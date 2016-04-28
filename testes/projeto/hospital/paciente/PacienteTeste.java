@@ -1,4 +1,4 @@
-package hospital.paciente;
+package projeto.hospital.paciente;
 
 import java.util.Date;
 
