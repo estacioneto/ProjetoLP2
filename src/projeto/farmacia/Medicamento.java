@@ -1,9 +1,9 @@
-package farmacia;
+package projeto.farmacia;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Medicamento implements Comparable<Medicamento>{
+public abstract class Medicamento implements Comparable<Medicamento>{
 
 	private String nome;
 	private double preco;

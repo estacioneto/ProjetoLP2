@@ -1,14 +1,14 @@
-package farmaciaTest;
+package projeto.farmaciaTest;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import farmacia.Categorias;
-import farmacia.Medicamento;
-import farmacia.MedicamentoGenerico;
-import farmacia.MedicamentoReferencia;
+import projeto.farmacia.Categorias;
+import projeto.farmacia.Medicamento;
+import projeto.farmacia.MedicamentoGenerico;
+import projeto.farmacia.MedicamentoReferencia;
 
 public class MedicamentoTest {
 
@@ -218,34 +218,4 @@ public class MedicamentoTest {
 			fail();
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

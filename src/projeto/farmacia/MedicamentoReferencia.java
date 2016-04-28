@@ -1,4 +1,4 @@
-package farmacia;
+package projeto.farmacia;
 
 public class MedicamentoReferencia extends Medicamento{
 
