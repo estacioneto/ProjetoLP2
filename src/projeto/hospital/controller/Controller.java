@@ -1,41 +1,48 @@
 package projeto.hospital.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-import projeto.util.GeradorDeMatricula;
+import projeto.util.Constantes;
+import projeto.util.Util;
 
 public class Controller {
-	
-	private LocalDate data;
-	private GeradorDeMatricula geradorMatricula;
-	private SimpleDateFormat formatadorAno;
-	
-	private SegurancaDoSistema segurancaSistema;
 
-	public Controller(){
-		this.data = LocalDate.now();
-		this.formatadorAno = new SimpleDateFormat("yyyy");
-		this.geradorMatricula = new GeradorDeMatricula();
-		
-		this.segurancaSistema = new SegurancaDoSistema();
-	}
-	
+	private LocalDate dataAtual;
+	private GeradorDeDadosDeSeguranca geradorDadosSeguranca;
+	private ValidadorDeLogica validador;
 
-	public String novaMatricula(String codigo) {
-		return this.geradorMatricula.geraNovaMatricula(codigo, this.getAno());
+	public Controller() {
+		this.dataAtual = LocalDate.now();
+		this.geradorDadosSeguranca = new GeradorDeDadosDeSeguranca();
+
+		this.validador = new ValidadorDeLogica();
 	}
 
-	private String getAno() {
-		return this.formatadorAno.format(data.getYear());
+	public void cadastrafuncionario(String nome, String cargo, String dataNascimento) {
+		Util.validaString(Constantes.NOME, nome);
+		Util.validaString(Constantes.CARGO, cargo);
+		Util.validaData(Constantes.DATA_NASCIMENTO, dataNascimento);
+
+		String matricula = geradorDadosSeguranca.geraMatricula(Util.getCodigoPorCargo(cargo), Util.getAnoPorData(dataNascimento));
+		String senha = geradorDadosSeguranca.geraSenha(matricula, Util.getAnoPorData(dataNascimento));
+		//TODO: Retorna funcionario?
+		cadastraLogin(matricula, senha);
 	}
-	
-	public void cadastraLogin(String matricula, String senha){
-		this.segurancaSistema.cadastraLogin(matricula, senha);
+
+	public String novaMatricula(String cargo) {
+		return this.geradorDadosSeguranca.geraMatricula(cargo, this.getAnoAtual());
 	}
-	
-	public void realizaLogin(String matricula, String senha){
-		this.segurancaSistema.validaAcesso(matricula, senha);
+
+	private String getAnoAtual() {
+		return Integer.toString(dataAtual.getYear());
 	}
-	
+
+	public void cadastraLogin(String matricula, String senha) {
+		this.validador.cadastraLogin(matricula, senha);
+	}
+
+	public void realizaLogin(String matricula, String senha) {
+		this.validador.validaAcesso(matricula, senha);
+	}
+
 }

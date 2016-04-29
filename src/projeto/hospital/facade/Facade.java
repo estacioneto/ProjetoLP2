@@ -2,14 +2,11 @@ package projeto.hospital.facade;
 
 import projeto.exceptions.acesso.AcessoBloqueadoException;
 import projeto.hospital.controller.Controller;
+import projeto.util.Constantes;
 
 public class Facade {
 
-	private final String CHAVE_DESBLOQUEIO = "c041ebf8";
-	private final String CODIGO_DIRETOR = "1";
-	private final String CODIGO_MEDICO = "2";
-	private final String CODIGO_TECNICO = "3";
-	
+	private final String CHAVE_DESBLOQUEIO = "c041ebf8";	
 	private Controller controller;
 	
 	public Facade(){
@@ -18,7 +15,7 @@ public class Facade {
 	
 	public String liberaSistema(String chave){
 		if(CHAVE_DESBLOQUEIO.equals(chave)){
-			String matricula = this.controller.novaMatricula(this.CODIGO_DIRETOR);
+			String matricula = this.controller.novaMatricula(Constantes.CODIGO_DIRETOR);
 			this.controller.cadastraLogin(matricula, chave);
 			return matricula;
 		}else{
