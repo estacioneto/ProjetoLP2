@@ -1,4 +1,4 @@
-package projeto.exceptions.acesso;
+package projeto.exceptions.logica;
 
 /**
  * Classe de Excecao nao checada para o caso de acesso por pessoas nao
@@ -6,7 +6,7 @@ package projeto.exceptions.acesso;
  * 
  * @author Estacio Pereira
  */
-public class AcessoBloqueadoException extends RuntimeException {
+public class AcessoBloqueadoException extends LogicaInvalidaException {
 
 	/**
 	 * Serial gerado automaticamente.
