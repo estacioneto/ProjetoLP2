@@ -1,34 +1,35 @@
 package projeto.hospital.controller;
 
-import projeto.hospital.gerencia.GerenciadorHospital;
+import projeto.exceptions.logica.OperacaoInvalidaException;
+import projeto.hospital.funcionarios.Funcionario;
+import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
 
 public class Controller {
 
-	private GerenciadorHospital gerenciadorHospital;
+	private Funcionario funcionarioLogado;
+	private GerenciadorDeFuncionarios gerenciadorFuncionarios;
 	
 	public Controller() {
-		this.gerenciadorHospital = new GerenciadorHospital();
+		this.funcionarioLogado = null;
+		this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
 	}
 
-	public String novaMatricula(String cargo){
-		return this.gerenciadorHospital.novaMatricula(cargo);
-	}
-	
-	
-	public boolean cadastraFuncionario(String nome, String cargo, String dataNascimento) {
-		return this.gerenciadorHospital.cadastraFuncionario(nome, cargo, dataNascimento);
+	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
+		return this.gerenciadorFuncionarios.cadastraFuncionario(nome, cargo, dataNascimento);
 	}
 
-	public boolean demiteFuncionario(String matriculaDiretor, String senhaDiretor, String matriculaFuncionario){
-		return this.gerenciadorHospital.demiteFuncionario(matriculaDiretor, senhaDiretor, matriculaFuncionario);
+	public boolean demiteFuncionario(String senhaDiretor, String matriculaFuncionario){
+		if(!estaLogado())
+			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
+		return this.gerenciadorFuncionarios.demiteFuncionario(this.funcionarioLogado.getMatricula(), senhaDiretor, matriculaFuncionario);
 	}
 	
-	public void cadastraLogin(String matricula, String senha) {
-		this.gerenciadorHospital.cadastraLogin(matricula, senha);
-	}
 
 	public void acessaSistema(String matricula, String senha) {
-		this.gerenciadorHospital.acessaSistema(matricula, senha);
+		this.funcionarioLogado = this.gerenciadorFuncionarios.acessaSistema(matricula, senha);
 	}
 
+	private boolean estaLogado() {
+		return (this.funcionarioLogado == null ? false : true);
+	}
 }

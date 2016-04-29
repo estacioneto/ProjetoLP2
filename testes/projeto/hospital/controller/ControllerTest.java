@@ -1,6 +1,6 @@
 package projeto.hospital.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,7 +10,6 @@ import projeto.exceptions.dados.ObjetoNuloException;
 import projeto.exceptions.dados.StringVaziaException;
 import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.util.Constantes;
 
 public class ControllerTest {
 
@@ -19,10 +18,10 @@ public class ControllerTest {
 		Controller controller = new Controller();
 
 		try {
-			Assert.assertTrue(controller.cadastraFuncionario("Estacio",
-					"Diretor", "18/04/1998"));
-			Assert.assertTrue(controller.cadastraFuncionario("Eric", "Medico",
-					"29/04/1997"));
+			Assert.assertEquals("12016001", controller.cadastraFuncionario(
+					"Estacio", "Diretor", "18/04/1998"));
+			Assert.assertEquals("22016002", controller.cadastraFuncionario(
+					"Eric", "Medico", "29/04/1997"));
 		} catch (DadoInvalidoException dadoInvalido) {
 			fail("Nao deveria lancar excecao: " + dadoInvalido.getMessage());
 		}
@@ -45,35 +44,27 @@ public class ControllerTest {
 	public void testRealizaLogin() {
 		Controller controller = new Controller();
 
-		Assert.assertTrue(controller.cadastraFuncionario("Estacio", "Diretor",
-				"18/04/1998"));
-		Assert.assertTrue(controller.cadastraFuncionario("Eric", "Medico",
-				"29/04/1997"));
-		Assert.assertTrue(controller.cadastraFuncionario("Estacio", "Diretor",
-				"18/04/1998"));
-		Assert.assertTrue(controller.cadastraFuncionario("Eric", "Medico",
-				"29/04/1997"));
-		Assert.assertTrue(controller.cadastraFuncionario("Eric", "Diretor",
-				"29/04/1997"));
-		Assert.assertTrue(controller.cadastraFuncionario("Eric",
+		Assert.assertEquals("12016001", controller.cadastraFuncionario(
+				"Estacio", "Diretor", "18/04/1998"));
+		controller.acessaSistema("12016001", "19981201");
+		Assert.assertEquals("22016002",
+				controller.cadastraFuncionario("Eric", "Medico", "29/04/1997"));
+		Assert.assertEquals("12016003", controller.cadastraFuncionario(
+				"Estacio", "Diretor", "18/04/1998"));
+		Assert.assertEquals("22016004", controller.cadastraFuncionario(
+				"Thaynan", "Medico", "19/10/1996"));
+		Assert.assertEquals("12016005", controller.cadastraFuncionario(
+				"Thaynan", "Diretor", "19/10/1996"));
+		Assert.assertEquals("32016006", controller.cadastraFuncionario("Eric",
 				"Tecnico Administrativo", "29/04/1997"));
-		Assert.assertTrue(controller.demiteFuncionario("12016003", "19981201",
-				"12016001"));
+		Assert.assertTrue(controller.demiteFuncionario("19981201", "12016003"));
 		try {
-			controller.demiteFuncionario("22016003", "19981201", "12016001");
+			controller.demiteFuncionario("19981201", "12016003");
 		} catch (OperacaoInvalidaException operacaoInvalida) {
 			fail("Nao deveria lancar essa excecao!");
-		} catch (AcessoBloqueadoException acessoBloqueado){
-			Assert.assertEquals("Matricula nao cadastrada!", acessoBloqueado.getMessage());
-		}
-		
-		try {
-			controller.demiteFuncionario("12016003", "19981201", "12016001");
-		} catch (OperacaoInvalidaException operacaoInvalida) {
-			// Ja foi removido
-			Assert.assertEquals("Matricula nao cadastrada!", operacaoInvalida.getMessage());
-		} catch (AcessoBloqueadoException acessoBloqueado){
-			fail("Nao deveria lancar essa excecao: " + acessoBloqueado.getMessage());
+		} catch (AcessoBloqueadoException acessoBloqueado) {
+			Assert.assertEquals("Matricula nao cadastrada!",
+					acessoBloqueado.getMessage());
 		}
 
 		try {
@@ -102,7 +93,7 @@ public class ControllerTest {
 			controller.acessaSistema("12016001", "c041ebf8");
 			fail("Deveria lancar excecao!");
 		} catch (AcessoBloqueadoException acessoBloqueado) {
-			Assert.assertEquals("Matricula nao cadastrada!",
+			Assert.assertEquals("Senha incorreta!",
 					acessoBloqueado.getMessage());
 		} catch (StringVaziaException stringVazia) {
 			fail("Nao deveria lancar essa excecao!");
@@ -133,26 +124,6 @@ public class ControllerTest {
 			Assert.assertEquals("Matricula nao pode ser nulo(a)!",
 					objetoNulo.getMessage());
 		}
-	}
-
-	@Test
-	public void testNovaMatricula() {
-		Controller controller = new Controller();
-
-		Assert.assertEquals("12016001",
-				controller.novaMatricula(Constantes.DIRETOR));
-		Assert.assertEquals("12016002",
-				controller.novaMatricula(Constantes.DIRETOR));
-		Assert.assertEquals("22016003",
-				controller.novaMatricula(Constantes.MEDICO));
-		Assert.assertEquals("22016004",
-				controller.novaMatricula(Constantes.MEDICO));
-		Assert.assertEquals("12016005",
-				controller.novaMatricula(Constantes.DIRETOR));
-		Assert.assertEquals("32016006",
-				controller.novaMatricula(Constantes.TECNICO));
-		Assert.assertEquals("32016007",
-				controller.novaMatricula(Constantes.TECNICO));
 	}
 
 }

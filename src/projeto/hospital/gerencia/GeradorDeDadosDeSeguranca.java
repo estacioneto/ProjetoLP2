@@ -26,6 +26,13 @@ public class GeradorDeDadosDeSeguranca {
 		return matricula;
 	}
 
+	public String getMatriculaCadastro(String cargo, String ano, String cadastro) {
+		String codigo = Util.getCodigoPorCargo(cargo);
+		String matricula = codigo + ano + cadastro;
+		this.novoCadastroEfetuado();
+		return matricula;
+	}
+	
 	private void novoCadastroEfetuado() {
 		this.cadastros++;
 	}

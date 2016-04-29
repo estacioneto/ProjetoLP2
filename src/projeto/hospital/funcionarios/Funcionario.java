@@ -145,4 +145,8 @@ public class Funcionario {
 		this.dataNascimento = dataNascimento;
 	}
 
+	public boolean temPermissao(Permissao permissao) {
+		return this.cargo.temPermissao(permissao);
+	}
+
 }

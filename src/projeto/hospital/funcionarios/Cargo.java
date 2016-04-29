@@ -70,4 +70,8 @@ public class Cargo {
 	public String getNome() {
 		return nome;
 	}
+
+	public boolean temPermissao(Permissao permissao) {
+		return this.permissoes.contains(permissao);
+	}
 }

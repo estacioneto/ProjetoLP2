@@ -13,6 +13,7 @@ public class Constantes {
 	public final static String CODIGO_DIRETOR = "1";
 	public final static String CODIGO_MEDICO = "2";
 	public final static String CODIGO_TECNICO = "3";
+	public final static String PRIMEIRO_CADASTRO = "001";
 	
 	public static final String NOME = "Nome";
 	public static final String PRECO = "Preco";

@@ -23,20 +23,20 @@ public class FacadeTest {
 		try {
 			String ano = formatadorAno.format(data);
 			String str = "1" + ano + "001";
-			Assert.assertEquals(str, facade.liberaSistema(chaveCorreta));
+			Assert.assertEquals(str, facade.liberaSistema("Estacio", "18/04/1998",chaveCorreta));
 		} catch (AcessoBloqueadoException acessoBloqueado) {
 			fail("O acesso foi feito corretamente! Nao deveria lancar excecao: " + chaveCorreta);
 		}
 
 		try {
-			facade.liberaSistema(Constantes.STRING_VAZIA);
+			facade.liberaSistema("Estacio", "18/04/1998",Constantes.STRING_VAZIA);
 			fail("O acesso foi nao feito corretamente! Deveria lancar excecao.");
 		} catch (AcessoBloqueadoException acessoBloqueado) {
 			Assert.assertEquals("Voce nao tem acesso ao sistema!", acessoBloqueado.getMessage());
 		}
 
 		try {
-			facade.liberaSistema(chaveCorreta.toUpperCase());
+			facade.liberaSistema("Estacio", "18/04/1998",chaveCorreta.toUpperCase());
 			fail("O acesso foi nao feito corretamente! Deveria lancar excecao.");
 		} catch (AcessoBloqueadoException acessoBloqueado) {
 			Assert.assertEquals("Voce nao tem acesso ao sistema!", acessoBloqueado.getMessage());
@@ -46,7 +46,7 @@ public class FacadeTest {
 			Facade facade2 = new Facade();
 			String ano = formatadorAno.format(data);
 			String str = "1" + ano + "001";
-			Assert.assertEquals(str, facade2.liberaSistema(chaveCorreta.toLowerCase()));
+			Assert.assertEquals(str, facade2.liberaSistema("Estacio", "18/04/1998",chaveCorreta.toLowerCase()));
 
 		} catch (AcessoBloqueadoException acessoBloqueado2) {
 			fail("O acesso foi feito corretamente! Nao deveria lancar excecao: " + chaveCorreta);
@@ -63,8 +63,8 @@ public class FacadeTest {
 		try {
 			String ano = formatadorAno.format(data);
 			String str = "1" + ano + "001";
-			Assert.assertEquals(str, facade.liberaSistema(chaveCorreta));
-			facade.acessaSistema(str, chaveCorreta);
+			Assert.assertEquals(str, facade.liberaSistema("Estacio", "18/04/1998", chaveCorreta));
+			facade.acessaSistema(str, "19981201");
 
 			try {
 				facade.acessaSistema(str, Constantes.STRING_VAZIA);
@@ -73,17 +73,17 @@ public class FacadeTest {
 				Assert.assertEquals("Senha nao pode ser vazio(a)!", stringVazia.getMessage());
 			}
 		} catch (AcessoBloqueadoException acessoBloqueado) {
-			fail("O acesso foi feito corretamente! Nao deveria lancar excecao: " + chaveCorreta);
+			fail("O acesso foi feito corretamente! Nao deveria lancar excecao: " + acessoBloqueado.getMessage());
 		}
 
 		try {
 			Facade facade2 = new Facade();
 			String ano = formatadorAno.format(data);
 			String str = "1" + ano + "001";
-			Assert.assertEquals(str, facade2.liberaSistema(chaveCorreta.toLowerCase()));
+			Assert.assertEquals(str, facade2.liberaSistema("Estacio", "18/04/1998",chaveCorreta.toLowerCase()));
 
-		} catch (AcessoBloqueadoException acessoBloqueado2) {
-			fail("O acesso foi feito corretamente! Nao deveria lancar excecao: " + chaveCorreta);
+		} catch (AcessoBloqueadoException acessoBloqueado) {
+			fail("O acesso foi feito corretamente! Nao deveria lancar excecao: " + acessoBloqueado.getMessage());
 		}
 	}
 }

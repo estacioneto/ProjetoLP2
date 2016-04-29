@@ -13,10 +13,9 @@ public class Facade {
 		this.controller = new Controller();
 	}
 	
-	public String liberaSistema(String chave){
+	public String liberaSistema(String nome, String dataNascimento, String chave){
 		if(CHAVE_DESBLOQUEIO.equals(chave)){
-			String matricula = this.controller.novaMatricula(Constantes.DIRETOR);
-			this.controller.cadastraLogin(matricula, chave);
+			String matricula = this.cadastraFuncionario(nome, Constantes.DIRETOR, dataNascimento);
 			return matricula;
 		}else{
 			throw new AcessoBloqueadoException("Voce nao tem acesso ao sistema!");
@@ -27,12 +26,12 @@ public class Facade {
 		this.controller.acessaSistema(matricula, senha);
 	}
 	
-	public boolean cadastrafuncionario(String nome, String cargo, String dataNascimento) {
+	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
 		return this.controller.cadastraFuncionario(nome, cargo, dataNascimento);
 	}
 
-	public boolean demiteFuncionario(String matriculaDiretor, String senhaDiretor, String matriculaFuncionario){
-		return this.controller.demiteFuncionario(matriculaDiretor, senhaDiretor, matriculaFuncionario);
+	public boolean demiteFuncionario(String senhaDiretor, String matriculaFuncionario){
+		return this.controller.demiteFuncionario(senhaDiretor, matriculaFuncionario);
 	}
 
 }
