@@ -1,6 +1,6 @@
 package projeto.hospital.facade;
 
-import projeto.exceptions.acesso.AcessoBloqueadoException;
+import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.hospital.controller.Controller;
 import projeto.util.Constantes;
 
@@ -15,7 +15,7 @@ public class Facade {
 	
 	public String liberaSistema(String chave){
 		if(CHAVE_DESBLOQUEIO.equals(chave)){
-			String matricula = this.controller.novaMatricula(Constantes.CODIGO_DIRETOR);
+			String matricula = this.controller.novaMatricula(Constantes.DIRETOR);
 			this.controller.cadastraLogin(matricula, chave);
 			return matricula;
 		}else{
@@ -23,8 +23,16 @@ public class Facade {
 		}
 	}
 	
-	public void realizaLogin(String matricula, String senha){
-		this.controller.realizaLogin(matricula, senha);
+	public void acessaSistema(String matricula, String senha){
+		this.controller.acessaSistema(matricula, senha);
+	}
+	
+	public boolean cadastrafuncionario(String nome, String cargo, String dataNascimento) {
+		return this.controller.cadastraFuncionario(nome, cargo, dataNascimento);
+	}
+
+	public boolean demiteFuncionario(String matriculaDiretor, String senhaDiretor, String matriculaFuncionario){
+		return this.controller.demiteFuncionario(matriculaDiretor, senhaDiretor, matriculaFuncionario);
 	}
 
 }

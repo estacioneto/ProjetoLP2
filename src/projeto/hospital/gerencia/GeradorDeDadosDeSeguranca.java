@@ -1,4 +1,4 @@
-package projeto.hospital.controller;
+package projeto.hospital.gerencia;
 
 import java.text.DecimalFormat;
 

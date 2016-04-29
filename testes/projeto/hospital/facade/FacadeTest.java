@@ -7,7 +7,8 @@ import java.text.SimpleDateFormat;
 import org.junit.Assert;
 import org.junit.Test;
 
-import projeto.exceptions.acesso.AcessoBloqueadoException;
+import projeto.exceptions.dados.StringVaziaException;
+import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.util.Constantes;
 
 public class FacadeTest {
@@ -63,12 +64,13 @@ public class FacadeTest {
 			String ano = formatadorAno.format(data);
 			String str = "1" + ano + "001";
 			Assert.assertEquals(str, facade.liberaSistema(chaveCorreta));
-			facade.realizaLogin(str, chaveCorreta);
+			facade.acessaSistema(str, chaveCorreta);
 
 			try {
-				facade.realizaLogin(str, Constantes.STRING_VAZIA);
-			} catch (AcessoBloqueadoException acessoBloqueado) {
-				Assert.assertEquals("Login falhou. Matricula ou senha incorretos.", acessoBloqueado.getMessage());
+				facade.acessaSistema(str, Constantes.STRING_VAZIA);
+				fail("Deveria lancar excecao!");
+			} catch (StringVaziaException stringVazia) {
+				Assert.assertEquals("Senha nao pode ser vazio(a)!", stringVazia.getMessage());
 			}
 		} catch (AcessoBloqueadoException acessoBloqueado) {
 			fail("O acesso foi feito corretamente! Nao deveria lancar excecao: " + chaveCorreta);
