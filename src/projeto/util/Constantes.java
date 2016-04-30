@@ -34,25 +34,18 @@ public class Constantes {
 
 	public static final String DATA_REGEX = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d{2})";
 
-	public static final String ERRO_CADASTRO_FUNCIONARIO = "Erro no cadastro de funcionario. ";
-	public static final String ERRO_NOME_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + NOME + " do funcionario ";
-	public static final String ERRO_MATRICULA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + MATRICULA + " do funcionario ";
-	public static final String ERRO_DATA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + DATA;
-	public static final String ERRO_SENHA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + SENHA;
-	public static final String ERRO_CARGO_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Nome do cargo ";
-	public static final String ERRO_CARGO_INVALIDO_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Cargo invalido.";
-	public static final String ERRO_CADASTRO_DIRETOR_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO
-			+ "Nao eh possivel criar mais de um Diretor Geral.";
-	public static final String ERRO_CONSULTA_FUNCIONARIO = "Erro na consulta de funcionario. ";
-
 	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(
 			Arrays.asList(new String[] { DIRETOR_GERAL.toLowerCase(), MEDICO.toLowerCase(), TECNICO.toLowerCase(),
 					TECNICO_ADMINISTATIVO.toLowerCase() }));
 
 	public static final int ZERO = 0;
+	public static final int UM = 1;
 	public static final int INDICE_DIA = ZERO;
-	public static final int INDICE_MES = 1;
+	public static final int INDICE_MES = UM;
 	public static final int INDICE_ANO = 2;
 	public static final int QUATRO = 4;
+	public static final int NOME_TAMANHO_MAXIMO = 16;
+	public static final int SENHA_TAMANHO_MINIMO = 8;
+	public static final int SENHA_TAMANHO_MAXIMO = NOME_TAMANHO_MAXIMO;
 
 }

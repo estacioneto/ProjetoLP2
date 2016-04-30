@@ -6,6 +6,7 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Cargo;
 import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.Permissao;
+import projeto.util.MensagensDeErro;
 
 /**
  * Valida varios aspectos da logica do sistema.
@@ -27,7 +28,7 @@ public class ValidadorDeLogica implements Serializable {
 	 */
 	public void validaExclusao(Funcionario funcionario) {
 		if (!funcionario.temPermissao(Permissao.EXCLUIR_FUNCIONARIOS))
-			throw new OperacaoInvalidaException("Exclusao nao pode ser efetuada! Usuario nao eh diretor!");
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + "O funcionario " + funcionario.getNome() + " nao tem permissao para excluir funcionarios.");
 	}
 
 	/**

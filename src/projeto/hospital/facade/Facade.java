@@ -51,8 +51,19 @@ public class Facade {
 		return this.controller.cadastraFuncionario(nome, cargo, dataNascimento);
 	}
 
-	public boolean demiteFuncionario(String senhaDiretor, String matriculaFuncionario) {
-		return this.controller.demiteFuncionario(senhaDiretor, matriculaFuncionario);
+	public void excluiFuncionario(String matriculaFuncionario, String senhaDiretor) {
+		this.controller.excluiFuncionario(senhaDiretor, matriculaFuncionario);
+	}
+	
+	public void atualizaInfoFuncionario(String matricula, String atributo, String novoValor){
+		this.controller.atualizaInfoFuncionario(matricula, atributo, novoValor);
+	}
+	
+	public void atualizaSenha(String senhaAntiga, String novaSenha){
+		this.controller.atualizaSenha(senhaAntiga, novaSenha);
 	}
 
+	public void atualizaInfoFuncionario(String atributo, String novoValor){
+		this.controller.atualizaInfoFuncionario(atributo, novoValor);
+	}
 }

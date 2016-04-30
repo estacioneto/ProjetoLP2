@@ -2,7 +2,7 @@ package projeto.hospital.funcionarios;
 
 import java.io.Serializable;
 
-import projeto.util.Constantes;
+import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 
 /**
@@ -41,9 +41,9 @@ public class Funcionario implements Serializable {
 	 */
 	public Funcionario(String nome, Cargo cargo, String matricula,
 			String senha, String dataNascimento) {
-		Util.validaString(Constantes.ERRO_NOME_FUNCIONARIO, nome);
-		Util.validaString(Constantes.ERRO_MATRICULA_FUNCIONARIO, matricula);
-		Util.validaString(Constantes.ERRO_SENHA_FUNCIONARIO, senha);
+		Util.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.NOME_FUNCIONARIO, nome);
+		Util.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.MATRICULA_FUNCIONARIO, matricula);
+		Util.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.SENHA_FUNCIONARIO, senha);
 
 		this.nome = nome;
 		this.cargo = cargo;

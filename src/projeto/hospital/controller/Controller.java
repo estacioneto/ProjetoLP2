@@ -29,8 +29,10 @@ public class Controller {
 	 * @return Matricula do novo cadastro
 	 */
 	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
-		// Se o usuario esta logado vai ser verificado se ele pode realizar a operacao
-		// Porque o diretor eh cadastrado quando nao existe ninguem logado, por isso precisa disso
+		// Se o usuario esta logado vai ser verificado se ele pode realizar a
+		// operacao
+		// Porque o diretor eh cadastrado quando nao existe ninguem logado, por
+		// isso precisa disso
 		if (!estaLogado()) {
 			if (!gerenciadorFuncionarios.isEmpty())
 				throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
@@ -45,9 +47,10 @@ public class Controller {
 	public void iniciaSistema() {
 		if (gerenciadorFuncionarios != null)
 			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
-		try{
-			this.gerenciadorFuncionarios = (GerenciadorDeFuncionarios)Util.getObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
-		}catch(Exception excecao){
+		try {
+			this.gerenciadorFuncionarios = (GerenciadorDeFuncionarios) Util
+					.getObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
+		} catch (Exception excecao) {
 			this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
 			Util.criaArquivo(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
 		}
@@ -70,11 +73,28 @@ public class Controller {
 		funcionarioLogado = null;
 	}
 
-	public boolean demiteFuncionario(String senhaDiretor, String matriculaFuncionario) {
+	public void excluiFuncionario(String senhaDiretor, String matriculaFuncionario) {
 		if (!estaLogado())
 			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
-		return this.gerenciadorFuncionarios.demiteFuncionario(this.funcionarioLogado.getMatricula(), senhaDiretor,
+		this.gerenciadorFuncionarios.excluiFuncionario(this.funcionarioLogado.getMatricula(), senhaDiretor,
 				matriculaFuncionario);
+	}
+
+	public void atualizaInfoFuncionario(String matricula, String atributo, String novoValor) {
+		this.gerenciadorFuncionarios.atualizaInfoFuncionario(this.funcionarioLogado, matricula, atributo, novoValor);
+	}
+
+	public void atualizaInfoFuncionario(String atributo, String novoValor) {
+		if (!estaLogado())
+			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.atualizaInfoFuncionario(funcionarioLogado, this.funcionarioLogado.getMatricula(),
+				atributo, novoValor);
+	}
+	
+	public void atualizaSenha(String senhaAntiga, String novaSenha) {
+		if (!estaLogado())
+			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.atualizaSenha(this.funcionarioLogado, senhaAntiga, novaSenha);
 	}
 
 	public String getInfoFuncionario(String matricula, String atributo) {
