@@ -41,8 +41,7 @@ public class Util {
 	public static void validaString(String erroAtributo, String atributo) {
 		validaNaoNulo(erroAtributo, atributo);
 		if (atributo.trim().length() == Constantes.ZERO)
-			throw new StringVaziaException(erroAtributo
-					+ "nao pode ser vazio.");
+			throw new StringVaziaException(erroAtributo + "nao pode ser vazio.");
 	}
 
 	/**
@@ -67,28 +66,33 @@ public class Util {
 	 */
 	public static void validaNaoNulo(String nomeAtributo, Object atributo) {
 		if (atributo == null)
-			throw new ObjetoNuloException(nomeAtributo
-					+ " nao pode ser nulo(a)!");
+			throw new ObjetoNuloException(nomeAtributo + " nao pode ser nulo(a)!");
 	}
 
+	public static void validaCargo(String cargo){
+		validaString(Constantes.ERRO_CARGO_FUNCIONARIO, cargo);
+		if(!Constantes.CARGOS_VALIDOS.contains(cargo.toLowerCase()))
+			throw new DadoInvalidoException(Constantes.ERRO_CARGO_INVALIDO_FUNCIONARIO);
+	}
+	
 	/**
 	 * Verifica se a data corresponde ao padrao dd/mm/aaaa e se a mesma eh
 	 * coerente.
 	 * 
-	 * @param nomeData
+	 * @param erroData
 	 *            Nome do atributo que carrega a data a ser analisada.
 	 * @param data
 	 *            Data a ser analisada.
 	 */
-	public static void validaData(String nomeData, String data) {
-		validaString(nomeData, data);
+	public static void validaData(String erroData, String data) {
+		validaString(erroData, data);
 
 		Pattern padrao = Pattern.compile(Constantes.DATA_REGEX);
 		Matcher validadorDePadrao = padrao.matcher(data);
 
 		// Verificacao da regex
 		if (!validadorDePadrao.matches())
-			throw new DataInvalidaException(nomeData + " nao eh valida!");
+			throw new DataInvalidaException(erroData + " invalida.");
 
 		validadorDePadrao.reset();
 		// Verificacao no calendario
@@ -99,20 +103,16 @@ public class Util {
 			int ano = Integer.parseInt(validadorDePadrao.group(3));
 
 			if (dia.equals("31"))
-				if (mes.equals("11") || mes.equals("04") || mes.equals("06")
-						|| mes.equals("09"))
-					throw new DataInvalidaException(nomeData
-							+ " nao eh valida! Mes fornecido nao tem dia 31!");
+				if (mes.equals("11") || mes.equals("04") || mes.equals("06") || mes.equals("09"))
+					throw new DataInvalidaException(erroData + " nao eh valida! Mes fornecido nao tem dia 31!");
 
 			if (mes.equals("02")) {
 				if (dia.equals("30") || dia.equals("31"))
-					throw new DataInvalidaException(nomeData
-							+ " nao eh valida! Fevereiro nao tem dias 30 e 31!");
+					throw new DataInvalidaException(erroData + " nao eh valida! Fevereiro nao tem dias 30 e 31!");
 
 				if (ano % 4 != 0 && dia.equals("29"))
 					throw new DataInvalidaException(
-							nomeData
-									+ " nao eh valida! Ano nao eh bissexto. Fevereiro nao tem dia 29!");
+							erroData + " nao eh valida! Ano nao eh bissexto. Fevereiro nao tem dia 29!");
 			}
 		}
 	}
@@ -127,7 +127,7 @@ public class Util {
 	public static String getCodigoPorCargo(String cargo) {
 		// Validacao do cargo ja deve ter sido feita antes de chamar esse metodo
 
-		if (cargo.equals(Constantes.DIRETOR))
+		if (cargo.equals(Constantes.DIRETOR_GERAL))
 			return Constantes.CODIGO_DIRETOR;
 		if (cargo.equals(Constantes.MEDICO))
 			return Constantes.CODIGO_MEDICO;
@@ -181,8 +181,16 @@ public class Util {
 	public static String getCodigoPorMatricula(String matricula) {
 		return Character.toString(matricula.charAt(Constantes.ZERO));
 	}
-	
-	public static String transformaFormatoData(String dataSistema){
+
+	/**
+	 * Vai pegar a data do formato recebido e guardado no sistema e transformar
+	 * para o formato de apresentacao
+	 * 
+	 * @param dataSistema
+	 *            data no formato do sistema
+	 * @return data no formato de apresentacao
+	 */
+	public static String transformaFormatoData(String dataSistema) {
 		String[] dataQuebrada = dataSistema.split("/");
 		String formatoSaida = String.join("-", dataQuebrada[2], dataQuebrada[1], dataQuebrada[0]);
 		return formatoSaida;

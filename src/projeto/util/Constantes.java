@@ -1,6 +1,7 @@
 package projeto.util;
 
-import org.junit.internal.runners.ErrorReportingRunner;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class Constantes {
 
@@ -8,7 +9,7 @@ public class Constantes {
 	public static final String BARRA = "/";
 	public static final String FORMATO_TRES_NUMEROS = "000";
 	
-	public static final String DIRETOR = "Diretor Geral";
+	public static final String DIRETOR_GERAL = "Diretor Geral";
 	public static final String MEDICO = "Medico";
 	public static final String TECNICO = "Tecnico Administrativo";
 	public static final String FUNCIONARIO = "Funcionario";
@@ -21,7 +22,7 @@ public class Constantes {
 	public static final String PRECO = "Preco";
 	public static final String CARGO = "Cargo";
 	public static final String ATRIBUTO = "Atributo";
-	public static final String DATA_NASCIMENTO = "Data";
+	public static final String DATA = "Data";
 	
 	public static final String SENHA = "Senha";
 	public static final String MATRICULA = "Matricula";
@@ -29,9 +30,14 @@ public class Constantes {
 	public static final String DATA_REGEX = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d{2})";
 	
 	public static final String ERRO_CADASTRO_FUNCIONARIO = "Erro no cadastro de funcionario. ";
-	public static final String ERRO_NOME_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Nome do funcionario ";
-	public static final String ERRO_MATRICULA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Matricula do funcionario ";
-	public static final String ERRO_DATA_NASCIMENTO_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Data ";
+	public static final String ERRO_NOME_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + NOME + " do funcionario ";
+	public static final String ERRO_MATRICULA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + MATRICULA + " do funcionario ";
+	public static final String ERRO_DATA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + DATA;
+	public static final String ERRO_SENHA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + SENHA;
+	public static final String ERRO_CARGO_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Nome do cargo ";
+	public static final String ERRO_CARGO_INVALIDO_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Cargo invalido.";
+	
+	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(Arrays.asList(new String[]{DIRETOR_GERAL.toLowerCase(), MEDICO.toLowerCase(), TECNICO.toLowerCase()}));
 	
 	public static final int ZERO = 0;
 	public static final int INDICE_DIA = ZERO;

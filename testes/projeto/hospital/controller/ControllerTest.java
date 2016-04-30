@@ -19,7 +19,7 @@ public class ControllerTest {
 
 		try {
 			Assert.assertEquals("12016001", controller.cadastraFuncionario(
-					"Estacio", "Diretor", "18/04/1998"));
+					"Estacio", "Diretor Geral", "18/04/1998"));
 			Assert.assertEquals("22016002", controller.cadastraFuncionario(
 					"Eric", "Medico", "29/04/1997"));
 		} catch (DadoInvalidoException dadoInvalido) {
@@ -29,7 +29,7 @@ public class ControllerTest {
 			controller.cadastraFuncionario("Thaynan", "Diretor", "00/00/000");
 			fail("Deveria lancar excecao!");
 		} catch (DadoInvalidoException dadoInvalido) {
-			Assert.assertEquals("Data de nascimento nao eh valida!",
+			Assert.assertEquals("Data nao eh valida!",
 					dadoInvalido.getMessage());
 		}
 		try {
@@ -45,16 +45,16 @@ public class ControllerTest {
 		Controller controller = new Controller();
 
 		Assert.assertEquals("12016001", controller.cadastraFuncionario(
-				"Estacio", "Diretor", "18/04/1998"));
+				"Estacio", "Diretor Geral", "18/04/1998"));
 		controller.acessaSistema("12016001", "19981201");
 		Assert.assertEquals("22016002",
 				controller.cadastraFuncionario("Eric", "Medico", "29/04/1997"));
 		Assert.assertEquals("12016003", controller.cadastraFuncionario(
-				"Estacio", "Diretor", "18/04/1998"));
+				"Estacio", "Diretor Geral", "18/04/1998"));
 		Assert.assertEquals("22016004", controller.cadastraFuncionario(
 				"Thaynan", "Medico", "19/10/1996"));
 		Assert.assertEquals("12016005", controller.cadastraFuncionario(
-				"Thaynan", "Diretor", "19/10/1996"));
+				"Thaynan", "Diretor Geral", "19/10/1996"));
 		Assert.assertEquals("32016006", controller.cadastraFuncionario("Eric",
 				"Tecnico Administrativo", "29/04/1997"));
 		Assert.assertTrue(controller.demiteFuncionario("19981201", "12016003"));

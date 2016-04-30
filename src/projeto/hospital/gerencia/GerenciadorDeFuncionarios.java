@@ -58,9 +58,9 @@ public class GerenciadorDeFuncionarios {
 
 	public String cadastraFuncionario(String nome, String cargo,
 			String dataNascimento) {
-		Util.validaString(Constantes.NOME, nome);
-		Util.validaString(Constantes.CARGO, cargo);
-		Util.validaData(Constantes.DATA_NASCIMENTO, dataNascimento);
+		Util.validaString(Constantes.ERRO_NOME_FUNCIONARIO, nome);
+		Util.validaCargo(cargo);
+		Util.validaData(Constantes.ERRO_DATA_FUNCIONARIO, dataNascimento);
 
 		String matricula = geradorDadosSeguranca.geraMatricula(cargo, getAnoAtual());
 		String senha = geradorDadosSeguranca.geraSenha(matricula, Util.getAnoPorData(dataNascimento));
@@ -105,7 +105,7 @@ public class GerenciadorDeFuncionarios {
 				return this.funcionarios.get(matricula).getNome();
 			case Constantes.CARGO:
 				return this.funcionarios.get(matricula).getCargo();
-			case Constantes.DATA_NASCIMENTO:
+			case Constantes.DATA:
 				return this.funcionarios.get(matricula).getDataNascimento();
 			default:
 				throw new DadoInvalidoException("Atributo nao valido.");

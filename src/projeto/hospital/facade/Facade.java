@@ -23,7 +23,7 @@ public class Facade {
 		if (sistemaJaIniciado) {
 			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Sistema liberado anteriormente.");
 		} else if (CHAVE_DESBLOQUEIO.equals(chave)) {
-			String matricula = this.cadastraFuncionario(nome, Constantes.DIRETOR, dataNascimento);
+			String matricula = this.cadastraFuncionario(nome, Constantes.DIRETOR_GERAL, dataNascimento);
 			sistemaJaIniciado = true;
 			return matricula;
 		} else {

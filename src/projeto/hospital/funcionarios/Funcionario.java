@@ -36,8 +36,7 @@ public class Funcionario {
 			String senha, String dataNascimento) {
 		Util.validaString(Constantes.ERRO_NOME_FUNCIONARIO, nome);
 		Util.validaString(Constantes.ERRO_MATRICULA_FUNCIONARIO, matricula);
-		Util.validaString(Constantes.ERRO_CADASTRO_FUNCIONARIO + Constantes.SENHA, senha);
-		Util.validaData(Constantes.ERRO_DATA_NASCIMENTO_FUNCIONARIO, dataNascimento);
+		Util.validaString(Constantes.ERRO_SENHA_FUNCIONARIO, senha);
 
 		this.nome = nome;
 		this.cargo = cargo;

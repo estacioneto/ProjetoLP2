@@ -28,7 +28,7 @@ public class Cargo {
 		this.nome = cargo;
 
 		this.permissoes = new HashSet<Permissao>();
-		if (cargo.equals(Constantes.DIRETOR)) {
+		if (cargo.equals(Constantes.DIRETOR_GERAL)) {
 			this.permissoes = Cargo.getPermissoesDiretor();
 		}
 	}
