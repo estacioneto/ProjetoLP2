@@ -48,7 +48,7 @@ public class Util {
 	public static void validaString(String erroAtributo, String atributo) {
 		validaNaoNulo(erroAtributo, atributo);
 		if (atributo.trim().length() == Constantes.ZERO)
-			throw new StringVaziaException(erroAtributo + "nao pode ser vazio.");
+			throw new StringVaziaException(erroAtributo + " nao pode ser vazio.");
 	}
 
 	/**
