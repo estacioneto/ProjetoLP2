@@ -36,17 +36,6 @@ public class Constantes {
 	
 	public static final String DATA_REGEX = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d{2})";
 	
-	public static final String ERRO_CADASTRO_FUNCIONARIO = "Erro no cadastro de funcionario. ";
-	public static final String ERRO_NOME_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + NOME + " do funcionario ";
-	public static final String ERRO_MATRICULA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + MATRICULA + " do funcionario ";
-	public static final String ERRO_DATA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + DATA;
-	public static final String ERRO_SENHA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + SENHA;
-	public static final String ERRO_CARGO_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Nome do cargo ";
-	public static final String ERRO_CARGO_INVALIDO_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Cargo invalido.";
-	public static final String ERRO_CADASTRO_DIRETOR_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Nao eh possivel criar mais de um Diretor Geral.";
-	
-	public static final String ERRO_CONSULTA_FUNCIONARIO = "Erro na consulta de funcionario. ";
-	
 	public static final HashSet<String> TIPOS_SANGUINEOS_VALIDOS = new HashSet<String>(Arrays.asList(new String[]{"A+", "A-", "B+", "B-", "AB+", "AB-", "O-", "O+"}));
 	
 	public static final String DADOS_DIRETORIO = "BD/";

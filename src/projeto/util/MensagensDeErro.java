@@ -22,4 +22,5 @@ public class MensagensDeErro {
 	public static final String NOME_TAMANHO_INVALIDO = "Nome deve ter menos de 16 caracteres.";
 	public static final String NOME_CARACTER_INVALIDO = "Nome deve ter apenas caracteres alfabeticos.";
 	public static final String PERMISSAO_NEGADA_ATUALIZACAO = "Funcionario nao pode atualizar informacao.";
+	
 }
