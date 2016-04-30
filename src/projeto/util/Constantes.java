@@ -1,5 +1,6 @@
 package projeto.util;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -8,7 +9,7 @@ public class Constantes {
 	public static final String STRING_VAZIA = "";
 	public static final String BARRA = "/";
 	public static final String FORMATO_TRES_NUMEROS = "000";
-	
+
 	public static final String DIRETOR_GERAL = "Diretor Geral";
 	public static final String MEDICO = "Medico";
 	public static final String TECNICO_ADMINISTATIVO = "Tecnico Administrativo";
@@ -18,7 +19,7 @@ public class Constantes {
 	public final static String CODIGO_MEDICO = "2";
 	public final static String CODIGO_TECNICO = "3";
 	public final static String PRIMEIRO_CADASTRO = "001";
-	
+
 	public static final String NOME = "Nome";
 	public static final String PRECO = "Preco";
 	public static final String CARGO = "Cargo";
@@ -47,12 +48,23 @@ public class Constantes {
 	public static final String ERRO_CONSULTA_FUNCIONARIO = "Erro na consulta de funcionario. ";
 	
 	public static final HashSet<String> TIPOS_SANGUINEOS_VALIDOS = new HashSet<String>(Arrays.asList(new String[]{"A+", "A-", "B+", "B-", "AB+", "AB-", "O-", "O+"}));
-	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(Arrays.asList(new String[]{DIRETOR_GERAL.toLowerCase(), MEDICO.toLowerCase(), TECNICO.toLowerCase(), TECNICO_ADMINISTATIVO.toLowerCase()}));
 	
+	public static final String DADOS_DIRETORIO = "BD/";
+	public static final File ARQUIVO_DADOS = new File(DADOS_DIRETORIO);
+	public static final String ARQUIVO_GERENCIADOR_FUNCIONARIOS = DADOS_DIRETORIO + "gerenciadorFuncionarios.txt";
+
+	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(
+			Arrays.asList(new String[] { DIRETOR_GERAL.toLowerCase(), MEDICO.toLowerCase(), TECNICO.toLowerCase(),
+					TECNICO_ADMINISTATIVO.toLowerCase() }));
+
 	public static final int ZERO = 0;
+	public static final int UM = 1;
 	public static final int INDICE_DIA = ZERO;
-	public static final int INDICE_MES = 1;
+	public static final int INDICE_MES = UM;
 	public static final int INDICE_ANO = 2;
 	public static final int QUATRO = 4;
-	
+	public static final int NOME_TAMANHO_MAXIMO = 16;
+	public static final int SENHA_TAMANHO_MINIMO = 8;
+	public static final int SENHA_TAMANHO_MAXIMO = NOME_TAMANHO_MAXIMO;
+
 }

@@ -1,5 +1,11 @@
 package projeto.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -7,6 +13,7 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.dados.DataInvalidaException;
 import projeto.exceptions.dados.ObjetoNuloException;
 import projeto.exceptions.dados.StringVaziaException;
+import projeto.exceptions.logica.OperacaoInvalidaException;
 
 /**
  * Se encarrega de varias validacoes de dados e de metodos mais genericos
@@ -69,10 +76,10 @@ public class Util {
 			throw new ObjetoNuloException(nomeAtributo + " nao pode ser nulo(a)!");
 	}
 
-	public static void validaCargo(String cargo) {
-		validaString(Constantes.ERRO_CARGO_FUNCIONARIO, cargo);
+	public static void validaCargo(String erroOperacao, String cargo) {
+		validaString(erroOperacao + MensagensDeErro.CARGO_FUNCIONARIO, cargo);
 		if (!Constantes.CARGOS_VALIDOS.contains(cargo.toLowerCase()))
-			throw new DadoInvalidoException(Constantes.ERRO_CARGO_INVALIDO_FUNCIONARIO);
+			throw new DadoInvalidoException(erroOperacao + MensagensDeErro.CARGO_INVALIDO_FUNCIONARIO);
 	}
 
 	/**
@@ -245,4 +252,180 @@ public class Util {
 			throw new DadoInvalidoException("Sexo biologico invalido.");
 	}
 
+	/*
+	 * Pega o objeto de um arquivo.
+	 * 
+	 * @param caminho Caminho do arquivo.
+	 * 
+	 * @return Objeto.
+	 */
+	public static Object getObjeto(String caminho) {
+		ObjectInputStream leitorDeObjetos = null;
+		Object objeto = null;
+		try {
+			leitorDeObjetos = new ObjectInputStream(new FileInputStream(caminho));
+			objeto = leitorDeObjetos.readObject();
+			return objeto;
+		} catch (Exception excecao) {
+			throw new DadoInvalidoException("Arquivo " + caminho + "nao existe!");
+		} finally {
+			try {
+				if (leitorDeObjetos != null) {
+					leitorDeObjetos.close();
+				}
+			} catch (IOException excecao) {
+				throw new DadoInvalidoException("Nao foi possivel fechar o arquivo " + caminho + "!");
+			}
+		}
+	}
+
+	/**
+	 * Cria um arquivo se ja nao existir.
+	 * 
+	 * @param caminho
+	 *            Caminho do arquivo.
+	 */
+	public static void criaArquivo(String caminho) {
+		File arquivo = new File(caminho);
+		// Verifica se sera necessario criar o arquivo
+		if (arquivo.getParentFile() != null)
+			arquivo.getParentFile().mkdirs();
+	}
+
+	/**
+	 * Escreve o objeto em um arquivo
+	 * 
+	 * @param caminho
+	 *            Caminho do arquivo
+	 * @param objeto
+	 *            Objeto a ser escrito
+	 */
+	public static void setObjeto(String caminho, Object objeto) {
+		ObjectOutputStream escritorObjeto = null;
+		try {
+			escritorObjeto = new ObjectOutputStream(new FileOutputStream(caminho));
+			escritorObjeto.writeObject(objeto);
+		} catch (Exception excecao) {
+			criaArquivo(caminho);
+			setObjeto(caminho, objeto);
+		} finally {
+			try {
+				if (escritorObjeto != null)
+					escritorObjeto.close();
+			} catch (IOException excecao) {
+				throw new DadoInvalidoException("Nao foi possivel fechar o arquivo " + caminho + "!");
+			}
+		}
+	}
+
+	/**
+	 * Limpa os dados de algum diretorio.
+	 * 
+	 * @param diretorio
+	 *            Diretorio a ser removido.
+	 * @return true se removeu com sucesso.
+	 */
+	public static boolean limpaDados(File diretorio) {
+		if (diretorio.isDirectory()) {
+			String[] filhos = diretorio.list();
+			for (String filho : filhos) {
+				if (!limpaDados(new File(diretorio, filho))) {
+					return false;
+				}
+			}
+		}
+		return diretorio.delete();
+	}
+
+	/**
+	 * Valida padrao da matricula.
+	 * 
+	 * @param matricula
+	 *            matricula a ser analisada.
+	 * @param mensagemErro
+	 *            Mensagem a ser utilizada caso nao obedeca o padrao.
+	 */
+	public static void validaPadraoMatricula(String matricula, String mensagemErro) {
+		for (int indice = 0; indice < matricula.length(); indice++) {
+			if (!Character.isDigit(matricula.charAt(indice)))
+				throw new DadoInvalidoException(mensagemErro);
+		}
+	}
+
+	/**
+	 * Valida atributo de funcionario.
+	 * 
+	 * @param erroOperacao
+	 *            Mensagem de erro correspondente a operacao.
+	 * @param atributo
+	 *            Atributo a ser analisado.
+	 */
+	public static void validaAtributo(String erroOperacao, String atributo, String valor) {
+		validaString(erroOperacao + MensagensDeErro.ATRIBUTO_FUNCIONARIO, atributo);
+		atributo = capitalizaString(atributo);
+
+		if (atributo.equals(Constantes.MATRICULA))
+			throw new OperacaoInvalidaException(erroOperacao + MensagensDeErro.ATUALIZAR_MATRICULA);
+		if (!(atributo.equals(Constantes.NOME) || atributo.equals(Constantes.CARGO)
+				|| atributo.equals(Constantes.DATA)))
+			throw new OperacaoInvalidaException(erroOperacao + MensagensDeErro.ATRIBUTO_INVALIDO);
+
+		if (atributo.equals(Constantes.NOME))
+			validaNome(erroOperacao, valor);
+		else if (atributo.equals(Constantes.DATA))
+			validaData(erroOperacao + Constantes.DATA, valor);
+	}
+
+	/**
+	 * Valida um nome.
+	 * 
+	 * @param erroOperacao
+	 *            Mensagem de erro correspondente a operacao.
+	 * @param nome
+	 *            Nome a ser analisado.
+	 */
+	public static void validaNome(String erroOperacao, String nome) {
+		Util.validaString(erroOperacao + MensagensDeErro.NOME_FUNCIONARIO, nome);
+		if (nome.length() == Constantes.NOME_TAMANHO_MAXIMO)
+			throw new OperacaoInvalidaException(erroOperacao + MensagensDeErro.NOME_TAMANHO_INVALIDO);
+		for (int indice = 0; indice < nome.length(); indice++) {
+			if (Character.isDigit(nome.charAt(indice)))
+				throw new OperacaoInvalidaException(erroOperacao + MensagensDeErro.NOME_CARACTER_INVALIDO);
+		}
+	}
+
+	/**
+	 * Retorna a String com a primeira letra maiuscula e as demais minusculas.
+	 * 
+	 * @param string
+	 *            String a ser modificada.
+	 * @return String capitalizada.
+	 */
+	public static String capitalizaString(String string) {
+		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase() + string.substring(Constantes.UM);
+	}
+
+	/**
+	 * Valida uma nova senha.
+	 * 
+	 * @param erroOperacao
+	 *            Mensagem de erro correspondente a operacao.
+	 * @param senha
+	 *            Senha a ser analisada.
+	 */
+	public static void validaSenha(String erroOperacao, String senha) {
+		Util.validaString(erroOperacao + Constantes.SENHA, senha);
+
+		if (senha.length() < Constantes.SENHA_TAMANHO_MINIMO || senha.length() > Constantes.SENHA_TAMANHO_MAXIMO)
+			throw new OperacaoInvalidaException(
+					erroOperacao + "A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
+
+		for (int indice = 0; indice < senha.length(); indice++) {
+			if (!(Character.isAlphabetic(senha.charAt(indice)) || Character.isDigit(senha.charAt(indice))
+					|| senha.charAt(indice) == ' ')) {
+				throw new OperacaoInvalidaException(
+						erroOperacao + "A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
+			}
+		}
+	}
 }

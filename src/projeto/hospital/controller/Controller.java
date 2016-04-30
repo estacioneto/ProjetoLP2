@@ -6,6 +6,8 @@ import projeto.hospital.funcionarios.Permissao;
 import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
 import projeto.hospital.gerencia.GerenciadorDePaciente;
 import projeto.hospital.gerencia.ValidadorDeLogica;
+import projeto.util.Constantes;
+import projeto.util.Util;
 
 public class Controller {
 
@@ -46,8 +48,14 @@ public class Controller {
 	public void iniciaSistema() {
 		if (gerenciadorFuncionarios != null)
 			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
-		this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
 		this.gerenciadorDePaciente = new GerenciadorDePaciente();
+		try {
+			this.gerenciadorFuncionarios = (GerenciadorDeFuncionarios) Util
+					.getObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
+		} catch (Exception excecao) {
+			this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
+			Util.criaArquivo(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
+		}
 	}
 
 	/**
@@ -57,6 +65,7 @@ public class Controller {
 		if (estaLogado())
 			throw new OperacaoInvalidaException("Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
 					+ funcionarioLogado.getNome() + ".");
+		Util.setObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS, gerenciadorFuncionarios);
 		this.gerenciadorFuncionarios = null;
 		this.gerenciadorDePaciente = null;
 	}
@@ -67,11 +76,28 @@ public class Controller {
 		funcionarioLogado = null;
 	}
 
-	public boolean demiteFuncionario(String senhaDiretor, String matriculaFuncionario) {
+	public void excluiFuncionario(String senhaDiretor, String matriculaFuncionario) {
 		if (!estaLogado())
 			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
-		return this.gerenciadorFuncionarios.demiteFuncionario(this.funcionarioLogado.getMatricula(), senhaDiretor,
+		this.gerenciadorFuncionarios.excluiFuncionario(this.funcionarioLogado.getMatricula(), senhaDiretor,
 				matriculaFuncionario);
+	}
+
+	public void atualizaInfoFuncionario(String matricula, String atributo, String novoValor) {
+		this.gerenciadorFuncionarios.atualizaInfoFuncionario(this.funcionarioLogado, matricula, atributo, novoValor);
+	}
+
+	public void atualizaInfoFuncionario(String atributo, String novoValor) {
+		if (!estaLogado())
+			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.atualizaInfoFuncionario(funcionarioLogado, this.funcionarioLogado.getMatricula(),
+				atributo, novoValor);
+	}
+	
+	public void atualizaSenha(String senhaAntiga, String novaSenha) {
+		if (!estaLogado())
+			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.atualizaSenha(this.funcionarioLogado, senhaAntiga, novaSenha);
 	}
 
 	public String getInfoFuncionario(String matricula, String atributo) {

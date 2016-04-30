@@ -1,6 +1,8 @@
 package projeto.hospital.funcionarios;
 
-import projeto.util.Constantes;
+import java.io.Serializable;
+
+import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 
 /**
@@ -10,8 +12,13 @@ import projeto.util.Util;
  * @author Estacio Pereira
  *
  */
-public class Funcionario {
+public class Funcionario implements Serializable {
 
+	/**
+	 * Serial gerado automaticamente.
+	 */
+	private static final long serialVersionUID = 1948219698630791794L;
+	
 	private String nome;
 	private Cargo cargo;
 	private String matricula;
@@ -34,9 +41,9 @@ public class Funcionario {
 	 */
 	public Funcionario(String nome, Cargo cargo, String matricula,
 			String senha, String dataNascimento) {
-		Util.validaString(Constantes.ERRO_NOME_FUNCIONARIO, nome);
-		Util.validaString(Constantes.ERRO_MATRICULA_FUNCIONARIO, matricula);
-		Util.validaString(Constantes.ERRO_SENHA_FUNCIONARIO, senha);
+		Util.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.NOME_FUNCIONARIO, nome);
+		Util.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.MATRICULA_FUNCIONARIO, matricula);
+		Util.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.SENHA_FUNCIONARIO, senha);
 
 		this.nome = nome;
 		this.cargo = cargo;

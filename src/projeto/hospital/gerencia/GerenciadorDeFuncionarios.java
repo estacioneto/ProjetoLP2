@@ -1,5 +1,6 @@
 package projeto.hospital.gerencia;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,11 +10,17 @@ import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.FuncionarioFactory;
+import projeto.hospital.funcionarios.Permissao;
 import projeto.util.Constantes;
+import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 
-public class GerenciadorDeFuncionarios {
+public class GerenciadorDeFuncionarios implements Serializable {
 
+	/**
+	 * Serial gerado automaticamente.
+	 */
+	private static final long serialVersionUID = 5781785073141058466L;
 	private Map<String, Funcionario> funcionarios;
 	private FuncionarioFactory factoryFuncionarios;
 	private ValidadorDeLogica validador;
@@ -36,19 +43,57 @@ public class GerenciadorDeFuncionarios {
 		return true;
 	}
 
-	public boolean demiteFuncionario(String matriculaDiretor, String senhaDiretor, String matriculaFuncionario) {
+//	public boolean demiteFuncionario(String matriculaDiretor, String senhaDiretor, String matriculaFuncionario) {
+//		Util.validaString(Constantes.MATRICULA, matriculaFuncionario);
+//		if (this.contemFuncionario(matriculaDiretor)) {
+//			Funcionario funcionario = this.funcionarios.get(matriculaDiretor);
+//			if (funcionario.getSenha().equals(senhaDiretor)) {
+//				this.validador.validaExclusao(funcionario);
+//				if (!this.contemFuncionario(matriculaFuncionario))
+//					return false;
+	public void excluiFuncionario(String matriculaDiretor, String senhaDiretor, String matriculaFuncionario) {
 		Util.validaString(Constantes.MATRICULA, matriculaFuncionario);
-		if (this.contemFuncionario(matriculaDiretor)) {
+		Util.validaPadraoMatricula(matriculaDiretor, MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + MensagensDeErro.PADRAO_MATRICULA);
+		Util.validaPadraoMatricula(matriculaFuncionario, MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + MensagensDeErro.PADRAO_MATRICULA);
+		if (this.contemFuncionario(matriculaDiretor) && this.contemFuncionario(matriculaFuncionario)) {
 			Funcionario funcionario = this.funcionarios.get(matriculaDiretor);
+			this.validador.validaExclusao(funcionario);
 			if (funcionario.getSenha().equals(senhaDiretor)) {
-				this.validador.validaExclusao(funcionario);
-				if (!this.contemFuncionario(matriculaFuncionario))
-					return false;
 				this.funcionarios.remove(matriculaFuncionario);
-				return true;
-			}
+			}else
+				throw new DadoInvalidoException(MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + MensagensDeErro.SENHA_INVALIDA);
+		}else
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
+	}
+	
+	public void atualizaInfoFuncionario(Funcionario funcionarioLogado, String matricula, String atributo, String novoValor){
+		Util.validaString(MensagensDeErro.ERRO_ATUALIZA_INFO + MensagensDeErro.MATRICULA_FUNCIONARIO, matricula);
+		Util.validaPadraoMatricula(matricula, MensagensDeErro.ERRO_ATUALIZA_INFO + MensagensDeErro.PADRAO_MATRICULA);
+		Util.validaAtributo(MensagensDeErro.ERRO_ATUALIZA_INFO, atributo, novoValor);
+		if(!contemFuncionario(matricula)){
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZA_INFO + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 		}
-		return false;
+		if(!(funcionarioLogado.getMatricula().equals(matricula) || funcionarioLogado.temPermissao(Permissao.ATUALIZAR_INFORMACOES_FUNCIONARIOS)))
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZA_INFO + MensagensDeErro.PERMISSAO_NEGADA_ATUALIZACAO);
+		switch (Util.capitalizaString(atributo)) {
+		case Constantes.NOME:
+			Util.validaNome(MensagensDeErro.ERRO_ATUALIZA_INFO, novoValor);
+			this.funcionarios.get(matricula).setNome(novoValor);
+			break;
+		case Constantes.DATA:
+			Util.validaData(MensagensDeErro.ERRO_ATUALIZA_INFO, novoValor);
+			this.funcionarios.get(matricula).setDataNascimento(novoValor);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void atualizaSenha(Funcionario funcionarioLogado, String senhaAntiga, String novaSenha) {
+		if(!funcionarioLogado.getSenha().equals(senhaAntiga))
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZA_INFO + MensagensDeErro.SENHA_INVALIDA);
+		Util.validaSenha(MensagensDeErro.ERRO_ATUALIZA_INFO, novaSenha);
+		this.funcionarios.get(funcionarioLogado.getMatricula()).setSenha(novaSenha);
 	}
 
 	public boolean contemFuncionario(String matricula) {
@@ -57,12 +102,12 @@ public class GerenciadorDeFuncionarios {
 	}
 
 	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
-		Util.validaString(Constantes.ERRO_NOME_FUNCIONARIO, nome);
-		Util.validaCargo(cargo);
-		Util.validaData(Constantes.ERRO_DATA_FUNCIONARIO, dataNascimento);
+		Util.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.NOME_FUNCIONARIO, nome);
+		Util.validaCargo(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO, cargo);
+		Util.validaData(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.DATA_FUNCIONARIO, dataNascimento);
 
 		if (Constantes.DIRETOR_GERAL.equals(cargo) && !this.isEmpty())
-			throw new OperacaoInvalidaException(Constantes.ERRO_CADASTRO_DIRETOR_FUNCIONARIO);
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_DIRETOR_FUNCIONARIO);
 
 		String matricula = geradorDadosSeguranca.geraMatricula(cargo, getAnoAtual());
 		String senha = geradorDadosSeguranca.geraSenha(matricula, Util.getAnoPorData(dataNascimento));
@@ -95,7 +140,7 @@ public class GerenciadorDeFuncionarios {
 			else
 				throw new AcessoBloqueadoException("Nao foi possivel realizar o login. Senha incorreta.");
 		else
-			throw new AcessoBloqueadoException("Nao foi possivel realizar o login. Funcionario nao cadastrado.");
+			throw new AcessoBloqueadoException("Nao foi possivel realizar o login. " + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 	}
 
 	/**
@@ -107,10 +152,12 @@ public class GerenciadorDeFuncionarios {
 
 	public String getInfoFuncionario(String matricula, String atributo) {
 		Util.validaString(Constantes.MATRICULA, matricula);
+		Util.validaPadraoMatricula(matricula,
+				MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + MensagensDeErro.PADRAO_MATRICULA);
 		Util.validaString(Constantes.ATRIBUTO, atributo);
 
 		if (this.contemFuncionario(matricula)) {
-			switch (atributo) {
+			switch (Util.capitalizaString(atributo)) {
 			case Constantes.NOME:
 				return this.funcionarios.get(matricula).getNome();
 			case Constantes.CARGO:
@@ -119,11 +166,13 @@ public class GerenciadorDeFuncionarios {
 				return this.funcionarios.get(matricula).getDataNascimento();
 			case Constantes.SENHA:
 				throw new OperacaoInvalidaException(
-						Constantes.ERRO_CONSULTA_FUNCIONARIO + "A senha do funcionario eh protegida.");
+						MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + "A senha do funcionario eh protegida.");
 			default:
 				throw new DadoInvalidoException("Atributo nao valido.");
 			}
 		}
-		throw new DadoInvalidoException("Funcionario nao cadastrado no sistema.");
+		throw new OperacaoInvalidaException(
+				MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 	}
+
 }
