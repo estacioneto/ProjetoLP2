@@ -27,6 +27,12 @@ public class Constantes {
 	public static final String SENHA = "Senha";
 	public static final String MATRICULA = "Matricula";
 	
+	public static final String PESO = "Peso";
+	public static final String GENERO = "Genero";
+	
+	public static final Object MASCULINO = "masculino";
+	public static final Object FEMININO = "feminino";
+	
 	public static final String DATA_REGEX = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d{2})";
 	
 	public static final String ERRO_CADASTRO_FUNCIONARIO = "Erro no cadastro de funcionario. ";
@@ -40,6 +46,7 @@ public class Constantes {
 	
 	public static final String ERRO_CONSULTA_FUNCIONARIO = "Erro na consulta de funcionario. ";
 	
+	public static final HashSet<String> TIPOS_SANGUINEOS_VALIDOS = new HashSet<String>(Arrays.asList(new String[]{"A+", "A-", "B+", "B-", "AB+", "AB-", "O-", "O+"}));
 	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(Arrays.asList(new String[]{DIRETOR_GERAL.toLowerCase(), MEDICO.toLowerCase(), TECNICO.toLowerCase(), TECNICO_ADMINISTATIVO.toLowerCase()}));
 	
 	public static final int ZERO = 0;

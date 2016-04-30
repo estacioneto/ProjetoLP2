@@ -16,10 +16,11 @@ public class ControllerTest {
 	@Test
 	public void testCadastraEDemitefuncionario() {
 		Controller controller = new Controller();
-
+		controller.iniciaSistema();
+		
 		try {
-			Assert.assertEquals("12016001", controller.cadastraFuncionario(
-					"Estacio", "Diretor Geral", "18/04/1998"));
+			String matriculaDiretor = controller.cadastraFuncionario("Estacio", "Diretor Geral", "18/04/1998")
+			controller.acessaSistema(matriculaDiretor, senha);
 			Assert.assertEquals("22016002", controller.cadastraFuncionario(
 					"Eric", "Medico", "29/04/1997"));
 		} catch (DadoInvalidoException dadoInvalido) {
@@ -44,27 +45,20 @@ public class ControllerTest {
 	public void testRealizaLogin() {
 		Controller controller = new Controller();
 
-		Assert.assertEquals("12016001", controller.cadastraFuncionario(
-				"Estacio", "Diretor Geral", "18/04/1998"));
+		Assert.assertEquals("12016001", controller.cadastraFuncionario("Estacio", "Diretor Geral", "18/04/1998"));
 		controller.acessaSistema("12016001", "19981201");
-		Assert.assertEquals("22016002",
-				controller.cadastraFuncionario("Eric", "Medico", "29/04/1997"));
-		Assert.assertEquals("12016003", controller.cadastraFuncionario(
-				"Estacio", "Diretor Geral", "18/04/1998"));
-		Assert.assertEquals("22016004", controller.cadastraFuncionario(
-				"Thaynan", "Medico", "19/10/1996"));
-		Assert.assertEquals("12016005", controller.cadastraFuncionario(
-				"Thaynan", "Diretor Geral", "19/10/1996"));
-		Assert.assertEquals("32016006", controller.cadastraFuncionario("Eric",
-				"Tecnico Administrativo", "29/04/1997"));
+		Assert.assertEquals("22016002", controller.cadastraFuncionario("Eric", "Medico", "29/04/1997"));
+		Assert.assertEquals("12016003", controller.cadastraFuncionario("Estacio", "Diretor Geral", "18/04/1998"));
+		Assert.assertEquals("22016004", controller.cadastraFuncionario("Thaynan", "Medico", "19/10/1996"));
+		Assert.assertEquals("12016005", controller.cadastraFuncionario("Thaynan", "Diretor Geral", "19/10/1996"));
+		Assert.assertEquals("32016006", controller.cadastraFuncionario("Eric", "Tecnico Administrativo", "29/04/1997"));
 		Assert.assertTrue(controller.demiteFuncionario("19981201", "12016003"));
 		try {
 			controller.demiteFuncionario("19981201", "12016003");
 		} catch (OperacaoInvalidaException operacaoInvalida) {
 			fail("Nao deveria lancar essa excecao!");
 		} catch (AcessoBloqueadoException acessoBloqueado) {
-			Assert.assertEquals("Matricula nao cadastrada!",
-					acessoBloqueado.getMessage());
+			Assert.assertEquals("Matricula nao cadastrada!", acessoBloqueado.getMessage());
 		}
 
 		try {
@@ -73,8 +67,7 @@ public class ControllerTest {
 		} catch (AcessoBloqueadoException acessoBloqueado) {
 			fail("Nao deveria lancar essa excecao!");
 		} catch (StringVaziaException stringVazia) {
-			Assert.assertEquals("Senha nao pode ser vazio(a)!",
-					stringVazia.getMessage());
+			Assert.assertEquals("Senha nao pode ser vazio(a)!", stringVazia.getMessage());
 		}
 
 		try {
@@ -85,16 +78,14 @@ public class ControllerTest {
 		} catch (StringVaziaException stringVazia) {
 			fail("Nao deveria lancar essa excecao!");
 		} catch (ObjetoNuloException objetoNulo) {
-			Assert.assertEquals("Senha nao pode ser nulo(a)!",
-					objetoNulo.getMessage());
+			Assert.assertEquals("Senha nao pode ser nulo(a)!", objetoNulo.getMessage());
 		}
 
 		try {
 			controller.acessaSistema("12016001", "c041ebf8");
 			fail("Deveria lancar excecao!");
 		} catch (AcessoBloqueadoException acessoBloqueado) {
-			Assert.assertEquals("Senha incorreta!",
-					acessoBloqueado.getMessage());
+			Assert.assertEquals("Senha incorreta!", acessoBloqueado.getMessage());
 		} catch (StringVaziaException stringVazia) {
 			fail("Nao deveria lancar essa excecao!");
 		} catch (ObjetoNuloException objetoNulo) {
@@ -107,8 +98,7 @@ public class ControllerTest {
 		} catch (AcessoBloqueadoException acessoBloqueado) {
 			fail("Nao deveria lancar essa excecao!");
 		} catch (StringVaziaException stringVazia) {
-			Assert.assertEquals("Matricula nao pode ser vazio(a)!",
-					stringVazia.getMessage());
+			Assert.assertEquals("Matricula nao pode ser vazio(a)!", stringVazia.getMessage());
 		} catch (ObjetoNuloException objetoNulo) {
 			fail("Nao deveria lancar essa excecao!");
 		}
@@ -121,8 +111,7 @@ public class ControllerTest {
 		} catch (StringVaziaException stringVazia) {
 			fail("Nao deveria lancar essa excecao!");
 		} catch (ObjetoNuloException objetoNulo) {
-			Assert.assertEquals("Matricula nao pode ser nulo(a)!",
-					objetoNulo.getMessage());
+			Assert.assertEquals("Matricula nao pode ser nulo(a)!", objetoNulo.getMessage());
 		}
 	}
 

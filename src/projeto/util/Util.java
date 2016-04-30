@@ -69,12 +69,12 @@ public class Util {
 			throw new ObjetoNuloException(nomeAtributo + " nao pode ser nulo(a)!");
 	}
 
-	public static void validaCargo(String cargo){
+	public static void validaCargo(String cargo) {
 		validaString(Constantes.ERRO_CARGO_FUNCIONARIO, cargo);
-		if(!Constantes.CARGOS_VALIDOS.contains(cargo.toLowerCase()))
+		if (!Constantes.CARGOS_VALIDOS.contains(cargo.toLowerCase()))
 			throw new DadoInvalidoException(Constantes.ERRO_CARGO_INVALIDO_FUNCIONARIO);
 	}
-	
+
 	/**
 	 * Verifica se a data corresponde ao padrao dd/mm/aaaa e se a mesma eh
 	 * coerente.
@@ -194,6 +194,53 @@ public class Util {
 		String[] dataQuebrada = dataSistema.split("/");
 		String formatoSaida = String.join("-", dataQuebrada[2], dataQuebrada[1], dataQuebrada[0]);
 		return formatoSaida;
+	}
+
+	/**
+	 * Valida se um valor double eh positivo
+	 * 
+	 * @param nomeAtributo
+	 *            Nome do atributo
+	 * @param valor
+	 *            valor
+	 */
+	public static void validaPositivo(String nomeAtributo, double valor) {
+		if (valor < 0)
+			throw new DadoInvalidoException(nomeAtributo + " nao pode ser negativo.");
+	}
+
+	/**
+	 * Valida se um valor inteiro eh positivo
+	 * 
+	 * @param nomeAtributo
+	 *            Nome do atributo
+	 * @param valor
+	 *            valor
+	 */
+	public static void validaPositivo(String nomeAtributo, int valor) {
+		if (valor < 0)
+			throw new DadoInvalidoException(nomeAtributo + " nao pode ser negativo.");
+	}
+
+	/**
+	 * Verifica se um tipo saguineo eh valido
+	 * 
+	 * @param tipoSanguineo
+	 *            tipo sanguineo
+	 */
+	public static void validaTipoSanguineo(String tipoSanguineo) {
+		if (!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipoSanguineo))
+			throw new DadoInvalidoException("Tipo sanguineo invalido.");
+	}
+
+	/**
+	 * Verifica se um sexo biologico eh valido
+	 * 
+	 * @param sexoBiologico sexo biologico
+	 */
+	public static void validaSexoBiologico(String sexoBiologico) {
+		if(!sexoBiologico.toLowerCase().equals(Constantes.MASCULINO) && !sexoBiologico.toLowerCase().equals(Constantes.FEMININO))
+			throw new DadoInvalidoException("Sexo biologico invalido.");
 	}
 
 }
