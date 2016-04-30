@@ -3,16 +3,24 @@ package projeto.paciente;
 public class GeradorIdPaciente {
 	private final static GeradorIdPaciente instancia = new GeradorIdPaciente();
 	private long id;
-	
+
 	private GeradorIdPaciente() {
-		id=0;
+		id = 0;
 	}
-	
-	public static GeradorIdPaciente getInstancia(){
+
+	/**
+	 * @return Instancia do gerador
+	 */
+	public static GeradorIdPaciente getInstancia() {
 		return instancia;
 	}
-	
-	public long getProximoId(){
+
+	/**
+	 * Gera o proximo ID
+	 * 
+	 * @return Proximo id
+	 */
+	public long getProximoId() {
 		return id++;
 	}
 }

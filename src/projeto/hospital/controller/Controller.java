@@ -4,12 +4,14 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.Permissao;
 import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
+import projeto.hospital.gerencia.GerenciadorDePaciente;
 import projeto.hospital.gerencia.ValidadorDeLogica;
 
 public class Controller {
 
 	private Funcionario funcionarioLogado;
 	private GerenciadorDeFuncionarios gerenciadorFuncionarios;
+	private GerenciadorDePaciente gerenciadorDePaciente;
 
 	public Controller() {
 		this.funcionarioLogado = null;
@@ -27,8 +29,9 @@ public class Controller {
 	 * @return Matricula do novo cadastro
 	 */
 	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
-		// Se o usuario esta logado vai ser verificado se ele pode realizar a operacao
-		// Porque o diretor eh cadastrado quando nao existe ninguem logado, por isso precisa disso
+		// Se o usuario esta logado vai ser verificado se ele pode realizar a
+		// operacao porque o diretor eh cadastrado quando nao existe ninguem
+		// logado, por isso precisa disso
 		if (!estaLogado()) {
 			if (!gerenciadorFuncionarios.isEmpty())
 				throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
@@ -44,6 +47,7 @@ public class Controller {
 		if (gerenciadorFuncionarios != null)
 			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
 		this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
+		this.gerenciadorDePaciente = new GerenciadorDePaciente();
 	}
 
 	/**
@@ -54,6 +58,7 @@ public class Controller {
 			throw new OperacaoInvalidaException("Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
 					+ funcionarioLogado.getNome() + ".");
 		this.gerenciadorFuncionarios = null;
+		this.gerenciadorDePaciente = null;
 	}
 
 	public void logout() {
@@ -82,5 +87,10 @@ public class Controller {
 
 	private boolean estaLogado() {
 		return this.funcionarioLogado != null;
+	}
+
+	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
+			String tipoSanguineo) {
+		return this.gerenciadorDePaciente.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo);
 	}
 }

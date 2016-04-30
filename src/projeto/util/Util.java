@@ -236,10 +236,12 @@ public class Util {
 	/**
 	 * Verifica se um sexo biologico eh valido
 	 * 
-	 * @param sexoBiologico sexo biologico
+	 * @param sexoBiologico
+	 *            sexo biologico
 	 */
 	public static void validaSexoBiologico(String sexoBiologico) {
-		if(!sexoBiologico.toLowerCase().equals(Constantes.MASCULINO) && !sexoBiologico.toLowerCase().equals(Constantes.FEMININO))
+		if (sexoBiologico == null || !sexoBiologico.toLowerCase().equals(Constantes.MASCULINO)
+				&& !sexoBiologico.toLowerCase().equals(Constantes.FEMININO))
 			throw new DadoInvalidoException("Sexo biologico invalido.");
 	}
 

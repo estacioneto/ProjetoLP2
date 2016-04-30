@@ -19,14 +19,14 @@ public class Facade {
 		this.controller.iniciaSistema();
 	}
 
-	public void fechaSistema(){
+	public void fechaSistema() {
 		this.controller.fechaSistema();
 	}
-	
-	public void logout(){
+
+	public void logout() {
 		this.controller.logout();
 	}
-	
+
 	public String liberaSistema(String chave, String nome, String dataNascimento) {
 		if (sistemaJaLiberado) {
 			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Sistema liberado anteriormente.");
@@ -55,4 +55,8 @@ public class Facade {
 		return this.controller.demiteFuncionario(senhaDiretor, matriculaFuncionario);
 	}
 
+	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
+			String tipoSanguineo) {
+		return this.controller.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo);
+	}
 }
