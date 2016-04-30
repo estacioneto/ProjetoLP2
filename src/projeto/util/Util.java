@@ -314,7 +314,7 @@ public class Util {
 	public static void validaAtributo(String erroOperacao, String atributo, String valor) {
 		validaString(erroOperacao + MensagensDeErro.ATRIBUTO_FUNCIONARIO, atributo);
 		atributo = capitalizaString(atributo);
-		
+
 		if (atributo.equals(Constantes.MATRICULA))
 			throw new OperacaoInvalidaException(erroOperacao + MensagensDeErro.ATUALIZAR_MATRICULA);
 		if (!(atributo.equals(Constantes.NOME) || atributo.equals(Constantes.CARGO)
@@ -345,19 +345,37 @@ public class Util {
 		}
 	}
 
+	/**
+	 * Retorna a String com a primeira letra maiuscula e as demais minusculas.
+	 * 
+	 * @param string
+	 *            String a ser modificada.
+	 * @return String capitalizada.
+	 */
 	public static String capitalizaString(String string) {
 		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase() + string.substring(Constantes.UM);
 	}
 
+	/**
+	 * Valida uma nova senha.
+	 * 
+	 * @param erroOperacao
+	 *            Mensagem de erro correspondente a operacao.
+	 * @param senha
+	 *            Senha a ser analisada.
+	 */
 	public static void validaSenha(String erroOperacao, String senha) {
 		Util.validaString(erroOperacao + Constantes.SENHA, senha);
-		
-		if(senha.length() < Constantes.SENHA_TAMANHO_MINIMO || senha.length() > Constantes.SENHA_TAMANHO_MAXIMO)
-			throw new OperacaoInvalidaException(erroOperacao + "A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
-		
-		for(int indice = 0; indice < senha.length(); indice++){
-			if(!(Character.isAlphabetic(senha.charAt(indice)) || Character.isDigit(senha.charAt(indice)) || senha.charAt(indice) == ' ')){
-				throw new OperacaoInvalidaException(erroOperacao + "A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
+
+		if (senha.length() < Constantes.SENHA_TAMANHO_MINIMO || senha.length() > Constantes.SENHA_TAMANHO_MAXIMO)
+			throw new OperacaoInvalidaException(
+					erroOperacao + "A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
+
+		for (int indice = 0; indice < senha.length(); indice++) {
+			if (!(Character.isAlphabetic(senha.charAt(indice)) || Character.isDigit(senha.charAt(indice))
+					|| senha.charAt(indice) == ' ')) {
+				throw new OperacaoInvalidaException(
+						erroOperacao + "A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
 			}
 		}
 	}
