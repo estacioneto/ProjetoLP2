@@ -1,5 +1,6 @@
 package projeto.hospital.funcionarios;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,9 +13,14 @@ import projeto.util.Util;
  * @author Estacio Pereira
  *
  */
-public class Cargo {
+public class Cargo implements Serializable {
 
-	private Set<Permissao> permissoes;
+	/**
+	 * Serial gerado automaticamente.
+	 */
+	private static final long serialVersionUID = 8465811114464412946L;
+	
+	private HashSet<Permissao> permissoes;
 	private String nome;
 
 	/**
@@ -53,8 +59,8 @@ public class Cargo {
 	 * 
 	 * @return Conjunto de permissoes do diretor.
 	 */
-	public static Set<Permissao> getPermissoesDiretor() {
-		Set<Permissao> permissoes = new HashSet<Permissao>();
+	public static HashSet<Permissao> getPermissoesDiretor() {
+		HashSet<Permissao> permissoes = new HashSet<Permissao>();
 		permissoes.add(Permissao.CADASTRAR_FUNCIONARIOS);
 		permissoes.add(Permissao.EXCLUIR_FUNCIONARIOS);
 		permissoes.add(Permissao.ATUALIZAR_INFORMACOES_FUNCIONARIOS);

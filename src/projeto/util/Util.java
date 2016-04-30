@@ -1,5 +1,11 @@
 package projeto.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -69,12 +75,12 @@ public class Util {
 			throw new ObjetoNuloException(nomeAtributo + " nao pode ser nulo(a)!");
 	}
 
-	public static void validaCargo(String cargo){
+	public static void validaCargo(String cargo) {
 		validaString(Constantes.ERRO_CARGO_FUNCIONARIO, cargo);
-		if(!Constantes.CARGOS_VALIDOS.contains(cargo.toLowerCase()))
+		if (!Constantes.CARGOS_VALIDOS.contains(cargo.toLowerCase()))
 			throw new DadoInvalidoException(Constantes.ERRO_CARGO_INVALIDO_FUNCIONARIO);
 	}
-	
+
 	/**
 	 * Verifica se a data corresponde ao padrao dd/mm/aaaa e se a mesma eh
 	 * coerente.
@@ -196,4 +202,88 @@ public class Util {
 		return formatoSaida;
 	}
 
+	/**
+	 * Pega o objeto de um arquivo.
+	 * 
+	 * @param caminho
+	 *            Caminho do arquivo.
+	 * @return Objeto.
+	 */
+	public static Object getObjeto(String caminho) {
+		ObjectInputStream leitorDeObjetos = null;
+		Object objeto = null;
+		try {
+			leitorDeObjetos = new ObjectInputStream(new FileInputStream(caminho));
+			objeto = leitorDeObjetos.readObject();
+			return objeto;
+		} catch (Exception excecao) {
+			throw new DadoInvalidoException("Arquivo " + caminho + "nao existe!");
+		} finally {
+			try {
+				if (leitorDeObjetos != null) {
+					leitorDeObjetos.close();
+				}
+			} catch (IOException excecao) {
+				throw new DadoInvalidoException("Nao foi possivel fechar o arquivo " + caminho + "!");
+			}
+		}
+	}
+
+	/**
+	 * Cria um arquivo se ja nao existir.
+	 * 
+	 * @param caminho
+	 *            Caminho do arquivo.
+	 */
+	public static void criaArquivo(String caminho) {
+		File arquivo = new File(caminho);
+		// Verifica se sera necessario criar o arquivo
+		if (arquivo.getParentFile() != null)
+			arquivo.getParentFile().mkdirs();
+	}
+
+	/**
+	 * Escreve o objeto em um arquivo
+	 * 
+	 * @param caminho
+	 *            Caminho do arquivo
+	 * @param objeto
+	 *            Objeto a ser escrito
+	 */
+	public static void setObjeto(String caminho, Object objeto) {
+		ObjectOutputStream escritorObjeto = null;
+		try {
+			escritorObjeto = new ObjectOutputStream(new FileOutputStream(caminho));
+			escritorObjeto.writeObject(objeto);
+		} catch (Exception excecao) {
+			criaArquivo(caminho);
+			setObjeto(caminho, objeto);
+		} finally {
+			try {
+				if (escritorObjeto != null)
+					escritorObjeto.close();
+			} catch (IOException excecao) {
+				throw new DadoInvalidoException("Nao foi possivel fechar o arquivo " + caminho + "!");
+			}
+		}
+	}
+
+	/**
+	 * Limpa os dados de algum diretorio.
+	 * 
+	 * @param diretorio
+	 *            Diretorio a ser removido.
+	 * @return true se removeu com sucesso.
+	 */
+	public static boolean limpaDados(File diretorio) {
+		if (diretorio.isDirectory()) {
+			String[] filhos = diretorio.list();
+			for (String filho : filhos) {
+				if (!limpaDados(new File(diretorio, filho))) {
+					return false;
+				}
+			}
+		}
+		return diretorio.delete();
+	}
 }

@@ -5,6 +5,8 @@ import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.Permissao;
 import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
 import projeto.hospital.gerencia.ValidadorDeLogica;
+import projeto.util.Constantes;
+import projeto.util.Util;
 
 public class Controller {
 
@@ -43,7 +45,12 @@ public class Controller {
 	public void iniciaSistema() {
 		if (gerenciadorFuncionarios != null)
 			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
-		this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
+		try{
+			this.gerenciadorFuncionarios = (GerenciadorDeFuncionarios)Util.getObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
+		}catch(Exception excecao){
+			this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
+			Util.criaArquivo(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
+		}
 	}
 
 	/**
@@ -53,6 +60,7 @@ public class Controller {
 		if (estaLogado())
 			throw new OperacaoInvalidaException("Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
 					+ funcionarioLogado.getNome() + ".");
+		Util.setObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS, gerenciadorFuncionarios);
 		this.gerenciadorFuncionarios = null;
 	}
 

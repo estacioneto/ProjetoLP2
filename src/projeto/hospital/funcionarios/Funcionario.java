@@ -1,5 +1,7 @@
 package projeto.hospital.funcionarios;
 
+import java.io.Serializable;
+
 import projeto.util.Constantes;
 import projeto.util.Util;
 
@@ -10,8 +12,13 @@ import projeto.util.Util;
  * @author Estacio Pereira
  *
  */
-public class Funcionario {
+public class Funcionario implements Serializable {
 
+	/**
+	 * Serial gerado automaticamente.
+	 */
+	private static final long serialVersionUID = 1948219698630791794L;
+	
 	private String nome;
 	private Cargo cargo;
 	private String matricula;

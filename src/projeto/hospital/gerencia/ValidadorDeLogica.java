@@ -1,5 +1,7 @@
 package projeto.hospital.gerencia;
 
+import java.io.Serializable;
+
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Cargo;
 import projeto.hospital.funcionarios.Funcionario;
@@ -10,7 +12,12 @@ import projeto.hospital.funcionarios.Permissao;
  * 
  * @author Estacio Pereira
  */
-public class ValidadorDeLogica {
+public class ValidadorDeLogica implements Serializable {
+
+	/**
+	 * Serial gerado automaticamente. 
+	 */
+	private static final long serialVersionUID = 8905446257346882767L;
 
 	/**
 	 * Valida a permissao de exclusao de algum funcionario.

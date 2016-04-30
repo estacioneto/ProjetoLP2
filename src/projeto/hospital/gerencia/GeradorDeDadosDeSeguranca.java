@@ -1,12 +1,18 @@
 package projeto.hospital.gerencia;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 import projeto.util.Constantes;
 import projeto.util.Util;
 
-public class GeradorDeDadosDeSeguranca {
+public class GeradorDeDadosDeSeguranca implements Serializable{
 
+	/**
+	 * Serial gerado automaticamente.
+	 */
+	private static final long serialVersionUID = -787866569388135898L;
+	
 	private int cadastros;
 	private DecimalFormat formatadorDecimal;
 
