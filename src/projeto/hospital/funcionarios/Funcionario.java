@@ -34,10 +34,10 @@ public class Funcionario {
 	 */
 	public Funcionario(String nome, Cargo cargo, String matricula,
 			String senha, String dataNascimento) {
-		Util.validaString(Constantes.NOME, nome);
-		Util.validaString(Constantes.MATRICULA, matricula);
-		Util.validaString(Constantes.SENHA, senha);
-		Util.validaData(Constantes.DATA_NASCIMENTO, dataNascimento);
+		Util.validaString(Constantes.ERRO_NOME_FUNCIONARIO, nome);
+		Util.validaString(Constantes.ERRO_MATRICULA_FUNCIONARIO, matricula);
+		Util.validaString(Constantes.ERRO_CADASTRO_FUNCIONARIO + Constantes.SENHA, senha);
+		Util.validaData(Constantes.ERRO_DATA_NASCIMENTO_FUNCIONARIO, dataNascimento);
 
 		this.nome = nome;
 		this.cargo = cargo;
@@ -132,7 +132,7 @@ public class Funcionario {
 	 * @return Data de nascimento do funcionario.
 	 */
 	public String getDataNascimento() {
-		return dataNascimento;
+		return Util.transformaFormatoData(this.dataNascimento);
 	}
 
 	/**

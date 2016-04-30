@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Funcionario;
@@ -89,8 +90,27 @@ public class GerenciadorDeFuncionarios {
 				if(this.funcionarios.get(matricula).getSenha().equals(senha))
 					return this.funcionarios.get(matricula);
 				else
-					throw new AcessoBloqueadoException("Senha incorreta!");
+					throw new AcessoBloqueadoException("Nao foi possivel realizar o login. Senha incorreta.");
 		else
-			throw new AcessoBloqueadoException("Matricula nao cadastrada!");
+			throw new AcessoBloqueadoException("Nao foi possivel realizar o login. Funcionario nao cadastrado.");
+	}
+
+	public String getInfoFuncionario(String matricula, String atributo) {
+		Util.validaString(Constantes.MATRICULA, matricula);
+		Util.validaString(Constantes.ATRIBUTO, atributo);
+		
+		if(this.contemFuncionario(matricula)){
+			switch(atributo){
+			case Constantes.NOME:
+				return this.funcionarios.get(matricula).getNome();
+			case Constantes.CARGO:
+				return this.funcionarios.get(matricula).getCargo();
+			case Constantes.DATA_NASCIMENTO:
+				return this.funcionarios.get(matricula).getDataNascimento();
+			default:
+				throw new DadoInvalidoException("Atributo nao valido.");
+			}
+		}
+		throw new DadoInvalidoException("Funcionario nao cadastrado no sistema.");
 	}
 }

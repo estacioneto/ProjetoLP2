@@ -33,16 +33,16 @@ public class Util {
 	 * Verifica se a String eh nula ou vazia. O nomeAtributo eh utilizado para
 	 * uma melhor criacao de excecao caso a String seja invalida.
 	 * 
-	 * @param nomeAtributo
+	 * @param erroAtributo
 	 *            Nome do atributo que carrega a String a ser analisada.
 	 * @param atributo
 	 *            String a ser analisada.
 	 */
-	public static void validaString(String nomeAtributo, String atributo) {
-		validaNaoNulo(nomeAtributo, atributo);
+	public static void validaString(String erroAtributo, String atributo) {
+		validaNaoNulo(erroAtributo, atributo);
 		if (atributo.trim().length() == Constantes.ZERO)
-			throw new StringVaziaException(nomeAtributo
-					+ " nao pode ser vazio(a)!");
+			throw new StringVaziaException(erroAtributo
+					+ "nao pode ser vazio.");
 	}
 
 	/**
@@ -180,6 +180,12 @@ public class Util {
 	 */
 	public static String getCodigoPorMatricula(String matricula) {
 		return Character.toString(matricula.charAt(Constantes.ZERO));
+	}
+	
+	public static String transformaFormatoData(String dataSistema){
+		String[] dataQuebrada = dataSistema.split("/");
+		String formatoSaida = String.join("-", dataQuebrada[2], dataQuebrada[1], dataQuebrada[0]);
+		return formatoSaida;
 	}
 
 }

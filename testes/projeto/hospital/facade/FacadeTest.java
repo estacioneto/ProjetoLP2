@@ -64,10 +64,10 @@ public class FacadeTest {
 			String ano = formatadorAno.format(data);
 			String str = "1" + ano + "001";
 			Assert.assertEquals(str, facade.liberaSistema("Estacio", "18/04/1998", chaveCorreta));
-			facade.acessaSistema(str, "19981201");
+			facade.login(str, "19981201");
 
 			try {
-				facade.acessaSistema(str, Constantes.STRING_VAZIA);
+				facade.login(str, Constantes.STRING_VAZIA);
 				fail("Deveria lancar excecao!");
 			} catch (StringVaziaException stringVazia) {
 				Assert.assertEquals("Senha nao pode ser vazio(a)!", stringVazia.getMessage());

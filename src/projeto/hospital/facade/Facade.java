@@ -6,31 +6,44 @@ import projeto.util.Constantes;
 
 public class Facade {
 
-	private final String CHAVE_DESBLOQUEIO = "c041ebf8";	
+	private final String CHAVE_DESBLOQUEIO = "c041ebf8";
 	private Controller controller;
-	
-	public Facade(){
+	private boolean sistemaJaIniciado;
+
+	public Facade() {
 		this.controller = new Controller();
+		this.sistemaJaIniciado = false;
 	}
-	
-	public String liberaSistema(String nome, String dataNascimento, String chave){
-		if(CHAVE_DESBLOQUEIO.equals(chave)){
+
+	public Facade iniciaSistema() {
+		return this;
+	}
+
+	public String liberaSistema(String chave, String nome, String dataNascimento) {
+		if (sistemaJaIniciado) {
+			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Sistema liberado anteriormente.");
+		} else if (CHAVE_DESBLOQUEIO.equals(chave)) {
 			String matricula = this.cadastraFuncionario(nome, Constantes.DIRETOR, dataNascimento);
+			sistemaJaIniciado = true;
 			return matricula;
-		}else{
-			throw new AcessoBloqueadoException("Voce nao tem acesso ao sistema!");
+		} else {
+			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Chave invalida.");
 		}
 	}
-	
-	public void acessaSistema(String matricula, String senha){
+
+	public void login(String matricula, String senha) {
 		this.controller.acessaSistema(matricula, senha);
 	}
-	
+
+	public String getInfoFuncionario(String matricula, String atributo) {
+		return this.controller.getInfoFuncionario(matricula, atributo);
+	}
+
 	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
 		return this.controller.cadastraFuncionario(nome, cargo, dataNascimento);
 	}
 
-	public boolean demiteFuncionario(String senhaDiretor, String matriculaFuncionario){
+	public boolean demiteFuncionario(String senhaDiretor, String matriculaFuncionario) {
 		return this.controller.demiteFuncionario(senhaDiretor, matriculaFuncionario);
 	}
 

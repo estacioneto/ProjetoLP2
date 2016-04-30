@@ -24,7 +24,10 @@ public class Controller {
 		return this.gerenciadorFuncionarios.demiteFuncionario(this.funcionarioLogado.getMatricula(), senhaDiretor, matriculaFuncionario);
 	}
 	
-
+	public String getInfoFuncionario(String matricula, String atributo){
+		return this.gerenciadorFuncionarios.getInfoFuncionario(matricula, atributo);
+	}
+	
 	public void acessaSistema(String matricula, String senha) {
 		this.funcionarioLogado = this.gerenciadorFuncionarios.acessaSistema(matricula, senha);
 	}
