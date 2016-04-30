@@ -1,6 +1,7 @@
 package projeto.hospital.gerencia;
 
 import projeto.exceptions.logica.OperacaoInvalidaException;
+import projeto.hospital.funcionarios.Cargo;
 import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.Permissao;
 
@@ -19,7 +20,21 @@ public class ValidadorDeLogica {
 	 */
 	public void validaExclusao(Funcionario funcionario) {
 		if (!funcionario.temPermissao(Permissao.EXCLUIR_FUNCIONARIOS))
-			throw new OperacaoInvalidaException(
-					"Exclusao nao pode ser efetuada! Usuario nao eh diretor!");
+			throw new OperacaoInvalidaException("Exclusao nao pode ser efetuada! Usuario nao eh diretor!");
+	}
+
+	/**
+	 * Valida se um funcionario tem a permissao para executar uma operacao
+	 * 
+	 * @param operacao
+	 *            Operacao
+	 * @param funcionario
+	 *            Funcionario
+	 */
+	public static void validaOperacao(Permissao operacao, Funcionario funcionario) {
+		String codigo = funcionario.getMatricula().substring(0, 1);
+		if (!Cargo.getPermissoesPorCodigo(codigo).contains(operacao))
+			throw new OperacaoInvalidaException("Erro no cadastro de funcionario. O funcionario "
+					+ funcionario.getNome() + " nao tem permissao para cadastrar funcionarios.");
 	}
 }

@@ -131,7 +131,7 @@ public class Util {
 			return Constantes.CODIGO_DIRETOR;
 		if (cargo.equals(Constantes.MEDICO))
 			return Constantes.CODIGO_MEDICO;
-		if (cargo.equals(Constantes.TECNICO))
+		if (cargo.equals(Constantes.TECNICO_ADMINISTATIVO))
 			return Constantes.CODIGO_TECNICO;
 		throw new DadoInvalidoException("Cargo inexistente!");
 	}

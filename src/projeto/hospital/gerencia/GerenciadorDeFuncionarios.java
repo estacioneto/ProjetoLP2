@@ -62,6 +62,9 @@ public class GerenciadorDeFuncionarios {
 		Util.validaCargo(cargo);
 		Util.validaData(Constantes.ERRO_DATA_FUNCIONARIO, dataNascimento);
 
+		if(Constantes.DIRETOR_GERAL.equals(cargo) && !this.isEmpty())
+			throw new OperacaoInvalidaException(Constantes.ERRO_CADASTRO_DIRETOR_FUNCIONARIO);
+		
 		String matricula = geradorDadosSeguranca.geraMatricula(cargo, getAnoAtual());
 		String senha = geradorDadosSeguranca.geraSenha(matricula, Util.getAnoPorData(dataNascimento));
 		Funcionario funcionario = this.factoryFuncionarios.criaFuncionario(nome, cargo, dataNascimento, matricula, senha);
@@ -94,7 +97,14 @@ public class GerenciadorDeFuncionarios {
 		else
 			throw new AcessoBloqueadoException("Nao foi possivel realizar o login. Funcionario nao cadastrado.");
 	}
-
+	
+	/**
+	 * @return Quantidade de usuarios cadastrados no sistema
+	 */
+	public boolean isEmpty(){
+		return this.funcionarios.isEmpty();
+	}
+	
 	public String getInfoFuncionario(String matricula, String atributo) {
 		Util.validaString(Constantes.MATRICULA, matricula);
 		Util.validaString(Constantes.ATRIBUTO, atributo);
@@ -107,6 +117,8 @@ public class GerenciadorDeFuncionarios {
 				return this.funcionarios.get(matricula).getCargo();
 			case Constantes.DATA:
 				return this.funcionarios.get(matricula).getDataNascimento();
+			case Constantes.SENHA:
+				throw new OperacaoInvalidaException(Constantes.ERRO_CONSULTA_FUNCIONARIO + "A senha do funcionario eh protegida.");
 			default:
 				throw new DadoInvalidoException("Atributo nao valido.");
 			}

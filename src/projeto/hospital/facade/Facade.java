@@ -8,23 +8,31 @@ public class Facade {
 
 	private final String CHAVE_DESBLOQUEIO = "c041ebf8";
 	private Controller controller;
-	private boolean sistemaJaIniciado;
+	private boolean sistemaJaLiberado;
 
 	public Facade() {
 		this.controller = new Controller();
-		this.sistemaJaIniciado = false;
+		this.sistemaJaLiberado = false;
 	}
 
-	public Facade iniciaSistema() {
-		return this;
+	public void iniciaSistema() {
+		this.controller.iniciaSistema();
 	}
 
+	public void fechaSistema(){
+		this.controller.fechaSistema();
+	}
+	
+	public void logout(){
+		this.controller.logout();
+	}
+	
 	public String liberaSistema(String chave, String nome, String dataNascimento) {
-		if (sistemaJaIniciado) {
+		if (sistemaJaLiberado) {
 			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Sistema liberado anteriormente.");
 		} else if (CHAVE_DESBLOQUEIO.equals(chave)) {
 			String matricula = this.cadastraFuncionario(nome, Constantes.DIRETOR_GERAL, dataNascimento);
-			sistemaJaIniciado = true;
+			sistemaJaLiberado = true;
 			return matricula;
 		} else {
 			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Chave invalida.");

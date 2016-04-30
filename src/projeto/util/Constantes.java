@@ -11,7 +11,8 @@ public class Constantes {
 	
 	public static final String DIRETOR_GERAL = "Diretor Geral";
 	public static final String MEDICO = "Medico";
-	public static final String TECNICO = "Tecnico Administrativo";
+	public static final String TECNICO_ADMINISTATIVO = "Tecnico Administrativo";
+	public static final String TECNICO = "Tecnico";
 	public static final String FUNCIONARIO = "Funcionario";
 	public final static String CODIGO_DIRETOR = "1";
 	public final static String CODIGO_MEDICO = "2";
@@ -23,7 +24,6 @@ public class Constantes {
 	public static final String CARGO = "Cargo";
 	public static final String ATRIBUTO = "Atributo";
 	public static final String DATA = "Data";
-	
 	public static final String SENHA = "Senha";
 	public static final String MATRICULA = "Matricula";
 	
@@ -36,8 +36,11 @@ public class Constantes {
 	public static final String ERRO_SENHA_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + SENHA;
 	public static final String ERRO_CARGO_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Nome do cargo ";
 	public static final String ERRO_CARGO_INVALIDO_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Cargo invalido.";
+	public static final String ERRO_CADASTRO_DIRETOR_FUNCIONARIO = ERRO_CADASTRO_FUNCIONARIO + "Nao eh possivel criar mais de um Diretor Geral.";
 	
-	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(Arrays.asList(new String[]{DIRETOR_GERAL.toLowerCase(), MEDICO.toLowerCase(), TECNICO.toLowerCase()}));
+	public static final String ERRO_CONSULTA_FUNCIONARIO = "Erro na consulta de funcionario. ";
+	
+	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(Arrays.asList(new String[]{DIRETOR_GERAL.toLowerCase(), MEDICO.toLowerCase(), TECNICO.toLowerCase(), TECNICO_ADMINISTATIVO.toLowerCase()}));
 	
 	public static final int ZERO = 0;
 	public static final int INDICE_DIA = ZERO;
