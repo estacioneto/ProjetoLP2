@@ -6,6 +6,7 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Cargo;
 import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.Permissao;
+import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 
 /**
@@ -39,10 +40,9 @@ public class ValidadorDeLogica implements Serializable {
 	 * @param funcionario
 	 *            Funcionario
 	 */
-	public static void validaOperacao(Permissao operacao, Funcionario funcionario) {
-		String codigo = funcionario.getMatricula().substring(0, 1);
+	public static void validaOperacao(String mensagem_erro, Permissao operacao, Funcionario funcionario) {
+		String codigo = funcionario.getMatricula().substring(Constantes.ZERO, Constantes.UM);
 		if (!Cargo.getPermissoesPorCodigo(codigo).contains(operacao))
-			throw new OperacaoInvalidaException("Erro no cadastro de funcionario. O funcionario "
-					+ funcionario.getNome() + " nao tem permissao para cadastrar funcionarios.");
+			throw new OperacaoInvalidaException(String.format(mensagem_erro, funcionario.getNome()));
 	}
 }

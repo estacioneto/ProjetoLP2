@@ -50,7 +50,20 @@ public class Cargo implements Serializable {
 		Set<Permissao> permissoes = new HashSet<Permissao>();
 		if (codigo.equals(Constantes.CODIGO_DIRETOR)) {
 			permissoes = getPermissoesDiretor();
+		} else if(codigo.equals(Constantes.CODIGO_TECNICO)){
+			permissoes = getPermissoesTecnico();
 		}
+		return permissoes;
+	}
+
+	/**
+	 * Metodo que retorna as permissoes do tecnico.
+	 * 
+	 * @return Conjunto de permissoes do tecnico
+	 */
+	private static Set<Permissao> getPermissoesTecnico() {
+		HashSet<Permissao> permissoes = new HashSet<Permissao>();
+		permissoes.add(Permissao.CADASTRAR_PACIENTES);
 		return permissoes;
 	}
 

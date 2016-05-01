@@ -1,5 +1,8 @@
 package projeto.paciente;
 
+/**
+ * @author Eric
+ */
 public class GeradorIdPaciente {
 	private final static GeradorIdPaciente instancia = new GeradorIdPaciente();
 	private Long id;

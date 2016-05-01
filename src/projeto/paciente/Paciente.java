@@ -1,12 +1,18 @@
 package projeto.paciente;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 
-public class Paciente {
+/**
+ * @author Eric
+ */
+public class Paciente implements Serializable { 
+	private static final long serialVersionUID = 1697453654897L;
+	
 	private String nome;
 	private String dataNascimento;
 	private Double peso;
@@ -134,12 +140,14 @@ public class Paciente {
 	 */
 	public Integer getIdade() {
 		LocalDate hoje = LocalDate.now();
+
 		String[] nascimento = this.dataNascimento.split("/");
-		int ano = Integer.parseInt(nascimento[2]), mes = Integer.parseInt(nascimento[1]),
-				dia = Integer.parseInt(nascimento[0]);
+		int ano = Integer.parseInt(nascimento[2]), 
+			mes = Integer.parseInt(nascimento[1]),
+			dia = Integer.parseInt(nascimento[0]);
 
 		int idade = hoje.getYear() - ano - 1;
-		if (mes <= hoje.getMonthValue() && dia <= hoje.getDayOfMonth())
+		if (mes < hoje.getMonthValue() || mes == hoje.getMonthValue() && dia <= hoje.getDayOfMonth())
 			idade++;
 
 		return idade;
@@ -150,7 +158,7 @@ public class Paciente {
 		String saida = "Nome: " + nome + ". ID: " + id + ". Data Nascimento: " + dataNascimento;
 		return saida;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

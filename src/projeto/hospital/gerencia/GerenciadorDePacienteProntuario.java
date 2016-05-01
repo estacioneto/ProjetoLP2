@@ -3,7 +3,6 @@ package projeto.hospital.gerencia;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -15,6 +14,11 @@ import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;;
 
+/**
+ * Gerencia os pacientes e prontuarios
+ * 
+ * @author Eric
+ */
 public class GerenciadorDePacienteProntuario {
 	private Set<Paciente> pacientes;
 	private List<Prontuario> prontuarios;
@@ -94,6 +98,13 @@ public class GerenciadorDePacienteProntuario {
 		}
 	}
 
+	/**
+	 * Busca um paciente por seu ID
+	 * 
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @return Paciente
+	 */
 	private Paciente buscaPaciente(Long idPaciente) {
 		for (Paciente paciente : this.pacientes)
 			if (paciente.getId().equals(idPaciente))
@@ -102,12 +113,20 @@ public class GerenciadorDePacienteProntuario {
 		throw new DadoInvalidoException("Paciente nao encontrado.");
 	}
 
+	/**
+	 * Busca um id de um paciente de acordo com a posicao de seu prontuario
+	 * 
+	 * @param posicao
+	 *            Posicao do prontuario
+	 * @return Id do paciente
+	 */
 	public Long getProntuario(int posicao) {
 		Util.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
-		if(posicao >= prontuarios.size())
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES + "(max = " + prontuarios.size() + ").");
-		
-		Collections.sort(prontuarios);		
+		if (posicao >= prontuarios.size())
+			throw new DadoInvalidoException(
+					MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES + "(max = " + prontuarios.size() + ").");
+
+		Collections.sort(prontuarios);
 		return prontuarios.get(posicao).getId();
 	}
 }

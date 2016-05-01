@@ -1,6 +1,13 @@
 package projeto.paciente;
 
-public class Prontuario implements Comparable {
+import java.io.Serializable;
+
+/**
+ * @author Eric
+ */
+public class Prontuario implements Comparable<Prontuario>, Serializable {
+	private static final long serialVersionUID = 21463754771L;
+	
 	Paciente paciente;
 
 	/**
@@ -24,14 +31,11 @@ public class Prontuario implements Comparable {
 	 * @return Id do paciente do prontuario
 	 */
 	public Long getId() {
-		System.out.println(paciente);
 		return paciente.getId();
 	}
-	
+
 	@Override
-	public int compareTo(Object obj){
-		Prontuario prontuario = (Prontuario) obj;
-		
+	public int compareTo(Prontuario prontuario) {
 		return this.paciente.getNome().compareTo(prontuario.getPaciente().getNome());
 	}
 }

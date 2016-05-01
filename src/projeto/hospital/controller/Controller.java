@@ -7,6 +7,7 @@ import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
 import projeto.hospital.gerencia.GerenciadorDePacienteProntuario;
 import projeto.hospital.gerencia.ValidadorDeLogica;
 import projeto.util.Constantes;
+import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 
 public class Controller {
@@ -38,7 +39,7 @@ public class Controller {
 			if (!gerenciadorFuncionarios.isEmpty())
 				throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
 		} else
-			ValidadorDeLogica.validaOperacao(Permissao.CADASTRAR_FUNCIONARIOS, funcionarioLogado);
+			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_FUNCIONARIO, Permissao.CADASTRAR_FUNCIONARIOS, funcionarioLogado);
 		return this.gerenciadorFuncionarios.cadastraFuncionario(nome, cargo, dataNascimento);
 	}
 
@@ -134,6 +135,11 @@ public class Controller {
 	 */
 	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
 			String tipoSanguineo) {
+		if (!estaLogado()) {
+			throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros de pacientes.");
+		} else
+			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE, Permissao.CADASTRAR_PACIENTES, funcionarioLogado);
+		
 		return this.gerenciadorDePaciente.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo);
 	}
 
@@ -147,6 +153,8 @@ public class Controller {
 	 * @return Informacao requisitada
 	 */
 	public Object getInfoPaciente(long idPaciente, String atributo) {
+		if (!estaLogado())
+			throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
 		return this.gerenciadorDePaciente.getInfoPaciente(idPaciente, atributo);
 	}
 
