@@ -64,6 +64,7 @@ public class Cargo implements Serializable {
 	private static Set<Permissao> getPermissoesTecnico() {
 		HashSet<Permissao> permissoes = new HashSet<Permissao>();
 		permissoes.add(Permissao.CADASTRAR_PACIENTES);
+		permissoes.add(Permissao.CADASTRAR_MEDICAMENTO);
 		return permissoes;
 	}
 

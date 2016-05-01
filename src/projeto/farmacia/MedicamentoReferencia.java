@@ -2,18 +2,22 @@ package projeto.farmacia;
 
 public class MedicamentoReferencia extends Medicamento{
 
-	public MedicamentoReferencia(String nome, double preco, int quantidade, String categorias) throws Exception {
+	public MedicamentoReferencia(String nome, double preco, int quantidade, String categorias){
 		super(nome, preco, quantidade, categorias);
 	}
 
+	public String getTipo(){
+		return "de Referencia";
+	}
+	
 	@Override
-	public double calculaPreco(){
+	public Double calculaPreco(){
 		return super.getPreco();
 	}
 	
 	@Override
 	public String toString() {
-		String formatacao = super.toString() + " Tipo: Referencia;";
+		String formatacao = "Medicamento de Referencia:" + super.toString();
 		return formatacao;
 	}
 }

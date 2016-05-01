@@ -1,48 +1,42 @@
 package projeto.farmacia;
 
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Set;
+import java.util.TreeSet;
+
+import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.util.*;
 
 public abstract class Medicamento{
 
 	private String nome;
-	private double preco;
+	private Double preco;
 	private int quantidade;
-	private Set<String> categorias;
+	private String categorias;
 	
-	public Medicamento(String nome, double preco, int quantidade, String categorias) throws Exception{
-		if(nome == null || nome.trim().isEmpty()){
-			throw new Exception("Nome de medicamento nao pode ser nulo ou vazio.");
-		}
-		if(preco < 0){
-			throw new Exception("Nao ha medicamento com valor negativo.");
-		}
-		if(quantidade <= 0){
-			throw new Exception("Nao ha quantidade nula ou negativa de medicamento.");
-		}
-		if(categorias == null || categorias.trim().isEmpty()){
-			throw new Exception("Nao ha categoria nula ou vazia.");
-		}
+	public Medicamento(String nome, Double preco, int quantidade, String categorias){
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_NOME_MEDICAMENTO, nome);
+		ValidadorDeDados.validaPositivo(MensagensDeErro.ERRO_PRECO_MEDICAMENTO, preco);
+		ValidadorDeDados.validaPositivo(MensagensDeErro.ERRO_QUANTIDADE_MEDICAMENTO, quantidade);
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CATEGORIA_MEDICAMENTO, categorias);
+		
 		this.nome = nome;
 		this.preco = preco;
 		this.quantidade = quantidade;
-		this.categorias = new HashSet<>();
-		this.addCategoriasDoArray(categorias);
+		this.categorias = categorias;
 	}
-
-	private void addCategoriasDoArray(String categorias){
-		String[] arrayCategorias = categorias.split(",");
-		
-		for(int i=0; i<arrayCategorias.length; i++){
-			this.categorias.add(arrayCategorias[i]);
-		}
-	}
+	
+	public abstract String getTipo();
 	
 	public double getPreco(){
 		return preco;
 	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
 	
-	public void setPreco(double preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 
@@ -54,53 +48,34 @@ public abstract class Medicamento{
 		return quantidade;
 	}
 
-	public Set<String> getCategorias() {
-		Set<String> copiaCategorias = new HashSet<>(this.categorias);
-		return copiaCategorias;
+	public String getCategorias() {
+		Set<String> novo = new TreeSet<>(Arrays.asList(this.categorias.split(",")));
+		return String.join(",", novo);
 	}
 	
-	public int getQutDeCategorias(){
-		return this.categorias.size();
-	}
-	
-	public abstract double calculaPreco();
+	public abstract Double calculaPreco();
 
-	public void recebeQutMedicamentos(int quantidade)throws Exception{
+	public void recebeQutMedicamentos(int quantidade){
 		if(quantidade <= 0){
-			throw new Exception("Nao existe quantidade negativa ou nula.");
+			throw new DadoInvalidoException("Nao existe quantidade negativa ou nula.");
 		}
 		this.quantidade += quantidade;
 	}
 	
-	public void pegaQutMedicamentos(int quantidade)throws Exception{
+	public void pegaQutMedicamentos(int quantidade){
 		if(quantidade <= 0){
-			throw new Exception("Nao existe quantidade negativa ou nula.");
+			throw new DadoInvalidoException("Nao existe quantidade negativa ou nula.");
 		}
 		if(quantidade > this.quantidade){
-			throw new Exception("Nao ha medicamentos suficientes.");
+			throw new DadoInvalidoException("Nao ha medicamentos suficientes.");
 		}
 		this.quantidade -= quantidade;
 	}
 	
-	public boolean addCategoria(String categoria) throws Exception{
-		if(categoria == null || categoria.trim().isEmpty()){
-			throw new Exception("Nao eh permitido a adicao de uma categoria nula ou vazia.");
-		}
-		boolean condicaoAdicaoCategoria = this.categorias.add(categoria);
-		return condicaoAdicaoCategoria;
-	}
-	
-	public boolean removeCategoria(String categoria) throws Exception{
-		if(categoria == null || categoria.trim().isEmpty()){
-			throw new Exception("Nao eh permitido a remocao de uma categoria nula ou vazia.");
-		}
-		boolean condicaoAdicaoCategoria = this.categorias.remove(categoria);
-		return condicaoAdicaoCategoria;
-	}
-	
 	public boolean contemCategoria(String categoria){
-		for(String categoriaAtual : this.categorias){
-			if(categoriaAtual.equalsIgnoreCase(categoria)){
+		String[] arrayCategorias = this.categorias.split(",");
+		for(int i=0; i<arrayCategorias.length; i++){
+			if(arrayCategorias[i].equalsIgnoreCase(categoria)){
 				return true;
 			}
 		}
@@ -109,7 +84,7 @@ public abstract class Medicamento{
 	
 	@Override
 	public String toString() {
-		String formatacao = String.format("Medicamento: %s; preco: %.2f; quantidade atual: %d;", this.getNome(), this.calculaPreco(), this.getQuantidade());
+		String formatacao = String.format(" %s - Preco: R$ %.2f - Disponivel: %d - Categorias: %s", this.getNome(), this.calculaPreco(), this.getQuantidade(), this.getCategorias());
 		return formatacao;
 	}
 
@@ -150,5 +125,4 @@ public abstract class Medicamento{
 			return false;
 		return true;
 	}
-
 }

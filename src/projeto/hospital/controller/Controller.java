@@ -4,6 +4,7 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.Permissao;
 import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
+import projeto.hospital.gerencia.GerenciadorDeMedicamento;
 import projeto.hospital.gerencia.GerenciadorDePacienteProntuario;
 import projeto.hospital.gerencia.ValidadorDeLogica;
 import projeto.util.Constantes;
@@ -19,6 +20,7 @@ public class Controller {
 	private Funcionario funcionarioLogado;
 	private GerenciadorDeFuncionarios gerenciadorFuncionarios;
 	private GerenciadorDePacienteProntuario gerenciadorDePaciente;
+	private GerenciadorDeMedicamento gerenciadorDeMedicamento;
 
 	/**
 	 * Construtor
@@ -38,17 +40,21 @@ public class Controller {
 	 *            Data de nascimento do novo usuario
 	 * @return Matricula do novo cadastro
 	 */
-	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
+	public String cadastraFuncionario(String nome, String cargo,
+			String dataNascimento) {
 		// Se o usuario esta logado vai ser verificado se ele pode realizar a
 		// operacao porque o diretor eh cadastrado quando nao existe ninguem
 		// logado, por isso precisa disso
 		if (!estaLogado()) {
 			if (!gerenciadorFuncionarios.isEmpty())
-				throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
+				throw new OperacaoInvalidaException(
+						"Voce precisa estar logado no sistema para realizar cadastros.");
 		} else
-			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_FUNCIONARIO,
+			ValidadorDeLogica.validaOperacao(
+					MensagensDeErro.ERRO_PERMISSAO_CADASTRO_FUNCIONARIO,
 					Permissao.CADASTRAR_FUNCIONARIOS, funcionarioLogado);
-		return this.gerenciadorFuncionarios.cadastraFuncionario(nome, cargo, dataNascimento);
+		return this.gerenciadorFuncionarios.cadastraFuncionario(nome, cargo,
+				dataNascimento);
 	}
 
 	/**
@@ -58,6 +64,7 @@ public class Controller {
 		if (gerenciadorFuncionarios != null)
 			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
 		this.gerenciadorDePaciente = new GerenciadorDePacienteProntuario();
+		this.gerenciadorDeMedicamento = new GerenciadorDeMedicamento();
 		try {
 			this.gerenciadorFuncionarios = (GerenciadorDeFuncionarios) Util
 					.getObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
@@ -72,9 +79,11 @@ public class Controller {
 	 */
 	public void fechaSistema() {
 		if (estaLogado())
-			throw new OperacaoInvalidaException("Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
-					+ funcionarioLogado.getNome() + ".");
-		Util.setObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS, gerenciadorFuncionarios);
+			throw new OperacaoInvalidaException(
+					"Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
+							+ funcionarioLogado.getNome() + ".");
+		Util.setObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS,
+				gerenciadorFuncionarios);
 		this.gerenciadorFuncionarios = null;
 		this.gerenciadorDePaciente = null;
 	}
@@ -84,7 +93,8 @@ public class Controller {
 	 */
 	public void logout() {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Nao foi possivel realizar o logout. Nao ha um funcionario logado.");
+			throw new OperacaoInvalidaException(
+					"Nao foi possivel realizar o logout. Nao ha um funcionario logado.");
 		funcionarioLogado = null;
 	}
 
@@ -96,10 +106,13 @@ public class Controller {
 	 * @param matriculaFuncionario
 	 *            Matricula do usuario a ser excluido
 	 */
-	public void excluiFuncionario(String senhaDiretor, String matriculaFuncionario) {
+	public void excluiFuncionario(String senhaDiretor,
+			String matriculaFuncionario) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
-		this.gerenciadorFuncionarios.excluiFuncionario(this.funcionarioLogado.getMatricula(), senhaDiretor,
+			throw new OperacaoInvalidaException(
+					"Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.excluiFuncionario(
+				this.funcionarioLogado.getMatricula(), senhaDiretor,
 				matriculaFuncionario);
 	}
 
@@ -113,8 +126,10 @@ public class Controller {
 	 * @param novoValor
 	 *            Novo valor do atributo
 	 */
-	public void atualizaInfoFuncionario(String matricula, String atributo, String novoValor) {
-		this.gerenciadorFuncionarios.atualizaInfoFuncionario(this.funcionarioLogado, matricula, atributo, novoValor);
+	public void atualizaInfoFuncionario(String matricula, String atributo,
+			String novoValor) {
+		this.gerenciadorFuncionarios.atualizaInfoFuncionario(
+				this.funcionarioLogado, matricula, atributo, novoValor);
 	}
 
 	/**
@@ -127,9 +142,10 @@ public class Controller {
 	 */
 	public void atualizaInfoFuncionario(String atributo, String novoValor) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
-		this.gerenciadorFuncionarios.atualizaInfoFuncionario(funcionarioLogado, this.funcionarioLogado.getMatricula(),
-				atributo, novoValor);
+			throw new OperacaoInvalidaException(
+					"Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.atualizaInfoFuncionario(funcionarioLogado,
+				this.funcionarioLogado.getMatricula(), atributo, novoValor);
 	}
 
 	/**
@@ -142,8 +158,10 @@ public class Controller {
 	 */
 	public void atualizaSenha(String senhaAntiga, String novaSenha) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
-		this.gerenciadorFuncionarios.atualizaSenha(this.funcionarioLogado, senhaAntiga, novaSenha);
+			throw new OperacaoInvalidaException(
+					"Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.atualizaSenha(this.funcionarioLogado,
+				senhaAntiga, novaSenha);
 	}
 
 	/**
@@ -156,7 +174,8 @@ public class Controller {
 	 * @return Atributo requisitado
 	 */
 	public String getInfoFuncionario(String matricula, String atributo) {
-		return this.gerenciadorFuncionarios.getInfoFuncionario(matricula, atributo);
+		return this.gerenciadorFuncionarios.getInfoFuncionario(matricula,
+				atributo);
 	}
 
 	/**
@@ -169,9 +188,11 @@ public class Controller {
 	 */
 	public void loginSistema(String matricula, String senha) {
 		if (estaLogado())
-			throw new OperacaoInvalidaException("Nao foi possivel realizar o login. Um funcionario ainda esta logado: "
-					+ funcionarioLogado.getNome() + ".");
-		this.funcionarioLogado = this.gerenciadorFuncionarios.acessaSistema(matricula, senha);
+			throw new OperacaoInvalidaException(
+					"Nao foi possivel realizar o login. Um funcionario ainda esta logado: "
+							+ funcionarioLogado.getNome() + ".");
+		this.funcionarioLogado = this.gerenciadorFuncionarios.acessaSistema(
+				matricula, senha);
 	}
 
 	private boolean estaLogado() {
@@ -195,16 +216,18 @@ public class Controller {
 	 *            Tipo sanguineo do paciente
 	 * @return Id do paciente cadastrado
 	 */
-	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
-			String tipoSanguineo) {
+	public long cadastraPaciente(String nome, String data, double peso,
+			String sexo, String genero, String tipoSanguineo) {
 		if (!estaLogado()) {
 			throw new OperacaoInvalidaException(
 					"Voce precisa estar logado no sistema para realizar cadastros de pacientes.");
 		} else
-			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
+			ValidadorDeLogica.validaOperacao(
+					MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
 					Permissao.CADASTRAR_PACIENTES, funcionarioLogado);
 
-		return this.gerenciadorDePaciente.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo);
+		return this.gerenciadorDePaciente.cadastraPaciente(nome, data, peso,
+				sexo, genero, tipoSanguineo);
 	}
 
 	/**
@@ -218,7 +241,8 @@ public class Controller {
 	 */
 	public Object getInfoPaciente(long idPaciente, String atributo) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
+			throw new OperacaoInvalidaException(
+					"Voce precisa estar logado no sistema para realizar cadastros.");
 		return this.gerenciadorDePaciente.getInfoPaciente(idPaciente, atributo);
 	}
 
@@ -231,5 +255,38 @@ public class Controller {
 	 */
 	public Long getProntuario(int posicao) {
 		return this.gerenciadorDePaciente.getProntuario(posicao);
+	}
+
+	public String cadastraMedicamento(String nome, String tipo, Double preco,
+			int quantidade, String categorias) {
+		if (!estaLogado())
+			throw new OperacaoInvalidaException(
+					"Voce precisa estar logado no sistema para realizar cadastros.");
+		else
+			ValidadorDeLogica.validaOperacao(
+					MensagensDeErro.ERRO_PERMISSAO_CADASTRO_MEDICAMENTO,
+					Permissao.CADASTRAR_MEDICAMENTO, funcionarioLogado);
+		return gerenciadorDeMedicamento.cadastraMedicamento(nome, tipo, preco,
+				quantidade, categorias);
+	}
+
+	public Object getInfoMedicamento(String atributo, String nome) {
+		return gerenciadorDeMedicamento.getInfoMedicamento(atributo, nome);
+	}
+
+	public void atualizaMedicamento(String nome, String atributo, String novo) {
+		this.gerenciadorDeMedicamento.atualizaMedicamento(nome, atributo, novo);
+	}
+
+	public String consultaMedCategoria(String categoria) {
+		return this.gerenciadorDeMedicamento.consultaMedCategoria(categoria);
+	}
+
+	public String consultaMedNome(String nome) {
+		return this.gerenciadorDeMedicamento.consultaMedNome(nome);
+	}
+
+	public String getEstoqueFarmacia(String ordenacao) {
+		return this.gerenciadorDeMedicamento.getEstoqueFarmacia(ordenacao);
 	}
 }

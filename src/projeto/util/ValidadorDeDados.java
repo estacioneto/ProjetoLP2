@@ -278,4 +278,9 @@ public abstract class ValidadorDeDados {
 		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase() + string.substring(Constantes.UM);
 	}
 
+	public static void validaCategoriaMedicamento(String categoria){
+		if(!Constantes.CATEGORIAS_MEDICAMENTOS.contains(categoria.toLowerCase())){
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_CATEGORIA_INVALIDA);
+		}
+	}
 }

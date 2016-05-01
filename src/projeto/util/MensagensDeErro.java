@@ -3,6 +3,7 @@ package projeto.util;
 public abstract class MensagensDeErro {
 	public static final String ERRO_PERMISSAO_CADASTRO_FUNCIONARIO = "Erro no cadastro de funcionario. O funcionario %s nao tem permissao para cadastrar funcionarios.";
 	public static final String ERRO_PERMISSAO_CADASTRO_PACIENTE = "Nao foi possivel cadastrar o paciente. O funcionario %s nao tem permissao para cadastrar pacientes.";
+	public static final String ERRO_PERMISSAO_CADASTRO_MEDICAMENTO = "Erro no cadastro de medicamento. O funcionario %s nao tem permissao para cadastrar medicamentos.";
 
 	public static final String ERRO_CADASTRO_FUNCIONARIO = "Erro no cadastro de funcionario. ";
 	public static final String NOME_FUNCIONARIO = Constantes.NOME + " do funcionario";
@@ -38,4 +39,17 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_DATA_PACIENTE = ERRO_CADASTRO_PACIENTE + Constantes.DATA;
 	public static final String ERRO_PACIENTE_JA_CADASTRADO = ERRO_CADASTRO_PACIENTE + "Paciente ja cadastrado.";
 
+	public static final String ERRO_CADASTRO_MEDICAMENTO = "Erro no cadastro de medicamento. ";
+	public static final String ERRO_NOME_MEDICAMENTO = ERRO_CADASTRO_MEDICAMENTO + Constantes.NOME + " do medicamento";
+	public static final String ERRO_PRECO_MEDICAMENTO = ERRO_CADASTRO_MEDICAMENTO + Constantes.PRECO + " do medicamento";
+	public static final String ERRO_QUANTIDADE_MEDICAMENTO = ERRO_CADASTRO_MEDICAMENTO + Constantes.QUANTIDADE + " do medicamento";
+	public static final String ERRO_CATEGORIA_MEDICAMENTO = ERRO_CADASTRO_MEDICAMENTO + Constantes.CATEGORIAS + " do medicamento";
+	public static final String ERRO_ATUALIZAR_ATRIBUTO_MEDICAMENTO = "Erro ao atualizar medicamento. %s do medicamento nao pode ser alterado.";
+	public static final String ERRO_ATUALIZAR_MEDICAMENTO_INVALIDO = "Erro ao atualizar medicamento. Medicamento nao cadastrado.";
+	public static final String ERRO_CONSULTA_CATEGORIA_MEDICAMENTO = "Erro na consulta de medicamentos. Nao ha remedios cadastrados nessa categoria.";
+	public static final String ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE = "Erro na consulta de medicamentos. Medicamento nao cadastrado.";
+	public static final String ERRO_CATEGORIA_INVALIDA = "Erro na consulta de medicamentos. Categoria invalida.";
+	public static final String ERRO_MEDICAMENTO_NAO_CADASTRADO = "Medicamento nao cadastrado.";
+	public static final String ERRO_CONSULTA_MEDICAMENTO = "Erro na consulta de medicamentos. ";
+	public static final String ERRO_ORDENCAO_MEDICAMENTO = ERRO_CONSULTA_MEDICAMENTO + "Tipo de ordenacao invalida.";
 }
