@@ -26,20 +26,13 @@ public class PacienteTeste {
 	 */
 	private void resetaPacientes() throws DadoInvalidoException {
 		geradorIdPaciente = GeradorIdPaciente.getInstancia();
-		eric = new Paciente("Eric", "29/04/1997", 72.5, "O-", "masculino", "Masculino",
-				geradorIdPaciente.getProximoId());
-		estacio = new Paciente("Estacio", "18/04/1998", 60.5, "A+", "masculino", "Masculino",
-				geradorIdPaciente.getProximoId());
-		thaynan = new Paciente("Thaynan", "19/10/1996", 82.5, "A+", "masculino", "Masculino",
-				geradorIdPaciente.getProximoId());
-		sergio = new Paciente("Sergio", "15/07/1993", 55.5, "O+", "masculino", "Masculino",
-				geradorIdPaciente.getProximoId());
-		bruno = new Paciente("Bruno", "27/02/1997", 62, "AB-", "masculino", "Masculino",
-				geradorIdPaciente.getProximoId());
-		luan = new Paciente("Luan", "12/12/1996", 71.5, "A+", "masculino", "Masculino",
-				geradorIdPaciente.getProximoId());
-		bruna = new Paciente("Bruna", "27/08/1996", 71.5, "B-", "feminino", "Feminino",
-				geradorIdPaciente.getProximoId());
+		eric = new Paciente("Eric", "29/04/1997", 72.5, "O-", "masculino", "Masculino");
+		estacio = new Paciente("Estacio", "18/04/1998", 60.5, "A+", "masculino", "Masculino");
+		thaynan = new Paciente("Thaynan", "19/10/1996", 82.5, "A+", "masculino", "Masculino");
+		sergio = new Paciente("Sergio", "15/07/1993", 55.5, "O+", "masculino", "Masculino");
+		bruno = new Paciente("Bruno", "27/02/1997", 62, "AB-", "masculino", "Masculino");
+		luan = new Paciente("Luan", "12/12/1996", 71.5, "A+", "masculino", "Masculino");
+		bruna = new Paciente("Bruna", "27/08/1996", 71.5, "B-", "feminino", "Feminino");
 	}
 
 	/**
@@ -51,30 +44,30 @@ public class PacienteTeste {
 		// sangue, SexoBiologico sexo, String Genero)
 		// Todos esses devem dar certo
 		geradorIdPaciente = GeradorIdPaciente.getInstancia();
-		new Paciente("Eric", "29/04/1997", 72.5, "O-", "masculino", "Masculino", geradorIdPaciente.getProximoId());
-		new Paciente("Estacio", "18/04/1998", 60.5, "A+", "masculino", "Masculino", geradorIdPaciente.getProximoId());
-		new Paciente("Thaynan", "19/10/1996", 82.5, "A+", "masculino", "Masculino", geradorIdPaciente.getProximoId());
-		new Paciente("Sergio", "15/07/1993", 55.5, "O+", "masculino", "Masculino", geradorIdPaciente.getProximoId());
-		new Paciente("Bruno", "07/02/1997", 62, "AB-", "masculino", "Masculino", geradorIdPaciente.getProximoId());
-		new Paciente("Luan", "12/12/1996", 71.5, "A+", "masculino", "Masculino", geradorIdPaciente.getProximoId());
-		new Paciente("Bruna", "27/08/1996", 71.5, "B-", "feminino", "Feminino", geradorIdPaciente.getProximoId());
+		new Paciente("Eric", "29/04/1997", 72.5, "O-", "masculino", "Masculino");
+		new Paciente("Estacio", "18/04/1998", 60.5, "A+", "masculino", "Masculino");
+		new Paciente("Thaynan", "19/10/1996", 82.5, "A+", "masculino", "Masculino");
+		new Paciente("Sergio", "15/07/1993", 55.5, "O+", "masculino", "Masculino");
+		new Paciente("Bruno", "07/02/1997", 62, "AB-", "masculino", "Masculino");
+		new Paciente("Luan", "12/12/1996", 71.5, "A+", "masculino", "Masculino");
+		new Paciente("Bruna", "27/08/1996", 71.5, "B-", "feminino", "Feminino");
 
 		// Vai testar todos os casos de erro possiveis para um cadastro, por
 		// ordem dos argumentos
 		try {
-			new Paciente("", "27/08/1996", 71.5, "B-", "feminino", "Feminino", geradorIdPaciente.getProximoId());
+			new Paciente("", "27/08/1996", 71.5, "B-", "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
 			assertEquals("Nome nao pode ser vazio.", e.getMessage());
 		}
 		try {
-			new Paciente(null, "27/08/1996", 71.5, "B-", "feminino", "Feminino", geradorIdPaciente.getProximoId());
+			new Paciente(null, "27/08/1996", 71.5, "B-", "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
 			assertEquals("Nome nao pode ser nulo(a)!", e.getMessage());
 		}
 		try {
-			new Paciente("Daniela", null, 71.5, "B-", "feminino", "Feminino", geradorIdPaciente.getProximoId());
+			new Paciente("Daniela", null, 71.5, "B-", "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
 			assertEquals("Data nao pode ser nulo(a)!", e.getMessage());
@@ -88,38 +81,37 @@ public class PacienteTeste {
 		// Assert.assertEquals("Data invalida.", e.getMessage());
 		// }
 		try {
-			new Paciente("Daniela", "27/08/1996", -1, "B-", "feminino", "Feminino", geradorIdPaciente.getProximoId());
+			new Paciente("Daniela", "27/08/1996", -1, "B-", "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
 			assertEquals("Peso nao pode ser negativo.", e.getMessage());
 		}
 		try {
-			new Paciente("Daniela", "27/08/1996", -71.5, "B-", "feminino", "Feminino",
-					geradorIdPaciente.getProximoId());
+			new Paciente("Daniela", "27/08/1996", -71.5, "B-", "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
 			assertEquals("Peso nao pode ser negativo.", e.getMessage());
 		}
 		try {
-			new Paciente("Daniela", "27/08/1996", 71.5, null, "feminino", "Feminino", geradorIdPaciente.getProximoId());
+			new Paciente("Daniela", "27/08/1996", 71.5, null, "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
 			assertEquals("Tipo sanguineo invalido.", e.getMessage());
 		}
 		try {
-			new Paciente("Daniela", "27/08/1996", 71.5, "B-", null, "Feminino", geradorIdPaciente.getProximoId());
+			new Paciente("Daniela", "27/08/1996", 71.5, "B-", null, "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
 			assertEquals("Sexo biologico invalido.", e.getMessage());
 		}
 		try {
-			new Paciente("Daniela", "27/08/1996", 71.5, "B-", "feminino", "", geradorIdPaciente.getProximoId());
+			new Paciente("Daniela", "27/08/1996", 71.5, "B-", "feminino", "");
 			fail();
 		} catch (DadoInvalidoException e) {
 			assertEquals("Genero nao pode ser vazio.", e.getMessage());
 		}
 		try {
-			new Paciente("Daniela", "27/08/1996", 71.5, "B-", "feminino", null, geradorIdPaciente.getProximoId());
+			new Paciente("Daniela", "27/08/1996", 71.5, "B-", "feminino", null);
 			fail();
 		} catch (DadoInvalidoException e) {
 			assertEquals("Genero nao pode ser nulo(a)!", e.getMessage());
@@ -132,7 +124,15 @@ public class PacienteTeste {
 	@Test
 	public void idsTeste() throws DadoInvalidoException {
 		this.resetaPacientes();
-
+		
+		eric.setId(geradorIdPaciente.getProximoId());
+		sergio.setId(geradorIdPaciente.getProximoId());
+		estacio.setId(geradorIdPaciente.getProximoId());
+		thaynan.setId(geradorIdPaciente.getProximoId());
+		bruno.setId(geradorIdPaciente.getProximoId());
+		luan.setId(geradorIdPaciente.getProximoId());
+		bruna.setId(geradorIdPaciente.getProximoId());
+		
 		assertNotEquals(eric.getId(), estacio.getId(), 0.5);
 		assertNotEquals(sergio.getId(), thaynan.getId(), 0.5);
 		assertNotEquals(bruno.getId(), luan.getId(), 0.5);
@@ -162,11 +162,5 @@ public class PacienteTeste {
 		// data
 		assertEquals("15/07/1993", sergio.getDataNascimento());
 		assertEquals("19/10/1996", thaynan.getDataNascimento());
-		
-		// id
-		assertNotEquals(eric.getId(), thaynan.getId(), 0.5);
-		assertNotEquals(bruna.getId(), estacio.getId(), 0.5);
-		assertNotEquals(luan.getId(), estacio.getId(), 0.5);
-
 	}
 }

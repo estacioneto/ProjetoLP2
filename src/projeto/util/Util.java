@@ -48,7 +48,7 @@ public class Util {
 	public static void validaString(String erroAtributo, String atributo) {
 		validaNaoNulo(erroAtributo, atributo);
 		if (atributo.trim().length() == Constantes.ZERO)
-			throw new StringVaziaException(erroAtributo + "nao pode ser vazio.");
+			throw new StringVaziaException(erroAtributo + " nao pode ser vazio.");
 	}
 
 	/**
@@ -237,7 +237,7 @@ public class Util {
 	 */
 	public static void validaTipoSanguineo(String tipoSanguineo) {
 		if (!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipoSanguineo))
-			throw new DadoInvalidoException("Tipo sanguineo invalido.");
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_TIPO_SANGUINEO_PACIENTE + " invalido.");
 	}
 
 	/**

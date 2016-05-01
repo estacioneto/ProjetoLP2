@@ -30,6 +30,7 @@ public class Constantes {
 	
 	public static final String PESO = "Peso";
 	public static final String GENERO = "Genero";
+	public static final String TIPOS_SANGUINEO = "Tipo sanguineo";
 	
 	public static final Object MASCULINO = "masculino";
 	public static final Object FEMININO = "feminino";

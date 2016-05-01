@@ -1,6 +1,7 @@
 package projeto.paciente;
 
 import projeto.util.Constantes;
+import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 
 public class Paciente {
@@ -24,10 +25,10 @@ public class Paciente {
 	 * @param id Id
 	 */
 	public Paciente(String nome, String dataNascimento, double peso, String tipoSanguineo, String sexoBiologico,
-			String genero, long id) {
-		Util.validaString(Constantes.NOME, nome);
-		Util.validaData(Constantes.DATA, dataNascimento);
-		Util.validaPositivo(Constantes.PESO, peso);
+			String genero) {
+		Util.validaString(MensagensDeErro.ERRO_NOME_PACIENTE , nome);
+		Util.validaData(MensagensDeErro.ERRO_DATA_PACIENTE, dataNascimento);
+		Util.validaPositivo(MensagensDeErro.ERRO_PESO_PACIENTE, peso);
 		Util.validaTipoSanguineo(tipoSanguineo);
 		Util.validaSexoBiologico(sexoBiologico);
 		Util.validaString(Constantes.GENERO, genero);
@@ -38,7 +39,6 @@ public class Paciente {
 		this.tiposanguineo = tipoSanguineo;
 		this.sexoBiologico = sexoBiologico;
 		this.genero = genero;
-		this.id = id;
 	}
 
 	/**
@@ -103,5 +103,31 @@ public class Paciente {
 	 */
 	public long getId() {
 		return id;
+	}
+	
+	/**
+	 * Seta um novo id para o paciente
+	 * @param id Novo id
+	 */
+	public void setId(Long id){
+		this.id = id;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Paciente))
+			return false;
+		
+		Paciente paciente = (Paciente) obj;
+		
+		return paciente.nome.equals(this.nome);
 	}
 }
