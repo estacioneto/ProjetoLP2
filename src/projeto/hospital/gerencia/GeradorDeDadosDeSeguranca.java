@@ -7,7 +7,6 @@ import projeto.util.Constantes;
 import projeto.util.Util;
 
 public class GeradorDeDadosDeSeguranca implements Serializable{
-
 	/**
 	 * Serial gerado automaticamente.
 	 */

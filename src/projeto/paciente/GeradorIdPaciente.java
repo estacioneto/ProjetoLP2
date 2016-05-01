@@ -1,9 +1,16 @@
 package projeto.paciente;
 
+import java.io.Serializable;
+
 /**
  * @author Eric
  */
-public class GeradorIdPaciente {
+public class GeradorIdPaciente implements Serializable {
+	/**
+	 * Serial gerado automaticamente.
+	 */
+	private static final long serialVersionUID = -4340956236350344819L;
+
 	private final static GeradorIdPaciente instancia = new GeradorIdPaciente();
 	private Long id;
 
@@ -24,7 +31,6 @@ public class GeradorIdPaciente {
 	 * @return Proximo id
 	 */
 	public Long getProximoId() {
-		id++;
-		return id;
+		return id++;
 	}
 }

@@ -1,5 +1,6 @@
 package projeto.hospital.gerencia;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,14 +13,20 @@ import projeto.paciente.Paciente;
 import projeto.paciente.Prontuario;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
-import projeto.util.Util;;
+import projeto.util.Util;
+import projeto.util.Validadores;;
 
 /**
  * Gerencia os pacientes e prontuarios
  * 
  * @author Eric
  */
-public class GerenciadorDePacienteProntuario {
+public class GerenciadorDePacienteProntuario implements Serializable {
+	/**
+	 * Serial gerado automaticamente.
+	 */
+	private static final long serialVersionUID = 6385782587198577722L;
+
 	private Set<Paciente> pacientes;
 	private List<Prontuario> prontuarios;
 	private GeradorIdPaciente geradorIdPaciente;
@@ -73,8 +80,8 @@ public class GerenciadorDePacienteProntuario {
 	 * @return Informacao requisitada
 	 */
 	public Object getInfoPaciente(Long idPaciente, String atributo) {
-		Util.validaPositivo(Constantes.ID, idPaciente);
-		Util.validaString(Constantes.ATRIBUTO, atributo);
+		Validadores.validaPositivo(Constantes.ID, idPaciente);
+		Validadores.validaString(Constantes.ATRIBUTO, atributo);
 
 		Paciente paciente = buscaPaciente(idPaciente);
 
@@ -121,7 +128,7 @@ public class GerenciadorDePacienteProntuario {
 	 * @return Id do paciente
 	 */
 	public Long getProntuario(int posicao) {
-		Util.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
+		Validadores.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
 		if (posicao >= prontuarios.size())
 			throw new DadoInvalidoException(
 					MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES + "(max = " + prontuarios.size() + ").");

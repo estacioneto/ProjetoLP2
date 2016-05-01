@@ -77,7 +77,7 @@ public class Facade {
 	 *            Senha do usuario.
 	 */
 	public void login(String matricula, String senha) {
-		this.controller.acessaSistema(matricula, senha);
+		this.controller.loginSistema(matricula, senha);
 	}
 
 	/**

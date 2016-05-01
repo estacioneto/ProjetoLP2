@@ -6,9 +6,12 @@ import java.io.Serializable;
  * @author Eric
  */
 public class Prontuario implements Comparable<Prontuario>, Serializable {
+	/**
+	 * Serial gerado automaticamente.
+	 */
 	private static final long serialVersionUID = 21463754771L;
 	
-	Paciente paciente;
+	private Paciente paciente;
 
 	/**
 	 * Construtor

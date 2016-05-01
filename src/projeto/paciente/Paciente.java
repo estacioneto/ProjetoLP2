@@ -5,12 +5,15 @@ import java.time.LocalDate;
 
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
-import projeto.util.Util;
+import projeto.util.Validadores;
 
 /**
  * @author Eric
  */
 public class Paciente implements Serializable { 
+	/**
+	 * Serial gerado automaticamente.
+	 */
 	private static final long serialVersionUID = 1697453654897L;
 	
 	private String nome;
@@ -41,12 +44,12 @@ public class Paciente implements Serializable {
 	 */
 	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {
-		Util.validaString(MensagensDeErro.ERRO_NOME_PACIENTE, nome);
-		Util.validaData(MensagensDeErro.ERRO_DATA_PACIENTE, dataNascimento);
-		Util.validaPositivo(MensagensDeErro.ERRO_PESO_PACIENTE, peso);
-		Util.validaTipoSanguineo(tipoSanguineo);
-		Util.validaSexoBiologico(sexoBiologico);
-		Util.validaString(Constantes.GENERO, genero);
+		Validadores.validaString(MensagensDeErro.ERRO_NOME_PACIENTE, nome);
+		Validadores.validaData(MensagensDeErro.ERRO_DATA_PACIENTE, dataNascimento);
+		Validadores.validaPositivo(MensagensDeErro.ERRO_PESO_PACIENTE, peso);
+		Validadores.validaTipoSanguineo(tipoSanguineo);
+		Validadores.validaSexoBiologico(sexoBiologico);
+		Validadores.validaString(Constantes.GENERO, genero);
 
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;

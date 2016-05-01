@@ -15,7 +15,6 @@ import projeto.util.MensagensDeErro;
  * @author Estacio Pereira
  */
 public class ValidadorDeLogica implements Serializable {
-
 	/**
 	 * Serial gerado automaticamente. 
 	 */

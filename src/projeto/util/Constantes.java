@@ -4,8 +4,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class Constantes {
-
+public abstract class Constantes {
 	public static final String STRING_VAZIA = "";
 	public static final String BARRA = "/";
 	public static final String FORMATO_TRES_NUMEROS = "000";
