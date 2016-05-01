@@ -146,13 +146,13 @@ public class FarmaciaTest {
 			farmacia.addMedicamento("Dipirona", 9.98, 550,
 					"analgesico,antiemetico,antitermico", "referencia");
 
-			assertEquals(farmacia.verificaMedicamentosOrdemAlfabetica().get(0),
+			assertEquals(farmacia.verificaMedicamentosOrdemAlfabetica(),
 					farmacia.verificaMedicamentoExistente("Dipirona"));
-			assertEquals(farmacia.verificaMedicamentosOrdemAlfabetica().get(1),
+			assertEquals(farmacia.verificaMedicamentosOrdemAlfabetica(),
 					farmacia.verificaMedicamentoExistente("Isotretinoina"));
-			assertEquals(farmacia.verificaMedicamentosOrdemPreco().get(3),
+			assertEquals(farmacia.verificaMedicamentosOrdemPreco(),
 					farmacia.verificaMedicamentoExistente("Morfina"));
-			assertEquals(farmacia.verificaMedicamentosOrdemPreco().get(0),
+			assertEquals(farmacia.verificaMedicamentosOrdemPreco(),
 					farmacia.verificaMedicamentoExistente("Prednisona"));
 
 		} catch (Exception e) {
