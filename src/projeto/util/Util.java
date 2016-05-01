@@ -14,6 +14,7 @@ import projeto.exceptions.dados.DadoInvalidoException;
  * utilizados em varias classes.
  * 
  * @author Estacio Pereira
+ * @author Eric
  *
  */
 public abstract class Util {

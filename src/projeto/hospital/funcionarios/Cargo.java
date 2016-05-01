@@ -5,16 +5,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 import projeto.util.Constantes;
-import projeto.util.Validadores;
+import projeto.util.ValidadorDeDados;
 
 /**
  * Classe Cargo. Carrega as permissoes do mesmo.
  * 
  * @author Estacio Pereira
- *
+ * @author Eric
+ * 
  */
 public class Cargo implements Serializable {
-
 	/**
 	 * Serial gerado automaticamente.
 	 */
@@ -30,7 +30,7 @@ public class Cargo implements Serializable {
 	 *            Cargo do funcionario.
 	 */
 	public Cargo(String cargo) {
-		Validadores.validaString(Constantes.CARGO, cargo);
+		ValidadorDeDados.validaString(Constantes.CARGO, cargo);
 		this.nome = cargo;
 
 		this.permissoes = new HashSet<Permissao>();

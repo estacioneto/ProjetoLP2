@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
-import projeto.util.Validadores;
+import projeto.util.ValidadorDeDados;
 
 /**
  * Entidade Funcionario. Trata-se da entidade generica do sistema que tera todos
@@ -14,7 +14,6 @@ import projeto.util.Validadores;
  *
  */
 public class Funcionario implements Serializable {
-
 	/**
 	 * Serial gerado automaticamente.
 	 */
@@ -42,9 +41,9 @@ public class Funcionario implements Serializable {
 	 */
 	public Funcionario(String nome, Cargo cargo, String matricula,
 			String senha, String dataNascimento) {
-		Validadores.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.NOME_FUNCIONARIO, nome);
-		Validadores.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.MATRICULA_FUNCIONARIO, matricula);
-		Validadores.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.SENHA_FUNCIONARIO, senha);
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.NOME_FUNCIONARIO, nome);
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.MATRICULA_FUNCIONARIO, matricula);
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.SENHA_FUNCIONARIO, senha);
 
 		this.nome = nome;
 		this.cargo = cargo;

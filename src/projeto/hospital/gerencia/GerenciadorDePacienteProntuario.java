@@ -14,7 +14,7 @@ import projeto.hospital.paciente.Prontuario;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
-import projeto.util.Validadores;;
+import projeto.util.ValidadorDeDados;;
 
 /**
  * Gerencia os pacientes e prontuarios
@@ -80,8 +80,8 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @return Informacao requisitada
 	 */
 	public Object getInfoPaciente(Long idPaciente, String atributo) {
-		Validadores.validaPositivo(Constantes.ID, idPaciente);
-		Validadores.validaString(Constantes.ATRIBUTO, atributo);
+		ValidadorDeDados.validaPositivo(Constantes.ID, idPaciente);
+		ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
 
 		Paciente paciente = buscaPaciente(idPaciente);
 
@@ -128,7 +128,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @return Id do paciente
 	 */
 	public Long getProntuario(int posicao) {
-		Validadores.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
+		ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
 		if (posicao >= prontuarios.size())
 			throw new DadoInvalidoException(
 					MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES + "(max = " + prontuarios.size() + ").");

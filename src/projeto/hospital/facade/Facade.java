@@ -9,6 +9,7 @@ import projeto.util.Constantes;
  * sistema.
  * 
  * @author Estacio Pereira
+ * @author Eric
  */
 public class Facade {
 

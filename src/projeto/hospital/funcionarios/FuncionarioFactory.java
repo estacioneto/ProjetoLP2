@@ -9,7 +9,6 @@ import java.io.Serializable;
  *
  */
 public class FuncionarioFactory implements Serializable{
-
 	/**
 	 * Serial gerado automaticamente.
 	 */

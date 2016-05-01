@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
-import projeto.util.Validadores;
+import projeto.util.ValidadorDeDados;
 
 /**
  * @author Eric
@@ -44,12 +44,12 @@ public class Paciente implements Serializable {
 	 */
 	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {
-		Validadores.validaString(MensagensDeErro.ERRO_NOME_PACIENTE, nome);
-		Validadores.validaData(MensagensDeErro.ERRO_DATA_PACIENTE, dataNascimento);
-		Validadores.validaPositivo(MensagensDeErro.ERRO_PESO_PACIENTE, peso);
-		Validadores.validaTipoSanguineo(tipoSanguineo);
-		Validadores.validaSexoBiologico(sexoBiologico);
-		Validadores.validaString(Constantes.GENERO, genero);
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_NOME_PACIENTE, nome);
+		ValidadorDeDados.validaData(MensagensDeErro.ERRO_DATA_PACIENTE, dataNascimento);
+		ValidadorDeDados.validaPositivo(MensagensDeErro.ERRO_PESO_PACIENTE, peso);
+		ValidadorDeDados.validaTipoSanguineo(tipoSanguineo);
+		ValidadorDeDados.validaSexoBiologico(sexoBiologico);
+		ValidadorDeDados.validaString(Constantes.GENERO, genero);
 
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;

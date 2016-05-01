@@ -3,6 +3,8 @@ package projeto.hospital.paciente;
 import java.io.Serializable;
 
 /**
+ * Factory singleton responsavel por gerar ids dos pacientes
+ * 
  * @author Eric
  */
 public class GeradorIdPaciente implements Serializable {

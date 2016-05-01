@@ -10,6 +10,10 @@ import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 
+/**
+ * @author Estacio
+ * @author Eric
+ */
 public class Controller {
 
 	private Funcionario funcionarioLogado;

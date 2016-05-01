@@ -13,9 +13,9 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
  * Classe com validadores de dados
  * 
  * @author Estacio
- * @author Er1c
+ * @author Eric
  */
-public abstract class Validadores {
+public abstract class ValidadorDeDados {
 	/**
 	 * Verifica se a String eh nula ou vazia.
 	 * 

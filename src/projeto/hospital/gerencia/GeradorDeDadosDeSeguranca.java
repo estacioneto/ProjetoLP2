@@ -6,6 +6,9 @@ import java.text.DecimalFormat;
 import projeto.util.Constantes;
 import projeto.util.Util;
 
+/**
+ * @author Estacio
+ */
 public class GeradorDeDadosDeSeguranca implements Serializable{
 	/**
 	 * Serial gerado automaticamente.
