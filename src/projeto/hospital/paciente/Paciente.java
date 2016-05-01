@@ -1,4 +1,4 @@
-package projeto.paciente;
+package projeto.hospital.paciente;
 
 import java.io.Serializable;
 import java.time.LocalDate;

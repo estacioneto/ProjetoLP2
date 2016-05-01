@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Set;
 
 import projeto.exceptions.dados.DadoInvalidoException;
-import projeto.paciente.GeradorIdPaciente;
-import projeto.paciente.Paciente;
-import projeto.paciente.Prontuario;
+import projeto.hospital.paciente.GeradorIdPaciente;
+import projeto.hospital.paciente.Paciente;
+import projeto.hospital.paciente.Prontuario;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
