@@ -170,6 +170,17 @@ public class Facade {
 	}
 
 	/**
+	 * Pega o id de um prontuario
+	 * 
+	 * @param posicao
+	 *            Posicao do prontuario
+	 * @return Id
+	 */
+	public Long getProntuario(int posicao) {
+		return this.controller.getProntuario(posicao);
+	}
+
+	/**
 	 * Atualiza a senha do usuario.
 	 * 
 	 * @param senhaAntiga

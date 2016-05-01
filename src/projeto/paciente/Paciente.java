@@ -1,5 +1,7 @@
 package projeto.paciente;
 
+import java.time.LocalDate;
+
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
@@ -15,18 +17,25 @@ public class Paciente {
 
 	/**
 	 * Construtor
-	 *  
-	 * @param nome Nome
-	 * @param dataNascimento Data de nascimento
-	 * @param peso Peso
-	 * @param tipoSanguineo Tipo sanguineo
-	 * @param sexoBiologico Sexo biologico
-	 * @param genero Genero
-	 * @param id Id
+	 * 
+	 * @param nome
+	 *            Nome
+	 * @param dataNascimento
+	 *            Data de nascimento
+	 * @param peso
+	 *            Peso
+	 * @param tipoSanguineo
+	 *            Tipo sanguineo
+	 * @param sexoBiologico
+	 *            Sexo biologico
+	 * @param genero
+	 *            Genero
+	 * @param id
+	 *            Id
 	 */
 	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {
-		Util.validaString(MensagensDeErro.ERRO_NOME_PACIENTE , nome);
+		Util.validaString(MensagensDeErro.ERRO_NOME_PACIENTE, nome);
 		Util.validaData(MensagensDeErro.ERRO_DATA_PACIENTE, dataNascimento);
 		Util.validaPositivo(MensagensDeErro.ERRO_PESO_PACIENTE, peso);
 		Util.validaTipoSanguineo(tipoSanguineo);
@@ -50,7 +59,9 @@ public class Paciente {
 
 	/**
 	 * Muda o nome do paciente
-	 * @param nome Nome
+	 * 
+	 * @param nome
+	 *            Nome
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
@@ -64,7 +75,8 @@ public class Paciente {
 	}
 
 	/**
-	 * @param peso Peso
+	 * @param peso
+	 *            Peso
 	 */
 	public void setPeso(Double peso) {
 		this.peso = peso;
@@ -83,7 +95,7 @@ public class Paciente {
 	public String getTiposanguineo() {
 		return tiposanguineo;
 	}
-	
+
 	/**
 	 * @return Sexo biologico
 	 */
@@ -104,15 +116,41 @@ public class Paciente {
 	public Long getId() {
 		return id;
 	}
-	
+
 	/**
 	 * Seta um novo id para o paciente
-	 * @param id Novo id
+	 * 
+	 * @param id
+	 *            Novo id
 	 */
-	public void setId(Long id){
+	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Calcula a idade do paciente
+	 * 
+	 * @return Idade do paciente
+	 */
+	public Integer getIdade() {
+		LocalDate hoje = LocalDate.now();
+		String[] nascimento = this.dataNascimento.split("/");
+		int ano = Integer.parseInt(nascimento[2]), mes = Integer.parseInt(nascimento[1]),
+				dia = Integer.parseInt(nascimento[0]);
+
+		int idade = hoje.getYear() - ano - 1;
+		if (mes <= hoje.getMonthValue() && dia <= hoje.getDayOfMonth())
+			idade++;
+
+		return idade;
+	}
+
+	@Override
+	public String toString() {
+		String saida = "Nome: " + nome + ". ID: " + id + ". Data Nascimento: " + dataNascimento;
+		return saida;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -123,11 +161,10 @@ public class Paciente {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(!(obj instanceof Paciente))
+		if (!(obj instanceof Paciente))
 			return false;
-		
+
 		Paciente paciente = (Paciente) obj;
-		
 		return paciente.nome.equals(this.nome);
 	}
 }

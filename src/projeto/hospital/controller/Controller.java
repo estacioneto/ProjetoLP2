@@ -4,7 +4,7 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.Permissao;
 import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
-import projeto.hospital.gerencia.GerenciadorDePaciente;
+import projeto.hospital.gerencia.GerenciadorDePacienteProntuario;
 import projeto.hospital.gerencia.ValidadorDeLogica;
 import projeto.util.Constantes;
 import projeto.util.Util;
@@ -13,7 +13,7 @@ public class Controller {
 
 	private Funcionario funcionarioLogado;
 	private GerenciadorDeFuncionarios gerenciadorFuncionarios;
-	private GerenciadorDePaciente gerenciadorDePaciente;
+	private GerenciadorDePacienteProntuario gerenciadorDePaciente;
 
 	public Controller() {
 		this.funcionarioLogado = null;
@@ -48,7 +48,7 @@ public class Controller {
 	public void iniciaSistema() {
 		if (gerenciadorFuncionarios != null)
 			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
-		this.gerenciadorDePaciente = new GerenciadorDePaciente();
+		this.gerenciadorDePaciente = new GerenciadorDePacienteProntuario();
 		try {
 			this.gerenciadorFuncionarios = (GerenciadorDeFuncionarios) Util
 					.getObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
@@ -148,5 +148,16 @@ public class Controller {
 	 */
 	public Object getInfoPaciente(long idPaciente, String atributo) {
 		return this.gerenciadorDePaciente.getInfoPaciente(idPaciente, atributo);
+	}
+
+	/**
+	 * Pega o id de um prontuario
+	 * 
+	 * @param posicao
+	 *            Posicao do prontuario
+	 * @return Id
+	 */
+	public Long getProntuario(int posicao) {
+		return this.gerenciadorDePaciente.getProntuario(posicao);
 	}
 }

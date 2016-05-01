@@ -32,10 +32,11 @@ public class Constantes {
 	public static final String PESO = "Peso";
 	public static final String GENERO = "Genero";
 	public static final String TIPOS_SANGUINEO = "TipoSanguineo";
+	public static final String IDADE = "Idade";
 	public static final String ID = "Id";
 	
-	public static final Object MASCULINO = "masculino";
-	public static final Object FEMININO = "feminino";
+	public static final String MASCULINO = "masculino";
+	public static final String FEMININO = "feminino";
 	
 	public static final String DATA_REGEX = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d{2})";
 	

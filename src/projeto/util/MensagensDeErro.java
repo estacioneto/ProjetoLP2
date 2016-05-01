@@ -23,6 +23,10 @@ public class MensagensDeErro {
 	public static final String NOME_CARACTER_INVALIDO = "Nome deve ter apenas caracteres alfabeticos.";
 	public static final String PERMISSAO_NEGADA_ATUALIZACAO = "Funcionario nao pode atualizar informacao.";
 	
+	public static final String ERRO_CONSULTAR_PRONTUARIO = "Erro ao consultar prontuario. ";
+	public static final String INDICE_PRONTUARIO = ERRO_CONSULTAR_PRONTUARIO + "Indice do prontuario";
+	public static final String ERRO_PRONTUARIOS_INSUFICIENTES = ERRO_CONSULTAR_PRONTUARIO + "Nao ha prontuarios suficientes ";
+	
 	public static final String ERRO_CADASTRO_PACIENTE = "Nao foi possivel cadastrar o paciente. ";
 	public static final String ERRO_NOME_PACIENTE = ERRO_CADASTRO_PACIENTE + Constantes.NOME + " do paciente";
 	public static final String ERRO_TIPO_SANGUINEO_PACIENTE = ERRO_CADASTRO_PACIENTE + "Tipo sanguineo";

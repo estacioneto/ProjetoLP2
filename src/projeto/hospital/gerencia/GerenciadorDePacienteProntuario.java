@@ -1,23 +1,32 @@
 package projeto.hospital.gerencia;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.paciente.GeradorIdPaciente;
 import projeto.paciente.Paciente;
+import projeto.paciente.Prontuario;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;;
 
-public class GerenciadorDePaciente {
-	private HashSet<Paciente> pacientes;
+public class GerenciadorDePacienteProntuario {
+	private Set<Paciente> pacientes;
+	private List<Prontuario> prontuarios;
 	private GeradorIdPaciente geradorIdPaciente;
+
 	/**
 	 * Construtor
 	 */
-	public GerenciadorDePaciente() {
+	public GerenciadorDePacienteProntuario() {
 		geradorIdPaciente = GeradorIdPaciente.getInstancia();
 		pacientes = new HashSet<Paciente>();
+		prontuarios = new ArrayList<Prontuario>();
 	}
 
 	/**
@@ -40,13 +49,16 @@ public class GerenciadorDePaciente {
 	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
 			String tipoSanguineo) {
 		Paciente novoPaciente = new Paciente(nome, data, peso, tipoSanguineo, sexo, genero);
-		Long novoId = geradorIdPaciente.getProximoId();
-		novoPaciente.setId(novoId);
 		if (!pacientes.add(novoPaciente))
 			throw new DadoInvalidoException(MensagensDeErro.ERRO_PACIENTE_JA_CADASTRADO);
+
+		Long novoId = geradorIdPaciente.getProximoId();
+		novoPaciente.setId(novoId);
+		prontuarios.add(new Prontuario(novoPaciente));
+
 		return novoId;
 	}
-	
+
 	/**
 	 * Acessa uma informacao especifica sobre um paciente
 	 * 
@@ -56,13 +68,13 @@ public class GerenciadorDePaciente {
 	 *            Informacao a ser requisitada
 	 * @return Informacao requisitada
 	 */
-	public Object getInfoPaciente(Long idPaciente, String atributo){
+	public Object getInfoPaciente(Long idPaciente, String atributo) {
 		Util.validaPositivo(Constantes.ID, idPaciente);
 		Util.validaString(Constantes.ATRIBUTO, atributo);
-		
+
 		Paciente paciente = buscaPaciente(idPaciente);
-		
-		switch(atributo){
+
+		switch (atributo) {
 		case Constantes.NOME:
 			return paciente.getNome();
 		case Constantes.DATA:
@@ -75,16 +87,27 @@ public class GerenciadorDePaciente {
 			return paciente.getTiposanguineo();
 		case Constantes.PESO:
 			return paciente.getPeso();
+		case Constantes.IDADE:
+			return paciente.getIdade();
 		default:
 			throw new DadoInvalidoException();
 		}
 	}
-	
-	private Paciente buscaPaciente(Long idPaciente){
-		for(Paciente paciente : this.pacientes)
-			if(paciente.getId().equals(idPaciente))
+
+	private Paciente buscaPaciente(Long idPaciente) {
+		for (Paciente paciente : this.pacientes)
+			if (paciente.getId().equals(idPaciente))
 				return paciente;
-		
+
 		throw new DadoInvalidoException("Paciente nao encontrado.");
+	}
+
+	public Long getProntuario(int posicao) {
+		Util.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
+		if(posicao >= prontuarios.size())
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES + "(max = " + prontuarios.size() + ").");
+		
+		Collections.sort(prontuarios);		
+		return prontuarios.get(posicao).getId();
 	}
 }

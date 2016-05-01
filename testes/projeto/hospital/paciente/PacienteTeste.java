@@ -30,7 +30,7 @@ public class PacienteTeste {
 		estacio = new Paciente("Estacio", "18/04/1998", 60.5, "A+", "masculino", "Masculino");
 		thaynan = new Paciente("Thaynan", "19/10/1996", 82.5, "A+", "masculino", "Masculino");
 		sergio = new Paciente("Sergio", "15/07/1993", 55.5, "O+", "masculino", "Masculino");
-		bruno = new Paciente("Bruno", "27/02/1997", 62, "AB-", "masculino", "Masculino");
+		bruno = new Paciente("Bruno", "27/02/1997", 62.0, "AB-", "masculino", "Masculino");
 		luan = new Paciente("Luan", "12/12/1996", 71.5, "A+", "masculino", "Masculino");
 		bruna = new Paciente("Bruna", "27/08/1996", 71.5, "B-", "feminino", "Feminino");
 	}
@@ -48,7 +48,7 @@ public class PacienteTeste {
 		new Paciente("Estacio", "18/04/1998", 60.5, "A+", "masculino", "Masculino");
 		new Paciente("Thaynan", "19/10/1996", 82.5, "A+", "masculino", "Masculino");
 		new Paciente("Sergio", "15/07/1993", 55.5, "O+", "masculino", "Masculino");
-		new Paciente("Bruno", "07/02/1997", 62, "AB-", "masculino", "Masculino");
+		new Paciente("Bruno", "07/02/1997", 62.0, "AB-", "masculino", "Masculino");
 		new Paciente("Luan", "12/12/1996", 71.5, "A+", "masculino", "Masculino");
 		new Paciente("Bruna", "27/08/1996", 71.5, "B-", "feminino", "Feminino");
 
@@ -58,19 +58,19 @@ public class PacienteTeste {
 			new Paciente("", "27/08/1996", 71.5, "B-", "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
-			assertEquals("Nome nao pode ser vazio.", e.getMessage());
+			assertEquals("Nao foi possivel cadastrar o paciente. Nome do paciente nao pode ser vazio.", e.getMessage());
 		}
 		try {
 			new Paciente(null, "27/08/1996", 71.5, "B-", "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
-			assertEquals("Nome nao pode ser nulo(a)!", e.getMessage());
+			assertEquals("Nao foi possivel cadastrar o paciente. Nome do paciente nao pode ser nulo(a)!", e.getMessage());
 		}
 		try {
 			new Paciente("Daniela", null, 71.5, "B-", "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
-			assertEquals("Data nao pode ser nulo(a)!", e.getMessage());
+			assertEquals("Nao foi possivel cadastrar o paciente. Data nao pode ser nulo(a)!", e.getMessage());
 		}
 		// TODO - devemos fazer uma verificacao de data minima valida?
 		// try{
@@ -81,22 +81,22 @@ public class PacienteTeste {
 		// Assert.assertEquals("Data invalida.", e.getMessage());
 		// }
 		try {
-			new Paciente("Daniela", "27/08/1996", -1, "B-", "feminino", "Feminino");
+			new Paciente("Daniela", "27/08/1996", -1.0, "B-", "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
-			assertEquals("Peso nao pode ser negativo.", e.getMessage());
+			assertEquals("Nao foi possivel cadastrar o paciente. Peso do paciente nao pode ser negativo.", e.getMessage());
 		}
 		try {
 			new Paciente("Daniela", "27/08/1996", -71.5, "B-", "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
-			assertEquals("Peso nao pode ser negativo.", e.getMessage());
+			assertEquals("Nao foi possivel cadastrar o paciente. Peso do paciente nao pode ser negativo.", e.getMessage());
 		}
 		try {
 			new Paciente("Daniela", "27/08/1996", 71.5, null, "feminino", "Feminino");
 			fail();
 		} catch (DadoInvalidoException e) {
-			assertEquals("Tipo sanguineo invalido.", e.getMessage());
+			assertEquals("Nao foi possivel cadastrar o paciente. Tipo sanguineo invalido.", e.getMessage());
 		}
 		try {
 			new Paciente("Daniela", "27/08/1996", 71.5, "B-", null, "Feminino");
