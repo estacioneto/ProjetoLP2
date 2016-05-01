@@ -26,27 +26,38 @@ public abstract class Constantes {
 	public static final String DATA = "Data";
 	public static final String SENHA = "Senha";
 	public static final String MATRICULA = "Matricula";
-	
+
 	public static final String SEXO = "Sexo";
 	public static final String PESO = "Peso";
 	public static final String GENERO = "Genero";
 	public static final String TIPOS_SANGUINEO = "TipoSanguineo";
 	public static final String IDADE = "Idade";
 	public static final String ID = "Id";
-	
+	public static final String QUANTIDADE = "Quantidade";
+	public static final String CATEGORIAS = "Categorias";
+	public static final String TIPO = "Tipo";
+
 	public static final String MASCULINO = "masculino";
 	public static final String FEMININO = "feminino";
-	
+
 	public static final String DATA_REGEX = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d{2})";
-	
-	public static final HashSet<String> TIPOS_SANGUINEOS_VALIDOS = new HashSet<String>(Arrays.asList(new String[]{"A+", "A-", "B+", "B-", "AB+", "AB-", "O-", "O+"}));
-	
+
+	public static final HashSet<String> TIPOS_SANGUINEOS_VALIDOS = new HashSet<String>(
+			Arrays.asList(new String[] { "A+", "A-", "B+", "B-", "AB+", "AB-",
+					"O-", "O+" }));
+	public static final HashSet<String> CATEGORIAS_MEDICAMENTOS = new HashSet<String>(
+			Arrays.asList(new String[] { "analgesico", "antibiotico",
+					"antitermico", "antiinflamatorio", "hormonal",
+					"antiemetico" }));
+
 	public static final String DADOS_DIRETORIO = "BD/";
 	public static final File ARQUIVO_DADOS = new File(DADOS_DIRETORIO);
-	public static final String ARQUIVO_GERENCIADOR_FUNCIONARIOS = DADOS_DIRETORIO + "gerenciadorFuncionarios.txt";
+	public static final String ARQUIVO_GERENCIADOR_FUNCIONARIOS = DADOS_DIRETORIO
+			+ "gerenciadorFuncionarios.txt";
 
 	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(
-			Arrays.asList(new String[] { DIRETOR_GERAL.toLowerCase(), MEDICO.toLowerCase(), TECNICO.toLowerCase(),
+			Arrays.asList(new String[] { DIRETOR_GERAL.toLowerCase(),
+					MEDICO.toLowerCase(), TECNICO.toLowerCase(),
 					TECNICO_ADMINISTATIVO.toLowerCase() }));
 
 	public static final int ZERO = 0;

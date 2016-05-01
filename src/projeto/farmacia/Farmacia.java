@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.util.MensagensDeErro;
+import projeto.util.ValidadorDeDados;
+
 public class Farmacia {
 
 	private List<Medicamento> listaMedicamentos;
@@ -19,26 +23,19 @@ public class Farmacia {
 		return copiaDaLista;
 	}
 	
-	public void addMedicamento(String nome, double preco, int quantidade, String tipoMedicamento, String categorias) throws Exception{
-		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome, preco, quantidade, tipoMedicamento, categorias);
+	public String addMedicamento(String nome, Double preco, int quantidade, String tipoMedicamento, String categorias){
+		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome, tipoMedicamento, preco, quantidade, categorias);
 		this.listaMedicamentos.add(medicamento);
+		return nome;
 	}
 	
-	public Medicamento verificaMedicamentoExistente(String nomeMedicamento){
+	public Medicamento verificaMedicamentoExistente(String erro, String nomeMedicamento){
 		for(Medicamento medicamentoAtual : this.listaMedicamentos){
 			if(medicamentoAtual.getNome().equalsIgnoreCase(nomeMedicamento)){
 				return medicamentoAtual;
 			}
 		}
-		return null;
-	}
-	
-	public boolean addCategoriaMedicamento(String nomeMedicamento, String categoria) throws Exception{
-		Medicamento medicamento = this.verificaMedicamentoExistente(nomeMedicamento);
-		if(medicamento != null){
-			return medicamento.addCategoria(categoria);
-		}
-		return false;
+		throw new DadoInvalidoException(erro);
 	}
 	
 	private List<Medicamento> medicamentoComCategoria(String categoria){
@@ -55,32 +52,36 @@ public class Farmacia {
 	}
 	
 	public String consultaMedicamentoPorCategoria(String categoria){
+		ValidadorDeDados.validaCategoriaMedicamento(categoria);
 		List<String> listaNomeMedicamentosCategoria = new ArrayList<>();
 		for(Medicamento medicamentoAtual : this.medicamentoComCategoria(categoria)){
 			listaNomeMedicamentosCategoria.add(medicamentoAtual.getNome());
 		}
-		return listaNomeMedicamentosCategoria.toString();
+		if(listaNomeMedicamentosCategoria.isEmpty()){
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_CATEGORIA_MEDICAMENTO);
+		}
+		return String.join(",", listaNomeMedicamentosCategoria);
 	}
 	
-	public String buscaMedicamento(String nomeMedicamento) throws Exception{
-		Medicamento medicamento = this.verificaMedicamentoExistente(nomeMedicamento);
-		if(medicamento != null){
-			return medicamento.toString();
+	private List<String> nomesNaLista(List<Medicamento> lista){
+		List<String> listaNomeMedicamentos = new ArrayList<>();
+		for(Medicamento medicamentoAtual : lista){
+			listaNomeMedicamentos.add(medicamentoAtual.getNome());
 		}
-		throw new Exception("Medicamento inexistente."); 
+		return listaNomeMedicamentos;
 	}
 	
 	public String verificaMedicamentosOrdemAlfabetica(){
 		List<Medicamento> copiaLista = new ArrayList<>(this.listaMedicamentos);
 		MedicamentoNomeComparator comparator = new MedicamentoNomeComparator();
 		Collections.sort(copiaLista, comparator);
-		return copiaLista.toString();
+		return String.join(",",this.nomesNaLista(copiaLista));
 	}
 	
 	public String verificaMedicamentosOrdemPreco(){
 		List<Medicamento> copiaLista = new ArrayList<>(this.listaMedicamentos);
 		MedicamentoPrecoComparator comparator = new MedicamentoPrecoComparator();
 		Collections.sort(copiaLista, comparator);
-		return copiaLista.toString();
+		return String.join(",",this.nomesNaLista(copiaLista));
 	}
 }

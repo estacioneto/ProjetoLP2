@@ -2,20 +2,25 @@ package projeto.farmacia;
 
 public class MedicamentoGenerico extends Medicamento{
 
-	public static final double DESCONTO_GENERICO = 0.6;
+	public static final double DESCONTO_GENERICO = 60;
+	public static final double DESCONTO_GENERICO_PORCENTAGEM = 100;
 	
-	public MedicamentoGenerico(String nome, double preco, int quantidade, String categorias) throws Exception {
+	public MedicamentoGenerico(String nome, Double preco, int quantidade, String categorias){
 		super(nome, preco, quantidade, categorias);
 	}
 
+	public String getTipo(){
+		return "Generico";
+	}
+	
 	@Override
-	public double calculaPreco(){
-		return super.getPreco() * DESCONTO_GENERICO;
+	public Double calculaPreco(){
+		return super.getPreco() * DESCONTO_GENERICO / DESCONTO_GENERICO_PORCENTAGEM;
 	}
 	
 	@Override
 	public String toString() {
-		String formatacao = super.toString() + " Tipo: Generico;";
+		String formatacao = "Medicamento Generico:" + super.toString();
 		return formatacao;
 	}
 }

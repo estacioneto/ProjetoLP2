@@ -204,4 +204,28 @@ public class Facade {
 	public void atualizaInfoFuncionario(String atributo, String novoValor) {
 		this.controller.atualizaInfoFuncionario(atributo, novoValor);
 	}
+	
+	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias){
+		return this.controller.cadastraMedicamento(nome, tipo, preco, quantidade, categorias);
+	}
+	
+	public Object getInfoMedicamento(String atributo, String nome){
+		return this.controller.getInfoMedicamento(atributo, nome);
+	}
+	
+	public void atualizaMedicamento(String nome, String atributo, String novoValor){
+		this.controller.atualizaMedicamento(nome, atributo, novoValor);
+	}
+	
+	public String consultaMedCategoria(String categoria){
+		return this.controller.consultaMedCategoria(categoria);
+	}
+	
+	public String consultaMedNome(String nome){
+		return this.controller.consultaMedNome(nome);
+	}
+	
+	public String getEstoqueFarmacia(String ordenacao){
+		return this.controller.getEstoqueFarmacia(ordenacao);
+	}
 }

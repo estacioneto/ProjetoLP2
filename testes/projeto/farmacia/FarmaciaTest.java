@@ -94,7 +94,6 @@ public class FarmaciaTest {
 					farmacia.consultaMedicamentoPorCategoria("analgesico"),
 					"[Dipirona, Dorflex, Neosaldina, Isotretinoina, Morfina]");
 
-			farmacia.addCategoriaMedicamento("Isotretinoina", "antiemetico");
 
 			assertEquals(
 					farmacia.consultaMedicamentoPorCategoria("antitermico"),
