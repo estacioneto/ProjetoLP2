@@ -134,9 +134,39 @@ public class Facade {
 		this.controller.atualizaInfoFuncionario(matricula, atributo, novoValor);
 	}
 
+	/**
+	 * Realiza o cadastro de um paciente
+	 * 
+	 * @param nome
+	 *            Nome do paciente
+	 * @param data
+	 *            Data de nascimento do paciente
+	 * @param peso
+	 *            Peso do paciente
+	 * @param sexo
+	 *            Sexo biologico do paciente
+	 * @param genero
+	 *            Genero do paciente
+	 * @param tipoSanguineo
+	 *            Tipo sanguineo do paciente
+	 * @return Id do paciente cadastrado
+	 */
 	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
 			String tipoSanguineo) {
 		return this.controller.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo);
+	}
+
+	/**
+	 * Acessa uma informacao especifica sobre um paciente
+	 * 
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @param atributo
+	 *            Informacao a ser requisitada
+	 * @return Informacao requisitada
+	 */
+	public Object getInfoPaciente(long idPaciente, String atributo) {
+		return this.controller.getInfoPaciente(idPaciente, atributo);
 	}
 
 	/**

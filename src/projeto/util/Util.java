@@ -215,6 +215,19 @@ public class Util {
 		if (valor < 0)
 			throw new DadoInvalidoException(nomeAtributo + " nao pode ser negativo.");
 	}
+	
+	/**
+	 * Valida se um valor long eh positivo
+	 * 
+	 * @param nomeAtributo
+	 *            Nome do atributo
+	 * @param valor
+	 *            valor
+	 */
+	public static void validaPositivo(String nomeAtributo, Long valor) {
+		if (valor < 0)
+			throw new DadoInvalidoException(nomeAtributo + " nao pode ser negativo.");
+	}
 
 	/**
 	 * Valida se um valor inteiro eh positivo
@@ -360,7 +373,7 @@ public class Util {
 	 * @param atributo
 	 *            Atributo a ser analisado.
 	 */
-	public static void validaAtributo(String erroOperacao, String atributo, String valor) {
+	public static void validaAtributoFuncionario(String erroOperacao, String atributo, String valor) {
 		validaString(erroOperacao + MensagensDeErro.ATRIBUTO_FUNCIONARIO, atributo);
 		atributo = capitalizaString(atributo);
 

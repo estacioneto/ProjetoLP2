@@ -25,7 +25,7 @@ public class MensagensDeErro {
 	
 	public static final String ERRO_CADASTRO_PACIENTE = "Nao foi possivel cadastrar o paciente. ";
 	public static final String ERRO_NOME_PACIENTE = ERRO_CADASTRO_PACIENTE + Constantes.NOME + " do paciente";
-	public static final String ERRO_TIPO_SANGUINEO_PACIENTE = ERRO_CADASTRO_PACIENTE + Constantes.TIPOS_SANGUINEO;
+	public static final String ERRO_TIPO_SANGUINEO_PACIENTE = ERRO_CADASTRO_PACIENTE + "Tipo sanguineo";
 	public static final String ERRO_PESO_PACIENTE = ERRO_CADASTRO_PACIENTE + Constantes.PESO + " do paciente";
 	public static final String ERRO_DATA_PACIENTE = ERRO_CADASTRO_PACIENTE + Constantes.DATA;
 	public static final String ERRO_PACIENTE_JA_CADASTRADO = ERRO_CADASTRO_PACIENTE + "Paciente ja cadastrado.";

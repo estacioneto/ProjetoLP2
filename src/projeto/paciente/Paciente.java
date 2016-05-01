@@ -7,11 +7,11 @@ import projeto.util.Util;
 public class Paciente {
 	private String nome;
 	private String dataNascimento;
-	private double peso;
+	private Double peso;
 	private String tiposanguineo;
 	private String sexoBiologico;
 	private String genero;
-	private long id;
+	private Long id;
 
 	/**
 	 * Construtor
@@ -24,7 +24,7 @@ public class Paciente {
 	 * @param genero Genero
 	 * @param id Id
 	 */
-	public Paciente(String nome, String dataNascimento, double peso, String tipoSanguineo, String sexoBiologico,
+	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {
 		Util.validaString(MensagensDeErro.ERRO_NOME_PACIENTE , nome);
 		Util.validaData(MensagensDeErro.ERRO_DATA_PACIENTE, dataNascimento);
@@ -59,14 +59,14 @@ public class Paciente {
 	/**
 	 * @return Peso
 	 */
-	public double getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
 
 	/**
 	 * @param peso Peso
 	 */
-	public void setPeso(double peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 
@@ -101,7 +101,7 @@ public class Paciente {
 	/**
 	 * @return Id
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	

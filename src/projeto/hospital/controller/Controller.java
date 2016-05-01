@@ -93,7 +93,7 @@ public class Controller {
 		this.gerenciadorFuncionarios.atualizaInfoFuncionario(funcionarioLogado, this.funcionarioLogado.getMatricula(),
 				atributo, novoValor);
 	}
-	
+
 	public void atualizaSenha(String senhaAntiga, String novaSenha) {
 		if (!estaLogado())
 			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
@@ -115,8 +115,38 @@ public class Controller {
 		return this.funcionarioLogado != null;
 	}
 
+	/**
+	 * Realiza o cadastro de um paciente
+	 * 
+	 * @param nome
+	 *            Nome do paciente
+	 * @param data
+	 *            Data de nascimento do paciente
+	 * @param peso
+	 *            Peso do paciente
+	 * @param sexo
+	 *            Sexo biologico do paciente
+	 * @param genero
+	 *            Genero do paciente
+	 * @param tipoSanguineo
+	 *            Tipo sanguineo do paciente
+	 * @return Id do paciente cadastrado
+	 */
 	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
 			String tipoSanguineo) {
 		return this.gerenciadorDePaciente.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo);
+	}
+
+	/**
+	 * Acessa uma informacao especifica sobre um paciente
+	 * 
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @param atributo
+	 *            Informacao a ser requisitada
+	 * @return Informacao requisitada
+	 */
+	public Object getInfoPaciente(long idPaciente, String atributo) {
+		return this.gerenciadorDePaciente.getInfoPaciente(idPaciente, atributo);
 	}
 }

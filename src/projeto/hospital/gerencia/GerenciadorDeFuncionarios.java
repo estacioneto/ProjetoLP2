@@ -69,7 +69,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	public void atualizaInfoFuncionario(Funcionario funcionarioLogado, String matricula, String atributo, String novoValor){
 		Util.validaString(MensagensDeErro.ERRO_ATUALIZA_INFO + MensagensDeErro.MATRICULA_FUNCIONARIO, matricula);
 		Util.validaPadraoMatricula(matricula, MensagensDeErro.ERRO_ATUALIZA_INFO + MensagensDeErro.PADRAO_MATRICULA);
-		Util.validaAtributo(MensagensDeErro.ERRO_ATUALIZA_INFO, atributo, novoValor);
+		Util.validaAtributoFuncionario(MensagensDeErro.ERRO_ATUALIZA_INFO, atributo, novoValor);
 		if(!contemFuncionario(matricula)){
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZA_INFO + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 		}
