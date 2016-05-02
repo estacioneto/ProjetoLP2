@@ -211,7 +211,7 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaAtributoFuncionario(String erroOperacao, String atributo, String valor) {
 		validaString(erroOperacao + MensagensDeErro.ATRIBUTO_FUNCIONARIO, atributo);
-		atributo = capitalizaString(atributo);
+		atributo = Util.capitalizaString(atributo);
 
 		if (atributo.equals(Constantes.MATRICULA))
 			throw new OperacaoInvalidaException(erroOperacao + MensagensDeErro.ATUALIZAR_MATRICULA);
@@ -268,16 +268,9 @@ public abstract class ValidadorDeDados {
 	}
 
 	/**
-	 * Retorna a String com a primeira letra maiuscula e as demais minusculas.
-	 * 
-	 * @param string
-	 *            String a ser modificada.
-	 * @return String capitalizada.
+	 * Valida uma categoria de medicamentos.
+	 * @param categoria Categoria a ser validada.
 	 */
-	public static String capitalizaString(String string) {
-		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase() + string.substring(Constantes.UM);
-	}
-
 	public static void validaCategoriaMedicamento(String categoria){
 		if(!Constantes.CATEGORIAS_MEDICAMENTOS.contains(categoria.toLowerCase())){
 			throw new DadoInvalidoException(MensagensDeErro.ERRO_CATEGORIA_INVALIDA);

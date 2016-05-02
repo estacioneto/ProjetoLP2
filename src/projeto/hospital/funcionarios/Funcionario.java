@@ -18,7 +18,7 @@ public class Funcionario implements Serializable {
 	 * Serial gerado automaticamente.
 	 */
 	private static final long serialVersionUID = 1948219698630791794L;
-	
+
 	private String nome;
 	private Cargo cargo;
 	private String matricula;
@@ -39,14 +39,19 @@ public class Funcionario implements Serializable {
 	 * @param dataNascimento
 	 *            Data de nascimento do funcionario.
 	 */
-	public Funcionario(String nome, Cargo cargo, String matricula,
-			String senha, String dataNascimento) {
-		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.NOME_FUNCIONARIO, nome);
-		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.MATRICULA_FUNCIONARIO, matricula);
-		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.SENHA_FUNCIONARIO, senha);
+	public Funcionario(String nome, String cargo, String matricula, String senha, String dataNascimento) {
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.NOME_FUNCIONARIO,
+				nome);
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.MATRICULA_FUNCIONARIO,
+				matricula);
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.SENHA_FUNCIONARIO,
+				senha);
+		ValidadorDeDados.validaData(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO, dataNascimento);
+		
+		ValidadorDeDados.validaCargo(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO, cargo);
 
 		this.nome = nome;
-		this.cargo = cargo;
+		this.cargo = new Cargo(cargo);
 		this.matricula = matricula;
 		this.senha = senha;
 		this.dataNascimento = dataNascimento;
@@ -82,6 +87,7 @@ public class Funcionario implements Serializable {
 	 *            Nome novo do funcionario.
 	 */
 	public void setNome(String nome) {
+		ValidadorDeDados.validaNome(MensagensDeErro.ERRO_ATUALIZA_INFO, nome);
 		this.nome = nome;
 	}
 
@@ -129,6 +135,7 @@ public class Funcionario implements Serializable {
 	 *            Senha nova do funcionario.
 	 */
 	public void setSenha(String senha) {
+		ValidadorDeDados.validaSenha(MensagensDeErro.ERRO_ATUALIZA_INFO, senha);
 		this.senha = senha;
 	}
 
@@ -148,9 +155,17 @@ public class Funcionario implements Serializable {
 	 *            Data de nascimento do funcionario.
 	 */
 	public void setDataNascimento(String dataNascimento) {
+		ValidadorDeDados.validaData(MensagensDeErro.ERRO_ATUALIZA_INFO, dataNascimento);
 		this.dataNascimento = dataNascimento;
 	}
 
+	/**
+	 * Verifica se o funcionario possui determinada permissao.
+	 * 
+	 * @param permissao
+	 *            Permissao a ser verificada.
+	 * @return true se o funcionario possui a permissao.
+	 */
 	public boolean temPermissao(Permissao permissao) {
 		return this.cargo.temPermissao(permissao);
 	}

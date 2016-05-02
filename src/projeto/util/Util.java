@@ -181,4 +181,15 @@ public abstract class Util {
 		}
 		return diretorio.delete();
 	}
+
+	/**
+	 * Retorna a String com a primeira letra maiuscula e as demais minusculas.
+	 * 
+	 * @param string
+	 *            String a ser modificada.
+	 * @return String capitalizada.
+	 */
+	public static String capitalizaString(String string) {
+		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase() + string.substring(Constantes.UM);
+	}
 }
