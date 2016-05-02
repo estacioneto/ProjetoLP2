@@ -131,7 +131,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 		ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
 		if (posicao >= prontuarios.size())
 			throw new DadoInvalidoException(
-					MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES + "(max = " + prontuarios.size() + ").");
+					String.format(MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES, prontuarios.size()));
 
 		Collections.sort(prontuarios);
 		return prontuarios.get(posicao).getId();

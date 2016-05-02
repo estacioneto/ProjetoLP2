@@ -26,7 +26,7 @@ public abstract class Util {
 	 * @return Codigo do cargo.
 	 */
 	public static String getCodigoPorCargo(String cargo) {
-		// Validacao do cargo ja deve ter sido feita antes de chamar esse metodo
+		// Validacao da string ser valida ja deve ter sido feita antes de chamar esse metodo
 
 		if (cargo.equals(Constantes.DIRETOR_GERAL))
 			return Constantes.CODIGO_DIRETOR;
