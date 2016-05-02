@@ -19,7 +19,7 @@ public class Cargo implements Serializable {
 	 * Serial gerado automaticamente.
 	 */
 	private static final long serialVersionUID = 8465811114464412946L;
-	
+
 	private HashSet<Permissao> permissoes;
 	private String nome;
 
@@ -50,7 +50,7 @@ public class Cargo implements Serializable {
 		Set<Permissao> permissoes = new HashSet<Permissao>();
 		if (codigo.equals(Constantes.CODIGO_DIRETOR)) {
 			permissoes = getPermissoesDiretor();
-		} else if(codigo.equals(Constantes.CODIGO_TECNICO)){
+		} else if (codigo.equals(Constantes.CODIGO_TECNICO)) {
 			permissoes = getPermissoesTecnico();
 		}
 		return permissoes;
@@ -91,6 +91,13 @@ public class Cargo implements Serializable {
 		return nome;
 	}
 
+	/**
+	 * Verifica se o cargo possui determinada permissao.
+	 * 
+	 * @param permissao
+	 *            Permissao a ser verificada.
+	 * @return true se o cargo permite determinada operacao.
+	 */
 	public boolean temPermissao(Permissao permissao) {
 		return this.permissoes.contains(permissao);
 	}

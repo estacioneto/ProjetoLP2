@@ -2,10 +2,10 @@ package projeto.hospital.gerencia;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.farmacia.Farmacia;
+import projeto.farmacia.Medicamento;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
-import projeto.util.ValidadorDeDados;
-import projeto.farmacia.Medicamento;
+import projeto.util.Util;
 
 public class GerenciadorDeMedicamento {
 
@@ -20,7 +20,7 @@ public class GerenciadorDeMedicamento {
 	
 	public Object getInfoMedicamento(String atributo, String nome){
 		Medicamento medicamento = farmacia.verificaMedicamentoExistente(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO, nome);
-		switch (ValidadorDeDados.capitalizaString(atributo)) {
+		switch (Util.capitalizaString(atributo)) {
 		case Constantes.TIPO:
 			return medicamento.getTipo();
 		case Constantes.NOME:
@@ -38,7 +38,7 @@ public class GerenciadorDeMedicamento {
 	
 	public void atualizaMedicamento(String nome, String atributo, String novoValor){
 		Medicamento medicamento = farmacia.verificaMedicamentoExistente(MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO_INVALIDO, nome);
-		atributo = ValidadorDeDados.capitalizaString(atributo); 
+		atributo = Util.capitalizaString(atributo); 
 		switch (atributo) {
 		case Constantes.PRECO:
 			Double novoPreco = Double.parseDouble(novoValor);
