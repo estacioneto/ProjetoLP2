@@ -10,12 +10,12 @@ import projeto.util.ValidadorDeDados;
 /**
  * @author Eric
  */
-public class Paciente implements Serializable { 
+public class Paciente implements Serializable {
 	/**
 	 * Serial gerado automaticamente.
 	 */
 	private static final long serialVersionUID = 1697453654897L;
-	
+
 	private String nome;
 	private String dataNascimento;
 	private Double peso;
@@ -44,9 +44,9 @@ public class Paciente implements Serializable {
 	 */
 	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {
-		ValidadorDeDados.validaString(MensagensDeErro.ERRO_NOME_PACIENTE, nome);
-		ValidadorDeDados.validaData(MensagensDeErro.ERRO_DATA_PACIENTE, dataNascimento);
-		ValidadorDeDados.validaPositivo(MensagensDeErro.ERRO_PESO_PACIENTE, peso);
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_NOME_CADASTRO_PACIENTE, nome);
+		ValidadorDeDados.validaData(MensagensDeErro.ERRO_DATA_CADASTRO_PACIENTE, dataNascimento);
+		ValidadorDeDados.validaPositivo(MensagensDeErro.ERRO_PESO_CADASTRO_PACIENTE, peso);
 		ValidadorDeDados.validaTipoSanguineo(tipoSanguineo);
 		ValidadorDeDados.validaSexoBiologico(sexoBiologico);
 		ValidadorDeDados.validaString(Constantes.GENERO, genero);
@@ -73,6 +73,7 @@ public class Paciente implements Serializable {
 	 *            Nome
 	 */
 	public void setNome(String nome) {
+		ValidadorDeDados.validaString(MensagensDeErro.ERRO_NOME_ATUALIZACAO_PACIENTE, nome);
 		this.nome = nome;
 	}
 
@@ -88,6 +89,7 @@ public class Paciente implements Serializable {
 	 *            Peso
 	 */
 	public void setPeso(Double peso) {
+		ValidadorDeDados.validaPositivo(MensagensDeErro.ERRO_PESO_ATUALIZACAO_PACIENTE, peso);
 		this.peso = peso;
 	}
 
@@ -144,10 +146,10 @@ public class Paciente implements Serializable {
 	public Integer getIdade() {
 		LocalDate hoje = LocalDate.now();
 
-		String[] nascimento = this.dataNascimento.split("/");
-		int ano = Integer.parseInt(nascimento[2]), 
-			mes = Integer.parseInt(nascimento[1]),
-			dia = Integer.parseInt(nascimento[0]);
+		String[] nascimento = this.dataNascimento.split(Constantes.BARRA);
+		int ano = Integer.parseInt(nascimento[Constantes.INDICE_ANO]),
+				mes = Integer.parseInt(nascimento[Constantes.INDICE_MES]),
+				dia = Integer.parseInt(nascimento[Constantes.INDICE_DIA]);
 
 		int idade = hoje.getYear() - ano - 1;
 		if (mes < hoje.getMonthValue() || mes == hoje.getMonthValue() && dia <= hoje.getDayOfMonth())
