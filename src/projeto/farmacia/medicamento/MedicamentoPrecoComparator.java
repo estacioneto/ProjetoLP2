@@ -1,20 +1,22 @@
-package projeto.farmacia;
+package projeto.farmacia.medicamento;
 
 import java.io.Serializable;
 import java.util.Comparator;
 
 /**
+ * Classe responsavel por ordenar uma lista de medicamentos a partir do preco
+ * final.
  * 
  * @author Thaynan
  *
  */
 public class MedicamentoPrecoComparator implements Comparator<Medicamento>,
 		Serializable {
-
+	
 	/**
 	 * Serial gerado automaticamente.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5428598739769016904L;
 
 	/**
 	 * Metodo que compara dois elementos pelo preco.

@@ -20,7 +20,7 @@ public class Cargo implements Serializable {
 	 */
 	private static final long serialVersionUID = 8465811114464412946L;
 
-	private HashSet<Permissao> permissoes;
+	private Set<Permissao> permissoes;
 	private String nome;
 
 	/**
@@ -73,12 +73,13 @@ public class Cargo implements Serializable {
 	 * 
 	 * @return Conjunto de permissoes do diretor.
 	 */
-	public static HashSet<Permissao> getPermissoesDiretor() {
+	public static Set<Permissao> getPermissoesDiretor() {
 		HashSet<Permissao> permissoes = new HashSet<Permissao>();
 		permissoes.add(Permissao.CADASTRAR_FUNCIONARIOS);
 		permissoes.add(Permissao.EXCLUIR_FUNCIONARIOS);
 		permissoes.add(Permissao.ATUALIZAR_INFORMACOES_FUNCIONARIOS);
-
+		permissoes.add(Permissao.CADASTRAR_MEDICAMENTO);
+		permissoes.add(Permissao.CADASTRAR_PACIENTES);
 		return permissoes;
 	}
 

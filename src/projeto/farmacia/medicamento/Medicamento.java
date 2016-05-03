@@ -1,4 +1,4 @@
-package projeto.farmacia;
+package projeto.farmacia.medicamento;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -9,12 +9,13 @@ import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
 
 /**
+ * Classe que possui o tipo basico que caracteriza todos os medicamentos.
  * 
  * @author Thaynan
  *
  */
 public abstract class Medicamento implements Serializable {
-	
+
 	/**
 	 * Serial gerado automaticamente.
 	 */
@@ -70,6 +71,8 @@ public abstract class Medicamento implements Serializable {
 	 *            Quantidade nova do medicamento.
 	 */
 	public void setQuantidade(int quantidade) {
+		ValidadorDeDados.validaPositivo(
+				MensagensDeErro.ERRO_ATUALIZA_MEDICAMENTO, quantidade);
 		this.quantidade = quantidade;
 	}
 
@@ -79,6 +82,8 @@ public abstract class Medicamento implements Serializable {
 	 *            Preco novo do medicamento.
 	 */
 	public void setPreco(Double preco) {
+		ValidadorDeDados.validaPositivo(
+				MensagensDeErro.ERRO_ATUALIZA_MEDICAMENTO, preco);
 		this.preco = preco;
 	}
 

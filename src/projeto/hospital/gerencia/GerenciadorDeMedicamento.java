@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.farmacia.Farmacia;
-import projeto.farmacia.Medicamento;
+import projeto.farmacia.medicamento.Medicamento;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
