@@ -79,7 +79,7 @@ public class Farmacia implements Serializable {
 	 *            Nome do medicamento em busca.
 	 * @return
 	 */
-	public Medicamento verificaMedicamentoExistente(String erro,
+	public Medicamento pegaMedicamento(String erro,
 			String nomeMedicamento) {
 		for (Medicamento medicamentoAtual : this.listaMedicamentos) {
 			if (medicamentoAtual.getNome().equalsIgnoreCase(nomeMedicamento)) {

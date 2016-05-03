@@ -72,7 +72,7 @@ public abstract class Medicamento implements Serializable {
 	 */
 	public void setQuantidade(int quantidade) {
 		ValidadorDeDados.validaPositivo(
-				MensagensDeErro.ERRO_ATUALIZA_MEDICAMENTO, quantidade);
+				MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO, quantidade);
 		this.quantidade = quantidade;
 	}
 
@@ -83,7 +83,7 @@ public abstract class Medicamento implements Serializable {
 	 */
 	public void setPreco(Double preco) {
 		ValidadorDeDados.validaPositivo(
-				MensagensDeErro.ERRO_ATUALIZA_MEDICAMENTO, preco);
+				MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO, preco);
 		this.preco = preco;
 	}
 
