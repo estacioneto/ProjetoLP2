@@ -1,5 +1,6 @@
 package projeto.farmacia;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,41 +9,86 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
 
-public class Farmacia {
+/**
+ * 
+ * @author Thaynan
+ *
+ */
+public class Farmacia implements Serializable {
 
+	/**
+	 * Serial gerado automaticamente.
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<Medicamento> listaMedicamentos;
 	private MedicamentoFactory medicamentoFactory;
-	
-	public Farmacia(){
+
+	/**
+	 * Cosntrutor da Farmacia.
+	 */
+	public Farmacia() {
 		this.listaMedicamentos = new ArrayList<>();
 		this.medicamentoFactory = new MedicamentoFactory();
 	}
 
+	/**
+	 * 
+	 * @return copia da lista de medicamentos.
+	 */
 	public List<Medicamento> getListaMedicamentos() {
 		List<Medicamento> copiaDaLista = new ArrayList<>(this.listaMedicamentos);
 		return copiaDaLista;
 	}
-	
-	public String addMedicamento(String nome, Double preco, int quantidade, String tipoMedicamento, String categorias){
-		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome, tipoMedicamento, preco, quantidade, categorias);
+
+	/**
+	 * Adiciona um medicamento cajo seja possivel, chamando a factory de
+	 * Medicamento.
+	 * 
+	 * @param nome
+	 *            Nome do medicamento.
+	 * @param preco
+	 *            Preco do medicamento.
+	 * @param quantidade
+	 *            Quantidade do medicamento.
+	 * @param tipoMedicamento
+	 *            Tipo do medicamento.
+	 * @param categorias
+	 *            Categorias do medicamento.
+	 * @return Nome do medicamento.
+	 */
+	public String addMedicamento(String nome, Double preco, int quantidade,
+			String tipoMedicamento, String categorias) {
+		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome,
+				tipoMedicamento, preco, quantidade, categorias);
 		this.listaMedicamentos.add(medicamento);
 		return nome;
 	}
-	
-	public Medicamento verificaMedicamentoExistente(String erro, String nomeMedicamento){
-		for(Medicamento medicamentoAtual : this.listaMedicamentos){
-			if(medicamentoAtual.getNome().equalsIgnoreCase(nomeMedicamento)){
+
+	/**
+	 * Verifica se um determinado medicamento existe a partir do nome.
+	 * 
+	 * @param erro
+	 *            Mensagem de erro, caso o medicamento nao exista.
+	 * @param nomeMedicamento
+	 *            Nome do medicamento em busca.
+	 * @return
+	 */
+	public Medicamento verificaMedicamentoExistente(String erro,
+			String nomeMedicamento) {
+		for (Medicamento medicamentoAtual : this.listaMedicamentos) {
+			if (medicamentoAtual.getNome().equalsIgnoreCase(nomeMedicamento)) {
 				return medicamentoAtual;
 			}
 		}
 		throw new DadoInvalidoException(erro);
 	}
-	
-	private List<Medicamento> medicamentoComCategoria(String categoria){
+
+	// Metodo que busca todos os medicamento que possuem tal categoria.
+	private List<Medicamento> medicamentoComCategoria(String categoria) {
 		List<Medicamento> medicamentosCategoria = new ArrayList<>();
-		
-		for(Medicamento medicamentoAtual : this.listaMedicamentos){
-			if(medicamentoAtual.contemCategoria(categoria)){
+
+		for (Medicamento medicamentoAtual : this.listaMedicamentos) {
+			if (medicamentoAtual.contemCategoria(categoria)) {
 				medicamentosCategoria.add(medicamentoAtual);
 			}
 		}
@@ -50,38 +96,58 @@ public class Farmacia {
 		Collections.sort(medicamentosCategoria, comparator);
 		return medicamentosCategoria;
 	}
-	
-	public String consultaMedicamentoPorCategoria(String categoria){
-		ValidadorDeDados.validaCategoriaMedicamento(categoria);
-		List<String> listaNomeMedicamentosCategoria = new ArrayList<>();
-		for(Medicamento medicamentoAtual : this.medicamentoComCategoria(categoria)){
-			listaNomeMedicamentosCategoria.add(medicamentoAtual.getNome());
-		}
-		if(listaNomeMedicamentosCategoria.isEmpty()){
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_CATEGORIA_MEDICAMENTO);
-		}
-		return String.join(",", listaNomeMedicamentosCategoria);
-	}
-	
-	private List<String> nomesNaLista(List<Medicamento> lista){
+
+	// Metodo que recebe uma lista e retorna os nomes dos medicamentos dessa
+	// lista em uma nova lista.
+	private List<String> nomesNaLista(List<Medicamento> lista) {
 		List<String> listaNomeMedicamentos = new ArrayList<>();
-		for(Medicamento medicamentoAtual : lista){
+		for (Medicamento medicamentoAtual : lista) {
 			listaNomeMedicamentos.add(medicamentoAtual.getNome());
 		}
 		return listaNomeMedicamentos;
 	}
-	
-	public String verificaMedicamentosOrdemAlfabetica(){
+
+	/**
+	 * Metodo que consulta todos o medicamentos que possuem uma determinada
+	 * categoria.
+	 * 
+	 * @param categoria
+	 *            Categoria referente ao medicamento.
+	 * @return todos os medicamentos que possuem determinada categoria.
+	 */
+	public String consultaMedicamentoPorCategoria(String categoria) {
+		ValidadorDeDados.validaCategoriaMedicamento(
+				MensagensDeErro.ERRO_CONSULTA_CATEGORIA_INVALIDA_MEDICAMENTO, categoria);
+		List<String> listaNomeMedicamentosCategoria = this.nomesNaLista(this
+				.medicamentoComCategoria(categoria));
+		if (listaNomeMedicamentosCategoria.isEmpty()) {
+			throw new DadoInvalidoException(
+					MensagensDeErro.ERRO_CONSULTA_CATEGORIA_MEDICAMENTO);
+		}
+		return String.join(",", listaNomeMedicamentosCategoria);
+	}
+
+	/**
+	 * Metodo que consulta medicamento pela ordem alfabetica.
+	 * 
+	 * @return todos os medicamentos em ordem alfabetica.
+	 */
+	public String consultaMedicamentosOrdemAlfabetica() {
 		List<Medicamento> copiaLista = new ArrayList<>(this.listaMedicamentos);
 		MedicamentoNomeComparator comparator = new MedicamentoNomeComparator();
 		Collections.sort(copiaLista, comparator);
-		return String.join(",",this.nomesNaLista(copiaLista));
+		return String.join(",", this.nomesNaLista(copiaLista));
 	}
-	
-	public String verificaMedicamentosOrdemPreco(){
+
+	/**
+	 * Metodo que consulta medicamento pela ordenados pelo preco.
+	 * 
+	 * @return todos os medicamentos em ordenados pelos preco.
+	 */
+	public String consultaMedicamentosOrdemPreco() {
 		List<Medicamento> copiaLista = new ArrayList<>(this.listaMedicamentos);
 		MedicamentoPrecoComparator comparator = new MedicamentoPrecoComparator();
 		Collections.sort(copiaLista, comparator);
-		return String.join(",",this.nomesNaLista(copiaLista));
+		return String.join(",", this.nomesNaLista(copiaLista));
 	}
 }

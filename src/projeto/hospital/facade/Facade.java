@@ -10,6 +10,7 @@ import projeto.util.Constantes;
  * 
  * @author Estacio Pereira
  * @author Eric
+ * @author Thaynan
  */
 public class Facade {
 
@@ -59,13 +60,16 @@ public class Facade {
 	 */
 	public String liberaSistema(String chave, String nome, String dataNascimento) {
 		if (sistemaJaLiberado) {
-			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Sistema liberado anteriormente.");
+			throw new AcessoBloqueadoException(
+					"Erro ao liberar o sistema. Sistema liberado anteriormente.");
 		} else if (CHAVE_DESBLOQUEIO.equals(chave)) {
-			String matricula = this.cadastraFuncionario(nome, Constantes.DIRETOR_GERAL, dataNascimento);
+			String matricula = this.cadastraFuncionario(nome,
+					Constantes.DIRETOR_GERAL, dataNascimento);
 			sistemaJaLiberado = true;
 			return matricula;
 		} else {
-			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Chave invalida.");
+			throw new AcessoBloqueadoException(
+					"Erro ao liberar o sistema. Chave invalida.");
 		}
 	}
 
@@ -105,7 +109,8 @@ public class Facade {
 	 *            Data de nascimento do funcionario.
 	 * @return Matricula do funcionario cadastrado.
 	 */
-	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
+	public String cadastraFuncionario(String nome, String cargo,
+			String dataNascimento) {
 		return this.controller.cadastraFuncionario(nome, cargo, dataNascimento);
 	}
 
@@ -131,7 +136,8 @@ public class Facade {
 	 * @param novoValor
 	 *            Valor do novo atributo.
 	 */
-	public void atualizaInfoFuncionario(String matricula, String atributo, String novoValor) {
+	public void atualizaInfoFuncionario(String matricula, String atributo,
+			String novoValor) {
 		this.controller.atualizaInfoFuncionario(matricula, atributo, novoValor);
 	}
 
@@ -152,9 +158,10 @@ public class Facade {
 	 *            Tipo sanguineo do paciente
 	 * @return Id do paciente cadastrado
 	 */
-	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
-			String tipoSanguineo) {
-		return this.controller.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo);
+	public long cadastraPaciente(String nome, String data, double peso,
+			String sexo, String genero, String tipoSanguineo) {
+		return this.controller.cadastraPaciente(nome, data, peso, sexo, genero,
+				tipoSanguineo);
 	}
 
 	/**
@@ -204,28 +211,89 @@ public class Facade {
 	public void atualizaInfoFuncionario(String atributo, String novoValor) {
 		this.controller.atualizaInfoFuncionario(atributo, novoValor);
 	}
-	
-	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias){
-		return this.controller.cadastraMedicamento(nome, tipo, preco, quantidade, categorias);
+
+	/**
+	 * Metodo que cadastra um medicamento.
+	 * 
+	 * @param nome
+	 *            Nome do medicamento.
+	 * @param tipo
+	 *            Tipo do medicamento.
+	 * @param preco
+	 *            Preco do medicamento.
+	 * @param quantidade
+	 *            Quantidade do medicamento.
+	 * @param categoriasCategorias
+	 *            do medicamento.
+	 * @return Nome do medicamento.
+	 */
+	public String cadastraMedicamento(String nome, String tipo, Double preco,
+			int quantidade, String categorias) {
+		return this.controller.cadastraMedicamento(nome, tipo, preco,
+				quantidade, categorias);
 	}
-	
-	public Object getInfoMedicamento(String atributo, String nome){
+
+	/**
+	 * Metodo que retorna um determinado atributo de um medicamento, passado o
+	 * seu nome.
+	 * 
+	 * @param atributo
+	 *            Atributo do medicamento.
+	 * @param nomeMedicamento
+	 *            Nome do medicamento.
+	 * @return atributo do medicamento.
+	 */
+	public Object getInfoMedicamento(String atributo, String nome) {
 		return this.controller.getInfoMedicamento(atributo, nome);
 	}
-	
-	public void atualizaMedicamento(String nome, String atributo, String novoValor){
+
+	/**
+	 * Metodo que atualiza um atributo de um medicamento.
+	 * 
+	 * @param nomeMedicamento
+	 *            Nome do medicamento.
+	 * @param atributo
+	 *            Atributo a ser atualizado.
+	 * @param novoValor
+	 *            Novo valor do atributo
+	 */
+	public void atualizaMedicamento(String nome, String atributo,
+			String novoValor) {
 		this.controller.atualizaMedicamento(nome, atributo, novoValor);
 	}
-	
-	public String consultaMedCategoria(String categoria){
+
+	/**
+	 * Metodo que retorna uma lista em String de todos os medicamentos com
+	 * determinada categoria.
+	 * 
+	 * @param categoria
+	 *            Categoria do medicamento desejada.
+	 * @return lista em String dos medicamentos.
+	 */
+	public String consultaMedCategoria(String categoria) {
 		return this.controller.consultaMedCategoria(categoria);
 	}
-	
-	public String consultaMedNome(String nome){
+
+	/**
+	 * Metodo que retorna as caracteristicas de um medicamento.
+	 * 
+	 * @param nome
+	 *            Nome do medicamento.
+	 * @return Caracteristicas do medicamento.
+	 */
+	public String consultaMedNome(String nome) {
 		return this.controller.consultaMedNome(nome);
 	}
-	
-	public String getEstoqueFarmacia(String ordenacao){
+
+	/**
+	 * Metodo que retorna uma lista em String dos medicamentos a partir de uma
+	 * ordem definida.
+	 * 
+	 * @param ordenacao
+	 *            Ordenacao desejada.
+	 * @return lista ordenada em String dos medicamentos.
+	 */
+	public String getEstoqueFarmacia(String ordenacao) {
 		return this.controller.getEstoqueFarmacia(ordenacao);
 	}
 }

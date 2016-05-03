@@ -14,6 +14,7 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
  * 
  * @author Estacio
  * @author Eric
+ * @author Thaynan
  */
 public abstract class ValidadorDeDados {
 	/**
@@ -40,7 +41,8 @@ public abstract class ValidadorDeDados {
 	public static void validaString(String erroAtributo, String atributo) {
 		validaNaoNulo(erroAtributo, atributo);
 		if (atributo.trim().length() == Constantes.ZERO)
-			throw new StringVaziaException(erroAtributo + " nao pode ser vazio.");
+			throw new StringVaziaException(erroAtributo
+					+ " nao pode ser vazio.");
 	}
 
 	/**
@@ -65,7 +67,8 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaNaoNulo(String nomeAtributo, Object atributo) {
 		if (atributo == null)
-			throw new ObjetoNuloException(nomeAtributo + " nao pode ser nulo(a)!");
+			throw new ObjetoNuloException(nomeAtributo
+					+ " nao pode ser nulo(a)!");
 	}
 
 	/**
@@ -79,7 +82,8 @@ public abstract class ValidadorDeDados {
 	public static void validaCargo(String erroOperacao, String cargo) {
 		validaString(erroOperacao + MensagensDeErro.CARGO_FUNCIONARIO, cargo);
 		if (!Constantes.CARGOS_VALIDOS.contains(cargo.toLowerCase()))
-			throw new DadoInvalidoException(erroOperacao + MensagensDeErro.CARGO_INVALIDO_FUNCIONARIO);
+			throw new DadoInvalidoException(erroOperacao
+					+ MensagensDeErro.CARGO_INVALIDO_FUNCIONARIO);
 	}
 
 	/**
@@ -110,16 +114,20 @@ public abstract class ValidadorDeDados {
 			int ano = Integer.parseInt(validadorDePadrao.group(3));
 
 			if (dia.equals("31"))
-				if (mes.equals("11") || mes.equals("04") || mes.equals("06") || mes.equals("09"))
-					throw new DataInvalidaException(erroData + " nao eh valida! Mes fornecido nao tem dia 31!");
+				if (mes.equals("11") || mes.equals("04") || mes.equals("06")
+						|| mes.equals("09"))
+					throw new DataInvalidaException(erroData
+							+ " nao eh valida! Mes fornecido nao tem dia 31!");
 
 			if (mes.equals("02")) {
 				if (dia.equals("30") || dia.equals("31"))
-					throw new DataInvalidaException(erroData + " nao eh valida! Fevereiro nao tem dias 30 e 31!");
+					throw new DataInvalidaException(erroData
+							+ " nao eh valida! Fevereiro nao tem dias 30 e 31!");
 
 				if (ano % 4 != 0 && dia.equals("29"))
 					throw new DataInvalidaException(
-							erroData + " nao eh valida! Ano nao eh bissexto. Fevereiro nao tem dia 29!");
+							erroData
+									+ " nao eh valida! Ano nao eh bissexto. Fevereiro nao tem dia 29!");
 			}
 		}
 	}
@@ -134,7 +142,8 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaPositivo(String nomeAtributo, double valor) {
 		if (valor < 0)
-			throw new DadoInvalidoException(nomeAtributo + " nao pode ser negativo.");
+			throw new DadoInvalidoException(nomeAtributo
+					+ " nao pode ser negativo.");
 	}
 
 	/**
@@ -147,7 +156,8 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaPositivo(String nomeAtributo, Long valor) {
 		if (valor < 0)
-			throw new DadoInvalidoException(nomeAtributo + " nao pode ser negativo.");
+			throw new DadoInvalidoException(nomeAtributo
+					+ " nao pode ser negativo.");
 	}
 
 	/**
@@ -160,7 +170,8 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaPositivo(String nomeAtributo, int valor) {
 		if (valor < 0)
-			throw new DadoInvalidoException(nomeAtributo + " nao pode ser negativo.");
+			throw new DadoInvalidoException(nomeAtributo
+					+ " nao pode ser negativo.");
 	}
 
 	/**
@@ -171,7 +182,8 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaTipoSanguineo(String tipoSanguineo) {
 		if (!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipoSanguineo))
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_TIPO_SANGUINEO_PACIENTE + " invalido.");
+			throw new DadoInvalidoException(
+					MensagensDeErro.ERRO_TIPO_SANGUINEO_PACIENTE + " invalido.");
 	}
 
 	/**
@@ -181,7 +193,8 @@ public abstract class ValidadorDeDados {
 	 *            sexo biologico
 	 */
 	public static void validaSexoBiologico(String sexoBiologico) {
-		if (sexoBiologico == null || !sexoBiologico.toLowerCase().equals(Constantes.MASCULINO)
+		if (sexoBiologico == null
+				|| !sexoBiologico.toLowerCase().equals(Constantes.MASCULINO)
 				&& !sexoBiologico.toLowerCase().equals(Constantes.FEMININO))
 			throw new DadoInvalidoException("Sexo biologico invalido.");
 	}
@@ -194,7 +207,8 @@ public abstract class ValidadorDeDados {
 	 * @param mensagemErro
 	 *            Mensagem a ser utilizada caso nao obedeca o padrao.
 	 */
-	public static void validaPadraoMatricula(String matricula, String mensagemErro) {
+	public static void validaPadraoMatricula(String matricula,
+			String mensagemErro) {
 		for (int indice = 0; indice < matricula.length(); indice++) {
 			if (!Character.isDigit(matricula.charAt(indice)))
 				throw new DadoInvalidoException(mensagemErro);
@@ -209,15 +223,20 @@ public abstract class ValidadorDeDados {
 	 * @param atributo
 	 *            Atributo a ser analisado.
 	 */
-	public static void validaAtributoFuncionario(String erroOperacao, String atributo, String valor) {
-		validaString(erroOperacao + MensagensDeErro.ATRIBUTO_FUNCIONARIO, atributo);
+	public static void validaAtributoFuncionario(String erroOperacao,
+			String atributo, String valor) {
+		validaString(erroOperacao + MensagensDeErro.ATRIBUTO_FUNCIONARIO,
+				atributo);
 		atributo = capitalizaString(atributo);
 
 		if (atributo.equals(Constantes.MATRICULA))
-			throw new OperacaoInvalidaException(erroOperacao + MensagensDeErro.ATUALIZAR_MATRICULA);
-		if (!(atributo.equals(Constantes.NOME) || atributo.equals(Constantes.CARGO)
-				|| atributo.equals(Constantes.DATA)))
-			throw new OperacaoInvalidaException(erroOperacao + MensagensDeErro.ATRIBUTO_INVALIDO);
+			throw new OperacaoInvalidaException(erroOperacao
+					+ MensagensDeErro.ATUALIZAR_MATRICULA);
+		if (!(atributo.equals(Constantes.NOME)
+				|| atributo.equals(Constantes.CARGO) || atributo
+					.equals(Constantes.DATA)))
+			throw new OperacaoInvalidaException(erroOperacao
+					+ MensagensDeErro.ATRIBUTO_INVALIDO);
 
 		if (atributo.equals(Constantes.NOME))
 			validaNome(erroOperacao, valor);
@@ -236,10 +255,12 @@ public abstract class ValidadorDeDados {
 	public static void validaNome(String erroOperacao, String nome) {
 		validaString(erroOperacao + MensagensDeErro.NOME_FUNCIONARIO, nome);
 		if (nome.length() == Constantes.NOME_TAMANHO_MAXIMO)
-			throw new OperacaoInvalidaException(erroOperacao + MensagensDeErro.NOME_TAMANHO_INVALIDO);
+			throw new OperacaoInvalidaException(erroOperacao
+					+ MensagensDeErro.NOME_TAMANHO_INVALIDO);
 		for (int indice = 0; indice < nome.length(); indice++) {
 			if (Character.isDigit(nome.charAt(indice)))
-				throw new OperacaoInvalidaException(erroOperacao + MensagensDeErro.NOME_CARACTER_INVALIDO);
+				throw new OperacaoInvalidaException(erroOperacao
+						+ MensagensDeErro.NOME_CARACTER_INVALIDO);
 		}
 	}
 
@@ -254,15 +275,19 @@ public abstract class ValidadorDeDados {
 	public static void validaSenha(String erroOperacao, String senha) {
 		validaString(erroOperacao + Constantes.SENHA, senha);
 
-		if (senha.length() < Constantes.SENHA_TAMANHO_MINIMO || senha.length() > Constantes.SENHA_TAMANHO_MAXIMO)
+		if (senha.length() < Constantes.SENHA_TAMANHO_MINIMO
+				|| senha.length() > Constantes.SENHA_TAMANHO_MAXIMO)
 			throw new OperacaoInvalidaException(
-					erroOperacao + "A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
+					erroOperacao
+							+ "A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
 
 		for (int indice = 0; indice < senha.length(); indice++) {
-			if (!(Character.isAlphabetic(senha.charAt(indice)) || Character.isDigit(senha.charAt(indice))
-					|| senha.charAt(indice) == ' ')) {
+			if (!(Character.isAlphabetic(senha.charAt(indice))
+					|| Character.isDigit(senha.charAt(indice)) || senha
+						.charAt(indice) == ' ')) {
 				throw new OperacaoInvalidaException(
-						erroOperacao + "A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
+						erroOperacao
+								+ "A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
 			}
 		}
 	}
@@ -275,12 +300,26 @@ public abstract class ValidadorDeDados {
 	 * @return String capitalizada.
 	 */
 	public static String capitalizaString(String string) {
-		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase() + string.substring(Constantes.UM);
+		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase()
+				+ string.substring(Constantes.UM);
 	}
 
-	public static void validaCategoriaMedicamento(String categoria){
-		if(!Constantes.CATEGORIAS_MEDICAMENTOS.contains(categoria.toLowerCase())){
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CATEGORIA_INVALIDA);
+	/**
+	 * Valida uma categoria.
+	 * 
+	 * @param mensagemDeErro
+	 *            Mensagem de Erro, caso aconteca uma excessao.
+	 * @param categoria
+	 *            Categorias do medicamento
+	 */
+	public static void validaCategoriaMedicamento(String mensagemDeErro,
+			String categoria) {
+		String[] arrayCategorias = categoria.split(",");
+		for (int i = 0; i < arrayCategorias.length; i++) {
+			if (!Constantes.CATEGORIAS_MEDICAMENTOS.contains(arrayCategorias[i]
+					.toLowerCase())) {
+				throw new DadoInvalidoException(mensagemDeErro);
+			}
 		}
 	}
 }

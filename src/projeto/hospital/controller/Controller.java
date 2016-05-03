@@ -14,6 +14,7 @@ import projeto.util.Util;
 /**
  * @author Estacio
  * @author Eric
+ * @author Thaynan
  */
 public class Controller {
 
@@ -257,6 +258,21 @@ public class Controller {
 		return this.gerenciadorDePaciente.getProntuario(posicao);
 	}
 
+	/**
+	 * Metodo que cadastra um medicamento.
+	 * 
+	 * @param nome
+	 *            Nome do medicamento.
+	 * @param tipo
+	 *            Tipo do medicamento.
+	 * @param preco
+	 *            Preco do medicamento.
+	 * @param quantidade
+	 *            Quantidade do medicamento.
+	 * @param categoriasCategorias
+	 *            do medicamento.
+	 * @return Nome do medicamento.
+	 */
 	public String cadastraMedicamento(String nome, String tipo, Double preco,
 			int quantidade, String categorias) {
 		if (!estaLogado())
@@ -270,22 +286,65 @@ public class Controller {
 				quantidade, categorias);
 	}
 
+	/**
+	 * Metodo que retorna um determinado atributo de um medicamento, passado o
+	 * seu nome.
+	 * 
+	 * @param atributo
+	 *            Atributo do medicamento.
+	 * @param nomeMedicamento
+	 *            Nome do medicamento.
+	 * @return atributo do medicamento.
+	 */
 	public Object getInfoMedicamento(String atributo, String nome) {
 		return gerenciadorDeMedicamento.getInfoMedicamento(atributo, nome);
 	}
 
+	/**
+	 * Metodo que atualiza um atributo de um medicamento.
+	 * 
+	 * @param nomeMedicamento
+	 *            Nome do medicamento.
+	 * @param atributo
+	 *            Atributo a ser atualizado.
+	 * @param novoValor
+	 *            Novo valor do atributo
+	 */
 	public void atualizaMedicamento(String nome, String atributo, String novo) {
 		this.gerenciadorDeMedicamento.atualizaMedicamento(nome, atributo, novo);
 	}
 
+	/**
+	 * Metodo que retorna uma lista em String de todos os medicamentos com
+	 * determinada categoria.
+	 * 
+	 * @param categoria
+	 *            Categoria do medicamento desejada.
+	 * @return lista em String dos medicamentos.
+	 */
 	public String consultaMedCategoria(String categoria) {
 		return this.gerenciadorDeMedicamento.consultaMedCategoria(categoria);
 	}
 
+	/**
+	 * Metodo que retorna as caracteristicas de um medicamento.
+	 * 
+	 * @param nome
+	 *            Nome do medicamento.
+	 * @return Caracteristicas do medicamento.
+	 */
 	public String consultaMedNome(String nome) {
 		return this.gerenciadorDeMedicamento.consultaMedNome(nome);
 	}
 
+	/**
+	 * Metodo que retorna uma lista em String dos medicamentos a partir de uma
+	 * ordem definida.
+	 * 
+	 * @param ordenacao
+	 *            Ordenacao desejada.
+	 * @return lista ordenada em String dos medicamentos.
+	 */
 	public String getEstoqueFarmacia(String ordenacao) {
 		return this.gerenciadorDeMedicamento.getEstoqueFarmacia(ordenacao);
 	}

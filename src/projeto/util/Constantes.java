@@ -36,7 +36,9 @@ public abstract class Constantes {
 	public static final String QUANTIDADE = "Quantidade";
 	public static final String CATEGORIAS = "Categorias";
 	public static final String TIPO = "Tipo";
-
+	public static final String TIPO_GENERICO = "Generico";
+	public static final String TIPO_REFERENCIA = "Referencia";
+	
 	public static final String MASCULINO = "masculino";
 	public static final String FEMININO = "feminino";
 
