@@ -10,7 +10,7 @@ public class MedicamentoFactory implements Serializable {
 	/**
 	 * Serial gerado automaticamente.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3926794298888896493L;
 
 	// Metodo responsavel pela criacao de um medicamento do tipo Generico.
 	private Medicamento criaMedicamentoGenerico(String nome, Double preco,

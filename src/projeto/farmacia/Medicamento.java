@@ -14,11 +14,11 @@ import projeto.util.ValidadorDeDados;
  *
  */
 public abstract class Medicamento implements Serializable {
-
+	
 	/**
 	 * Serial gerado automaticamente.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7166091567180515070L;
 	private String nome;
 	private Double preco;
 	private int quantidade;

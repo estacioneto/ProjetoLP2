@@ -56,6 +56,7 @@ public abstract class Constantes {
 	public static final File ARQUIVO_DADOS = new File(DADOS_DIRETORIO);
 	public static final String ARQUIVO_GERENCIADOR_FUNCIONARIOS = DADOS_DIRETORIO
 			+ "gerenciadorFuncionarios.txt";
+	public static final String ARQUIVO_CONTROLLER = DADOS_DIRETORIO + "controller.txt";
 
 	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(
 			Arrays.asList(new String[] { DIRETOR_GERAL.toLowerCase(),
@@ -71,5 +72,4 @@ public abstract class Constantes {
 	public static final int NOME_TAMANHO_MAXIMO = 16;
 	public static final int SENHA_TAMANHO_MINIMO = 8;
 	public static final int SENHA_TAMANHO_MAXIMO = NOME_TAMANHO_MAXIMO;
-
 }

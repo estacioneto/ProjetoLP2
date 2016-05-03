@@ -1,5 +1,7 @@
 package projeto.hospital.controller;
 
+import java.io.Serializable;
+
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.Permissao;
@@ -7,9 +9,7 @@ import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
 import projeto.hospital.gerencia.GerenciadorDeMedicamento;
 import projeto.hospital.gerencia.GerenciadorDePacienteProntuario;
 import projeto.hospital.gerencia.ValidadorDeLogica;
-import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
-import projeto.util.Util;
 
 /**
  * Classe controladora. Gerencia a logica de negocio do sistema delegando
@@ -19,8 +19,13 @@ import projeto.util.Util;
  * @author Eric
  * @author Thaynan
  */
-public class Controller {
+public class Controller implements Serializable{
 
+	/**
+	 * Serial gerado automaticamente.
+	 */
+	private static final long serialVersionUID = -1215543804197231123L;
+	
 	private Funcionario funcionarioLogado;
 	private GerenciadorDeFuncionarios gerenciadorFuncionarios;
 	private GerenciadorDePacienteProntuario gerenciadorDePaciente;
@@ -30,6 +35,9 @@ public class Controller {
 	 * Construtor
 	 */
 	public Controller() {
+		this.gerenciadorDePaciente = new GerenciadorDePacienteProntuario();
+		this.gerenciadorDeMedicamento = new GerenciadorDeMedicamento();
+		this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
 		this.funcionarioLogado = null;
 	}
 
@@ -58,32 +66,12 @@ public class Controller {
 	}
 
 	/**
-	 * Inicia o sistema se ele ainda nao foi iniciado
-	 */
-	public void iniciaSistema() {
-		if (gerenciadorFuncionarios != null)
-			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
-		this.gerenciadorDePaciente = new GerenciadorDePacienteProntuario();
-		this.gerenciadorDeMedicamento = new GerenciadorDeMedicamento();
-		try {
-			this.gerenciadorFuncionarios = (GerenciadorDeFuncionarios) Util
-					.getObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
-		} catch (Exception excecao) {
-			this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
-			Util.criaArquivo(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS);
-		}
-	}
-
-	/**
 	 * Fecha o sistema se nenhum usuario estiver mais logado
 	 */
 	public void fechaSistema() {
 		if (estaLogado())
 			throw new OperacaoInvalidaException("Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
 					+ funcionarioLogado.getNome() + ".");
-		Util.setObjeto(Constantes.ARQUIVO_GERENCIADOR_FUNCIONARIOS, gerenciadorFuncionarios);
-		this.gerenciadorFuncionarios = null;
-		this.gerenciadorDePaciente = null;
 	}
 
 	/**
