@@ -6,7 +6,7 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import projeto.farmacia.Farmacia;
+import projeto.util.MensagensDeErro;
 
 public class FarmaciaTest {
 
@@ -16,13 +16,13 @@ public class FarmaciaTest {
 	public void inicializaFarmacia() {
 		try {
 			farmacia = new Farmacia();
-			farmacia.addMedicamento("Isotretinoina", 79.90, 200,
-					"analgesico,antiemetico,antitermico", "generico");
-			farmacia.addMedicamento("Morfina", 374.90, 100,
-					"analgesico,antitermico", "referencia");
-			farmacia.addMedicamento("Prednisona", 10.38, 172, "antitermico",
-					"generico");
-		} catch (Exception e) {
+			farmacia.addMedicamento("Isotretinoina", 79.90, 200, "generico",
+					"analgesico,antiemetico,antitermico");
+			farmacia.addMedicamento("Morfina", 374.90, 100, "referencia",
+					"analgesico,antitermico");
+			farmacia.addMedicamento("Prednisona", 10.38, 172, "generico",
+					"antitermico");
+		} catch (RuntimeException e) {
 			fail();
 		}
 	}
@@ -33,16 +33,16 @@ public class FarmaciaTest {
 	@Test
 	public void testAddMedicamentoValido() {
 		try {
-			farmacia.addMedicamento("Dipirona", 9.98, 550,
-					"analgesico,antiemetico,antitermico", "referencia");
-			farmacia.addMedicamento("Dorflex", 10.50, 600, "antibiotico",
-					"referencia");
-			farmacia.addMedicamento("Neosaldina", 19.62, 200,
-					"analgesico,antiinflamatorio", "referencia");
-			farmacia.addMedicamento("Albendazol", 374.90, 100, "analgesico",
-					"generico");
-			farmacia.addMedicamento("Aciclovir", 10.50, 600,
-					"analgesico,antitermico", "generico");
+			farmacia.addMedicamento("Dipirona", 9.98, 550, "referencia",
+					"analgesico,antiemetico,antitermico");
+			farmacia.addMedicamento("Dorflex", 10.50, 600, "referencia",
+					"antibiotico");
+			farmacia.addMedicamento("Neosaldina", 19.62, 200, "referencia",
+					"analgesico,antiinflamatorio");
+			farmacia.addMedicamento("Albendazol", 374.90, 100, "generico",
+					"analgesico");
+			farmacia.addMedicamento("Aciclovir", 10.50, 600, "generico",
+					"analgesico,antitermico");
 		} catch (Exception e) {
 			fail();
 		}
@@ -54,22 +54,22 @@ public class FarmaciaTest {
 	@Test
 	public void testAddMedicamentoTipoInvalido() {
 		try {
-			farmacia.addMedicamento("Dipirona", 9.98, 550,
-					"analgesico,antiemetico,antitermico", "referenciado");
+			farmacia.addMedicamento("Dipirona", 9.98, 550, "referenciado",
+					"analgesico,antiemetico,antitermico");
 			fail();
 		} catch (Exception e) {
 			assertEquals(e.getMessage(), "Nao existe este tipo de medicamento.");
 		}
 		try {
-			farmacia.addMedicamento("Aciclovir", 10.50, 600,
-					"analgesico,antitermico", "");
+			farmacia.addMedicamento("Aciclovir", 10.50, 600, "",
+					"analgesico,antitermico");
 			fail();
 		} catch (Exception e) {
 			assertEquals(e.getMessage(), "Nao existe este tipo de medicamento.");
 		}
 		try {
-			farmacia.addMedicamento("Aciclovir", 10.50, 600,
-					"analgesico,antitermico", "       ");
+			farmacia.addMedicamento("Aciclovir", 10.50, 600, "genericoo",
+					"analgesico,antitermico");
 			fail();
 		} catch (Exception e) {
 			assertEquals(e.getMessage(), "Nao existe este tipo de medicamento.");
@@ -83,25 +83,24 @@ public class FarmaciaTest {
 	@Test
 	public void testConsultaMedicamentoPorCategoria() {
 		try {
-			farmacia.addMedicamento("Dipirona", 9.98, 550,
-					"analgesico,antiemetico,antitermico", "referencia");
-			farmacia.addMedicamento("Dorflex", 10.50, 600,
-					"antibiotico,analgesico", "referencia");
-			farmacia.addMedicamento("Neosaldina", 19.62, 200,
-					"analgesico,antiinflamatorio", "referencia");
-
+			farmacia.addMedicamento("Dipirona", 9.98, 550, "referencia",
+					"analgesico,antiemetico,antitermico");
+			farmacia.addMedicamento("Dorflex", 10.50, 600, "referencia",
+					"antibiotico");
+			farmacia.addMedicamento("Neosaldina", 19.62, 200, "referencia",
+					"analgesico,antiinflamatorio");
+			
 			assertEquals(
 					farmacia.consultaMedicamentoPorCategoria("analgesico"),
-					"[Dipirona, Dorflex, Neosaldina, Isotretinoina, Morfina]");
-
+					"Dipirona,Neosaldina,Isotretinoina,Morfina");
 
 			assertEquals(
 					farmacia.consultaMedicamentoPorCategoria("antitermico"),
-					"[Prednisona, Dipirona, Isotretinoina, Morfina]");
+					"Prednisona,Dipirona,Isotretinoina,Morfina");
 
 			assertEquals(
-					farmacia.consultaMedicamentoPorCategoria("analgesico"),
-					"[Dipirona, Dorflex, Neosaldina, Isotretinoina, Morfina]");
+					farmacia.consultaMedicamentoPorCategoria("antitermico"),
+					"Prednisona,Dipirona,Isotretinoina,Morfina");
 		} catch (Exception e) {
 			fail();
 		}
@@ -110,31 +109,34 @@ public class FarmaciaTest {
 	/**
 	 * Testa o retorno valido da busca de medicamentos por nome
 	 */
+	/*
 	@Test
 	public void testBuscaMedicamento() {
 		try {
-			farmacia.addMedicamento("Dipirona", 9.98, 550,
-					"analgesico,antiemetico,antitermico", "referencia");
-			farmacia.addMedicamento("Dorflex", 10.50, 600,
-					"antibiotico,analgesico", "referencia");
-			farmacia.addMedicamento("Neosaldina", 19.62, 200,
-					"analgesico,antiinflamatorio", "referencia");
+			farmacia.addMedicamento("Dipirona", 9.98, 550, "referencia",
+					"analgesico,antiemetico,antitermico");
+			farmacia.addMedicamento("Dorflex", 10.50, 600, "referencia",
+					"antibiotico");
+			farmacia.addMedicamento("Neosaldina", 19.62, 200, "referencia",
+					"analgesico,antiinflamatorio");
+			 
+			assertEquals(farmacia.verificaMedicamentoExistente(
+					MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE,
+					"Dipirona"), farmacia.getListaMedicamentos().get(3).toString());
+			assertEquals(farmacia.verificaMedicamentoExistente(
+					MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE,
+					"Dorflex"), farmacia.getListaMedicamentos().get(4));
+			assertEquals(farmacia.verificaMedicamentoExistente(
+					MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE,
+					"Isotretinoina"), farmacia.getListaMedicamentos().get(1));
+			assertEquals(farmacia.verificaMedicamentoExistente(
+					MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE,
+					"Prednisona"), farmacia.getListaMedicamentos().get(3));
 
-			assertEquals(farmacia.buscaMedicamento("Dipirona"),
-					"Medicamento: Dipirona; preco: 9,98; quantidade atual: 550; Tipo: Referencia;");
-			assertEquals(farmacia.buscaMedicamento("Dorflex"),
-					"Medicamento: Dorflex; preco: 10,50; quantidade atual: 600; Tipo: Referencia;");
-			assertEquals(
-					farmacia.buscaMedicamento("Isotretinoina"),
-					"Medicamento: Isotretinoina; preco: 47,94; quantidade atual: 200; Tipo: Generico;");
-			assertEquals(farmacia.buscaMedicamento("Morfina"),
-					"Medicamento: Morfina; preco: 374,90; quantidade atual: 100; Tipo: Referencia;");
-			assertEquals(farmacia.buscaMedicamento("Prednisona"),
-					"Medicamento: Prednisona; preco: 6,23; quantidade atual: 172; Tipo: Generico;");
 		} catch (Exception e) {
 			fail();
 		}
-	}
+	}*/
 
 	/**
 	 * Testa se a ordem da lista eh correta
@@ -142,17 +144,19 @@ public class FarmaciaTest {
 	@Test
 	public void testOrdenaListaMedicamentos() {
 		try {
-			farmacia.addMedicamento("Dipirona", 9.98, 550,
-					"analgesico,antiemetico,antitermico", "referencia");
-
-			assertEquals(farmacia.verificaMedicamentosOrdemAlfabetica(),
-					farmacia.verificaMedicamentoExistente("Dipirona"));
-			assertEquals(farmacia.verificaMedicamentosOrdemAlfabetica(),
-					farmacia.verificaMedicamentoExistente("Isotretinoina"));
-			assertEquals(farmacia.verificaMedicamentosOrdemPreco(),
-					farmacia.verificaMedicamentoExistente("Morfina"));
-			assertEquals(farmacia.verificaMedicamentosOrdemPreco(),
-					farmacia.verificaMedicamentoExistente("Prednisona"));
+			farmacia.addMedicamento("Dipirona", 9.98, 550, "referencia",
+					"analgesico,antiemetico,antitermico");
+			
+			assertEquals(farmacia.consultaMedicamentosOrdemAlfabetica(), "Dipirona,Isotretinoina,Morfina,Prednisona");
+			assertEquals(farmacia.consultaMedicamentosOrdemPreco(), "Prednisona,Dipirona,Isotretinoina,Morfina");
+			
+			farmacia.addMedicamento("Dorflex", 10.50, 600, "referencia",
+					"antibiotico");
+			farmacia.addMedicamento("Neosaldina", 19.62, 200, "referencia",
+					"analgesico,antiinflamatorio");
+			
+			assertEquals(farmacia.consultaMedicamentosOrdemAlfabetica(), "Dipirona,Dorflex,Isotretinoina,Morfina,Neosaldina,Prednisona");
+			assertEquals(farmacia.consultaMedicamentosOrdemPreco(), "Prednisona,Dipirona,Dorflex,Neosaldina,Isotretinoina,Morfina");
 
 		} catch (Exception e) {
 			fail();
