@@ -7,8 +7,6 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import projeto.exceptions.dados.DadoInvalidoException;
-import projeto.hospital.paciente.GeradorIdPaciente;
-import projeto.hospital.paciente.Paciente;
 
 public class PacienteTeste {
 	Paciente eric;

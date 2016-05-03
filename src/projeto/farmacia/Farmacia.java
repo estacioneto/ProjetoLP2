@@ -6,10 +6,16 @@ import java.util.Collections;
 import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.farmacia.medicamento.Medicamento;
+import projeto.farmacia.medicamento.MedicamentoFactory;
+import projeto.farmacia.medicamento.MedicamentoNomeComparator;
+import projeto.farmacia.medicamento.MedicamentoPrecoComparator;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
 
 /**
+ * Classe que representa uma farmacia, sedo a mesma responsavel pela gerencia e
+ * cadastro de medicamentos.
  * 
  * @author Thaynan
  *
@@ -83,7 +89,13 @@ public class Farmacia implements Serializable {
 		throw new DadoInvalidoException(erro);
 	}
 
-	// Metodo que busca todos os medicamento que possuem tal categoria.
+	/**
+	 * Metodo que busca todos os medicamento que possuem tal categoria.
+	 * 
+	 * @param categoria
+	 *            Categoria do medicamento
+	 * @return lista de medicamento
+	 */
 	private List<Medicamento> medicamentoComCategoria(String categoria) {
 		List<Medicamento> medicamentosCategoria = new ArrayList<>();
 
@@ -117,7 +129,8 @@ public class Farmacia implements Serializable {
 	 */
 	public String consultaMedicamentoPorCategoria(String categoria) {
 		ValidadorDeDados.validaCategoriaMedicamento(
-				MensagensDeErro.ERRO_CONSULTA_CATEGORIA_INVALIDA_MEDICAMENTO, categoria);
+				MensagensDeErro.ERRO_CONSULTA_CATEGORIA_INVALIDA_MEDICAMENTO,
+				categoria);
 		List<String> listaNomeMedicamentosCategoria = this.nomesNaLista(this
 				.medicamentoComCategoria(categoria));
 		if (listaNomeMedicamentosCategoria.isEmpty()) {

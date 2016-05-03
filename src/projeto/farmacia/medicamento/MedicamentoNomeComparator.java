@@ -1,9 +1,11 @@
-package projeto.farmacia;
+package projeto.farmacia.medicamento;
 
 import java.io.Serializable;
 import java.util.Comparator;
 
 /**
+ * Classe responsavel por ordenar uma lista de medicamentos a partir do nome dos
+ * mesmos.
  * 
  * @author Thaynan
  *
@@ -14,7 +16,7 @@ public class MedicamentoNomeComparator implements Comparator<Medicamento>,
 	/**
 	 * Serial gerado automaticamente.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6335375792078771774L;
 
 	/**
 	 * Metodo que compara dois elementos pelo preco.
