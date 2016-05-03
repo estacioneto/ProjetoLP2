@@ -2,6 +2,8 @@ package projeto.hospital.paciente;
 
 import java.io.Serializable;
 
+import projeto.util.ValidadorDeDados;
+
 /**
  * @author Eric
  */
@@ -20,6 +22,7 @@ public class Prontuario implements Comparable<Prontuario>, Serializable {
 	 *            Paciente relacionado ao prontuario
 	 */
 	public Prontuario(Paciente paciente) {
+		ValidadorDeDados.validaNaoNulo(paciente);
 		this.paciente = paciente;
 	}
 
