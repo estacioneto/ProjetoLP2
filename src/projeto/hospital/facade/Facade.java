@@ -1,8 +1,10 @@
 package projeto.hospital.facade;
 
 import projeto.exceptions.logica.AcessoBloqueadoException;
+import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.controller.Controller;
 import projeto.util.Constantes;
+import projeto.util.Util;
 
 /**
  * Classe de fachada. A fachada do sistema cuida da interacao do usuario com o
@@ -22,7 +24,7 @@ public class Facade {
 	 * Construtor padrao.
 	 */
 	public Facade() {
-		this.controller = new Controller();
+		this.controller = null;
 		this.sistemaJaLiberado = false;
 	}
 
@@ -30,7 +32,16 @@ public class Facade {
 	 * Inicia o sistema.
 	 */
 	public void iniciaSistema() {
-		this.controller.iniciaSistema();
+		if (this.controller != null)
+			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
+		
+		try {
+			this.controller = (Controller) Util
+					.getObjeto(Constantes.ARQUIVO_CONTROLLER);
+		} catch (Exception excecao) {
+			this.controller = new Controller();
+			Util.criaArquivo(Constantes.ARQUIVO_CONTROLLER);
+		}
 	}
 
 	/**
@@ -38,6 +49,8 @@ public class Facade {
 	 */
 	public void fechaSistema() {
 		this.controller.fechaSistema();
+		Util.setObjeto(Constantes.ARQUIVO_CONTROLLER, this.controller);
+		this.controller= null;
 	}
 
 	/**

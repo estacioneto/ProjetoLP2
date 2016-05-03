@@ -19,7 +19,7 @@ public class Farmacia implements Serializable {
 	/**
 	 * Serial gerado automaticamente.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4325301404289139683L;
 	private List<Medicamento> listaMedicamentos;
 	private MedicamentoFactory medicamentoFactory;
 

@@ -19,7 +19,7 @@ public class GerenciadorDeMedicamento implements Serializable {
 	/**
 	 * Serial gerado automaticamente.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7250140707171454261L;
 	private Farmacia farmacia;
 
 	/**
