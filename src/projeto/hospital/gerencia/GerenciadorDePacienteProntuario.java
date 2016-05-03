@@ -35,7 +35,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * Construtor
 	 */
 	public GerenciadorDePacienteProntuario() {
-		geradorIdPaciente = GeradorIdPaciente.getInstancia();
+		geradorIdPaciente = new GeradorIdPaciente();
 		pacientes = new HashSet<Paciente>();
 		prontuarios = new ArrayList<Prontuario>();
 	}
