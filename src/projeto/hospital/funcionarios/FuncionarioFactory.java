@@ -31,7 +31,7 @@ public class FuncionarioFactory implements Serializable{
 	 */
 	public Funcionario criaFuncionario(String nome, String cargo,
 			String dataNascimento, String matricula, String senha) {
-		return new Funcionario(nome, new Cargo(cargo), matricula, senha,
+		return new Funcionario(nome, cargo, matricula, senha,
 				dataNascimento);
 	}
 

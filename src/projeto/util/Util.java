@@ -26,7 +26,7 @@ public abstract class Util {
 	 * @return Codigo do cargo.
 	 */
 	public static String getCodigoPorCargo(String cargo) {
-		// Validacao do cargo ja deve ter sido feita antes de chamar esse metodo
+		// Validacao da string ser valida ja deve ter sido feita antes de chamar esse metodo
 
 		if (cargo.equals(Constantes.DIRETOR_GERAL))
 			return Constantes.CODIGO_DIRETOR;
@@ -180,5 +180,16 @@ public abstract class Util {
 			}
 		}
 		return diretorio.delete();
+	}
+
+	/**
+	 * Retorna a String com a primeira letra maiuscula e as demais minusculas.
+	 * 
+	 * @param string
+	 *            String a ser modificada.
+	 * @return String capitalizada.
+	 */
+	public static String capitalizaString(String string) {
+		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase() + string.substring(Constantes.UM);
 	}
 }

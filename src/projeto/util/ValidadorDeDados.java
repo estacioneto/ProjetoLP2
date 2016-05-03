@@ -182,8 +182,7 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaTipoSanguineo(String tipoSanguineo) {
 		if (!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipoSanguineo))
-			throw new DadoInvalidoException(
-					MensagensDeErro.ERRO_TIPO_SANGUINEO_PACIENTE + " invalido.");
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_TIPO_SANGUINEO_CADASTRO_PACIENTE + " invalido.");
 	}
 
 	/**
@@ -293,11 +292,8 @@ public abstract class ValidadorDeDados {
 	}
 
 	/**
-	 * Retorna a String com a primeira letra maiuscula e as demais minusculas.
-	 * 
-	 * @param string
-	 *            String a ser modificada.
-	 * @return String capitalizada.
+	 * Valida uma categoria de medicamentos.
+	 * @param categoria Categoria a ser validada.
 	 */
 	public static String capitalizaString(String string) {
 		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase()
