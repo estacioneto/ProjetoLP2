@@ -2,6 +2,7 @@ package projeto.hospital.paciente;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -21,11 +22,15 @@ public class ProntuarioTeste {
 	 * 
 	 */
 	private void resetaPacientes() throws DadoInvalidoException {
-		geradorIdPaciente = GeradorIdPaciente.getInstancia();
+		geradorIdPaciente = new GeradorIdPaciente();
 		eric = new Paciente("Eric", "29/04/1997", 72.5, "O-", "masculino", "Masculino");
+		eric.setId(geradorIdPaciente.getProximoId());
 		estacio = new Paciente("Estacio", "18/04/1998", 60.5, "A+", "masculino", "Masculino");
+		estacio.setId(geradorIdPaciente.getProximoId());
 		thaynan = new Paciente("Thaynan", "19/10/1996", 82.5, "A+", "masculino", "Masculino");
+		thaynan.setId(geradorIdPaciente.getProximoId());
 		sergio = new Paciente("Sergio", "15/07/1993", 55.5, "O+", "masculino", "Masculino");
+		sergio.setId(geradorIdPaciente.getProximoId());
 	}
 	
 	/**
@@ -41,7 +46,7 @@ public class ProntuarioTeste {
 		try{
 			new Prontuario(null);
 		} catch(DadoInvalidoException e){
-			assertEquals("", e.getMessage());
+			assertEquals("Objeto nao pode ser nulo!", e.getMessage());
 		}
 	}
 
@@ -78,6 +83,7 @@ public class ProntuarioTeste {
 	 */
 	@Test
 	public void testOrdenacao(){
+		resetaPacientes();
 		Prontuario prontuarioEric = new Prontuario(eric);
 		Prontuario prontuarioThaynan = new Prontuario(thaynan);
 		Prontuario prontuarioSergio = new Prontuario(sergio);
@@ -89,6 +95,10 @@ public class ProntuarioTeste {
 		conjunto.add(prontuarioEstacio);
 		conjunto.add(prontuarioSergio);
 		
-		assertEquals("", conjunto.toString());
+		ArrayList<String> listaNomes = new ArrayList<String>();
+		for(Prontuario p : conjunto)
+			listaNomes.add(p.getPaciente().getNome());		
+		
+		assertEquals("Eric,Estacio,Sergio,Thaynan", String.join(",", listaNomes));
 	}
 }
