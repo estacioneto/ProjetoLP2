@@ -8,6 +8,8 @@ import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
 
 /**
+ * Classe para representar os pacientes
+ * 
  * @author Eric
  */
 public class Paciente implements Serializable {
@@ -172,6 +174,9 @@ public class Paciente implements Serializable {
 		return result;
 	}
 
+	/**
+	 * Compara a partir do nome do paciente
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof Paciente))

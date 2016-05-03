@@ -25,7 +25,7 @@ public class PacienteTeste {
 	 * 
 	 */
 	private void resetaPacientes() throws DadoInvalidoException {
-		geradorIdPaciente = GeradorIdPaciente.getInstancia();
+		geradorIdPaciente = new GeradorIdPaciente();
 		eric = new Paciente("Eric", "29/04/1997", 72.5, "O-", "masculino", "Masculino");
 		estacio = new Paciente("Estacio", "18/04/1998", 60.5, "A+", "masculino", "Masculino");
 		thaynan = new Paciente("Thaynan", "19/10/1996", 82.5, "A+", "masculino", "Masculino");
@@ -43,7 +43,7 @@ public class PacienteTeste {
 		// new Paciente(String nome, String nascimento, double peso, TipoSangue
 		// sangue, SexoBiologico sexo, String Genero)
 		// Todos esses devem dar certo
-		geradorIdPaciente = GeradorIdPaciente.getInstancia();
+		geradorIdPaciente = new GeradorIdPaciente();
 		new Paciente("Eric", "29/04/1997", 72.5, "O-", "masculino", "Masculino");
 		new Paciente("Estacio", "18/04/1998", 60.5, "A+", "masculino", "Masculino");
 		new Paciente("Thaynan", "19/10/1996", 82.5, "A+", "masculino", "Masculino");

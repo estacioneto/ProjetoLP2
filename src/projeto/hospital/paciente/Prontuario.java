@@ -3,6 +3,8 @@ package projeto.hospital.paciente;
 import java.io.Serializable;
 
 /**
+ * Classe para representar os prontuarios
+ * 
  * @author Eric
  */
 public class Prontuario implements Comparable<Prontuario>, Serializable {
