@@ -56,4 +56,9 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_MEDICAMENTO_NAO_CADASTRADO = "Medicamento nao cadastrado.";
 	public static final String ERRO_CONSULTA_MEDICAMENTO = "Erro na consulta de medicamentos. ";
 	public static final String ERRO_ORDENCAO_MEDICAMENTO = ERRO_CONSULTA_MEDICAMENTO + "Tipo de ordenacao invalida.";
+	public static final String ERRO_ATUALIZACAO = "Erro de atualizacao.";
+	public static final String ERRO_ATUALIZACAO_ENTIDADE = "Erro ao atualizar %s. ";
+	public static final String ERRO_CADASTRO = "Erro de casastro.";
+	public static final String ERRO_CADASTRO_ENTIDADE = "Erro ao casastrar %s.";
+	
 }
