@@ -16,8 +16,6 @@ import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
 
-;
-
 /**
  * Gerencia os pacientes e prontuarios
  * 
@@ -59,24 +57,26 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Tipo sanguineo do paciente
 	 * @return Id do paciente cadastrado
 	 */
-	public long cadastraPaciente(String nome, String data, double peso,
-			String sexo, String genero, String tipoSanguineo) {
+	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
+			String tipoSanguineo) {
 		try {
-			Paciente novoPaciente = new Paciente(nome, data, peso,
-					tipoSanguineo, sexo, genero);
+			ValidadorDeDados.validaNome(Constantes.DO_PACIENTE, nome);
+			ValidadorDeDados.validaData(data);
+			ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE, peso);
+			ValidadorDeDados.validaSexoBiologico(sexo);
+			ValidadorDeDados.validaString(Constantes.GENERO, genero);
+			ValidadorDeDados.validaTipoSanguineo(tipoSanguineo);
+			
+			Paciente novoPaciente = new Paciente(nome, data, peso, tipoSanguineo, sexo, genero);
 			if (!pacientes.add(novoPaciente))
-				throw new DadoInvalidoException(
-						MensagensDeErro.PACIENTE_JA_CADASTRADO);
+				throw new DadoInvalidoException(MensagensDeErro.PACIENTE_JA_CADASTRADO);
 
 			Long novoId = geradorIdPaciente.getProximoId();
 			novoPaciente.setId(novoId);
 			prontuarios.add(new Prontuario(novoPaciente));
-
 			return novoId;
-
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(
-					MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
 		}
 	}
 
@@ -93,7 +93,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 		ValidadorDeDados.validaPositivo(Constantes.ID, idPaciente);
 		ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
 
-		Paciente paciente = buscaPaciente(idPaciente);
+		Paciente paciente = buscaPacientePorId(idPaciente);
 
 		switch (atributo) {
 		case Constantes.NOME:
@@ -122,7 +122,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Id do paciente
 	 * @return Paciente
 	 */
-	private Paciente buscaPaciente(Long idPaciente) {
+	private Paciente buscaPacientePorId(Long idPaciente) {
 		for (Paciente paciente : this.pacientes)
 			if (paciente.getId().equals(idPaciente))
 				return paciente;
@@ -139,12 +139,10 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 */
 	public Long getProntuario(int posicao) {
 		try {
-			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO,
-					posicao);
+			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
 			if (posicao >= prontuarios.size())
-				throw new DadoInvalidoException(String.format(
-						MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES,
-						prontuarios.size()));
+				throw new DadoInvalidoException(
+						String.format(MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES, prontuarios.size()));
 
 			Collections.sort(prontuarios);
 			return prontuarios.get(posicao).getId();

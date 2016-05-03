@@ -226,7 +226,7 @@ public abstract class ValidadorDeDados {
 			throw new OperacaoInvalidaException(MensagensDeErro.ATRIBUTO_INVALIDO);
 
 		if (atributo.equals(Constantes.NOME))
-			validaNomeFuncionario(valor);
+			validaNome(Constantes.DO_FUNCIONARIO, valor);
 		else if (atributo.equals(Constantes.DATA))
 			validaData(valor);
 	}
@@ -239,8 +239,8 @@ public abstract class ValidadorDeDados {
 	 * @param nome
 	 *            Nome a ser analisado.
 	 */
-	public static void validaNomeFuncionario(String nome) {
-		validaString(MensagensDeErro.NOME_FUNCIONARIO, nome);
+	public static void validaNome(String pessoa, String nome) {
+		validaString("Nome" + pessoa, nome);
 		if (nome.length() == Constantes.NOME_TAMANHO_MAXIMO)
 			throw new OperacaoInvalidaException(MensagensDeErro.NOME_TAMANHO_INVALIDO);
 		for (int indice = 0; indice < nome.length(); indice++) {
