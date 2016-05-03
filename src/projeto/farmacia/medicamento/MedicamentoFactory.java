@@ -1,10 +1,16 @@
-package projeto.farmacia;
+package projeto.farmacia.medicamento;
 
 import java.io.Serializable;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.util.Constantes;
 
+/**
+ * Classe responsavel por criar um medicamento.
+ * 
+ * @author Thaynan
+ *
+ */
 public class MedicamentoFactory implements Serializable {
 
 	/**

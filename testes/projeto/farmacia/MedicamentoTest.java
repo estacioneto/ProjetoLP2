@@ -8,6 +8,10 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
+import projeto.farmacia.medicamento.Medicamento;
+import projeto.farmacia.medicamento.MedicamentoGenerico;
+import projeto.farmacia.medicamento.MedicamentoReferencia;
+
 public class MedicamentoTest {
 
 	private Medicamento apracur;
@@ -110,6 +114,22 @@ public class MedicamentoTest {
 			assertEquals(
 					e.getMessage(),
 					"Erro no cadastro de medicamento. Quantidade do medicamento nao pode ser negativo.");
+		}
+		try {
+			Medicamento dipirona = new MedicamentoReferencia("Dipirona", 9.98, 550,
+					"");
+			fail();
+		} catch (Exception e) {
+			assertEquals(e.getMessage(),
+					"Erro no cadastro de medicamento. Categorias do medicamento nao pode ser nula ou vazia.");
+		}
+		try {
+			Medicamento dipirona = new MedicamentoReferencia("Dipirona", 9.98, 550,
+					null);
+			fail();
+		} catch (Exception e) {
+			assertEquals(e.getMessage(),
+					"Erro no cadastro de medicamento. Categorias do medicamento nao pode ser nula ou vazia.");
 		}
 	}
 

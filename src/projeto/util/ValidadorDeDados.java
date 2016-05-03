@@ -25,7 +25,7 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaString(String atributo) {
 		validaNaoNulo(atributo);
-		if (atributo.trim().length() == Constantes.ZERO)
+		if (atributo.trim().isEmpty())
 			throw new StringVaziaException();
 	}
 
@@ -124,7 +124,8 @@ public abstract class ValidadorDeDados {
 					throw new DataInvalidaException(erroData
 							+ " nao eh valida! Fevereiro nao tem dias 30 e 31!");
 
-				if ((ano % 4 != 0 || (ano % 4 == 0 && ano % 100 == 0) || ano % 400 != 0) && dia.equals("29"))
+				if ((ano % 4 != 0 || (ano % 4 == 0 && ano % 100 == 0) || ano % 400 != 0)
+						&& dia.equals("29"))
 					throw new DataInvalidaException(
 							erroData
 									+ " nao eh valida! Ano nao eh bissexto. Fevereiro nao tem dia 29!");
@@ -182,7 +183,9 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaTipoSanguineo(String tipoSanguineo) {
 		if (!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipoSanguineo))
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_TIPO_SANGUINEO_CADASTRO_PACIENTE + " invalido.");
+			throw new DadoInvalidoException(
+					MensagensDeErro.ERRO_TIPO_SANGUINEO_CADASTRO_PACIENTE
+							+ " invalido.");
 	}
 
 	/**
@@ -293,7 +296,9 @@ public abstract class ValidadorDeDados {
 
 	/**
 	 * Valida uma categoria de medicamentos.
-	 * @param categoria Categoria a ser validada.
+	 * 
+	 * @param categoria
+	 *            Categoria a ser validada.
 	 */
 	public static String capitalizaString(String string) {
 		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase()
@@ -310,6 +315,9 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaCategoriaMedicamento(String mensagemDeErro,
 			String categoria) {
+		if (categoria == null || categoria.trim().isEmpty()) {
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_CATEGORIA_INVALIDA_MEDICAMENTO);
+		}
 		String[] arrayCategorias = categoria.split(",");
 		for (int i = 0; i < arrayCategorias.length; i++) {
 			if (!Constantes.CATEGORIAS_MEDICAMENTOS.contains(arrayCategorias[i]

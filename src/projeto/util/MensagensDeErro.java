@@ -43,12 +43,14 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_PESO_ATUALIZACAO_PACIENTE = ERRO_ATUALIZACAO_PACIENTE + Constantes.PESO + " do paciente";
 	
 	public static final String ERRO_CADASTRO_MEDICAMENTO = "Erro no cadastro de medicamento. ";
+	public static final String ERRO_ATUALIZA_MEDICAMENTO = "Erro ao atualizar medicamento. ";
 	public static final String ERRO_NOME_MEDICAMENTO = ERRO_CADASTRO_MEDICAMENTO + Constantes.NOME + " do medicamento";
 	public static final String ERRO_PRECO_MEDICAMENTO = ERRO_CADASTRO_MEDICAMENTO + Constantes.PRECO + " do medicamento";
 	public static final String ERRO_QUANTIDADE_MEDICAMENTO = ERRO_CADASTRO_MEDICAMENTO + Constantes.QUANTIDADE + " do medicamento";
 	public static final String ERRO_CATEGORIA_MEDICAMENTO = ERRO_CADASTRO_MEDICAMENTO + Constantes.CATEGORIAS + " do medicamento";
-	public static final String ERRO_ATUALIZAR_ATRIBUTO_MEDICAMENTO = "Erro ao atualizar medicamento. %s do medicamento nao pode ser alterado.";
-	public static final String ERRO_ATUALIZAR_MEDICAMENTO_INVALIDO = "Erro ao atualizar medicamento. Medicamento nao cadastrado.";
+	public static final String ERRO_CATEGORIA_INVALIDA_MEDICAMENTO = ERRO_CADASTRO_MEDICAMENTO + Constantes.CATEGORIAS + " do medicamento nao pode ser nula ou vazia.";
+	public static final String ERRO_ATUALIZAR_ATRIBUTO_MEDICAMENTO = ERRO_ATUALIZA_MEDICAMENTO + "%s do medicamento nao pode ser alterado.";
+	public static final String ERRO_ATUALIZAR_MEDICAMENTO_INVALIDO = ERRO_ATUALIZA_MEDICAMENTO + "Medicamento nao cadastrado.";
 	public static final String ERRO_CONSULTA_CATEGORIA_MEDICAMENTO = "Erro na consulta de medicamentos. Nao ha remedios cadastrados nessa categoria.";
 	public static final String ERRO_CONSULTA_CATEGORIA_INVALIDA_MEDICAMENTO =  "Erro na consulta de medicamentos. Categoria invalida.";
 	public static final String ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE = "Erro na consulta de medicamentos. Medicamento nao cadastrado.";

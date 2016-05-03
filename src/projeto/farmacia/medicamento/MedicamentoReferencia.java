@@ -1,18 +1,21 @@
-package projeto.farmacia;
+package projeto.farmacia.medicamento;
 
 import java.io.Serializable;
 
 /**
+ * Classe que representa o tipo medicamento de referencia, seus comportaemntos e
+ * estados.
  * 
  * @author Thaynan
  *
  */
 public class MedicamentoReferencia extends Medicamento implements Serializable {
 
+	
 	/**
 	 * Serial gerado automaticamente.
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6053591316062764788L;
 
 	public static final String TIPO = "de Referencia";
 
