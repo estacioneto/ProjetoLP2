@@ -124,7 +124,7 @@ public abstract class ValidadorDeDados {
 					throw new DataInvalidaException(erroData
 							+ " nao eh valida! Fevereiro nao tem dias 30 e 31!");
 
-				if (ano % 4 != 0 && dia.equals("29"))
+				if ((ano % 4 != 0 || (ano % 4 == 0 && ano % 100 == 0) || ano % 400 != 0) && dia.equals("29"))
 					throw new DataInvalidaException(
 							erroData
 									+ " nao eh valida! Ano nao eh bissexto. Fevereiro nao tem dia 29!");
