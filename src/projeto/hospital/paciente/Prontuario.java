@@ -5,6 +5,8 @@ import java.io.Serializable;
 import projeto.util.ValidadorDeDados;
 
 /**
+ * Classe para representar os prontuarios
+ * 
  * @author Eric
  */
 public class Prontuario implements Comparable<Prontuario>, Serializable {
