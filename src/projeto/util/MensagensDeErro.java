@@ -19,7 +19,7 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_FUNCIONARIO_NAO_CADASTRADO = "Funcionario nao cadastrado.";
 	public static final String SENHA_INVALIDA = "Senha invalida.";
 	public static final String PADRAO_MATRICULA = "A matricula nao segue o padrao.";
-	public static final String ERRO_ATUALIZA_INFO = "Erro ao atualizar funcionario. ";
+	public static final String ERRO_ATUALIZA_FUNCIONARIO = "Erro ao atualizar funcionario. ";
 	public static final String ATRIBUTO_FUNCIONARIO = "Atributo do funcionario ";
 	public static final String ATUALIZAR_MATRICULA = "Nao eh possivel atualizar matricula do funcionario.";
 	public static final String ATRIBUTO_INVALIDO = "Atributo nao valido.";
@@ -28,16 +28,12 @@ public abstract class MensagensDeErro {
 	public static final String PERMISSAO_NEGADA_ATUALIZACAO = "Funcionario nao pode atualizar informacao.";
 
 	public static final String ERRO_CONSULTAR_PRONTUARIO = "Erro ao consultar prontuario. ";
-	public static final String INDICE_PRONTUARIO = ERRO_CONSULTAR_PRONTUARIO + "Indice do prontuario";
-	public static final String ERRO_PRONTUARIOS_INSUFICIENTES = ERRO_CONSULTAR_PRONTUARIO
-			+ "Nao ha prontuarios suficientes (max = %d).";
+	public static final String INDICE_PRONTUARIO = "Indice do prontuario";
+	public static final String ERRO_PRONTUARIOS_INSUFICIENTES = "Nao ha prontuarios suficientes (max = %d).";
 
 	public static final String ERRO_CADASTRO_PACIENTE = "Nao foi possivel cadastrar o paciente. ";
-	public static final String ERRO_NOME_CADASTRO_PACIENTE = ERRO_CADASTRO_PACIENTE + Constantes.NOME + " do paciente";
-	public static final String ERRO_TIPO_SANGUINEO_CADASTRO_PACIENTE = ERRO_CADASTRO_PACIENTE + "Tipo sanguineo";
-	public static final String ERRO_PESO_CADASTRO_PACIENTE = ERRO_CADASTRO_PACIENTE + Constantes.PESO + " do paciente";
-	public static final String ERRO_DATA_CADASTRO_PACIENTE = ERRO_CADASTRO_PACIENTE + Constantes.DATA;
-	public static final String ERRO_PACIENTE_JA_CADASTRADO = ERRO_CADASTRO_PACIENTE + "Paciente ja cadastrado.";
+	public static final String TIPO_SANGUINEO = "Tipo sanguineo";
+	public static final String PACIENTE_JA_CADASTRADO = "Paciente ja cadastrado.";
 	public static final String ERRO_ATUALIZACAO_PACIENTE = "Nao foi possivel atualizar o paciente. ";
 	public static final String ERRO_NOME_ATUALIZACAO_PACIENTE = ERRO_ATUALIZACAO_PACIENTE + Constantes.NOME + " do paciente";
 	public static final String ERRO_PESO_ATUALIZACAO_PACIENTE = ERRO_ATUALIZACAO_PACIENTE + Constantes.PESO + " do paciente";

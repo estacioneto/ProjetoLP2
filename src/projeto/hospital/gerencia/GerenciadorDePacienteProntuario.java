@@ -14,7 +14,9 @@ import projeto.hospital.paciente.Prontuario;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
-import projeto.util.ValidadorDeDados;;
+import projeto.util.ValidadorDeDados;
+
+;
 
 /**
  * Gerencia os pacientes e prontuarios
@@ -57,17 +59,25 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Tipo sanguineo do paciente
 	 * @return Id do paciente cadastrado
 	 */
-	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
-			String tipoSanguineo) {
-		Paciente novoPaciente = new Paciente(nome, data, peso, tipoSanguineo, sexo, genero);
-		if (!pacientes.add(novoPaciente))
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_PACIENTE_JA_CADASTRADO);
+	public long cadastraPaciente(String nome, String data, double peso,
+			String sexo, String genero, String tipoSanguineo) {
+		try {
+			Paciente novoPaciente = new Paciente(nome, data, peso,
+					tipoSanguineo, sexo, genero);
+			if (!pacientes.add(novoPaciente))
+				throw new DadoInvalidoException(
+						MensagensDeErro.PACIENTE_JA_CADASTRADO);
 
-		Long novoId = geradorIdPaciente.getProximoId();
-		novoPaciente.setId(novoId);
-		prontuarios.add(new Prontuario(novoPaciente));
+			Long novoId = geradorIdPaciente.getProximoId();
+			novoPaciente.setId(novoId);
+			prontuarios.add(new Prontuario(novoPaciente));
 
-		return novoId;
+			return novoId;
+
+		} catch (DadoInvalidoException e) {
+			throw new DadoInvalidoException(
+					MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
+		}
 	}
 
 	/**
@@ -128,12 +138,18 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @return Id do paciente
 	 */
 	public Long getProntuario(int posicao) {
-		ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
-		if (posicao >= prontuarios.size())
-			throw new DadoInvalidoException(
-					String.format(MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES, prontuarios.size()));
+		try {
+			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO,
+					posicao);
+			if (posicao >= prontuarios.size())
+				throw new DadoInvalidoException(String.format(
+						MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES,
+						prontuarios.size()));
 
-		Collections.sort(prontuarios);
-		return prontuarios.get(posicao).getId();
+			Collections.sort(prontuarios);
+			return prontuarios.get(posicao).getId();
+		} catch (DadoInvalidoException e) {
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+		}
 	}
 }

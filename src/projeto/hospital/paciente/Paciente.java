@@ -46,9 +46,9 @@ public class Paciente implements Serializable {
 	 */
 	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {
-		ValidadorDeDados.validaString(MensagensDeErro.ERRO_NOME_CADASTRO_PACIENTE, nome);
-		ValidadorDeDados.validaData(MensagensDeErro.ERRO_DATA_CADASTRO_PACIENTE, dataNascimento);
-		ValidadorDeDados.validaPositivo(MensagensDeErro.ERRO_PESO_CADASTRO_PACIENTE, peso);
+		ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_PACIENTE, nome);
+		ValidadorDeDados.validaData(dataNascimento);
+		ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE, peso);
 		ValidadorDeDados.validaTipoSanguineo(tipoSanguineo);
 		ValidadorDeDados.validaSexoBiologico(sexoBiologico);
 		ValidadorDeDados.validaString(Constantes.GENERO, genero);

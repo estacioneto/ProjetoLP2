@@ -2,9 +2,7 @@ package projeto.hospital.funcionarios;
 
 import java.io.Serializable;
 
-import projeto.util.MensagensDeErro;
 import projeto.util.Util;
-import projeto.util.ValidadorDeDados;
 
 /**
  * Entidade Funcionario. Trata-se da entidade generica do sistema que tera todos
@@ -39,17 +37,10 @@ public class Funcionario implements Serializable {
 	 * @param dataNascimento
 	 *            Data de nascimento do funcionario.
 	 */
-	public Funcionario(String nome, String cargo, String matricula, String senha, String dataNascimento) {
-		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.NOME_FUNCIONARIO,
-				nome);
-		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.MATRICULA_FUNCIONARIO,
-				matricula);
-		ValidadorDeDados.validaString(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.SENHA_FUNCIONARIO,
-				senha);
-		ValidadorDeDados.validaData(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO, dataNascimento);
-		
-		ValidadorDeDados.validaCargo(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO, cargo);
-
+	public Funcionario(String nome, String cargo, String matricula,
+			String senha, String dataNascimento) {
+		// Nao eh necessario validar porque no Gerenciador ja eh feito isso
+		// la no gerenciador de funcionarios
 		this.nome = nome;
 		this.cargo = new Cargo(cargo);
 		this.matricula = matricula;
@@ -87,7 +78,6 @@ public class Funcionario implements Serializable {
 	 *            Nome novo do funcionario.
 	 */
 	public void setNome(String nome) {
-		ValidadorDeDados.validaNome(MensagensDeErro.ERRO_ATUALIZA_INFO, nome);
 		this.nome = nome;
 	}
 
@@ -135,7 +125,6 @@ public class Funcionario implements Serializable {
 	 *            Senha nova do funcionario.
 	 */
 	public void setSenha(String senha) {
-		ValidadorDeDados.validaSenha(MensagensDeErro.ERRO_ATUALIZA_INFO, senha);
 		this.senha = senha;
 	}
 
@@ -155,7 +144,6 @@ public class Funcionario implements Serializable {
 	 *            Data de nascimento do funcionario.
 	 */
 	public void setDataNascimento(String dataNascimento) {
-		ValidadorDeDados.validaData(MensagensDeErro.ERRO_ATUALIZA_INFO, dataNascimento);
 		this.dataNascimento = dataNascimento;
 	}
 
