@@ -8,7 +8,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import projeto.exceptions.dados.DadoInvalidoException;
-import projeto.util.Constantes;
 
 /**
  * Se encarrega de metodos mais genericos

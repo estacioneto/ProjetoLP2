@@ -16,7 +16,7 @@ import projeto.util.MensagensDeErro;
  */
 public class ValidadorDeLogica implements Serializable {
 	/**
-	 * Serial gerado automaticamente. 
+	 * Serial gerado automaticamente.
 	 */
 	private static final long serialVersionUID = 8905446257346882767L;
 
@@ -28,7 +28,8 @@ public class ValidadorDeLogica implements Serializable {
 	 */
 	public void validaExclusao(Funcionario funcionario) {
 		if (!funcionario.temPermissao(Permissao.EXCLUIR_FUNCIONARIOS))
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + "O funcionario " + funcionario.getNome() + " nao tem permissao para excluir funcionarios.");
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + "O funcionario "
+					+ funcionario.getNome() + " nao tem permissao para excluir funcionarios.");
 	}
 
 	/**

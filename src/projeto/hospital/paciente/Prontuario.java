@@ -2,8 +2,6 @@ package projeto.hospital.paciente;
 
 import java.io.Serializable;
 
-import projeto.util.ValidadorDeDados;
-
 /**
  * Classe para representar os prontuarios
  * 
@@ -14,7 +12,7 @@ public class Prontuario implements Comparable<Prontuario>, Serializable {
 	 * Serial gerado automaticamente.
 	 */
 	private static final long serialVersionUID = 21463754771L;
-	
+
 	private Paciente paciente;
 
 	/**
@@ -24,7 +22,6 @@ public class Prontuario implements Comparable<Prontuario>, Serializable {
 	 *            Paciente relacionado ao prontuario
 	 */
 	public Prontuario(Paciente paciente) {
-		ValidadorDeDados.validaNaoNulo(paciente);
 		this.paciente = paciente;
 	}
 
@@ -42,6 +39,9 @@ public class Prontuario implements Comparable<Prontuario>, Serializable {
 		return paciente.getId();
 	}
 
+	/**
+	 * Compara prontuarios a partir do nome de seus pacientes
+	 */
 	@Override
 	public int compareTo(Prontuario prontuario) {
 		return this.paciente.getNome().compareTo(prontuario.getPaciente().getNome());

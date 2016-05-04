@@ -10,6 +10,7 @@ import projeto.farmacia.medicamento.Medicamento;
 import projeto.farmacia.medicamento.MedicamentoFactory;
 import projeto.farmacia.medicamento.MedicamentoNomeComparator;
 import projeto.farmacia.medicamento.MedicamentoPrecoComparator;
+import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
 
@@ -62,10 +63,13 @@ public class Farmacia implements Serializable {
 	 *            Categorias do medicamento.
 	 * @return Nome do medicamento.
 	 */
-	public String addMedicamento(String nome, Double preco, int quantidade,
-			String tipoMedicamento, String categorias) {
-		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome,
-				tipoMedicamento, preco, quantidade, categorias);
+	public String addMedicamento(String nome, Double preco, int quantidade, String tipoMedicamento, String categorias) {
+		ValidadorDeDados.validaNome(Constantes.DO_MEDICAMENTO, nome);
+		ValidadorDeDados.validaPositivo(Constantes.PRECO + Constantes.DO_MEDICAMENTO, preco);
+		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO, quantidade);
+		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO, categorias);
+		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome, tipoMedicamento, preco, quantidade,
+				categorias);
 		this.listaMedicamentos.add(medicamento);
 		return nome;
 	}
@@ -79,8 +83,7 @@ public class Farmacia implements Serializable {
 	 *            Nome do medicamento em busca.
 	 * @return
 	 */
-	public Medicamento verificaMedicamentoExistente(String erro,
-			String nomeMedicamento) {
+	public Medicamento pegaMedicamento(String erro, String nomeMedicamento) {
 		for (Medicamento medicamentoAtual : this.listaMedicamentos) {
 			if (medicamentoAtual.getNome().equalsIgnoreCase(nomeMedicamento)) {
 				return medicamentoAtual;
@@ -128,14 +131,10 @@ public class Farmacia implements Serializable {
 	 * @return todos os medicamentos que possuem determinada categoria.
 	 */
 	public String consultaMedicamentoPorCategoria(String categoria) {
-		ValidadorDeDados.validaCategoriaMedicamento(
-				MensagensDeErro.ERRO_CONSULTA_CATEGORIA_INVALIDA_MEDICAMENTO,
-				categoria);
-		List<String> listaNomeMedicamentosCategoria = this.nomesNaLista(this
-				.medicamentoComCategoria(categoria));
+		ValidadorDeDados.validaCategoriaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_CATEGORIA_INVALIDA, categoria);
+		List<String> listaNomeMedicamentosCategoria = this.nomesNaLista(this.medicamentoComCategoria(categoria));
 		if (listaNomeMedicamentosCategoria.isEmpty()) {
-			throw new DadoInvalidoException(
-					MensagensDeErro.ERRO_CONSULTA_CATEGORIA_MEDICAMENTO);
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTOS_NA_CATEGORIA);
 		}
 		return String.join(",", listaNomeMedicamentosCategoria);
 	}

@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import projeto.util.Constantes;
-import projeto.util.MensagensDeErro;
-import projeto.util.ValidadorDeDados;
 
 /**
  * Classe para representar os pacientes
@@ -46,13 +44,6 @@ public class Paciente implements Serializable {
 	 */
 	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {
-		ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_PACIENTE, nome);
-		ValidadorDeDados.validaData(dataNascimento);
-		ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE, peso);
-		ValidadorDeDados.validaTipoSanguineo(tipoSanguineo);
-		ValidadorDeDados.validaSexoBiologico(sexoBiologico);
-		ValidadorDeDados.validaString(Constantes.GENERO, genero);
-
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.peso = peso;
@@ -75,7 +66,6 @@ public class Paciente implements Serializable {
 	 *            Nome
 	 */
 	public void setNome(String nome) {
-		ValidadorDeDados.validaString(MensagensDeErro.ERRO_NOME_ATUALIZACAO_PACIENTE, nome);
 		this.nome = nome;
 	}
 
@@ -91,7 +81,6 @@ public class Paciente implements Serializable {
 	 *            Peso
 	 */
 	public void setPeso(Double peso) {
-		ValidadorDeDados.validaPositivo(MensagensDeErro.ERRO_PESO_ATUALIZACAO_PACIENTE, peso);
 		this.peso = peso;
 	}
 

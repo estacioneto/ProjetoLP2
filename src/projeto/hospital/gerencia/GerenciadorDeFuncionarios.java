@@ -104,7 +104,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 			String novoValor) {
 		try {
 			ValidadorDeDados.validaPadraoMatricula(matricula);
-			ValidadorDeDados.validaAtributoFuncionario(atributo, novoValor);
+			ValidadorDeDados.validaAtualizarAtributoFuncionario(atributo, novoValor);
 			if (!contemFuncionario(matricula)) {
 				throw new OperacaoInvalidaException(MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 			}
@@ -177,7 +177,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 			// Validacao necessaria antes de realizar o cadastro
 			// A ordem importa e a geracao de uma matricula depende de um cargo
 			// valido e uma data valida.
-			ValidadorDeDados.validaNomeFuncionario(nome);
+			ValidadorDeDados.validaNome(Constantes.DO_FUNCIONARIO, nome);
 			ValidadorDeDados.validaCargo(cargo);
 			ValidadorDeDados.validaData(dataNascimento);
 

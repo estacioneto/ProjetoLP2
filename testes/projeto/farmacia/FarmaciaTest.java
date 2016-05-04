@@ -120,23 +120,23 @@ public class FarmaciaTest {
 					"analgesico,antiinflamatorio");
 
 			assertEquals(
-					farmacia.verificaMedicamentoExistente(
-							MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE,
+					farmacia.pegaMedicamento(
+							MensagensDeErro.ERRO_MEDICAMENTO_INEXISTENTE,
 							"Dipirona").toString(), farmacia
 							.getListaMedicamentos().get(3).toString());
 			assertEquals(
-					farmacia.verificaMedicamentoExistente(
-							MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE,
+					farmacia.pegaMedicamento(
+							MensagensDeErro.ERRO_MEDICAMENTO_INEXISTENTE,
 							"Dorflex").toString(), farmacia
 							.getListaMedicamentos().get(4).toString());
 			assertEquals(
-					farmacia.verificaMedicamentoExistente(
-							MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE,
+					farmacia.pegaMedicamento(
+							MensagensDeErro.ERRO_MEDICAMENTO_INEXISTENTE,
 							"Neosaldina").toString(), farmacia
 							.getListaMedicamentos().get(5).toString());
 			assertEquals(
-					farmacia.verificaMedicamentoExistente(
-							MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE,
+					farmacia.pegaMedicamento(
+							MensagensDeErro.ERRO_MEDICAMENTO_INEXISTENTE,
 							"Prednisona").toString(), farmacia
 							.getListaMedicamentos().get(2).toString());
 
