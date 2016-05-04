@@ -104,7 +104,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 			String novoValor) {
 		try {
 			ValidadorDeDados.validaPadraoMatricula(matricula);
-			ValidadorDeDados.validaAtributoFuncionario(atributo, novoValor);
+			ValidadorDeDados.validaAtualizarAtributoFuncionario(atributo, novoValor);
 			if (!contemFuncionario(matricula)) {
 				throw new OperacaoInvalidaException(MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 			}

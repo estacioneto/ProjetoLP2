@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public abstract class Constantes {
-	public static final String STRING_VAZIA = "";
 	public static final String BARRA = "/";
 	public static final String FORMATO_TRES_NUMEROS = "000";
 
@@ -22,6 +21,8 @@ public abstract class Constantes {
 
 	public static final String DO_PACIENTE = " do paciente";
 	public static final String DO_FUNCIONARIO = " do funcionario";
+	public static final String DO_MEDICAMENTO= " do medicamento";
+	
 	public static final String NOME = "Nome";
 	public static final String PRECO = "Preco";
 	public static final String CARGO = "Cargo";

@@ -45,7 +45,11 @@ public class GerenciadorDeMedicamento implements Serializable {
 	 * @return Nome do medicamento.
 	 */
 	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias) {
-		return farmacia.addMedicamento(nome, preco, quantidade, tipo, categorias);
+		try {
+			return farmacia.addMedicamento(nome, preco, quantidade, tipo, categorias);
+		} catch (DadoInvalidoException e) {
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_CADASTRO_MEDICAMENTO + e.getMessage());
+		}
 	}
 
 	/**
@@ -93,6 +97,8 @@ public class GerenciadorDeMedicamento implements Serializable {
 	 */
 	public void atualizaMedicamento(String nomeMedicamento, String atributo, String novoValor) {
 		try {
+			ValidadorDeDados.validaString(atributo, novoValor);
+			ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_MEDICAMENTO, nomeMedicamento);
 			Medicamento medicamento = farmacia.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO,
 					nomeMedicamento);
 			atributo = ValidadorDeDados.capitalizaString(atributo);
@@ -123,7 +129,11 @@ public class GerenciadorDeMedicamento implements Serializable {
 	 * @return lista em String dos medicamentos.
 	 */
 	public String consultaMedCategoria(String categoria) {
-		return farmacia.consultaMedicamentoPorCategoria(categoria);
+		try {
+			return farmacia.consultaMedicamentoPorCategoria(categoria);
+		} catch (DadoInvalidoException e) {
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
+		}
 	}
 
 	/**
@@ -134,7 +144,11 @@ public class GerenciadorDeMedicamento implements Serializable {
 	 * @return Caracteristicas do medicamento.
 	 */
 	public String consultaMedNome(String nome) {
-		return farmacia.pegaMedicamento(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE, nome).toString();
+		try {
+			return farmacia.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_INEXISTENTE, nome).toString();
+		} catch (DadoInvalidoException e) {
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
+		}
 	}
 
 	/**
@@ -146,12 +160,16 @@ public class GerenciadorDeMedicamento implements Serializable {
 	 * @return lista ordenada em String dos medicamentos.
 	 */
 	public String getEstoqueFarmacia(String ordenacao) {
-		if (ordenacao.equalsIgnoreCase("preco")) {
-			return farmacia.consultaMedicamentosOrdemPreco();
-		} else if (ordenacao.equalsIgnoreCase("alfabetica")) {
-			return farmacia.consultaMedicamentosOrdemAlfabetica();
-		} else {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_ORDENCAO_MEDICAMENTO);
+		try {
+			if (ordenacao.equalsIgnoreCase("preco")) {
+				return farmacia.consultaMedicamentosOrdemPreco();
+			} else if (ordenacao.equalsIgnoreCase("alfabetica")) {
+				return farmacia.consultaMedicamentosOrdemAlfabetica();
+			} else {
+				throw new DadoInvalidoException(MensagensDeErro.ERRO_ORDENCAO_MEDICAMENTO);
+			}
+		} catch (DadoInvalidoException e) {
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}
 	}
 }

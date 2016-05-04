@@ -18,18 +18,6 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
  */
 public abstract class ValidadorDeDados {
 	/**
-	 * Verifica se a String eh nula ou vazia.
-	 * 
-	 * @param atributo
-	 *            String a ser analisada.
-	 */
-	public static void validaString(String atributo) {
-		validaNaoNulo(atributo);
-		if (atributo.trim().isEmpty())
-			throw new StringVaziaException();
-	}
-
-	/**
 	 * Verifica se a String eh nula ou vazia. O nomeAtributo eh utilizado para
 	 * uma melhor criacao de excecao caso a String seja invalida.
 	 * 
@@ -199,7 +187,7 @@ public abstract class ValidadorDeDados {
 	 *            Mensagem a ser utilizada caso nao obedeca o padrao.
 	 */
 	public static void validaPadraoMatricula(String matricula) {
-		validaString(MensagensDeErro.MATRICULA_FUNCIONARIO, matricula);
+		validaString(Constantes.MATRICULA + Constantes.DO_FUNCIONARIO, matricula);
 
 		for (int indice = 0; indice < matricula.length(); indice++) {
 			if (!Character.isDigit(matricula.charAt(indice)))
@@ -208,14 +196,14 @@ public abstract class ValidadorDeDados {
 	}
 
 	/**
-	 * Valida atributo de funcionario.
+	 * Valida se atributo de funcionario eh atualizavel.
 	 * 
 	 * @param atributo
 	 *            Titulo do atributo
 	 * @param atributo
 	 *            Atributo a ser analisado.
 	 */
-	public static void validaAtributoFuncionario(String atributo, String valor) {
+	public static void validaAtualizarAtributoFuncionario(String atributo, String valor) {
 		validaString(MensagensDeErro.ATRIBUTO_FUNCIONARIO, atributo);
 		atributo = capitalizaString(atributo);
 
@@ -234,8 +222,8 @@ public abstract class ValidadorDeDados {
 	/**
 	 * Valida um nome.
 	 * 
-	 * @param erroOperacao
-	 *            Mensagem de erro correspondente a operacao.
+	 * @param pessoa
+	 *            Pessoa a quem se refere o nome. Paciente/funcionario
 	 * @param nome
 	 *            Nome a ser analisado.
 	 */

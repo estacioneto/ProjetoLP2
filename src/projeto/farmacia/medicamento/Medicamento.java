@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
-import projeto.util.MensagensDeErro;
-import projeto.util.ValidadorDeDados;
-
 /**
  * Classe que possui o tipo basico que caracteriza todos os medicamentos.
  * 
@@ -37,16 +34,7 @@ public abstract class Medicamento implements Serializable {
 	 * @param categorias
 	 *            Categorias do medicamento
 	 */
-	public Medicamento(String nome, Double preco, int quantidade,
-			String categorias) {
-		ValidadorDeDados.validaString(MensagensDeErro.ERRO_NOME_MEDICAMENTO,
-				nome);
-		ValidadorDeDados.validaPositivo(MensagensDeErro.ERRO_PRECO_MEDICAMENTO,
-				preco);
-		ValidadorDeDados.validaPositivo(
-				MensagensDeErro.ERRO_QUANTIDADE_MEDICAMENTO, quantidade);
-		ValidadorDeDados.validaCategoriaMedicamento(
-				MensagensDeErro.ERRO_CATEGORIA_MEDICAMENTO, categorias);
+	public Medicamento(String nome, Double preco, int quantidade, String categorias) {
 		this.nome = nome;
 		this.preco = preco;
 		this.quantidade = quantidade;
@@ -71,8 +59,6 @@ public abstract class Medicamento implements Serializable {
 	 *            Quantidade nova do medicamento.
 	 */
 	public void setQuantidade(int quantidade) {
-		ValidadorDeDados.validaPositivo(
-				MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO, quantidade);
 		this.quantidade = quantidade;
 	}
 
@@ -82,8 +68,6 @@ public abstract class Medicamento implements Serializable {
 	 *            Preco novo do medicamento.
 	 */
 	public void setPreco(Double preco) {
-		ValidadorDeDados.validaPositivo(
-				MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO, preco);
 		this.preco = preco;
 	}
 
@@ -108,8 +92,7 @@ public abstract class Medicamento implements Serializable {
 	 * @return Categorias do medicamento.
 	 */
 	public String getCategorias() {
-		Set<String> novo = new TreeSet<>(Arrays.asList(this.categorias
-				.split(",")));
+		Set<String> novo = new TreeSet<>(Arrays.asList(this.categorias.split(",")));
 		return String.join(",", novo);
 	}
 
@@ -142,10 +125,8 @@ public abstract class Medicamento implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		String formatacao = String.format(
-				" %s - Preco: R$ %.2f - Disponivel: %d - Categorias: %s",
-				this.getNome(), this.calculaPreco(), this.getQuantidade(),
-				this.getCategorias());
+		String formatacao = String.format(" %s - Preco: R$ %.2f - Disponivel: %d - Categorias: %s", this.getNome(),
+				this.calculaPreco(), this.getQuantidade(), this.getCategorias());
 		return formatacao;
 	}
 
@@ -153,8 +134,7 @@ public abstract class Medicamento implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((categorias == null) ? 0 : categorias.hashCode());
+		result = prime * result + ((categorias == null) ? 0 : categorias.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(preco);
@@ -169,10 +149,8 @@ public abstract class Medicamento implements Serializable {
 	public boolean equals(Object obj) {
 		if (obj instanceof Medicamento) {
 			Medicamento objMedicamento = (Medicamento) obj;
-			if (objMedicamento.calculaPreco() == this.calculaPreco()
-					&& objMedicamento.getNome().equals(this.getNome())
-					&& objMedicamento.getCategorias().equals(
-							this.getCategorias())) {
+			if (objMedicamento.calculaPreco() == this.calculaPreco() && objMedicamento.getNome().equals(this.getNome())
+					&& objMedicamento.getCategorias().equals(this.getCategorias())) {
 				return true;
 			}
 		}
