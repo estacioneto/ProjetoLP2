@@ -49,8 +49,6 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_CONSULTA_CATEGORIA_MEDICAMENTO = "Erro na consulta de medicamentos. Nao ha remedios cadastrados nessa categoria.";
 	public static final String ERRO_CONSULTA_CATEGORIA_INVALIDA_MEDICAMENTO =  "Erro na consulta de medicamentos. Categoria invalida.";
 	public static final String ERRO_CONSULTA_MEDICAMENTO_INEXISTENTE = "Erro na consulta de medicamentos. Medicamento nao cadastrado.";
-	public static final String ERRO_CATEGORIA_INVALIDA = "Erro na consulta de medicamentos. Categoria invalida.";
-	public static final String ERRO_MEDICAMENTO_NAO_CADASTRADO = "Medicamento nao cadastrado.";
 	public static final String ERRO_CONSULTA_MEDICAMENTO = "Erro na consulta de medicamentos. ";
 	public static final String ERRO_ORDENCAO_MEDICAMENTO = ERRO_CONSULTA_MEDICAMENTO + "Tipo de ordenacao invalida.";
 	public static final String ERRO_ATUALIZACAO = "Erro de atualizacao.";

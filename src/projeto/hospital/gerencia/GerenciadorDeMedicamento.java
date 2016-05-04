@@ -63,7 +63,7 @@ public class GerenciadorDeMedicamento implements Serializable {
 	public Object getInfoMedicamento(String atributo, String nomeMedicamento) {
 		Medicamento medicamento = farmacia.verificaMedicamentoExistente(
 				MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO
-						+ MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO,
+						+ MensagensDeErro.ERRO_CATEGORIA_INVALIDA_MEDICAMENTO,
 				nomeMedicamento);
 		switch (ValidadorDeDados.capitalizaString(atributo)) {
 		case Constantes.TIPO:
