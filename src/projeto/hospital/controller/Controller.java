@@ -6,7 +6,7 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.Permissao;
 import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
-import projeto.hospital.gerencia.GerenciadorDeMedicamento;
+import projeto.hospital.gerencia.GerenciadorDeFarmacia;
 import projeto.hospital.gerencia.GerenciadorDePacienteProntuario;
 import projeto.hospital.gerencia.ValidadorDeLogica;
 import projeto.util.MensagensDeErro;
@@ -29,14 +29,14 @@ public class Controller implements Serializable {
 	private Funcionario funcionarioLogado;
 	private GerenciadorDeFuncionarios gerenciadorFuncionarios;
 	private GerenciadorDePacienteProntuario gerenciadorDePaciente;
-	private GerenciadorDeMedicamento gerenciadorDeMedicamento;
+	private GerenciadorDeFarmacia gerenciadorDeMedicamento;
 
 	/**
 	 * Construtor
 	 */
 	public Controller() {
 		this.gerenciadorDePaciente = new GerenciadorDePacienteProntuario();
-		this.gerenciadorDeMedicamento = new GerenciadorDeMedicamento();
+		this.gerenciadorDeMedicamento = new GerenciadorDeFarmacia();
 		this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
 		this.funcionarioLogado = null;
 	}

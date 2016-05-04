@@ -14,7 +14,7 @@ import projeto.util.ValidadorDeDados;
  * @author Thaynan
  *
  */
-public class GerenciadorDeMedicamento implements Serializable {
+public class GerenciadorDeFarmacia implements Serializable {
 
 	/**
 	 * Serial gerado automaticamente.
@@ -25,7 +25,7 @@ public class GerenciadorDeMedicamento implements Serializable {
 	/**
 	 * Construtor
 	 */
-	public GerenciadorDeMedicamento() {
+	public GerenciadorDeFarmacia() {
 		farmacia = new Farmacia();
 	}
 
