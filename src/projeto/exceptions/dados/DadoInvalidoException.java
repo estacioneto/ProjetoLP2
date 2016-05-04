@@ -5,7 +5,7 @@ package projeto.exceptions.dados;
  * 
  * @author Estacio Pereira
  */
-public class DadoInvalidoException extends RuntimeException {
+public class DadoInvalidoException extends Exception {
 
 	/**
 	 * Serial padrao.

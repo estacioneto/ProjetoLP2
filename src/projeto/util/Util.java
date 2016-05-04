@@ -25,7 +25,7 @@ public abstract class Util {
 	 *            Nome do cargo.
 	 * @return Codigo do cargo.
 	 */
-	public static String getCodigoPorCargo(String cargo) {
+	public static String getCodigoPorCargo(String cargo) throws DadoInvalidoException {
 		// Validacao da string ser valida ja deve ter sido feita antes de chamar esse metodo
 
 		if (cargo.equals(Constantes.DIRETOR_GERAL))
@@ -104,7 +104,7 @@ public abstract class Util {
 	 * 
 	 * @return Objeto.
 	 */
-	public static Object getObjeto(String caminho) {
+	public static Object getObjeto(String caminho) throws DadoInvalidoException {
 		ObjectInputStream leitorDeObjetos = null;
 		Object objeto = null;
 		try {
@@ -144,8 +144,9 @@ public abstract class Util {
 	 *            Caminho do arquivo
 	 * @param objeto
 	 *            Objeto a ser escrito
+	 * @throws DadoInvalidoException 
 	 */
-	public static void setObjeto(String caminho, Object objeto) {
+	public static void setObjeto(String caminho, Object objeto) throws DadoInvalidoException {
 		ObjectOutputStream escritorObjeto = null;
 		try {
 			escritorObjeto = new ObjectOutputStream(new FileOutputStream(caminho));

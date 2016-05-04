@@ -84,7 +84,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 			} else
 				throw new DadoInvalidoException(MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + e.getMessage());
 		}
 	}
 
@@ -124,7 +124,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 				break;
 			}
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + e.getMessage());
 		}
 	}
 
@@ -193,7 +193,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 			else
 				throw new OperacaoInvalidaException("Funcionario ja cadastrado!");
 		} catch (DadoInvalidoException | OperacaoInvalidaException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + e.getMessage());
 		}
 	}
 
@@ -267,7 +267,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 			}
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 		} catch (DadoInvalidoException | OperacaoInvalidaException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + e.getMessage());
 		}
 	}
 }
