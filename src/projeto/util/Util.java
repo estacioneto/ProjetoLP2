@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.exceptions.logica.OperacaoInvalidaException;
 
 /**
  * Se encarrega de metodos mais genericos
@@ -146,7 +147,7 @@ public abstract class Util {
 	 *            Objeto a ser escrito
 	 * @throws DadoInvalidoException 
 	 */
-	public static void setObjeto(String caminho, Object objeto) throws DadoInvalidoException {
+	public static void setObjeto(String caminho, Object objeto) throws OperacaoInvalidaException {
 		ObjectOutputStream escritorObjeto = null;
 		try {
 			escritorObjeto = new ObjectOutputStream(new FileOutputStream(caminho));
@@ -159,7 +160,7 @@ public abstract class Util {
 				if (escritorObjeto != null)
 					escritorObjeto.close();
 			} catch (IOException excecao) {
-				throw new DadoInvalidoException("Nao foi possivel fechar o arquivo " + caminho + "!");
+				throw new OperacaoInvalidaException("Nao foi possivel fechar o arquivo " + caminho + "!");
 			}
 		}
 	}

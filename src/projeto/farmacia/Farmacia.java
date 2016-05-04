@@ -62,14 +62,20 @@ public class Farmacia implements Serializable {
 	 * @param categorias
 	 *            Categorias do medicamento.
 	 * @return Nome do medicamento.
+	 * @throws DadoInvalidoException
 	 */
-	public String addMedicamento(String nome, Double preco, int quantidade, String tipoMedicamento, String categorias) {
+	public String addMedicamento(String nome, Double preco, int quantidade,
+			String tipoMedicamento, String categorias)
+			throws DadoInvalidoException {
 		ValidadorDeDados.validaNome(Constantes.DO_MEDICAMENTO, nome);
-		ValidadorDeDados.validaPositivo(Constantes.PRECO + Constantes.DO_MEDICAMENTO, preco);
-		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO, quantidade);
-		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO, categorias);
-		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome, tipoMedicamento, preco, quantidade,
-				categorias);
+		ValidadorDeDados.validaPositivo(Constantes.PRECO
+				+ Constantes.DO_MEDICAMENTO, preco);
+		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE
+				+ Constantes.DO_MEDICAMENTO, quantidade);
+		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS
+				+ Constantes.DO_MEDICAMENTO, categorias);
+		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome,
+				tipoMedicamento, preco, quantidade, categorias);
 		this.listaMedicamentos.add(medicamento);
 		return nome;
 	}
@@ -82,8 +88,10 @@ public class Farmacia implements Serializable {
 	 * @param nomeMedicamento
 	 *            Nome do medicamento em busca.
 	 * @return
+	 * @throws DadoInvalidoException
 	 */
-	public Medicamento pegaMedicamento(String erro, String nomeMedicamento) {
+	public Medicamento pegaMedicamento(String erro, String nomeMedicamento)
+			throws DadoInvalidoException {
 		for (Medicamento medicamentoAtual : this.listaMedicamentos) {
 			if (medicamentoAtual.getNome().equalsIgnoreCase(nomeMedicamento)) {
 				return medicamentoAtual;
@@ -129,12 +137,17 @@ public class Farmacia implements Serializable {
 	 * @param categoria
 	 *            Categoria referente ao medicamento.
 	 * @return todos os medicamentos que possuem determinada categoria.
+	 * @throws DadoInvalidoException
 	 */
-	public String consultaMedicamentoPorCategoria(String categoria) {
-		ValidadorDeDados.validaCategoriaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_CATEGORIA_INVALIDA, categoria);
-		List<String> listaNomeMedicamentosCategoria = this.nomesNaLista(this.medicamentoComCategoria(categoria));
+	public String consultaMedicamentoPorCategoria(String categoria)
+			throws DadoInvalidoException {
+		ValidadorDeDados.validaCategoriaMedicamento(
+				MensagensDeErro.ERRO_MEDICAMENTO_CATEGORIA_INVALIDA, categoria);
+		List<String> listaNomeMedicamentosCategoria = this.nomesNaLista(this
+				.medicamentoComCategoria(categoria));
 		if (listaNomeMedicamentosCategoria.isEmpty()) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTOS_NA_CATEGORIA);
+			throw new DadoInvalidoException(
+					MensagensDeErro.ERRO_CONSULTA_MEDICAMENTOS_NA_CATEGORIA);
 		}
 		return String.join(",", listaNomeMedicamentosCategoria);
 	}

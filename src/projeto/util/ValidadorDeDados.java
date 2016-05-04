@@ -263,19 +263,18 @@ public abstract class ValidadorDeDados {
 	 *            Mensagem de erro correspondente a operacao.
 	 * @param senha
 	 *            Senha a ser analisada.
-	 * @throws StringVaziaException 
-	 * @throws ObjetoNuloException 
+	 * @throws DadoInvalidoException 
 	 */
-	public static void validaSenha(String senha) throws StringVaziaException, ObjetoNuloException {
+	public static void validaSenha(String senha) throws DadoInvalidoException {
 		validaString(Constantes.SENHA, senha);
 
 		if (senha.length() < Constantes.SENHA_TAMANHO_MINIMO || senha.length() > Constantes.SENHA_TAMANHO_MAXIMO)
-			throw new OperacaoInvalidaException("A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
+			throw new DadoInvalidoException("A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
 
 		for (int indice = 0; indice < senha.length(); indice++) {
 			if (!(Character.isAlphabetic(senha.charAt(indice)) || Character.isDigit(senha.charAt(indice))
 					|| senha.charAt(indice) == ' ')) {
-				throw new OperacaoInvalidaException("A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
+				throw new DadoInvalidoException("A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
 			}
 		}
 	}

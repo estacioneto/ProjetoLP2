@@ -3,7 +3,9 @@ package projeto.farmacia.medicamento;
 import java.io.Serializable;
 
 import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.util.Constantes;
+import projeto.util.MensagensDeErro;
 
 /**
  * Classe responsavel por criar um medicamento.
@@ -51,17 +53,22 @@ public class MedicamentoFactory implements Serializable {
 	 */
 	public Medicamento criaMedicamento(String nome, String tipoMedicamento,
 			Double preco, int quantidade, String categorias) {
-		Medicamento medicamento;
-		if (tipoMedicamento.equalsIgnoreCase(Constantes.TIPO_GENERICO)) {
-			medicamento = this.criaMedicamentoGenerico(nome, preco, quantidade,
-					tipoMedicamento, categorias);
-		} else if (tipoMedicamento.equalsIgnoreCase(Constantes.TIPO_REFERENCIA)) {
-			medicamento = this.criaMedicamentoReferencia(nome, preco,
-					quantidade, tipoMedicamento, categorias);
-		} else {
-			throw new DadoInvalidoException(
-					"Nao existe este tipo de medicamento.");
+		try {
+			Medicamento medicamento;
+			if (tipoMedicamento.equalsIgnoreCase(Constantes.TIPO_GENERICO)) {
+				medicamento = this.criaMedicamentoGenerico(nome, preco,
+						quantidade, tipoMedicamento, categorias);
+			} else if (tipoMedicamento
+					.equalsIgnoreCase(Constantes.TIPO_REFERENCIA)) {
+				medicamento = this.criaMedicamentoReferencia(nome, preco,
+						quantidade, tipoMedicamento, categorias);
+			} else {
+				throw new DadoInvalidoException(
+						"Nao existe este tipo de medicamento.");
+			}
+			return medicamento;
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_MEDICAMENTO + e.getMessage());
 		}
-		return medicamento;
 	}
 }

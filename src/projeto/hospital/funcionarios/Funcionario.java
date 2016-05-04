@@ -2,6 +2,8 @@ package projeto.hospital.funcionarios;
 
 import java.io.Serializable;
 
+import projeto.exceptions.dados.ObjetoNuloException;
+import projeto.exceptions.dados.StringVaziaException;
 import projeto.util.Util;
 
 /**
@@ -36,6 +38,8 @@ public class Funcionario implements Serializable {
 	 *            Senha do funcionario.
 	 * @param dataNascimento
 	 *            Data de nascimento do funcionario.
+	 * @throws ObjetoNuloException 
+	 * @throws StringVaziaException 
 	 */
 	public Funcionario(String nome, String cargo, String matricula,
 			String senha, String dataNascimento) {

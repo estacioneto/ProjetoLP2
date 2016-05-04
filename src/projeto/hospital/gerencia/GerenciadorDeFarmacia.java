@@ -3,6 +3,7 @@ package projeto.hospital.gerencia;
 import java.io.Serializable;
 
 import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.farmacia.Farmacia;
 import projeto.farmacia.medicamento.Medicamento;
 import projeto.util.Constantes;
@@ -48,7 +49,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 		try {
 			return farmacia.addMedicamento(nome, preco, quantidade, tipo, categorias);
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CADASTRO_MEDICAMENTO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_MEDICAMENTO + e.getMessage());
 		}
 	}
 
@@ -81,7 +82,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 				throw new DadoInvalidoException();
 			}
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}
 	}
 
@@ -116,7 +117,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 						String.format(MensagensDeErro.ERRO_ATRIBUTO_MEDICAMENTO_NAO_ATUALIZAVEL, atributo));
 			}
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO + e.getMessage());
 		}
 	}
 
@@ -132,7 +133,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 		try {
 			return farmacia.consultaMedicamentoPorCategoria(categoria);
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}
 	}
 
@@ -147,7 +148,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 		try {
 			return farmacia.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_INEXISTENTE, nome).toString();
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}
 	}
 
@@ -169,7 +170,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 				throw new DadoInvalidoException(MensagensDeErro.ERRO_ORDENCAO_MEDICAMENTO);
 			}
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}
 	}
 }

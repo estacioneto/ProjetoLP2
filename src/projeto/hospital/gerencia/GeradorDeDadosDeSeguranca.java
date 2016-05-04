@@ -3,6 +3,7 @@ package projeto.hospital.gerencia;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
+import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.util.Constantes;
 import projeto.util.Util;
 
@@ -51,8 +52,9 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 	 * @param ano
 	 *            Ano de nascimento do funcionario.
 	 * @return Matricula gerada.
+	 * @throws DadoInvalidoException 
 	 */
-	public String geraMatricula(String cargo, String ano) {
+	public String geraMatricula(String cargo, String ano) throws DadoInvalidoException {
 		String matricula = getMatriculaCadastro(cargo, ano, Integer.toString(cadastros));
 		this.novoCadastroEfetuado();
 		return matricula;
@@ -68,8 +70,9 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 	 * @param cadastro
 	 *            Cadastro desejado.
 	 * @return Matricula gerada no determinado cadastro.
+	 * @throws DadoInvalidoException 
 	 */
-	public String getMatriculaCadastro(String cargo, String ano, String cadastro) {
+	public String getMatriculaCadastro(String cargo, String ano, String cadastro) throws DadoInvalidoException {
 		String codigo = Util.getCodigoPorCargo(cargo);
 		String matricula = codigo + ano + formatadorDecimal.format(Integer.parseInt(cadastro));
 		return matricula;

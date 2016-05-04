@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import projeto.exceptions.dados.ObjetoNuloException;
+import projeto.exceptions.dados.StringVaziaException;
 import projeto.util.Constantes;
-import projeto.util.ValidadorDeDados;
 
 /**
  * Classe Cargo. Carrega as permissoes do mesmo.
@@ -28,9 +29,10 @@ public class Cargo implements Serializable {
 	 * 
 	 * @param cargo
 	 *            Cargo do funcionario.
+	 * @throws ObjetoNuloException 
+	 * @throws StringVaziaException 
 	 */
 	public Cargo(String cargo) {
-		ValidadorDeDados.validaString(Constantes.CARGO, cargo);
 		this.nome = cargo;
 
 		this.permissoes = new HashSet<Permissao>();

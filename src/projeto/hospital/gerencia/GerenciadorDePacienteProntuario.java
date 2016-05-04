@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.paciente.GeradorIdPaciente;
 import projeto.hospital.paciente.Paciente;
 import projeto.hospital.paciente.Prontuario;
@@ -76,7 +77,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 			prontuarios.add(new Prontuario(novoPaciente));
 			return novoId;
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
 		}
 	}
 
@@ -90,8 +91,8 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @return Informacao requisitada
 	 */
 	public Object getInfoPaciente(Long idPaciente, String atributo) {
-		ValidadorDeDados.validaPositivo(Constantes.ID, idPaciente);
-		ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
+		//ValidadorDeDados.validaPositivo(Constantes.ID, idPaciente);
+		//ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
 
 		Paciente paciente = buscaPacientePorId(idPaciente);
 
@@ -111,7 +112,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 		case Constantes.IDADE:
 			return paciente.getIdade();
 		default:
-			throw new DadoInvalidoException();
+			throw new OperacaoInvalidaException();
 		}
 	}
 
@@ -127,7 +128,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 			if (paciente.getId().equals(idPaciente))
 				return paciente;
 
-		throw new DadoInvalidoException("Paciente nao encontrado.");
+		throw new OperacaoInvalidaException("Paciente nao encontrado.");
 	}
 
 	/**
@@ -147,7 +148,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 			Collections.sort(prontuarios);
 			return prontuarios.get(posicao).getId();
 		} catch (DadoInvalidoException e) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
 	}
 }
