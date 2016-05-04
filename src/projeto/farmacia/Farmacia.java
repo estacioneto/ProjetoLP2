@@ -65,7 +65,7 @@ public class Farmacia implements Serializable {
 	 */
 	public String addMedicamento(String nome, Double preco, int quantidade, String tipoMedicamento, String categorias) {
 		ValidadorDeDados.validaNome(Constantes.DO_MEDICAMENTO, nome);
-		ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_MEDICAMENTO, preco);
+		ValidadorDeDados.validaPositivo(Constantes.PRECO + Constantes.DO_MEDICAMENTO, preco);
 		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO, quantidade);
 		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO, categorias);
 		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome, tipoMedicamento, preco, quantidade,
