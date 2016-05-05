@@ -225,7 +225,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	public Funcionario acessaSistema(String matricula, String senha) {
 		try {
 			ValidadorDeDados.validaPadraoMatricula(matricula);
-			ValidadorDeDados.validaSenha(senha);
+			ValidadorDeDados.validaString(Constantes.SENHA, senha);
 			if (this.contemFuncionario(matricula))
 				if (this.funcionarios.get(matricula).getSenha().equals(senha))
 					return this.funcionarios.get(matricula);

@@ -73,7 +73,7 @@ public abstract class Constantes {
 	public static final int INDICE_MES = UM;
 	public static final int INDICE_ANO = 2;
 	public static final int QUATRO = 4;
-	public static final int NOME_TAMANHO_MAXIMO = 16;
+	public static final int NOME_TAMANHO_MAXIMO = 50;
 	public static final int SENHA_TAMANHO_MINIMO = 8;
-	public static final int SENHA_TAMANHO_MAXIMO = NOME_TAMANHO_MAXIMO;
+	public static final int SENHA_TAMANHO_MAXIMO = 12;
 }
