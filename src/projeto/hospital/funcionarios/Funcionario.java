@@ -2,6 +2,8 @@ package projeto.hospital.funcionarios;
 
 import java.io.Serializable;
 
+import projeto.hospital.funcionarios.cargos.Cargo;
+import projeto.hospital.funcionarios.cargos.Permissao;
 import projeto.util.Util;
 
 /**
@@ -37,12 +39,12 @@ public class Funcionario implements Serializable {
 	 * @param dataNascimento
 	 *            Data de nascimento do funcionario. 
 	 */
-	public Funcionario(String nome, String cargo, String matricula,
+	public Funcionario(String nome, Cargo cargo, String matricula,
 			String senha, String dataNascimento) {
 		// Nao eh necessario validar porque no Gerenciador ja eh feito isso
 		// la no gerenciador de funcionarios
 		this.nome = nome;
-		this.cargo = new Cargo(cargo);
+		this.cargo = cargo;
 		this.matricula = matricula;
 		this.senha = senha;
 		this.dataNascimento = dataNascimento;
@@ -86,8 +88,17 @@ public class Funcionario implements Serializable {
 	 * 
 	 * @return Nome do cargo do funcionario.
 	 */
-	public String getCargo() {
+	public String getCargoNome() {
 		return cargo.getNome();
+	}
+	
+	/**
+	 * Retorna o cargo do funcionario.
+	 * 
+	 * @return Cargo do funcionario.
+	 */
+	public Cargo getCargo() {
+		return cargo;
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package projeto.hospital.funcionarios;
+package projeto.hospital.funcionarios.cargos;
 
 /**
  * Enumeration com as permissoes dos funcionarios.

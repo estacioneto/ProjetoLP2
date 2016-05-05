@@ -3,10 +3,8 @@ package projeto.hospital.gerencia;
 import java.io.Serializable;
 
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.funcionarios.Cargo;
 import projeto.hospital.funcionarios.Funcionario;
-import projeto.hospital.funcionarios.Permissao;
-import projeto.util.Constantes;
+import projeto.hospital.funcionarios.cargos.Permissao;
 import projeto.util.MensagensDeErro;
 
 /**
@@ -43,8 +41,7 @@ public class ValidadorDeLogica implements Serializable {
 	 *            Funcionario.
 	 */
 	public static void validaOperacao(String mensagem_erro, Permissao operacao, Funcionario funcionario) {
-		String codigo = funcionario.getMatricula().substring(Constantes.ZERO, Constantes.UM);
-		if (!Cargo.getPermissoesPorCodigo(codigo).contains(operacao))
+		if (!funcionario.getCargo().temPermissao(operacao))
 			throw new OperacaoInvalidaException(String.format(mensagem_erro, funcionario.getNome()));
 	}
 }

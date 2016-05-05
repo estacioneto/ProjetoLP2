@@ -11,7 +11,7 @@ import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Funcionario;
 import projeto.hospital.funcionarios.FuncionarioFactory;
-import projeto.hospital.funcionarios.Permissao;
+import projeto.hospital.funcionarios.cargos.Permissao;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
@@ -266,7 +266,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 				case Constantes.NOME:
 					return this.funcionarios.get(matricula).getNome();
 				case Constantes.CARGO:
-					return this.funcionarios.get(matricula).getCargo();
+					return this.funcionarios.get(matricula).getCargoNome();
 				case Constantes.DATA:
 					return this.funcionarios.get(matricula).getDataNascimento();
 				case Constantes.SENHA:

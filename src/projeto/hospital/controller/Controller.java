@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.funcionarios.Funcionario;
-import projeto.hospital.funcionarios.Permissao;
+import projeto.hospital.funcionarios.cargos.Permissao;
 import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
 import projeto.hospital.gerencia.GerenciadorDeFarmacia;
 import projeto.hospital.gerencia.GerenciadorDePacienteProntuario;
