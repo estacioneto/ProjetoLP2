@@ -35,10 +35,12 @@ public class ValidadorDeLogica implements Serializable {
 	/**
 	 * Valida se um funcionario tem a permissao para executar uma operacao
 	 * 
+	 * @param mensagem_erro
+	 *            Mensagem de erro da operacao.
 	 * @param operacao
-	 *            Operacao
+	 *            Operacao a ser validada.
 	 * @param funcionario
-	 *            Funcionario
+	 *            Funcionario.
 	 */
 	public static void validaOperacao(String mensagem_erro, Permissao operacao, Funcionario funcionario) {
 		String codigo = funcionario.getMatricula().substring(Constantes.ZERO, Constantes.UM);

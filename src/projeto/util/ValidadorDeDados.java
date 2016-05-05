@@ -25,10 +25,13 @@ public abstract class ValidadorDeDados {
 	 *            Nome do atributo que carrega a String a ser analisada.
 	 * @param atributo
 	 *            String a ser analisada.
-	 * @throws StringVaziaException 
-	 * @throws ObjetoNuloException 
+	 * @throws StringVaziaException
+	 *             Caso o atributo seja uma String vazia.
+	 * @throws ObjetoNuloException
+	 *             Caso o atributo seja nulo.
 	 */
-	public static void validaString(String erroAtributo, String atributo) throws StringVaziaException, ObjetoNuloException {
+	public static void validaString(String erroAtributo, String atributo)
+			throws StringVaziaException, ObjetoNuloException {
 		validaNaoNulo(erroAtributo, atributo);
 		if (atributo.trim().length() == Constantes.ZERO)
 			throw new StringVaziaException(erroAtributo + " nao pode ser vazio.");
@@ -39,7 +42,8 @@ public abstract class ValidadorDeDados {
 	 * 
 	 * @param atributo
 	 *            Objeto a ser analisado.
-	 * @throws ObjetoNuloException 
+	 * @throws ObjetoNuloException
+	 *             Caso o atributo seja nulo.
 	 */
 	public static void validaNaoNulo(Object atributo) throws ObjetoNuloException {
 		if (atributo == null)
@@ -54,7 +58,8 @@ public abstract class ValidadorDeDados {
 	 *            Nome do atributo que carrega o Objeto a ser analisado.
 	 * @param atributo
 	 *            Objeto a ser analisado.
-	 * @throws ObjetoNuloException 
+	 * @throws ObjetoNuloException
+	 *             Caso o atributo seja nulo.
 	 */
 	public static void validaNaoNulo(String nomeAtributo, Object atributo) throws ObjetoNuloException {
 		if (atributo == null)
@@ -64,11 +69,10 @@ public abstract class ValidadorDeDados {
 	/**
 	 * Verifica se o cargo eh valido de ser cadastrado
 	 * 
-	 * @param erroOperacao
-	 *            Erro que deve ser lancado
 	 * @param cargo
 	 *            Cargo a ser verificado
-	 * @throws DadoInvalidoException 
+	 * @throws DadoInvalidoException
+	 *             Caso o cargo nao exista.
 	 */
 	public static void validaCargo(String cargo) throws DadoInvalidoException {
 		validaString(MensagensDeErro.CARGO_FUNCIONARIO, cargo);
@@ -80,13 +84,14 @@ public abstract class ValidadorDeDados {
 	 * Verifica se a data corresponde ao padrao dd/mm/aaaa e se a mesma eh
 	 * coerente.
 	 * 
-	 * @param erroData
-	 *            Nome do atributo que carrega a data a ser analisada.
 	 * @param data
 	 *            Data a ser analisada.
-	 * @throws StringVaziaException 
-	 * @throws DataInvalidaException 
-	 * @throws ObjetoNuloException 
+	 * @throws StringVaziaException
+	 *             Caso a data seja uma String vazia.
+	 * @throws DataInvalidaException
+	 *             Caso a data seja incoerente.
+	 * @throws ObjetoNuloException
+	 *             Caso a data seja nula.
 	 */
 	public static void validaData(String data) throws StringVaziaException, DataInvalidaException, ObjetoNuloException {
 		validaString(Constantes.DATA, data);
@@ -129,7 +134,8 @@ public abstract class ValidadorDeDados {
 	 *            Nome do atributo
 	 * @param valor
 	 *            valor
-	 * @throws DadoInvalidoException 
+	 * @throws DadoInvalidoException
+	 *             Caso o valor seja negativo.
 	 */
 	public static void validaPositivo(String nomeAtributo, double valor) throws DadoInvalidoException {
 		if (valor < 0)
@@ -143,7 +149,8 @@ public abstract class ValidadorDeDados {
 	 *            Nome do atributo
 	 * @param valor
 	 *            valor
-	 * @throws DadoInvalidoException 
+	 * @throws DadoInvalidoException
+	 *             Caso o valor seja negativo.
 	 */
 	public static void validaPositivo(String nomeAtributo, Long valor) throws DadoInvalidoException {
 		if (valor < 0)
@@ -157,7 +164,8 @@ public abstract class ValidadorDeDados {
 	 *            Nome do atributo
 	 * @param valor
 	 *            valor
-	 * @throws DadoInvalidoException 
+	 * @throws DadoInvalidoException
+	 *             Caso o valor seja negativo.
 	 */
 	public static void validaPositivo(String nomeAtributo, int valor) throws DadoInvalidoException {
 		if (valor < 0)
@@ -169,7 +177,8 @@ public abstract class ValidadorDeDados {
 	 * 
 	 * @param tipoSanguineo
 	 *            tipo sanguineo
-	 * @throws DadoInvalidoException 
+	 * @throws DadoInvalidoException
+	 *             Caso o tipo sanguineo nao exista.
 	 */
 	public static void validaTipoSanguineo(String tipoSanguineo) throws DadoInvalidoException {
 		if (!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipoSanguineo))
@@ -181,7 +190,8 @@ public abstract class ValidadorDeDados {
 	 * 
 	 * @param sexoBiologico
 	 *            sexo biologico
-	 * @throws DadoInvalidoException 
+	 * @throws DadoInvalidoException
+	 *             Caso o sexo biologico seja invalido.
 	 */
 	public static void validaSexoBiologico(String sexoBiologico) throws DadoInvalidoException {
 		if (sexoBiologico == null || !sexoBiologico.toLowerCase().equals(Constantes.MASCULINO)
@@ -196,9 +206,8 @@ public abstract class ValidadorDeDados {
 	 * 
 	 * @param matricula
 	 *            matricula a ser analisada.
-	 * @param mensagemErro
-	 *            Mensagem a ser utilizada caso nao obedeca o padrao.
-	 * @throws DadoInvalidoException 
+	 * @throws DadoInvalidoException
+	 *             Caso a matricula nao siga o padrao.
 	 */
 	public static void validaPadraoMatricula(String matricula) throws DadoInvalidoException {
 		validaString(Constantes.MATRICULA + Constantes.DO_FUNCIONARIO, matricula);
@@ -214,13 +223,17 @@ public abstract class ValidadorDeDados {
 	 * 
 	 * @param atributo
 	 *            Titulo do atributo
-	 * @param atributo
+	 * @param valor
 	 *            Atributo a ser analisado.
-	 * @throws StringVaziaException 
-	 * @throws DataInvalidaException 
-	 * @throws ObjetoNuloException 
+	 * @throws StringVaziaException
+	 *             Caso o atributo ou o valor seja vazio.
+	 * @throws DataInvalidaException
+	 *             Caso o valor seja uma data invalida.
+	 * @throws ObjetoNuloException
+	 *             Caso o atributo ou o valor seja nulo.
 	 */
-	public static void validaAtualizarAtributoFuncionario(String atributo, String valor) throws StringVaziaException, DataInvalidaException, ObjetoNuloException {
+	public static void validaAtualizarAtributoFuncionario(String atributo, String valor)
+			throws StringVaziaException, DataInvalidaException, ObjetoNuloException {
 		validaString(MensagensDeErro.ATRIBUTO_FUNCIONARIO, atributo);
 		atributo = capitalizaString(atributo);
 
@@ -243,8 +256,10 @@ public abstract class ValidadorDeDados {
 	 *            Pessoa a quem se refere o nome. Paciente/funcionario
 	 * @param nome
 	 *            Nome a ser analisado.
-	 * @throws StringVaziaException 
-	 * @throws ObjetoNuloException 
+	 * @throws StringVaziaException
+	 *             Caso algum dado seja uma String vazia.
+	 * @throws ObjetoNuloException
+	 *             Caso algum dado seja nulo.
 	 */
 	public static void validaNome(String pessoa, String nome) throws StringVaziaException, ObjetoNuloException {
 		validaString("Nome" + pessoa, nome);
@@ -259,11 +274,10 @@ public abstract class ValidadorDeDados {
 	/**
 	 * Valida uma nova senha.
 	 * 
-	 * @param erroOperacao
-	 *            Mensagem de erro correspondente a operacao.
 	 * @param senha
 	 *            Senha a ser analisada.
-	 * @throws DadoInvalidoException 
+	 * @throws DadoInvalidoException
+	 *             Caso a senha seja vazia, nula ou nao seguir o padrao.
 	 */
 	public static void validaSenha(String senha) throws DadoInvalidoException {
 		validaString(Constantes.SENHA, senha);
@@ -282,11 +296,13 @@ public abstract class ValidadorDeDados {
 	/**
 	 * Valida uma categoria de medicamentos.
 	 * 
-	 * @param categoria
+	 * @param string
 	 *            Categoria a ser validada.
+	 * @return String capitalizada.
 	 */
 	public static String capitalizaString(String string) {
-		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase() + string.substring(Constantes.UM);
+		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase()
+				+ string.substring(Constantes.UM).toLowerCase();
 	}
 
 	/**
@@ -296,9 +312,11 @@ public abstract class ValidadorDeDados {
 	 *            Mensagem de Erro, caso aconteca uma excessao.
 	 * @param categoria
 	 *            Categorias do medicamento
-	 * @throws DadoInvalidoException 
+	 * @throws DadoInvalidoException
+	 *             Caso a categotia nao exista ou ela seja uma String invalida.
 	 */
-	public static void validaCategoriaMedicamento(String mensagemDeErro, String categoria) throws DadoInvalidoException {
+	public static void validaCategoriaMedicamento(String mensagemDeErro, String categoria)
+			throws DadoInvalidoException {
 		if (categoria == null || categoria.trim().isEmpty()) {
 			throw new DadoInvalidoException(MensagensDeErro.ERRO_CATEGORIA_INVALIDA_MEDICAMENTO);
 		}

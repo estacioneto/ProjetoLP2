@@ -22,7 +22,7 @@ public class LogicaInvalidaException extends RuntimeException {
 	/**
 	 * Construtor com mensagem definida.
 	 * 
-	 * @param menssagem
+	 * @param mensagem
 	 *            Mensagem da Excecao.
 	 */
 	public LogicaInvalidaException(String mensagem) {

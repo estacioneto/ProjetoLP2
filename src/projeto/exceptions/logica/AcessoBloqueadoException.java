@@ -23,7 +23,7 @@ public class AcessoBloqueadoException extends LogicaInvalidaException {
 	/**
 	 * Construtor com mensagem definida.
 	 * 
-	 * @param menssagem
+	 * @param mensagem
 	 *            Mensagem da Excecao.
 	 */
 	public AcessoBloqueadoException(String mensagem) {

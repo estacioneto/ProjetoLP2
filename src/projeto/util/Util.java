@@ -11,8 +11,7 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 
 /**
- * Se encarrega de metodos mais genericos
- * utilizados em varias classes.
+ * Se encarrega de metodos mais genericos utilizados em varias classes.
  * 
  * @author Estacio Pereira
  * @author Eric
@@ -25,9 +24,13 @@ public abstract class Util {
 	 * @param cargo
 	 *            Nome do cargo.
 	 * @return Codigo do cargo.
+	 * 
+	 * @throws DadoInvalidoException
+	 *             Caso o cargo nao exista.
 	 */
 	public static String getCodigoPorCargo(String cargo) throws DadoInvalidoException {
-		// Validacao da string ser valida ja deve ter sido feita antes de chamar esse metodo
+		// Validacao da string ser valida ja deve ter sido feita antes de chamar
+		// esse metodo
 
 		if (cargo.equals(Constantes.DIRETOR_GERAL))
 			return Constantes.CODIGO_DIRETOR;
@@ -98,12 +101,16 @@ public abstract class Util {
 		return formatoSaida;
 	}
 
-	/*
+	/**
 	 * Pega o objeto de um arquivo.
 	 * 
-	 * @param caminho Caminho do arquivo.
+	 * @param caminho
+	 *            Caminho do arquivo.
 	 * 
 	 * @return Objeto.
+	 * 
+	 * @throws DadoInvalidoException
+	 *             Caso o caminho nao exista.
 	 */
 	public static Object getObjeto(String caminho) throws DadoInvalidoException {
 		ObjectInputStream leitorDeObjetos = null;
@@ -120,7 +127,7 @@ public abstract class Util {
 					leitorDeObjetos.close();
 				}
 			} catch (IOException excecao) {
-				throw new DadoInvalidoException("Nao foi possivel fechar o arquivo " + caminho + "!");
+				throw new OperacaoInvalidaException("Nao foi possivel fechar o arquivo " + caminho + "!");
 			}
 		}
 	}
@@ -145,9 +152,8 @@ public abstract class Util {
 	 *            Caminho do arquivo
 	 * @param objeto
 	 *            Objeto a ser escrito
-	 * @throws DadoInvalidoException 
 	 */
-	public static void setObjeto(String caminho, Object objeto) throws OperacaoInvalidaException {
+	public static void setObjeto(String caminho, Object objeto) {
 		ObjectOutputStream escritorObjeto = null;
 		try {
 			escritorObjeto = new ObjectOutputStream(new FileOutputStream(caminho));

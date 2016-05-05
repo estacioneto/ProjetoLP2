@@ -264,7 +264,7 @@ public class Controller implements Serializable {
 	 *            Preco do medicamento.
 	 * @param quantidade
 	 *            Quantidade do medicamento.
-	 * @param categoriasCategorias
+	 * @param categorias
 	 *            do medicamento.
 	 * @return Nome do medicamento.
 	 */
@@ -287,7 +287,7 @@ public class Controller implements Serializable {
 	 * 
 	 * @param atributo
 	 *            Atributo do medicamento.
-	 * @param nomeMedicamento
+	 * @param nome
 	 *            Nome do medicamento.
 	 * @return atributo do medicamento.
 	 */
@@ -298,11 +298,11 @@ public class Controller implements Serializable {
 	/**
 	 * Metodo que atualiza um atributo de um medicamento.
 	 * 
-	 * @param nomeMedicamento
+	 * @param nome
 	 *            Nome do medicamento.
 	 * @param atributo
 	 *            Atributo a ser atualizado.
-	 * @param novoValor
+	 * @param novo
 	 *            Novo valor do atributo
 	 */
 	public void atualizaMedicamento(String nome, String atributo, String novo) {

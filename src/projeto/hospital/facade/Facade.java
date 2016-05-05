@@ -236,7 +236,7 @@ public class Facade {
 	 *            Preco do medicamento.
 	 * @param quantidade
 	 *            Quantidade do medicamento.
-	 * @param categoriasCategorias
+	 * @param categorias
 	 *            do medicamento.
 	 * @return Nome do medicamento.
 	 */
@@ -252,7 +252,7 @@ public class Facade {
 	 * 
 	 * @param atributo
 	 *            Atributo do medicamento.
-	 * @param nomeMedicamento
+	 * @param nome
 	 *            Nome do medicamento.
 	 * @return atributo do medicamento.
 	 */
@@ -263,7 +263,7 @@ public class Facade {
 	/**
 	 * Metodo que atualiza um atributo de um medicamento.
 	 * 
-	 * @param nomeMedicamento
+	 * @param nome
 	 *            Nome do medicamento.
 	 * @param atributo
 	 *            Atributo a ser atualizado.

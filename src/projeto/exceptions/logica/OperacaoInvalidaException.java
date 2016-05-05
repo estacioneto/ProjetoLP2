@@ -22,7 +22,7 @@ public class OperacaoInvalidaException extends LogicaInvalidaException {
 	/**
 	 * Construtor com mensagem definida.
 	 * 
-	 * @param menssagem
+	 * @param mensagem
 	 *            Mensagem da Excecao.
 	 */
 	public OperacaoInvalidaException(String mensagem) {

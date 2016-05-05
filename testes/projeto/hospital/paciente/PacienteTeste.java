@@ -1,7 +1,6 @@
 package projeto.hospital.paciente;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -36,7 +35,7 @@ public class PacienteTeste {
 	 * Testa a criacao de um usuario
 	 */
 	@Test
-	public void cadastroTeste() throws DadoInvalidoException {
+	public void cadastroTeste() {
 		// new Paciente(String nome, String nascimento, double peso, TipoSangue
 		// sangue, SexoBiologico sexo, String Genero)
 		// Todos esses devem dar certo
@@ -112,8 +111,12 @@ public class PacienteTeste {
 	 * Testa se os ids que estao sendo designados sao diferentes
 	 */
 	@Test
-	public void idsTeste() throws DadoInvalidoException {
-		this.resetaPacientes();
+	public void idsTeste() {
+		try {
+			this.resetaPacientes();
+		} catch (DadoInvalidoException e) {
+			fail();
+		}
 		
 		eric.setId(geradorIdPaciente.getProximoId());
 		sergio.setId(geradorIdPaciente.getProximoId());
@@ -138,7 +141,11 @@ public class PacienteTeste {
 	 */
 	@Test
 	public void getsTeste() {
-		this.resetaPacientes();
+		try {
+			this.resetaPacientes();
+		} catch (DadoInvalidoException e) {
+			fail();
+		}
 
 		// get nome
 		assertEquals("Eric", eric.getNome());

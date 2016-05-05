@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import projeto.exceptions.dados.ObjetoNuloException;
-import projeto.exceptions.dados.StringVaziaException;
 import projeto.util.Constantes;
 
 /**
@@ -28,9 +26,7 @@ public class Cargo implements Serializable {
 	 * Construtor padrao.
 	 * 
 	 * @param cargo
-	 *            Cargo do funcionario.
-	 * @throws ObjetoNuloException 
-	 * @throws StringVaziaException 
+	 *            Cargo do funcionario. 
 	 */
 	public Cargo(String cargo) {
 		this.nome = cargo;

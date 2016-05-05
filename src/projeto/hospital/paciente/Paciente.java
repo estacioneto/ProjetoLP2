@@ -39,8 +39,6 @@ public class Paciente implements Serializable {
 	 *            Sexo biologico
 	 * @param genero
 	 *            Genero
-	 * @param id
-	 *            Id
 	 */
 	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {

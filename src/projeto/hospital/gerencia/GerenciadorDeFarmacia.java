@@ -41,7 +41,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 	 *            Preco do medicamento.
 	 * @param quantidade
 	 *            Quantidade do medicamento.
-	 * @param categoriasCategorias
+	 * @param categorias
 	 *            do medicamento.
 	 * @return Nome do medicamento.
 	 */

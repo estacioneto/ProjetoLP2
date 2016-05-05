@@ -22,7 +22,7 @@ public class FarmaciaTest {
 					"analgesico,antitermico");
 			farmacia.addMedicamento("Prednisona", 10.38, 172, "generico",
 					"antitermico");
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			fail();
 		}
 	}
@@ -58,21 +58,21 @@ public class FarmaciaTest {
 					"analgesico,antiemetico,antitermico");
 			fail();
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Nao existe este tipo de medicamento.");
+			assertEquals(e.getMessage(), "Erro no cadastro de medicamento. " + "Nao existe este tipo de medicamento.");
 		}
 		try {
 			farmacia.addMedicamento("Aciclovir", 10.50, 600, "",
 					"analgesico,antitermico");
 			fail();
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Nao existe este tipo de medicamento.");
+			assertEquals(e.getMessage(), "Erro no cadastro de medicamento. " + "Nao existe este tipo de medicamento.");
 		}
 		try {
 			farmacia.addMedicamento("Aciclovir", 10.50, 600, "genericoo",
 					"analgesico,antitermico");
 			fail();
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Nao existe este tipo de medicamento.");
+			assertEquals(e.getMessage(), "Erro no cadastro de medicamento. " + "Nao existe este tipo de medicamento.");
 		}
 	}
 

@@ -38,7 +38,11 @@ public class ProntuarioTeste {
 	 */
 	@Test
 	public void testProntuario() {
-		resetaPacientes();
+		try {
+			resetaPacientes();
+		} catch (DadoInvalidoException e) {
+			fail();
+		}
 		new Prontuario(eric);
 		new Prontuario(estacio);
 		new Prontuario(sergio);
@@ -57,7 +61,11 @@ public class ProntuarioTeste {
 	 */
 	@Test
 	public void testGetPaciente() {
-		resetaPacientes();
+		try {
+			resetaPacientes();
+		} catch (DadoInvalidoException e) {
+			fail();
+		}
 		Prontuario prontuarioEric = new Prontuario(eric);
 		Prontuario prontuarioThaynan = new Prontuario(thaynan);
 		
@@ -70,7 +78,11 @@ public class ProntuarioTeste {
 	 */
 	@Test
 	public void testGetId() {
-		resetaPacientes();
+		try {
+			resetaPacientes();
+		} catch (DadoInvalidoException e) {
+			fail();
+		}
 		Prontuario prontuarioEric = new Prontuario(eric);
 		Prontuario prontuarioThaynan = new Prontuario(thaynan);
 		Prontuario prontuarioSergio = new Prontuario(sergio);
@@ -85,7 +97,11 @@ public class ProntuarioTeste {
 	 */
 	@Test
 	public void testOrdenacao(){
-		resetaPacientes();
+		try {
+			resetaPacientes();
+		} catch (DadoInvalidoException e) {
+			fail();
+		}
 		Prontuario prontuarioEric = new Prontuario(eric);
 		Prontuario prontuarioThaynan = new Prontuario(thaynan);
 		Prontuario prontuarioSergio = new Prontuario(sergio);
