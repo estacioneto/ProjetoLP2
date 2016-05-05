@@ -1,4 +1,4 @@
-package projeto.hospital.gerencia;
+package projeto.hospital.gerencia.funcionario;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -9,9 +9,8 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.dados.ObjetoNuloException;
 import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.funcionarios.Funcionario;
-import projeto.hospital.funcionarios.FuncionarioFactory;
-import projeto.hospital.funcionarios.cargos.Permissao;
+import projeto.hospital.gerencia.ValidadorDeLogica;
+import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
@@ -31,7 +30,6 @@ public class GerenciadorDeFuncionarios implements Serializable {
 
 	private Map<String, Funcionario> funcionarios;
 	private FuncionarioFactory factoryFuncionarios;
-	private ValidadorDeLogica validador;
 	private GeradorDeDadosDeSeguranca geradorDadosSeguranca;
 
 	/**
@@ -40,7 +38,6 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	public GerenciadorDeFuncionarios() {
 		this.funcionarios = new HashMap<String, Funcionario>();
 		this.factoryFuncionarios = new FuncionarioFactory();
-		this.validador = new ValidadorDeLogica();
 		this.geradorDadosSeguranca = new GeradorDeDadosDeSeguranca();
 	}
 
@@ -79,7 +76,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 			if (this.contemFuncionario(matriculaUsuario) && this.contemFuncionario(matriculaFuncionario)) {
 				Funcionario funcionario = this.funcionarios.get(matriculaUsuario);
 
-				this.validador.validaExclusao(funcionario);
+				ValidadorDeLogica.validaExclusao(funcionario);
 				if (funcionario.getSenha().equals(senhaUsuario)) {
 					this.funcionarios.remove(matriculaFuncionario);
 				} else

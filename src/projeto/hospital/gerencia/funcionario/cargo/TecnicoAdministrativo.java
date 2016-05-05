@@ -1,4 +1,4 @@
-package projeto.hospital.funcionarios.cargos;
+package projeto.hospital.gerencia.funcionario.cargo;
 
 import projeto.util.Constantes;
 

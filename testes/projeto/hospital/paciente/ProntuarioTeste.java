@@ -9,6 +9,9 @@ import java.util.TreeSet;
 import org.junit.Test;
 
 import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.hospital.gerencia.prontuario.paciente.GeradorIdPaciente;
+import projeto.hospital.gerencia.prontuario.paciente.Paciente;
+import projeto.hospital.gerencia.prontuario.paciente.Prontuario;
 
 public class ProntuarioTeste {
 	Paciente eric;

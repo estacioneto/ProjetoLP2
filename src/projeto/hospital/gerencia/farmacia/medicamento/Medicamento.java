@@ -1,4 +1,4 @@
-package projeto.farmacia.medicamento;
+package projeto.hospital.gerencia.farmacia.medicamento;
 
 import java.io.Serializable;
 import java.util.Arrays;

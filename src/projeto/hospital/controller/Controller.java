@@ -3,12 +3,13 @@ package projeto.hospital.controller;
 import java.io.Serializable;
 
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.funcionarios.Funcionario;
-import projeto.hospital.funcionarios.cargos.Permissao;
-import projeto.hospital.gerencia.GerenciadorDeFuncionarios;
-import projeto.hospital.gerencia.GerenciadorDeFarmacia;
-import projeto.hospital.gerencia.GerenciadorDePacienteProntuario;
 import projeto.hospital.gerencia.ValidadorDeLogica;
+import projeto.hospital.gerencia.bancodeorgaos.BancoDeOrgaos;
+import projeto.hospital.gerencia.farmacia.GerenciadorDeFarmacia;
+import projeto.hospital.gerencia.funcionario.Funcionario;
+import projeto.hospital.gerencia.funcionario.GerenciadorDeFuncionarios;
+import projeto.hospital.gerencia.funcionario.cargo.Permissao;
+import projeto.hospital.gerencia.prontuario.GerenciadorDePacienteProntuario;
 import projeto.util.MensagensDeErro;
 
 /**
@@ -30,6 +31,7 @@ public class Controller implements Serializable {
 	private GerenciadorDeFuncionarios gerenciadorFuncionarios;
 	private GerenciadorDePacienteProntuario gerenciadorDePaciente;
 	private GerenciadorDeFarmacia gerenciadorDeMedicamento;
+	private BancoDeOrgaos bancoDeOrgaos;
 
 	/**
 	 * Construtor
@@ -38,6 +40,7 @@ public class Controller implements Serializable {
 		this.gerenciadorDePaciente = new GerenciadorDePacienteProntuario();
 		this.gerenciadorDeMedicamento = new GerenciadorDeFarmacia();
 		this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
+		this.bancoDeOrgaos = new BancoDeOrgaos();
 		this.funcionarioLogado = null;
 	}
 

@@ -3,8 +3,8 @@ package projeto.hospital.gerencia;
 import java.io.Serializable;
 
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.funcionarios.Funcionario;
-import projeto.hospital.funcionarios.cargos.Permissao;
+import projeto.hospital.gerencia.funcionario.Funcionario;
+import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.util.MensagensDeErro;
 
 /**
@@ -12,7 +12,7 @@ import projeto.util.MensagensDeErro;
  * 
  * @author Estacio Pereira
  */
-public class ValidadorDeLogica implements Serializable {
+public abstract class ValidadorDeLogica implements Serializable {
 	/**
 	 * Serial gerado automaticamente.
 	 */
@@ -24,7 +24,7 @@ public class ValidadorDeLogica implements Serializable {
 	 * @param funcionario
 	 *            Funcionario que deseja excluir outro.
 	 */
-	public void validaExclusao(Funcionario funcionario) {
+	public static void validaExclusao(Funcionario funcionario) {
 		if (!funcionario.temPermissao(Permissao.EXCLUIR_FUNCIONARIOS))
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + "O funcionario "
 					+ funcionario.getNome() + " nao tem permissao para excluir funcionarios.");

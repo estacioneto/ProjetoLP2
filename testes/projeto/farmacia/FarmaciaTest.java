@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
+import projeto.hospital.gerencia.farmacia.Farmacia;
 import projeto.util.MensagensDeErro;
 
 public class FarmaciaTest {

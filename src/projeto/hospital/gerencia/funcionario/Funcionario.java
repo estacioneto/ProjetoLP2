@@ -1,9 +1,9 @@
-package projeto.hospital.funcionarios;
+package projeto.hospital.gerencia.funcionario;
 
 import java.io.Serializable;
 
-import projeto.hospital.funcionarios.cargos.Cargo;
-import projeto.hospital.funcionarios.cargos.Permissao;
+import projeto.hospital.gerencia.funcionario.cargo.Cargo;
+import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.util.Util;
 
 /**

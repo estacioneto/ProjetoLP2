@@ -1,4 +1,4 @@
-package projeto.hospital.gerencia;
+package projeto.hospital.gerencia.funcionario;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;

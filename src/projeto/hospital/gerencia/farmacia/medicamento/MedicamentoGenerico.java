@@ -1,23 +1,24 @@
-package projeto.farmacia.medicamento;
+package projeto.hospital.gerencia.farmacia.medicamento;
 
 import java.io.Serializable;
 
 /**
- * Classe que representa o tipo medicamento de referencia, seus comportaemntos e
+ * Classe que representa o tipo medicamento generico, seus comportaemntos e
  * estados.
  * 
  * @author Thaynan
  *
  */
-public class MedicamentoReferencia extends Medicamento implements Serializable {
+public class MedicamentoGenerico extends Medicamento implements Serializable {
 
-	
 	/**
 	 * Serial gerado automaticamente.
 	 */
-	private static final long serialVersionUID = 6053591316062764788L;
+	private static final long serialVersionUID = 1556492773719602719L;
 
-	public static final String TIPO = "de Referencia";
+	public static final double DESCONTO_GENERICO = 60;
+	public static final double DESCONTO_GENERICO_PORCENTAGEM = 100;
+	public static final String TIPO = "Generico";
 
 	/**
 	 * Construtor
@@ -31,7 +32,7 @@ public class MedicamentoReferencia extends Medicamento implements Serializable {
 	 * @param categorias
 	 *            Categorias do medicamento
 	 */
-	public MedicamentoReferencia(String nome, double preco, int quantidade,
+	public MedicamentoGenerico(String nome, Double preco, int quantidade,
 			String categorias) {
 		super(nome, preco, quantidade, categorias);
 	}
@@ -48,7 +49,8 @@ public class MedicamentoReferencia extends Medicamento implements Serializable {
 	 */
 	@Override
 	public Double calculaPreco() {
-		return super.getPreco();
+		return super.getPreco() * DESCONTO_GENERICO
+				/ DESCONTO_GENERICO_PORCENTAGEM;
 	}
 
 	/**
@@ -56,8 +58,7 @@ public class MedicamentoReferencia extends Medicamento implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		String formatacao = "Medicamento " + this.getTipo() + ":"
-				+ super.toString();
+		String formatacao = "Medicamento " + TIPO + ":" + super.toString();
 		return formatacao;
 	}
 }

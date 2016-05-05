@@ -1,11 +1,11 @@
-package projeto.hospital.funcionarios;
+package projeto.hospital.gerencia.funcionario;
 
 import java.io.Serializable;
 
-import projeto.hospital.funcionarios.cargos.Cargo;
-import projeto.hospital.funcionarios.cargos.Diretor;
-import projeto.hospital.funcionarios.cargos.Medico;
-import projeto.hospital.funcionarios.cargos.TecnicoAdministrativo;
+import projeto.hospital.gerencia.funcionario.cargo.Cargo;
+import projeto.hospital.gerencia.funcionario.cargo.Diretor;
+import projeto.hospital.gerencia.funcionario.cargo.Medico;
+import projeto.hospital.gerencia.funcionario.cargo.TecnicoAdministrativo;
 import projeto.util.Constantes;
 
 /**

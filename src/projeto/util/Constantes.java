@@ -76,4 +76,5 @@ public abstract class Constantes {
 	public static final int NOME_TAMANHO_MAXIMO = 50;
 	public static final int SENHA_TAMANHO_MINIMO = 8;
 	public static final int SENHA_TAMANHO_MAXIMO = 12;
+	public static final int INDICE_INVALIDO = -1;
 }

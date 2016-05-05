@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.hospital.gerencia.prontuario.paciente.GeradorIdPaciente;
+import projeto.hospital.gerencia.prontuario.paciente.Paciente;
 
 public class PacienteTeste {
 	Paciente eric;

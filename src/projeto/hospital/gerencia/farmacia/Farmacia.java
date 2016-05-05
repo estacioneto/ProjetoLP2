@@ -1,4 +1,4 @@
-package projeto.farmacia;
+package projeto.hospital.gerencia.farmacia;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
-import projeto.farmacia.medicamento.Medicamento;
-import projeto.farmacia.medicamento.MedicamentoFactory;
-import projeto.farmacia.medicamento.MedicamentoNomeComparator;
-import projeto.farmacia.medicamento.MedicamentoPrecoComparator;
+import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
+import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoFactory;
+import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoNomeComparator;
+import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoPrecoComparator;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;

@@ -1,11 +1,10 @@
-package projeto.hospital.gerencia;
+package projeto.hospital.gerencia.farmacia;
 
 import java.io.Serializable;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.farmacia.Farmacia;
-import projeto.farmacia.medicamento.Medicamento;
+import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;

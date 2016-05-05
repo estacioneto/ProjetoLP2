@@ -1,4 +1,4 @@
-package projeto.hospital.gerencia;
+package projeto.hospital.gerencia.prontuario;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import java.util.Set;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.paciente.GeradorIdPaciente;
-import projeto.hospital.paciente.Paciente;
-import projeto.hospital.paciente.Prontuario;
+import projeto.hospital.gerencia.prontuario.paciente.GeradorIdPaciente;
+import projeto.hospital.gerencia.prontuario.paciente.Paciente;
+import projeto.hospital.gerencia.prontuario.paciente.Prontuario;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;

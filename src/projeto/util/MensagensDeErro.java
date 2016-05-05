@@ -42,4 +42,8 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_MEDICAMENTO_NAO_CADASTRADO = "Medicamento nao cadastrado.";
 	public static final String ERRO_CONSULTA_MEDICAMENTO = "Erro na consulta de medicamentos. ";
 	public static final String ERRO_ORDENCAO_MEDICAMENTO = "Tipo de ordenacao invalida.";
+	public static final String ERRO_CADASTRO_ORGAO = "Erro ao cadastrar orgao. ";
+	public static final String ERRO_ORGAO_INEXISTENTE = "Orgao nao cadastrado.";
+	public static final String ERRO_REMOCAO_ORGAO = "Erro ao excluir orgao. ";
+	public static final String ERRO_CONSULTA_ORGAO = "Erro na consulta de orgaos. ";
 }

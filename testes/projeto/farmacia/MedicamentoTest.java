@@ -8,9 +8,9 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import projeto.farmacia.medicamento.Medicamento;
-import projeto.farmacia.medicamento.MedicamentoGenerico;
-import projeto.farmacia.medicamento.MedicamentoReferencia;
+import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
+import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoGenerico;
+import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoReferencia;
 
 public class MedicamentoTest {
 
