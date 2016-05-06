@@ -46,4 +46,5 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_ORGAO_INEXISTENTE = "Orgao nao cadastrado.";
 	public static final String ERRO_REMOCAO_ORGAO = "Erro ao excluir orgao. ";
 	public static final String ERRO_CONSULTA_ORGAO = "Erro na consulta de orgaos. ";
+	public static final String ERRO_ATUALIZA_INFO = "Erro ao atualizar funcionario. ";
 }

@@ -1,9 +1,12 @@
-package projeto.hospital.gerencia.farmacia.medicamento;
+package projeto.hospital.gerencia.farmacia;
 
 import java.io.Serializable;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
+import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
+import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoGenerico;
+import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoReferencia;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 
@@ -23,16 +26,16 @@ public class MedicamentoFactory implements Serializable {
 	// Metodo responsavel pela criacao de um medicamento do tipo Generico.
 	private Medicamento criaMedicamentoGenerico(String nome, Double preco,
 			int quantidade, String tipoMedicamento, String categorias) {
-		Medicamento medicamento = new MedicamentoGenerico(nome, preco,
-				quantidade, categorias);
+		Medicamento medicamento = new Medicamento(nome, preco,
+				quantidade, categorias, new MedicamentoGenerico());
 		return medicamento;
 	}
 
 	// Metodo responsavel pela criacao de um medicamento do tipo de Referencia.
 	private Medicamento criaMedicamentoReferencia(String nome, Double preco,
 			int quantidade, String tipoMedicamento, String categorias) {
-		Medicamento medicamento = new MedicamentoReferencia(nome, preco,
-				quantidade, categorias);
+		Medicamento medicamento = new Medicamento(nome, preco,
+				quantidade, categorias, new MedicamentoReferencia());
 		return medicamento;
 	}
 

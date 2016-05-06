@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import projeto.util.Constantes;
+import projeto.util.ExMetodo;
+import projeto.util.Util;
 
 /**
  * Classe para representar os pacientes
@@ -17,10 +19,13 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	private static final long serialVersionUID = 1697453654897L;
 
 	private String nome;
-	private String dataNascimento;
+	@ExMetodo(metodo=Constantes.FORMATA_DATA_METODO)
+	private String data;
+	@ExMetodo(metodo=Constantes.GET_IDADE_PACIENTE)
+	private int idade;
 	private Double peso;
-	private String tiposanguineo;
-	private String sexoBiologico;
+	private String tipoSanguineo;
+	private String sexo;
 	private String genero;
 	private Long id;
 
@@ -43,10 +48,10 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {
 		this.nome = nome;
-		this.dataNascimento = dataNascimento;
+		this.data = dataNascimento;
 		this.peso = peso;
-		this.tiposanguineo = tipoSanguineo;
-		this.sexoBiologico = sexoBiologico;
+		this.tipoSanguineo = tipoSanguineo;
+		this.sexo = sexoBiologico;
 		this.genero = genero;
 	}
 
@@ -86,21 +91,21 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 * @return Data de nascimento
 	 */
 	public String getDataNascimento() {
-		return dataNascimento;
+		return Util.transformaFormatoData(data);
 	}
 
 	/**
 	 * @return Tipo sanguineo
 	 */
 	public String getTiposanguineo() {
-		return tiposanguineo;
+		return tipoSanguineo;
 	}
 
 	/**
 	 * @return Sexo biologico
 	 */
 	public String getSexoBiologico() {
-		return sexoBiologico;
+		return sexo;
 	}
 
 	/**
@@ -135,7 +140,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	public Integer getIdade() {
 		LocalDate hoje = LocalDate.now();
 
-		String[] nascimento = this.dataNascimento.split(Constantes.BARRA);
+		String[] nascimento = data.split(Constantes.BARRA);
 		int ano = Integer.parseInt(nascimento[Constantes.INDICE_ANO]),
 				mes = Integer.parseInt(nascimento[Constantes.INDICE_MES]),
 				dia = Integer.parseInt(nascimento[Constantes.INDICE_DIA]);
@@ -157,7 +162,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 
 	@Override
 	public String toString() {
-		String saida = "Nome: " + nome + ". ID: " + id + ". Data Nascimento: " + dataNascimento;
+		String saida = "Nome: " + nome + ". ID: " + id + ". Data Nascimento: " + data;
 		return saida;
 	}
 

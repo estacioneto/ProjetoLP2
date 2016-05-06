@@ -3,13 +3,11 @@ package projeto.hospital.gerencia.farmacia;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
-import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoFactory;
-import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoNomeComparator;
-import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoPrecoComparator;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
@@ -29,6 +27,8 @@ public class Farmacia implements Serializable {
 	private static final long serialVersionUID = 4325301404289139683L;
 	private List<Medicamento> listaMedicamentos;
 	private MedicamentoFactory medicamentoFactory;
+	private Comparator<Medicamento> nomeComparator;
+	private Comparator<Medicamento> precoComparator;
 
 	/**
 	 * Cosntrutor da Farmacia.
@@ -36,6 +36,24 @@ public class Farmacia implements Serializable {
 	public Farmacia() {
 		this.listaMedicamentos = new ArrayList<>();
 		this.medicamentoFactory = new MedicamentoFactory();
+		this.inicializaComparators();
+	}
+	
+	private void inicializaComparators() {
+		this.nomeComparator = (Comparator<Medicamento> & Serializable)(Medicamento medicamentoA,
+				Medicamento medicamentoB) -> {
+			return medicamentoA.getNome().compareTo(medicamentoB.getNome());
+		};
+		
+		this.precoComparator = (Comparator<Medicamento> & Serializable)(Medicamento medicamentoA,
+				Medicamento medicamentoB) -> {
+				if (medicamentoA.calculaPreco() > medicamentoB.calculaPreco()) {
+					return 1;
+				} else if (medicamentoA.calculaPreco() < medicamentoB.calculaPreco()) {
+					return -1;
+				}
+				return 0;
+		};
 	}
 
 	/**
@@ -112,8 +130,7 @@ public class Farmacia implements Serializable {
 				medicamentosCategoria.add(medicamentoAtual);
 			}
 		}
-		MedicamentoPrecoComparator comparator = new MedicamentoPrecoComparator();
-		Collections.sort(medicamentosCategoria, comparator);
+		Collections.sort(medicamentosCategoria, this.precoComparator);
 		return medicamentosCategoria;
 	}
 
@@ -153,8 +170,8 @@ public class Farmacia implements Serializable {
 	 */
 	public String consultaMedicamentosOrdemAlfabetica() {
 		List<Medicamento> copiaLista = new ArrayList<>(this.listaMedicamentos);
-		MedicamentoNomeComparator comparator = new MedicamentoNomeComparator();
-		Collections.sort(copiaLista, comparator);
+		//MedicamentoNomeComparator comparator = new MedicamentoNomeComparator();
+		Collections.sort(copiaLista, this.nomeComparator);
 		return String.join(",", this.nomesNaLista(copiaLista));
 	}
 
@@ -165,8 +182,8 @@ public class Farmacia implements Serializable {
 	 */
 	public String consultaMedicamentosOrdemPreco() {
 		List<Medicamento> copiaLista = new ArrayList<>(this.listaMedicamentos);
-		MedicamentoPrecoComparator comparator = new MedicamentoPrecoComparator();
-		Collections.sort(copiaLista, comparator);
+//		MedicamentoPrecoComparator comparator = new MedicamentoPrecoComparator();
+		Collections.sort(copiaLista, this.precoComparator);
 		return String.join(",", this.nomesNaLista(copiaLista));
 	}
 }

@@ -75,6 +75,14 @@ public abstract class Constantes {
 	public static final int QUATRO = 4;
 	public static final int NOME_TAMANHO_MAXIMO = 50;
 	public static final int SENHA_TAMANHO_MINIMO = 8;
+	public static final String FORMATA_DATA_METODO = "getDataNascimento";
+	public static final String GET_IDADE_PACIENTE = "getIdade";
+	public static final String SENHA_PROTEGIDA = "getSenhaProtegida";
+	public static final String GET_CARGO = "getCargoNome";
 	public static final int SENHA_TAMANHO_MAXIMO = 12;
 	public static final int INDICE_INVALIDO = -1;
+	public static final String GET_TIPO_MEDICAMENTO = "getTipo";
+	public static final String CALCULA_PRECO_MEDICAMENTO = "calculaPreco";
+	public static final String GET_QUANTIDADE_MEDICAMENTO = "getQuantidade";
+	public static final String GET_CATEGORIAS_MEDICAMENTO = "getCategorias";
 }

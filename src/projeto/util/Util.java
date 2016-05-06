@@ -6,8 +6,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.exceptions.dados.ObjetoNuloException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 
 /**
@@ -97,7 +101,8 @@ public abstract class Util {
 	 */
 	public static String transformaFormatoData(String dataSistema) {
 		String[] dataQuebrada = dataSistema.split("/");
-		String formatoSaida = String.join("-", dataQuebrada[2], dataQuebrada[1], dataQuebrada[0]);
+		String formatoSaida = String.join("-", dataQuebrada[2],
+				dataQuebrada[1], dataQuebrada[0]);
 		return formatoSaida;
 	}
 
@@ -116,11 +121,13 @@ public abstract class Util {
 		ObjectInputStream leitorDeObjetos = null;
 		Object objeto = null;
 		try {
-			leitorDeObjetos = new ObjectInputStream(new FileInputStream(caminho));
+			leitorDeObjetos = new ObjectInputStream(
+					new FileInputStream(caminho));
 			objeto = leitorDeObjetos.readObject();
 			return objeto;
 		} catch (Exception excecao) {
-			throw new DadoInvalidoException("Arquivo " + caminho + "nao existe!");
+			throw new DadoInvalidoException("Arquivo " + caminho
+					+ "nao existe!");
 		} finally {
 			try {
 				if (leitorDeObjetos != null) {
@@ -156,7 +163,8 @@ public abstract class Util {
 	public static void setObjeto(String caminho, Object objeto) {
 		ObjectOutputStream escritorObjeto = null;
 		try {
-			escritorObjeto = new ObjectOutputStream(new FileOutputStream(caminho));
+			escritorObjeto = new ObjectOutputStream(new FileOutputStream(
+					caminho));
 			escritorObjeto.writeObject(objeto);
 		} catch (Exception excecao) {
 			criaArquivo(caminho);
@@ -198,6 +206,50 @@ public abstract class Util {
 	 * @return String capitalizada.
 	 */
 	public static String capitalizaString(String string) {
-		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase() + string.substring(Constantes.UM);
+		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase()
+				+ string.substring(Constantes.UM);
+	}
+
+	/**
+	 * Formata a String para retornar o nome do atributo. 
+	 * @param string Nome do atributo sem formatacao.
+	 * @return Nome do atributo.
+	 */
+	private static String getNomeCampo(String string) {
+		return string.substring(Constantes.ZERO, Constantes.UM).toLowerCase()
+				+ string.substring(Constantes.UM);
+	}
+
+	/**
+	 * Pega informacao de um determinado objeto.
+	 * 
+	 * @param objeto
+	 *            Objeto a ser usado.
+	 * @param atributo
+	 *            Atributo a ser retornado.
+	 * @param erro
+	 *            Erro caso algo saia errado.
+	 * @return Atributo.
+	 */
+	public static Object getInfo(Object objeto, String atributo, String erro) {
+		Class clazz = objeto.getClass(); // Classe do objeto
+		Field campo; // Campo a ser requisitado.
+		Method metodo; // Metodo possivel de ser invocado.
+		try {
+			campo = clazz.getDeclaredField(Util.getNomeCampo(atributo)); // Pega o campo referente ao atributo.
+			campo.setAccessible(true); // Faz com que seja possivel acessar o campo.
+			if (campo.isAnnotationPresent(ExMetodo.class)) { // Caso precise executar um metodo, executa.
+				ExMetodo anotacao = campo.getAnnotation(ExMetodo.class); // Pega a anotacao do metodo.
+				metodo = clazz.getMethod(anotacao.metodo()); // Pega o metodo.
+				return metodo.invoke(objeto); // Invoca o metodo pelo objeto.
+			}
+			return campo.get(objeto); // Caso nao precise executar nenhum metodo, retorna o proprio campo.
+		} catch (NoSuchFieldException | IllegalArgumentException
+				| IllegalAccessException | NoSuchMethodException
+				| SecurityException e){
+			throw new OperacaoInvalidaException(erro + "Atributo nao valido." + " " + Util.getNomeCampo(atributo) + " " + e.toString() + " " + objeto.getClass()); //Caso o atributo passado nao seja compativel.
+		}catch(InvocationTargetException excecao) {
+			throw new OperacaoInvalidaException(excecao.getCause().getMessage()); // Caso o metodo lance uma excecao.
+		}
 	}
 }

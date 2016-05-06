@@ -2,9 +2,15 @@ package projeto.hospital.gerencia.funcionario;
 
 import java.io.Serializable;
 
+import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
+import projeto.util.Constantes;
+import projeto.util.ExMetodo;
+import projeto.util.MensagensDeErro;
 import projeto.util.Util;
+import projeto.util.ValidadorDeDados;
 
 /**
  * Entidade Funcionario. Trata-se da entidade generica do sistema que tera todos
@@ -20,10 +26,13 @@ public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1948219698630791794L;
 
 	private String nome;
-	private Cargo cargo;
 	private String matricula;
+	@ExMetodo(metodo = Constantes.GET_CARGO)
+	private Cargo cargo;
+	@ExMetodo(metodo = Constantes.SENHA_PROTEGIDA)
 	private String senha;
-	private String dataNascimento;
+	@ExMetodo(metodo = Constantes.FORMATA_DATA_METODO)
+	private String data;
 
 	/**
 	 * Construtor padrao.
@@ -37,7 +46,7 @@ public class Funcionario implements Serializable {
 	 * @param senha
 	 *            Senha do funcionario.
 	 * @param dataNascimento
-	 *            Data de nascimento do funcionario. 
+	 *            Data de nascimento do funcionario.
 	 */
 	public Funcionario(String nome, Cargo cargo, String matricula,
 			String senha, String dataNascimento) {
@@ -47,7 +56,7 @@ public class Funcionario implements Serializable {
 		this.cargo = cargo;
 		this.matricula = matricula;
 		this.senha = senha;
-		this.dataNascimento = dataNascimento;
+		this.data = dataNascimento;
 	}
 
 	/**
@@ -91,7 +100,7 @@ public class Funcionario implements Serializable {
 	public String getCargoNome() {
 		return cargo.getNome();
 	}
-	
+
 	/**
 	 * Retorna o cargo do funcionario.
 	 * 
@@ -145,7 +154,7 @@ public class Funcionario implements Serializable {
 	 * @return Data de nascimento do funcionario.
 	 */
 	public String getDataNascimento() {
-		return Util.transformaFormatoData(this.dataNascimento);
+		return Util.transformaFormatoData(this.data);
 	}
 
 	/**
@@ -153,9 +162,13 @@ public class Funcionario implements Serializable {
 	 * 
 	 * @param dataNascimento
 	 *            Data de nascimento do funcionario.
+	 * @throws DadoInvalidoException
+	 *             Caso a data seja invalida.
 	 */
-	public void setDataNascimento(String dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setDataNascimento(String dataNascimento)
+			throws DadoInvalidoException {
+		ValidadorDeDados.validaData(dataNascimento);
+		this.data = dataNascimento;
 	}
 
 	/**
@@ -167,6 +180,12 @@ public class Funcionario implements Serializable {
 	 */
 	public boolean temPermissao(Permissao permissao) {
 		return this.cargo.temPermissao(permissao);
+	}
+
+	public String getSenhaProtegida() {
+		throw new OperacaoInvalidaException(
+				MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO
+						+ "A senha do funcionario eh protegida.");
 	}
 
 }

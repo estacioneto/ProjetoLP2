@@ -7,6 +7,7 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
+import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
 
 /**
@@ -66,20 +67,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 		try {
 			Medicamento medicamento = farmacia.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO,
 					nomeMedicamento);
-			switch (ValidadorDeDados.capitalizaString(atributo)) {
-			case Constantes.TIPO:
-				return medicamento.getTipo();
-			case Constantes.NOME:
-				return medicamento.getNome();
-			case Constantes.CATEGORIAS:
-				return medicamento.getCategorias();
-			case Constantes.PRECO:
-				return medicamento.calculaPreco();
-			case Constantes.QUANTIDADE:
-				return medicamento.getQuantidade();
-			default:
-				throw new DadoInvalidoException();
-			}
+			return Util.getInfo(medicamento, atributo, MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO);
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}

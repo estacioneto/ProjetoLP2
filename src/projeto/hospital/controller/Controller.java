@@ -167,9 +167,8 @@ public class Controller implements Serializable {
 	 *            Atributo a ser requisitado
 	 * @return Atributo requisitado
 	 */
-	public String getInfoFuncionario(String matricula, String atributo) {
-		return this.gerenciadorFuncionarios.getInfoFuncionario(matricula,
-				atributo);
+	public Object getInfoFuncionario(String matricula, String atributo) {
+		return this.gerenciadorFuncionarios.getInfoFuncionario(matricula, atributo);
 	}
 
 	/**

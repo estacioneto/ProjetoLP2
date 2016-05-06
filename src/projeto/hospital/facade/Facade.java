@@ -107,7 +107,7 @@ public class Facade {
 	 *            Atributo do funcionario.
 	 * @return Informacao do funcionario.
 	 */
-	public String getInfoFuncionario(String matricula, String atributo) {
+	public Object getInfoFuncionario(String matricula, String atributo) {
 		return this.controller.getInfoFuncionario(matricula, atributo);
 	}
 

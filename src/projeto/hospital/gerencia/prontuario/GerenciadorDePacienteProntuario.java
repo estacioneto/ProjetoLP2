@@ -91,24 +91,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 
 		Paciente paciente = buscaPacientePorId(idPaciente);
 
-		switch (atributo) {
-		case Constantes.NOME:
-			return paciente.getNome();
-		case Constantes.DATA:
-			return Util.transformaFormatoData(paciente.getDataNascimento());
-		case Constantes.SEXO:
-			return paciente.getSexoBiologico();
-		case Constantes.GENERO:
-			return paciente.getGenero();
-		case Constantes.TIPOS_SANGUINEO:
-			return paciente.getTiposanguineo();
-		case Constantes.PESO:
-			return paciente.getPeso();
-		case Constantes.IDADE:
-			return paciente.getIdade();
-		default:
-			throw new OperacaoInvalidaException();
-		}
+		return Util.getInfo(paciente, atributo, MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO);
 	}
 
 	/**

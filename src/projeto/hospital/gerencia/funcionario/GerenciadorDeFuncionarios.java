@@ -254,24 +254,12 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 *            Atributo do funcionario.
 	 * @return Informacao do funcionario.
 	 */
-	public String getInfoFuncionario(String matricula, String atributo) {
+	public Object getInfoFuncionario(String matricula, String atributo) {
 		try {
 			ValidadorDeDados.validaPadraoMatricula(matricula);
 			ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
 			if (this.contemFuncionario(matricula)) {
-				switch (Util.capitalizaString(atributo)) {
-				case Constantes.NOME:
-					return this.funcionarios.get(matricula).getNome();
-				case Constantes.CARGO:
-					return this.funcionarios.get(matricula).getCargoNome();
-				case Constantes.DATA:
-					return this.funcionarios.get(matricula).getDataNascimento();
-				case Constantes.SENHA:
-					throw new OperacaoInvalidaException(
-							MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + "A senha do funcionario eh protegida.");
-				default:
-					throw new DadoInvalidoException("Atributo nao valido.");
-				}
+				return Util.getInfo(this.funcionarios.get(matricula), atributo, MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO);
 			}
 			throw new OperacaoInvalidaException(
 					MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
