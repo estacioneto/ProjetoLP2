@@ -3,14 +3,11 @@ package projeto.hospital.controller;
 import java.io.Serializable;
 
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.gerencia.ValidadorDeLogica;
 import projeto.hospital.gerencia.bancodeorgaos.BancoDeOrgaos;
 import projeto.hospital.gerencia.farmacia.GerenciadorDeFarmacia;
 import projeto.hospital.gerencia.funcionario.Funcionario;
 import projeto.hospital.gerencia.funcionario.GerenciadorDeFuncionarios;
-import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.hospital.gerencia.prontuario.GerenciadorDePacienteProntuario;
-import projeto.util.MensagensDeErro;
 
 /**
  * Classe controladora. Gerencia a logica de negocio do sistema delegando
@@ -45,7 +42,7 @@ public class Controller implements Serializable {
 	}
 
 	/**
-	 * Verifica se o usuario tem a permissao para cadastrar e faz o cadastro
+	 * Realiza o cadastro de um funcionario.
 	 * 
 	 * @param nome
 	 *            Nome do usuario a ser cadastrado
@@ -64,12 +61,9 @@ public class Controller implements Serializable {
 			if (!gerenciadorFuncionarios.isEmpty())
 				throw new OperacaoInvalidaException(
 						"Voce precisa estar logado no sistema para realizar cadastros.");
-		} else
-			ValidadorDeLogica.validaOperacao(
-					MensagensDeErro.ERRO_PERMISSAO_CADASTRO_FUNCIONARIO,
-					Permissao.CADASTRAR_FUNCIONARIOS, funcionarioLogado);
+		}
 		return this.gerenciadorFuncionarios.cadastraFuncionario(nome, cargo,
-				dataNascimento);
+				dataNascimento, funcionarioLogado);
 	}
 
 	/**
@@ -219,13 +213,10 @@ public class Controller implements Serializable {
 		if (!estaLogado()) {
 			throw new OperacaoInvalidaException(
 					"Voce precisa estar logado no sistema para realizar cadastros de pacientes.");
-		} else
-			ValidadorDeLogica.validaOperacao(
-					MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
-					Permissao.CADASTRAR_PACIENTES, funcionarioLogado);
+		}
 
 		return this.gerenciadorDePaciente.cadastraPaciente(nome, data, peso,
-				sexo, genero, tipoSanguineo);
+				sexo, genero, tipoSanguineo, funcionarioLogado);
 	}
 
 	/**
@@ -275,12 +266,8 @@ public class Controller implements Serializable {
 		if (!estaLogado())
 			throw new OperacaoInvalidaException(
 					"Voce precisa estar logado no sistema para realizar cadastros.");
-		else
-			ValidadorDeLogica.validaOperacao(
-					MensagensDeErro.ERRO_PERMISSAO_CADASTRO_MEDICAMENTO,
-					Permissao.CADASTRAR_MEDICAMENTO, funcionarioLogado);
 		return gerenciadorDeMedicamento.cadastraMedicamento(nome, tipo, preco,
-				quantidade, categorias);
+				quantidade, categorias, funcionarioLogado);
 	}
 
 	/**

@@ -174,7 +174,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 *            Data de nascimento do funcionario.
 	 * @return Matricula do funcionario cadastrado.
 	 */
-	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
+	public String cadastraFuncionario(String nome, String cargo, String dataNascimento, Funcionario funcionarioLogado) {
 		try {
 			// Validacao necessaria antes de realizar o cadastro
 			// A ordem importa e a geracao de uma matricula depende de um cargo
@@ -187,6 +187,11 @@ public class GerenciadorDeFuncionarios implements Serializable {
 				throw new OperacaoInvalidaException(
 						MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.ERRO_CADASTRO_DIRETOR_FUNCIONARIO);
 
+			if(!this.isEmpty())
+			ValidadorDeLogica.validaOperacao(
+					MensagensDeErro.ERRO_PERMISSAO_CADASTRO_FUNCIONARIO,
+					Permissao.CADASTRAR_FUNCIONARIOS, funcionarioLogado);
+			
 			String matricula = geradorDadosSeguranca.geraMatricula(cargo, getAnoAtual());
 			String senha = geradorDadosSeguranca.geraSenha(matricula, Util.getAnoPorData(dataNascimento));
 			Funcionario funcionario = this.factoryFuncionarios.criaFuncionario(nome, cargo, dataNascimento, matricula,
