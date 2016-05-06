@@ -1,11 +1,8 @@
 package projeto.hospital.gerencia.prontuario;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.TreeMap;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
@@ -28,8 +25,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 */
 	private static final long serialVersionUID = 6385782587198577722L;
 
-	private Set<Paciente> pacientes;
-	private List<Prontuario> prontuarios;
+	private Map<Paciente, Prontuario> pacientes;
 	private GeradorIdPaciente geradorIdPaciente;
 
 	/**
@@ -37,8 +33,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 */
 	public GerenciadorDePacienteProntuario() {
 		geradorIdPaciente = new GeradorIdPaciente();
-		pacientes = new HashSet<Paciente>();
-		prontuarios = new ArrayList<Prontuario>();
+		pacientes = new TreeMap<>();
 	}
 
 	/**
@@ -67,14 +62,14 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 			ValidadorDeDados.validaSexoBiologico(sexo);
 			ValidadorDeDados.validaString(Constantes.GENERO, genero);
 			ValidadorDeDados.validaTipoSanguineo(tipoSanguineo);
-			
+
 			Paciente novoPaciente = new Paciente(nome, data, peso, tipoSanguineo, sexo, genero);
-			if (!pacientes.add(novoPaciente))
+			if (pacientes.containsKey(novoPaciente))
 				throw new DadoInvalidoException(MensagensDeErro.PACIENTE_JA_CADASTRADO);
 
 			Long novoId = geradorIdPaciente.getProximoId();
 			novoPaciente.setId(novoId);
-			prontuarios.add(new Prontuario(novoPaciente));
+			pacientes.put(novoPaciente, new Prontuario(novoPaciente));
 			return novoId;
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
@@ -91,8 +86,8 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @return Informacao requisitada
 	 */
 	public Object getInfoPaciente(Long idPaciente, String atributo) {
-		//ValidadorDeDados.validaPositivo(Constantes.ID, idPaciente);
-		//ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
+		// ValidadorDeDados.validaPositivo(Constantes.ID, idPaciente);
+		// ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
 
 		Paciente paciente = buscaPacientePorId(idPaciente);
 
@@ -124,7 +119,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @return Paciente
 	 */
 	private Paciente buscaPacientePorId(Long idPaciente) {
-		for (Paciente paciente : this.pacientes)
+		for (Paciente paciente : this.pacientes.keySet())
 			if (paciente.getId().equals(idPaciente))
 				return paciente;
 
@@ -138,15 +133,19 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Posicao do prontuario
 	 * @return Id do paciente
 	 */
-	public Long getProntuario(int posicao) {
+	public Long getIdProntuario(int posicao) {
 		try {
 			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
-			if (posicao >= prontuarios.size())
-				throw new DadoInvalidoException(
-						String.format(MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES, prontuarios.size()));
+			
+			int contadorPosicao = 0;
+			for (Paciente paciente : pacientes.keySet()){
+				if (contadorPosicao == posicao)
+					return pacientes.get(paciente).getId();
+				contadorPosicao++;
+			}
 
-			Collections.sort(prontuarios);
-			return prontuarios.get(posicao).getId();
+			throw new DadoInvalidoException(
+					String.format(MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES, pacientes.size()));
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}

@@ -253,7 +253,7 @@ public class Controller implements Serializable {
 	 * @return Id
 	 */
 	public Long getProntuario(int posicao) {
-		return this.gerenciadorDePaciente.getProntuario(posicao);
+		return this.gerenciadorDePaciente.getIdProntuario(posicao);
 	}
 
 	/**

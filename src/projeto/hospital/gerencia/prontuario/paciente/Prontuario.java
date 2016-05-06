@@ -7,7 +7,7 @@ import java.io.Serializable;
  * 
  * @author Eric
  */
-public class Prontuario implements Comparable<Prontuario>, Serializable {
+public class Prontuario implements Serializable {
 	/**
 	 * Serial gerado automaticamente.
 	 */
@@ -37,13 +37,5 @@ public class Prontuario implements Comparable<Prontuario>, Serializable {
 	 */
 	public Long getId() {
 		return paciente.getId();
-	}
-
-	/**
-	 * Compara prontuarios a partir do nome de seus pacientes
-	 */
-	@Override
-	public int compareTo(Prontuario prontuario) {
-		return this.paciente.getNome().compareTo(prontuario.getPaciente().getNome());
 	}
 }

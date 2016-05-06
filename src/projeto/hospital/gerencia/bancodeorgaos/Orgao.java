@@ -1,9 +1,15 @@
 package projeto.hospital.gerencia.bancodeorgaos;
 
+import java.io.Serializable;
+
 import projeto.util.Constantes;
 
-public class Orgao {
-
+public class Orgao implements Serializable {
+	/**
+	 * Id gerado automaticamente 
+	 */
+	private static final long serialVersionUID = -6346901598202920798L;
+	
 	private String nome;
 	private String tipoSanguineo;
 	private int quantidade;

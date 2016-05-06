@@ -10,7 +10,7 @@ import projeto.util.Constantes;
  * 
  * @author Eric
  */
-public class Paciente implements Serializable {
+public class Paciente implements Serializable, Comparable<Paciente> {
 	/**
 	 * Serial gerado automaticamente.
 	 */
@@ -145,6 +145,14 @@ public class Paciente implements Serializable {
 			idade++;
 
 		return idade;
+	}
+
+	/**
+	 * Compara pacientes pelo nome
+	 */
+	@Override
+	public int compareTo(Paciente paciente) {
+		return nome.compareTo(paciente.nome);
 	}
 
 	@Override
