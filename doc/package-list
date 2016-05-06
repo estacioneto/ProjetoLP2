@@ -1,10 +1,15 @@
 projeto.exceptions.dados
 projeto.exceptions.logica
 projeto.farmacia
-projeto.farmacia.medicamento
 projeto.hospital.controller
 projeto.hospital.facade
-projeto.hospital.funcionarios
 projeto.hospital.gerencia
+projeto.hospital.gerencia.bancodeorgaos
+projeto.hospital.gerencia.farmacia
+projeto.hospital.gerencia.farmacia.medicamento
+projeto.hospital.gerencia.funcionario
+projeto.hospital.gerencia.funcionario.cargo
+projeto.hospital.gerencia.prontuario
+projeto.hospital.gerencia.prontuario.paciente
 projeto.hospital.paciente
 projeto.util
