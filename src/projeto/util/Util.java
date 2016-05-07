@@ -235,10 +235,22 @@ public abstract class Util {
 	 */
 	public static Object getInfo(Object objeto, String atributo) throws DadoInvalidoException {
 		Class clazz = objeto.getClass(); // Classe do objeto
-		Field campo; // Campo a ser requisitado.
+		Field campo = null; // Campo a ser requisitado.
 		Method metodo; // Metodo possivel de ser invocado.
+		
+		/*
+		 * Caso o campo nao seja da classe,
+		 * pega o da superclasse.
+		 */
+		do{
+			try{
+				campo = clazz.getDeclaredField(Util.getNomeCampo(atributo)); // Pega o campo referente ao atributo
+			}catch(NoSuchFieldException noField){ 
+				clazz = clazz.getSuperclass(); // Caso o campo nao exista, procura na superclasse.
+			}
+		}while(campo == null);
+		
 		try {
-			campo = clazz.getDeclaredField(Util.getNomeCampo(atributo)); // Pega o campo referente ao atributo.
 			campo.setAccessible(true); // Faz com que seja possivel acessar o campo.
 			if (campo.isAnnotationPresent(ExMetodo.class)) { // Caso precise executar um metodo, executa.
 				ExMetodo anotacao = campo.getAnnotation(ExMetodo.class); // Pega a anotacao do metodo.
@@ -246,7 +258,7 @@ public abstract class Util {
 				return metodo.invoke(objeto); // Invoca o metodo pelo objeto.
 			}
 			return campo.get(objeto); // Caso nao precise executar nenhum metodo, retorna o proprio campo.
-		} catch (NoSuchFieldException | IllegalArgumentException
+		} catch (IllegalArgumentException
 				| IllegalAccessException | NoSuchMethodException
 				| SecurityException e){
 			//Caso o atributo passado nao seja compativel.

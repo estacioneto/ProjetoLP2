@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Thaynan
  *
  */
-public class MedicamentoReferencia implements Serializable, TipoMedicamento {
+public class MedicamentoReferencia extends Medicamento implements Serializable {
 
 	
 	/**
@@ -20,18 +20,26 @@ public class MedicamentoReferencia implements Serializable, TipoMedicamento {
 	public static final String TIPO = "de Referencia";
 
 	/**
+	 * Construtor
+	 * 
+	 * @param nome
+	 *            Nome do medicamento
+	 * @param preco
+	 *            Preco do medicamento
+	 * @param quantidade
+	 *            Quantidade do medicamento
+	 * @param categorias
+	 *            Categorias do medicamento
+	 */
+	public MedicamentoReferencia(String nome, Double preco, int quantidade, String categorias) {
+		super(nome, preco, quantidade, categorias);
+	}
+	
+	/**
 	 * @return Tipo do medicamento.
 	 */
 	public String getTipo() {
 		return TIPO;
-	}
-
-	/**
-	 * @return Preco do medicamento final.
-	 */
-	@Override
-	public Double calculaPreco(Double preco) {
-		return preco;
 	}
 
 	/**
@@ -40,6 +48,6 @@ public class MedicamentoReferencia implements Serializable, TipoMedicamento {
 	@Override
 	public String toString() {
 		String formatacao = "Medicamento " + this.getTipo() + ":";
-		return formatacao;
+		return formatacao + super.toString();
 	}
 }

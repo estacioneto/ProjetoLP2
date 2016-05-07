@@ -26,16 +26,16 @@ public class MedicamentoFactory implements Serializable {
 	// Metodo responsavel pela criacao de um medicamento do tipo Generico.
 	private Medicamento criaMedicamentoGenerico(String nome, Double preco,
 			int quantidade, String tipoMedicamento, String categorias) {
-		Medicamento medicamento = new Medicamento(nome, preco,
-				quantidade, categorias, new MedicamentoGenerico());
+		Medicamento medicamento = new MedicamentoGenerico(nome, preco,
+				quantidade, categorias);
 		return medicamento;
 	}
 
 	// Metodo responsavel pela criacao de um medicamento do tipo de Referencia.
 	private Medicamento criaMedicamentoReferencia(String nome, Double preco,
 			int quantidade, String tipoMedicamento, String categorias) {
-		Medicamento medicamento = new Medicamento(nome, preco,
-				quantidade, categorias, new MedicamentoReferencia());
+		Medicamento medicamento = new MedicamentoReferencia(nome, preco,
+				quantidade, categorias);
 		return medicamento;
 	}
 

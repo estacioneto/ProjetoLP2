@@ -153,20 +153,20 @@ public class MedicamentoTest {
 			assertEquals("Isotretinoina", isotretinoina.getNome());
 			assertEquals("Prednisona", prednisona.getNome());
 
-			assertEquals(8.94, dimeticona.calculaPreco(), 0.01);// Medicamento
+			assertEquals(8.94, dimeticona.getPreco(), 0.01);// Medicamento
 																// generico
 																// desconto 40%
 																// (14.90 * 0.6
 																// = 8.94)
-			assertEquals(7.18, apracur.calculaPreco(), 0.01);
-			assertEquals(47.94, isotretinoina.calculaPreco(), 0.01);// Medicamento
+			assertEquals(7.18, apracur.getPreco(), 0.01);
+			assertEquals(47.94, isotretinoina.getPreco(), 0.01);// Medicamento
 																	// generico
 																	// desconto
 																	// 40%
 																	// (79.90 *
 																	// 0.6 =
 																	// 47.94)
-			assertEquals(6.3, aciclovir.calculaPreco(), 0.01);// Medicamento
+			assertEquals(6.3, aciclovir.getPreco(), 0.01);// Medicamento
 																// generico
 																// desconto 40%
 																// (10.50 * 0.6

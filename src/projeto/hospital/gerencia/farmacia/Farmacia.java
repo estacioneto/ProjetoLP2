@@ -47,9 +47,9 @@ public class Farmacia implements Serializable {
 		
 		this.precoComparator = (Comparator<Medicamento> & Serializable)(Medicamento medicamentoA,
 				Medicamento medicamentoB) -> {
-				if (medicamentoA.calculaPreco() > medicamentoB.calculaPreco()) {
+				if (medicamentoA.getPreco() > medicamentoB.getPreco()) {
 					return 1;
-				} else if (medicamentoA.calculaPreco() < medicamentoB.calculaPreco()) {
+				} else if (medicamentoA.getPreco() < medicamentoB.getPreco()) {
 					return -1;
 				}
 				return 0;

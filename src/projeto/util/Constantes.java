@@ -82,8 +82,8 @@ public abstract class Constantes {
 	public static final String GET_CARGO = "getCargoNome";
 	public static final int SENHA_TAMANHO_MAXIMO = 12;
 	public static final int INDICE_INVALIDO = -1;
-	public static final String GET_TIPO_MEDICAMENTO = "getTipo";
-	public static final String CALCULA_PRECO_MEDICAMENTO = "calculaPreco";
-	public static final String GET_QUANTIDADE_MEDICAMENTO = "getQuantidade";
-	public static final String GET_CATEGORIAS_MEDICAMENTO = "getCategorias";
+	public static final String GET_TIPO = "getTipo";
+	public static final String GET_QUANTIDADE = "getQuantidade";
+	public static final String GET_CATEGORIAS = "getCategorias";
+	public static final String GET_PRECO = "getPreco";
 }
