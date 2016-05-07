@@ -85,12 +85,13 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @return Informacao requisitada
 	 */
 	public Object getInfoPaciente(Long idPaciente, String atributo) {
-		// ValidadorDeDados.validaPositivo(Constantes.ID, idPaciente);
-		// ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
-
-		Paciente paciente = buscaPacientePorId(idPaciente);
-
-		return Util.getInfo(paciente, atributo, MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO);
+		try{
+			Paciente paciente = buscaPacientePorId(idPaciente);
+	
+			return Util.getInfo(paciente, atributo);
+		}catch(DadoInvalidoException e){
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+		}
 	}
 
 	/**

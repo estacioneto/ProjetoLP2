@@ -2,7 +2,7 @@ package projeto.hospital.facade;
 
 import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.controller.Model;
+import projeto.hospital.model.Model;
 import projeto.util.Constantes;
 import projeto.util.Util;
 

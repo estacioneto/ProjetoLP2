@@ -1,5 +1,7 @@
 package projeto.hospital.gerencia.procedimentos;
 
+import java.io.Serializable;
+
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.bancodeorgaos.Orgao;
 import projeto.hospital.gerencia.prontuario.Prontuario;
@@ -11,14 +13,25 @@ import projeto.util.Util;
  * 
  * @author Er1c
  */
-public class Procedimentos {
+public class Procedimentos implements Serializable {
+	/**
+	 * Id gerado automaticamente
+	 */
+	private static final long serialVersionUID = 6731797048997438464L;
+	
 	private final double PRECO_CONSULTA = 350.0;
 	private final double PRECO_CIRURGIA_BARIATRICA = 7600.00;
 	private final double PRECO_REDESIGNICAO_SEXUAL = 9300.00;
 	private final double PRECO_TRANSPLANTE = 12500.00;
 
 	private final double REDUCAO_PESO_BARIATRICA = 15;
-
+	
+	/**
+	 * Construtor
+	 */
+	public Procedimentos(){
+	}
+	
 	/**
 	 * ~ Procedimento de consulta clinica
 	 * 

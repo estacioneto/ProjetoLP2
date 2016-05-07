@@ -230,8 +230,10 @@ public abstract class Util {
 	 * @param erro
 	 *            Erro caso algo saia errado.
 	 * @return Atributo.
+	 * @throws DadoInvalidoException
+	 *             Caso o atributo seja invalido
 	 */
-	public static Object getInfo(Object objeto, String atributo, String erro) {
+	public static Object getInfo(Object objeto, String atributo) throws DadoInvalidoException {
 		Class clazz = objeto.getClass(); // Classe do objeto
 		Field campo; // Campo a ser requisitado.
 		Method metodo; // Metodo possivel de ser invocado.
@@ -247,9 +249,11 @@ public abstract class Util {
 		} catch (NoSuchFieldException | IllegalArgumentException
 				| IllegalAccessException | NoSuchMethodException
 				| SecurityException e){
-			throw new OperacaoInvalidaException(erro + "Atributo nao valido." + " " + Util.getNomeCampo(atributo) + " " + e.toString() + " " + objeto.getClass()); //Caso o atributo passado nao seja compativel.
+			//Caso o atributo passado nao seja compativel.
+			throw new DadoInvalidoException("Atributo nao valido. " + Util.getNomeCampo(atributo) + " "
+					+ e.toString() + " " + objeto.getClass()); 
 		}catch(InvocationTargetException excecao) {
-			throw new OperacaoInvalidaException(excecao.getCause().getMessage()); // Caso o metodo lance uma excecao.
+			throw new DadoInvalidoException(excecao.getCause().getMessage()); // Caso o metodo lance uma excecao.
 		}
 	}
 	
@@ -265,6 +269,8 @@ public abstract class Util {
 	 */
 	public static void validaCompatibilidadeTipoSanguineo(String tipoSanguineoPaciente, String tipoSanguineoOrgao)
 			throws DadoInvalidoException {
+		// Nao eh preciso validar os tipos sanguineos pq isso deve ser feito na
+		// criacao dos orgaos e dos pacientes
 		List<String> tipos = Constantes.TIPOS_SANGUINEOS_VALIDOS;
 		int sanguePaciente = tipos.indexOf(tipoSanguineoPaciente);
 		int sangueOrgao = tipos.indexOf(tipoSanguineoOrgao);

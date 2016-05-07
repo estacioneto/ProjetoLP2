@@ -259,7 +259,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 			ValidadorDeDados.validaPadraoMatricula(matricula);
 			ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
 			if (this.contemFuncionario(matricula)) {
-				return Util.getInfo(this.funcionarios.get(matricula), atributo, MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO);
+				return Util.getInfo(this.funcionarios.get(matricula), atributo);
 			}
 			throw new OperacaoInvalidaException(
 					MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);

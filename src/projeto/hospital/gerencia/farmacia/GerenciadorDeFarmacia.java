@@ -67,7 +67,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 		try {
 			Medicamento medicamento = farmacia.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO,
 					nomeMedicamento);
-			return Util.getInfo(medicamento, atributo, MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO);
+			return Util.getInfo(medicamento, atributo);
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}

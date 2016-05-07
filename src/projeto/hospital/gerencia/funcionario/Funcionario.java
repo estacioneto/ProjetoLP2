@@ -183,9 +183,7 @@ public class Funcionario implements Serializable {
 	}
 
 	public String getSenhaProtegida() {
-		throw new OperacaoInvalidaException(
-				MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO
-						+ "A senha do funcionario eh protegida.");
+		throw new OperacaoInvalidaException("A senha do funcionario eh protegida.");
 	}
 
 }

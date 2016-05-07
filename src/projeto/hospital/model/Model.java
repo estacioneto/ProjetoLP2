@@ -1,4 +1,4 @@
-package projeto.hospital.controller;
+package projeto.hospital.model;
 
 import java.io.Serializable;
 
