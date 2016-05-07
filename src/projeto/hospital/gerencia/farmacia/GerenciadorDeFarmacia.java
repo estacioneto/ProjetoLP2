@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
+import projeto.hospital.gerencia.ValidadorDeLogica;
 import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
+import projeto.hospital.gerencia.funcionario.Funcionario;
+import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
@@ -43,9 +46,13 @@ public class GerenciadorDeFarmacia implements Serializable {
 	 *            Quantidade do medicamento.
 	 * @param categorias
 	 *            do medicamento.
+	 * @param funcionarioLogado funcionario Logado no sistema.
 	 * @return Nome do medicamento.
 	 */
-	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias) {
+	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias, Funcionario funcionarioLogado) {
+		ValidadorDeLogica.validaOperacao(
+				MensagensDeErro.ERRO_PERMISSAO_CADASTRO_MEDICAMENTO,
+				Permissao.CADASTRAR_MEDICAMENTO, funcionarioLogado);
 		try {
 			return farmacia.addMedicamento(nome, preco, quantidade, tipo, categorias);
 		} catch (DadoInvalidoException e) {
