@@ -57,34 +57,28 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Funcionario Logado.
 	 * @return Id do paciente cadastrado
 	 */
-	public long cadastraPaciente(String nome, String data, double peso,
-			String sexo, String genero, String tipoSanguineo,
-			Funcionario funcionarioLogado) {
+	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
+			String tipoSanguineo, Funcionario funcionarioLogado) {
 		try {
 			ValidadorDeDados.validaNome(Constantes.DO_PACIENTE, nome);
 			ValidadorDeDados.validaData(data);
-			ValidadorDeDados.validaPositivo(Constantes.PESO
-					+ Constantes.DO_PACIENTE, peso);
+			ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE, peso);
 			ValidadorDeDados.validaSexoBiologico(sexo);
 			ValidadorDeDados.validaString(Constantes.GENERO, genero);
 			ValidadorDeDados.validaTipoSanguineo(tipoSanguineo);
 
-			ValidadorDeLogica.validaOperacao(
-					MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
+			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
 					Permissao.CADASTRAR_PACIENTES, funcionarioLogado);
-			Paciente novoPaciente = new Paciente(nome, data, peso,
-					tipoSanguineo, sexo, genero);
+			Paciente novoPaciente = new Paciente(nome, data, peso, tipoSanguineo, sexo, genero);
 			if (pacientes.containsKey(novoPaciente))
-				throw new DadoInvalidoException(
-						MensagensDeErro.PACIENTE_JA_CADASTRADO);
+				throw new DadoInvalidoException(MensagensDeErro.PACIENTE_JA_CADASTRADO);
 
 			Long novoId = geradorIdPaciente.getProximoId();
 			novoPaciente.setId(novoId);
 			pacientes.put(novoPaciente, new Prontuario(novoPaciente));
 			return novoId;
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
 		}
 	}
 
@@ -98,11 +92,11 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @return Informacao requisitada
 	 */
 	public Object getInfoPaciente(Long idPaciente, String atributo) {
-		try{
+		try {
 			Paciente paciente = buscaPacientePorId(idPaciente);
-	
+
 			return Util.getInfo(paciente, atributo);
-		}catch(DadoInvalidoException e){
+		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
 	}
@@ -129,24 +123,50 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Posicao do prontuario
 	 * @return Id do paciente
 	 */
-	public Long getIdProntuario(int posicao) {
+	public Long getIdProntuarioPosicao(int posicao) {
 		try {
-			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO,
-					posicao);
+			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
 
-			int contadorPosicao = 0;
-			for (Paciente paciente : pacientes.keySet()) {
-				if (contadorPosicao == posicao)
-					return pacientes.get(paciente).getId();
-				contadorPosicao++;
-			}
-
-			throw new DadoInvalidoException(String.format(
-					MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES,
-					pacientes.size()));
+			return getPacientePosicao(posicao).getId();
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
+	}
+
+	/**
+	 * Pega um prontuario de acordo com sua posicao
+	 * 
+	 * @param posicao
+	 *            Posicao do prontuario a ser recuperado
+	 * @return Prontuario recuperado
+	 */
+	public Prontuario getProntuarioPosicao(int posicao) {
+		try {
+			Paciente paciente = getPacientePosicao(posicao);
+			
+			return this.pacientes.get(paciente);
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException();
+		}
+	}
+
+	/**
+	 * Pega um paciente no set de acordo com sua posicao em ordem alfabetica
+	 * 
+	 * @param posicao
+	 *            Posicao do paciente requerido
+	 * @return Paciente recuperado
+	 * @throws DadoInvalidoException
+	 *             Caso nao haja a posicao requerida
+	 */
+	private Paciente getPacientePosicao(int posicao) throws DadoInvalidoException {
+		int contadorPosicao = 0;
+		for (Paciente paciente : pacientes.keySet()) {
+			if (contadorPosicao == posicao)
+				return paciente;
+			contadorPosicao++;
+		}
+		throw new DadoInvalidoException(
+				String.format(MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES, pacientes.size()));
 	}
 }

@@ -8,7 +8,6 @@ import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.util.Constantes;
 import projeto.util.ExMetodo;
-import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
 

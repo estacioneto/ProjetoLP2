@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.bancodeorgaos.BancoDeOrgaos;
+import projeto.hospital.gerencia.bancodeorgaos.Orgao;
 import projeto.hospital.gerencia.farmacia.GerenciadorDeFarmacia;
 import projeto.hospital.gerencia.funcionario.Funcionario;
 import projeto.hospital.gerencia.funcionario.GerenciadorDeFuncionarios;
+import projeto.hospital.gerencia.procedimentos.GerenciadorProcedimento;
 import projeto.hospital.gerencia.prontuario.GerenciadorDePacienteProntuario;
+import projeto.hospital.gerencia.prontuario.Prontuario;
 
 /**
  * Classe controladora. Gerencia a logica de negocio do sistema delegando
@@ -29,6 +32,7 @@ public class Model implements Serializable {
 	private GerenciadorDePacienteProntuario gerenciadorDePaciente;
 	private GerenciadorDeFarmacia gerenciadorDeMedicamento;
 	private BancoDeOrgaos bancoDeOrgaos;
+	private GerenciadorProcedimento gerenciadorProcedimento;
 
 	/**
 	 * Construtor
@@ -243,7 +247,7 @@ public class Model implements Serializable {
 	 * @return Id
 	 */
 	public Long getProntuario(int posicao) {
-		return this.gerenciadorDePaciente.getIdProntuario(posicao);
+		return this.gerenciadorDePaciente.getIdProntuarioPosicao(posicao);
 	}
 
 	/**
@@ -331,5 +335,11 @@ public class Model implements Serializable {
 	 */
 	public String getEstoqueFarmacia(String ordenacao) {
 		return this.gerenciadorDeMedicamento.getEstoqueFarmacia(ordenacao);
+	}
+	
+	public void realizaProcedimento(String procedimento, String nomeOrgao, int prontuarioPosicao){
+		Prontuario prontuario = gerenciadorDePaciente.getProntuarioPosicao(prontuarioPosicao);
+		Orgao orgao = bancoDeOrgaos.getOrgao(nomeOrgao, prontuario.getPaciente().getTiposanguineo());
+		gerenciadorProcedimento.realizaProcedimento(procedimento, prontuario, orgao);
 	}
 }
