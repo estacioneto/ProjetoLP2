@@ -8,7 +8,6 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.prontuario.paciente.GeradorIdPaciente;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;
-import projeto.hospital.gerencia.prontuario.paciente.Prontuario;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;

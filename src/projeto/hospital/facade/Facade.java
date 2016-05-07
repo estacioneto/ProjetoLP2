@@ -2,7 +2,7 @@ package projeto.hospital.facade;
 
 import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.controller.Controller;
+import projeto.hospital.controller.Model;
 import projeto.util.Constantes;
 import projeto.util.Util;
 
@@ -17,7 +17,7 @@ import projeto.util.Util;
 public class Facade {
 
 	private final String CHAVE_DESBLOQUEIO = "c041ebf8";
-	private Controller controller;
+	private Model controller;
 	private boolean sistemaJaLiberado;
 
 	/**
@@ -36,10 +36,10 @@ public class Facade {
 			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
 		
 		try {
-			this.controller = (Controller) Util
+			this.controller = (Model) Util
 					.getObjeto(Constantes.ARQUIVO_CONTROLLER);
 		} catch (Exception excecao) {
-			this.controller = new Controller();
+			this.controller = new Model();
 			Util.criaArquivo(Constantes.ARQUIVO_CONTROLLER);
 		}
 	}

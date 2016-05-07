@@ -19,14 +19,16 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	private static final long serialVersionUID = 1697453654897L;
 
 	private String nome;
-	@ExMetodo(metodo=Constantes.FORMATA_DATA_METODO)
+	@ExMetodo(metodo = Constantes.FORMATA_DATA_METODO)
 	private String data;
-	@ExMetodo(metodo=Constantes.GET_IDADE_PACIENTE)
+	@ExMetodo(metodo = Constantes.GET_IDADE_PACIENTE)
 	private int idade;
 	private Double peso;
 	private String tipoSanguineo;
 	private String sexo;
 	private String genero;
+	@ExMetodo(metodo = "getGastosPaciente")
+	private double gastos;
 	private Long id;
 
 	/**
@@ -53,6 +55,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.tipoSanguineo = tipoSanguineo;
 		this.sexo = sexoBiologico;
 		this.genero = genero;
+		this.gastos = 0;
 	}
 
 	/**
@@ -150,6 +153,36 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 			idade++;
 
 		return idade;
+	}
+
+	/**
+	 * Registra gastos do paciente em procedimentos
+	 * 
+	 * @param gasto
+	 */
+	public void registraGasto(double gasto) {
+		this.gastos += gasto;
+	}
+
+	/**
+	 * Metodo temporario, provavelmente vai ser usado algo assim
+	 * 
+	 * @return Gastos do paciente
+	 */
+	public String getGastosPaciente() {
+		// TODO mudar isso quando sair os testes
+		return "O paciente ja gastou R$ " + this.gastos + ".";
+	}
+	
+	/**
+	 * Muda o genero do paciente
+	 */
+	public void mudaGenero() {
+		if(this.genero.equalsIgnoreCase(Constantes.MASCULINO))
+			this.genero = Util.capitalizaString(Constantes.FEMININO);
+		
+		else
+			this.genero = Util.capitalizaString(Constantes.MASCULINO);
 	}
 
 	/**

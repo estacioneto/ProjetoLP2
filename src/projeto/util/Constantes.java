@@ -1,6 +1,7 @@
 package projeto.util;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -48,9 +49,9 @@ public abstract class Constantes {
 
 	public static final String DATA_REGEX = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d{2})";
 
-	public static final HashSet<String> TIPOS_SANGUINEOS_VALIDOS = new HashSet<String>(
-			Arrays.asList(new String[] { "A+", "A-", "B+", "B-", "AB+", "AB-",
-					"O-", "O+" }));
+	public static final ArrayList<String> TIPOS_SANGUINEOS_VALIDOS = new ArrayList<String>(
+			Arrays.asList(new String[] { "O-", "O+", "B-", "B+", "A-", "A+",
+					"AB-", "AB+" }));
 	public static final HashSet<String> CATEGORIAS_MEDICAMENTOS = new HashSet<String>(
 			Arrays.asList(new String[] { "analgesico", "antibiotico",
 					"antitermico", "antiinflamatorio", "hormonal",

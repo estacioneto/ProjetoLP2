@@ -20,7 +20,7 @@ import projeto.util.MensagensDeErro;
  * @author Eric
  * @author Thaynan
  */
-public class Controller implements Serializable {
+public class Model implements Serializable {
 
 	/**
 	 * Serial gerado automaticamente.
@@ -36,7 +36,7 @@ public class Controller implements Serializable {
 	/**
 	 * Construtor
 	 */
-	public Controller() {
+	public Model() {
 		this.gerenciadorDePaciente = new GerenciadorDePacienteProntuario();
 		this.gerenciadorDeMedicamento = new GerenciadorDeFarmacia();
 		this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();

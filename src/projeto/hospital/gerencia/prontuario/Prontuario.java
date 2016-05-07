@@ -1,6 +1,10 @@
-package projeto.hospital.gerencia.prontuario.paciente;
+package projeto.hospital.gerencia.prontuario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import projeto.hospital.gerencia.prontuario.paciente.Paciente;
 
 /**
  * Classe para representar os prontuarios
@@ -14,6 +18,7 @@ public class Prontuario implements Serializable {
 	private static final long serialVersionUID = 21463754771L;
 
 	private Paciente paciente;
+	private List<String> procedimentosRealizados;
 
 	/**
 	 * Construtor
@@ -23,6 +28,7 @@ public class Prontuario implements Serializable {
 	 */
 	public Prontuario(Paciente paciente) {
 		this.paciente = paciente;
+		this.procedimentosRealizados = new ArrayList<>();
 	}
 
 	/**
@@ -37,5 +43,14 @@ public class Prontuario implements Serializable {
 	 */
 	public Long getId() {
 		return paciente.getId();
+	}
+
+	/**
+	 * Registra um procedimento realizado no paciente
+	 * 
+	 * @param procedimentoRealizado
+	 */
+	public void registraProcedimento(String procedimentoRealizado) {
+		this.procedimentosRealizados.add(procedimentoRealizado);
 	}
 }
