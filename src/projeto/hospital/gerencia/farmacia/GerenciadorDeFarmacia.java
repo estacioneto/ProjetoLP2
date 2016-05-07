@@ -97,19 +97,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 			Medicamento medicamento = farmacia.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO,
 					nomeMedicamento);
 			atributo = ValidadorDeDados.capitalizaString(atributo);
-			switch (atributo) {
-			case Constantes.PRECO:
-				Double novoPreco = Double.parseDouble(novoValor);
-				medicamento.setPreco(novoPreco);
-				break;
-			case Constantes.QUANTIDADE:
-				Integer novaQtd = Integer.parseInt(novoValor);
-				medicamento.setQuantidade(novaQtd);
-				break;
-			default:
-				throw new DadoInvalidoException(
-						String.format(MensagensDeErro.ERRO_ATRIBUTO_MEDICAMENTO_NAO_ATUALIZAVEL, atributo));
-			}
+			Util.atualizaInfo(medicamento, atributo, novoValor, String.format(MensagensDeErro.ERRO_ATRIBUTO_MEDICAMENTO_NAO_ATUALIZAVEL, atributo));
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO + e.getMessage());
 		}

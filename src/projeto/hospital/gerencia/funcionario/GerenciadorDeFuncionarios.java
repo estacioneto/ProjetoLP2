@@ -115,16 +115,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 					|| funcionarioLogado.temPermissao(Permissao.ATUALIZAR_INFORMACOES_FUNCIONARIOS)))
 				throw new OperacaoInvalidaException(
 						MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + MensagensDeErro.PERMISSAO_NEGADA_ATUALIZACAO);
-			switch (Util.capitalizaString(atributo)) {
-			case Constantes.NOME:
-				this.funcionarios.get(matricula).setNome(novoValor);
-				break;
-			case Constantes.DATA:
-				this.funcionarios.get(matricula).setDataNascimento(novoValor);
-				break;
-			default:
-				break;
-			}
+			Util.atualizaInfo(this.funcionarios.get(matricula), atributo, novoValor, Constantes.FUNCIONARIO_NAO_ATUALIZAVEL);
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + e.getMessage());
 		}

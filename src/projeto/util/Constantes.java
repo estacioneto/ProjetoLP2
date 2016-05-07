@@ -86,4 +86,10 @@ public abstract class Constantes {
 	public static final String GET_QUANTIDADE = "getQuantidade";
 	public static final String GET_CATEGORIAS = "getCategorias";
 	public static final String GET_PRECO = "getPreco";
+	public static final String GET_NOME = "getNome";
+	public static final String SET_NOME = "setNome";
+	public static final String SET_DATA = "setData";
+	public static final String FUNCIONARIO_NAO_ATUALIZAVEL = "Atributo nao atualizavel.";
+	public static final String SET_PRECO = "setPreco";
+	public static final String SET_QUANTIDADE = "setQuantidade";
 }

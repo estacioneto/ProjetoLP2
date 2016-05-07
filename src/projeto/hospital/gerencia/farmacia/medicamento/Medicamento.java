@@ -23,12 +23,13 @@ public class Medicamento implements Serializable {
 	// Para pegar a informacao da subclasse, ela tem que conhecer os seus
 	// atributos.
 	private String nome;
+	@ExMetodo(get = Constantes.GET_QUANTIDADE, set = Constantes.SET_QUANTIDADE)
 	private int quantidade;
-	@ExMetodo(metodo = Constantes.GET_CATEGORIAS)
+	@ExMetodo(get = Constantes.GET_CATEGORIAS)
 	private String categorias;
-	@ExMetodo(metodo = Constantes.GET_TIPO)
+	@ExMetodo(get = Constantes.GET_TIPO)
 	private String tipo;
-	@ExMetodo(metodo = Constantes.GET_PRECO)
+	@ExMetodo(get = Constantes.GET_PRECO, set = Constantes.SET_PRECO)
 	private Double preco;
 
 	/**
@@ -82,6 +83,15 @@ public class Medicamento implements Serializable {
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
+	
+	/**
+	 * 
+	 * @param quantidade
+	 *            Quantidade nova do medicamento.
+	 */
+	public void setQuantidade(String quantidade) {
+		this.quantidade = Integer.parseInt(quantidade);
+	}
 
 	/**
 	 * 
@@ -90,6 +100,15 @@ public class Medicamento implements Serializable {
 	 */
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+	
+	/**
+	 * 
+	 * @param preco
+	 *            Preco novo do medicamento.
+	 */
+	public void setPreco(String preco) {
+		this.setPreco(Double.parseDouble(preco));
 	}
 
 	/**

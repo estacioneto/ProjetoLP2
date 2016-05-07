@@ -19,15 +19,15 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	private static final long serialVersionUID = 1697453654897L;
 
 	private String nome;
-	@ExMetodo(metodo = Constantes.FORMATA_DATA_METODO)
+	@ExMetodo(get = Constantes.FORMATA_DATA_METODO)
 	private String data;
-	@ExMetodo(metodo = Constantes.GET_IDADE_PACIENTE)
+	@ExMetodo(get = Constantes.GET_IDADE_PACIENTE)
 	private int idade;
 	private Double peso;
 	private String tipoSanguineo;
 	private String sexo;
 	private String genero;
-	@ExMetodo(metodo = "getGastosPaciente")
+	@ExMetodo(get = "getGastosPaciente")
 	private double gastos;
 	private Long id;
 

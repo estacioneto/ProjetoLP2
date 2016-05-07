@@ -24,13 +24,14 @@ public class Funcionario implements Serializable {
 	 */
 	private static final long serialVersionUID = 1948219698630791794L;
 
+	@ExMetodo(get = Constantes.GET_NOME, set = Constantes.SET_NOME)
 	private String nome;
 	private String matricula;
-	@ExMetodo(metodo = Constantes.GET_CARGO)
+	@ExMetodo(get = Constantes.GET_CARGO)
 	private Cargo cargo;
-	@ExMetodo(metodo = Constantes.SENHA_PROTEGIDA)
+	@ExMetodo(get = Constantes.SENHA_PROTEGIDA)
 	private String senha;
-	@ExMetodo(metodo = Constantes.FORMATA_DATA_METODO)
+	@ExMetodo(get = Constantes.FORMATA_DATA_METODO, set = Constantes.SET_DATA)
 	private String data;
 
 	/**
@@ -164,7 +165,7 @@ public class Funcionario implements Serializable {
 	 * @throws DadoInvalidoException
 	 *             Caso a data seja invalida.
 	 */
-	public void setDataNascimento(String dataNascimento)
+	public void setData(String dataNascimento)
 			throws DadoInvalidoException {
 		ValidadorDeDados.validaData(dataNascimento);
 		this.data = dataNascimento;

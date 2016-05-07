@@ -48,6 +48,11 @@ public class MedicamentoGenerico extends Medicamento implements Serializable {
 		super.setPreco(preco * DESCONTO_GENERICO / DESCONTO_GENERICO_PORCENTAGEM);
 	}
 
+	@Override
+	public void setPreco(String preco) {
+		this.setPreco(Double.parseDouble(preco));
+	}
+
 	/**
 	 * @return caracteristicas do medicamento.
 	 */
