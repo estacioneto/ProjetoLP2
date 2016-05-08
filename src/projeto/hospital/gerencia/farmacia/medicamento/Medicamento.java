@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import projeto.util.ConstantesReflection;
-import projeto.util.ExMetodo;
+import projeto.util.MetodoAssociado;
 
 /**
  * Classe que possui o tipo basico que caracteriza todos os medicamentos.
@@ -22,15 +22,15 @@ public class Medicamento implements Serializable {
 	private static final long serialVersionUID = -7166091567180515070L;
 	// Para pegar a informacao da subclasse, ela tem que conhecer os seus
 	// atributos.
-	@ExMetodo(get = ConstantesReflection.GET_NOME)
+	@MetodoAssociado(get = ConstantesReflection.GET_NOME)
 	private String nome;
-	@ExMetodo(get = ConstantesReflection.GET_QUANTIDADE, set = ConstantesReflection.SET_QUANTIDADE)
+	@MetodoAssociado(get = ConstantesReflection.GET_QUANTIDADE, set = ConstantesReflection.SET_QUANTIDADE)
 	private int quantidade;
-	@ExMetodo(get = ConstantesReflection.GET_CATEGORIAS)
+	@MetodoAssociado(get = ConstantesReflection.GET_CATEGORIAS)
 	private String categorias;
-	@ExMetodo(get = ConstantesReflection.GET_TIPO)
+	@MetodoAssociado(get = ConstantesReflection.GET_TIPO)
 	private String tipo;
-	@ExMetodo(get = ConstantesReflection.GET_PRECO, set = ConstantesReflection.SET_PRECO)
+	@MetodoAssociado(get = ConstantesReflection.GET_PRECO, set = ConstantesReflection.SET_PRECO)
 	private Double preco;
 
 	/**

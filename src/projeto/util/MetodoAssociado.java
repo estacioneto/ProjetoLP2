@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExMetodo {
+public @interface MetodoAssociado {
 
 	String get() default "";
 	String set() default "";
