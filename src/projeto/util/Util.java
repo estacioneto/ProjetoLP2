@@ -252,8 +252,8 @@ public abstract class Util {
 		
 		try {
 			campo.setAccessible(true); // Faz com que seja possivel acessar o campo.
-			if (campo.isAnnotationPresent(ExMetodo.class)) { // Caso precise executar um metodo, executa.
-				ExMetodo anotacao = campo.getAnnotation(ExMetodo.class); // Pega a anotacao do metodo.
+			if (campo.isAnnotationPresent(MetodoAssociado.class)) { // Caso precise executar um metodo, executa.
+				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class); // Pega a anotacao do metodo.
 				metodo = clazz.getMethod(anotacao.get()); // Pega o metodo.
 				return metodo.invoke(objeto); // Invoca o metodo pelo objeto.
 			}
@@ -299,8 +299,8 @@ public abstract class Util {
 		
 		try {
 			campo.setAccessible(true); // Faz com que seja possivel acessar o campo.
-			if (campo.isAnnotationPresent(ExMetodo.class)) { // Caso precise executar um metodo, executa.
-				ExMetodo anotacao = campo.getAnnotation(ExMetodo.class); // Pega a anotacao do metodo.
+			if (campo.isAnnotationPresent(MetodoAssociado.class)) { // Caso precise executar um metodo, executa.
+				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class); // Pega a anotacao do metodo.
 				metodo = clazz.getMethod(anotacao.set(), novoValor.getClass()); // Pega o metodo.
 				metodo.invoke(objeto, novoValor); // Invoca o metodo pelo objeto.
 			}else{
