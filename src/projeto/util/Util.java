@@ -347,7 +347,7 @@ public abstract class Util {
 				{ true, true, true, true, true, true, true, true } };
 
 		// TODO arrumar essa mensagem de erro quando sairem os testes
-		if (!matrizCompatibilidade[sangueOrgao][sanguePaciente])
+		if (!matrizCompatibilidade[sanguePaciente][sangueOrgao])
 			throw new DadoInvalidoException("Tipo de sangue nao compativel.");
 	}
 }
