@@ -6,6 +6,7 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.bancodeorgaos.Orgao;
 import projeto.hospital.gerencia.prontuario.Prontuario;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;
+import projeto.util.Constantes;
 import projeto.util.Util;
 
 /**
@@ -59,7 +60,7 @@ public class Procedimentos implements Serializable {
 
 		double pesoPaciente = paciente.getPeso();
 		// Usado esse tipo de calculo para evitar erros de precisao
-		double novoPeso = pesoPaciente * REDUCAO_PESO_BARIATRICA / 100.0;
+		double novoPeso = pesoPaciente * REDUCAO_PESO_BARIATRICA / Constantes.PORCENTAGEM_TOTAL;
 		paciente.setPeso(novoPeso);
 	}
 

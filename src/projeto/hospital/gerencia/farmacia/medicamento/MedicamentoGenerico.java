@@ -2,6 +2,8 @@ package projeto.hospital.gerencia.farmacia.medicamento;
 
 import java.io.Serializable;
 
+import projeto.util.Constantes;
+
 /**
  * Classe que representa o tipo medicamento generico, seus comportaemntos e
  * estados.
@@ -17,7 +19,7 @@ public class MedicamentoGenerico extends Medicamento implements Serializable {
 	private static final long serialVersionUID = 1556492773719602719L;
 
 	public static final double DESCONTO_GENERICO = 60;
-	public static final double DESCONTO_GENERICO_PORCENTAGEM = 100;
+	public static final double DESCONTO_GENERICO_PORCENTAGEM = Constantes.PORCENTAGEM_TOTAL;
 	public static final String TIPO = "Generico";
 	
 	/**

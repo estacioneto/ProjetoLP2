@@ -17,6 +17,10 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
  * @author Thaynan
  */
 public abstract class ValidadorDeDados {
+	
+	private static final int NOME_TAMANHO_MAXIMO = 50;
+	private static final int SENHA_TAMANHO_MINIMO = 8;
+	private static final int SENHA_TAMANHO_MAXIMO = 12;
 	/**
 	 * Verifica se a String eh nula ou vazia. O nomeAtributo eh utilizado para
 	 * uma melhor criacao de excecao caso a String seja invalida.
@@ -263,7 +267,7 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaNome(String pessoa, String nome) throws StringVaziaException, ObjetoNuloException {
 		validaString("Nome" + pessoa, nome);
-		if (nome.length() == Constantes.NOME_TAMANHO_MAXIMO)
+		if (nome.length() >= NOME_TAMANHO_MAXIMO)
 			throw new OperacaoInvalidaException(MensagensDeErro.NOME_TAMANHO_INVALIDO);
 		for (int indice = 0; indice < nome.length(); indice++) {
 			if (Character.isDigit(nome.charAt(indice)))
@@ -282,7 +286,7 @@ public abstract class ValidadorDeDados {
 	public static void validaSenha(String senha) throws DadoInvalidoException {
 		validaString(Constantes.SENHA, senha);
 
-		if (senha.length() < Constantes.SENHA_TAMANHO_MINIMO || senha.length() > Constantes.SENHA_TAMANHO_MAXIMO)
+		if (senha.length() < SENHA_TAMANHO_MINIMO || senha.length() > SENHA_TAMANHO_MAXIMO)
 			throw new DadoInvalidoException("A nova senha deve ter entre 8 - 12 caracteres alfanumericos.");
 
 		for (int indice = 0; indice < senha.length(); indice++) {
