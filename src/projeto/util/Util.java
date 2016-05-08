@@ -22,6 +22,7 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
  *
  */
 public abstract class Util {
+	// CODIGOS/SUBSTRINGS
 	/**
 	 * Dado o nome do cargo, este metodo retorna o codigo do mesmo.
 	 * 
@@ -44,19 +45,7 @@ public abstract class Util {
 			return Constantes.CODIGO_TECNICO;
 		throw new DadoInvalidoException("Cargo inexistente!");
 	}
-
-	/**
-	 * Dada uma determinada data, o metodo retorna o ano da mesma.
-	 * 
-	 * @param data
-	 *            Data
-	 * @return Ano da data.
-	 */
-	public static String getAnoPorData(String data) {
-		// Validacao da data ja deve ter sido feita antes de chamar esse metodo
-		return data.split(Constantes.BARRA)[Constantes.INDICE_ANO];
-	}
-
+	
 	/**
 	 * Dado um numero em String, retorna os quatro primeiros digitos em String.
 	 * 
@@ -90,7 +79,43 @@ public abstract class Util {
 	public static String getCodigoPorMatricula(String matricula) {
 		return Character.toString(matricula.charAt(Constantes.ZERO));
 	}
+	
+	/**
+	 * Retorna a String com a primeira letra maiuscula e as demais minusculas.
+	 * 
+	 * @param string
+	 *            String a ser modificada.
+	 * @return String capitalizada.
+	 */
+	public static String capitalizaString(String string) {
+		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase()
+				+ string.substring(Constantes.UM);
+	}
 
+	/**
+	 * Formata a String para retornar o nome do atributo. 
+	 * @param string Nome do atributo sem formatacao.
+	 * @return Nome do atributo.
+	 */
+	private static String getNomeCampo(String string) {
+		return string.substring(Constantes.ZERO, Constantes.UM).toLowerCase()
+				+ string.substring(Constantes.UM);
+	}
+	// CODIGOS/SUBSTRINGS
+	
+	// DATA
+	/**
+	 * Dada uma determinada data, o metodo retorna o ano da mesma.
+	 * 
+	 * @param data
+	 *            Data
+	 * @return Ano da data.
+	 */
+	public static String getAnoPorData(String data) {
+		// Validacao da data ja deve ter sido feita antes de chamar esse metodo
+		return data.split(Constantes.BARRA)[Constantes.INDICE_ANO];
+	}
+	
 	/**
 	 * Vai pegar a data do formato recebido e guardado no sistema e transformar
 	 * para o formato de apresentacao
@@ -105,7 +130,21 @@ public abstract class Util {
 				dataQuebrada[1], dataQuebrada[0]);
 		return formatoSaida;
 	}
-
+	// DATA
+	// ARQUIVOS
+	/**
+	 * Cria um arquivo se ja nao existir.
+	 * 
+	 * @param caminho
+	 *            Caminho do arquivo.
+	 */
+	public static void criaArquivo(String caminho) {
+		File arquivo = new File(caminho);
+		// Verifica se sera necessario criar o arquivo
+		if (arquivo.getParentFile() != null)
+			arquivo.getParentFile().mkdirs();
+	}
+	
 	/**
 	 * Pega o objeto de um arquivo.
 	 * 
@@ -138,20 +177,7 @@ public abstract class Util {
 			}
 		}
 	}
-
-	/**
-	 * Cria um arquivo se ja nao existir.
-	 * 
-	 * @param caminho
-	 *            Caminho do arquivo.
-	 */
-	public static void criaArquivo(String caminho) {
-		File arquivo = new File(caminho);
-		// Verifica se sera necessario criar o arquivo
-		if (arquivo.getParentFile() != null)
-			arquivo.getParentFile().mkdirs();
-	}
-
+	
 	/**
 	 * Escreve o objeto em um arquivo
 	 * 
@@ -197,28 +223,8 @@ public abstract class Util {
 		}
 		return diretorio.delete();
 	}
-
-	/**
-	 * Retorna a String com a primeira letra maiuscula e as demais minusculas.
-	 * 
-	 * @param string
-	 *            String a ser modificada.
-	 * @return String capitalizada.
-	 */
-	public static String capitalizaString(String string) {
-		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase()
-				+ string.substring(Constantes.UM);
-	}
-
-	/**
-	 * Formata a String para retornar o nome do atributo. 
-	 * @param string Nome do atributo sem formatacao.
-	 * @return Nome do atributo.
-	 */
-	private static String getNomeCampo(String string) {
-		return string.substring(Constantes.ZERO, Constantes.UM).toLowerCase()
-				+ string.substring(Constantes.UM);
-	}
+	// ARQUIVOS
+	// REFLECTION
 
 	/**
 	 * Pega informacao de um determinado objeto.
@@ -315,6 +321,7 @@ public abstract class Util {
 			throw new DadoInvalidoException(excecao.getCause().getMessage()); // Caso o metodo lance uma excecao.
 		}
 	}
+	// REFLECTION
 	
 	/**
 	 * Valida a compatibilidade entre dois tipos sanguineos

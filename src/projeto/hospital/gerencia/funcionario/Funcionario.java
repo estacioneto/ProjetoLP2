@@ -60,20 +60,19 @@ public class Funcionario implements Serializable {
 		this.data = dataNascimento;
 	}
 
+	// VERIFICACAO DE PERMISSAO
 	/**
-	 * Equals de funcionario, tendo em vista que a matricula identifica cada um.
+	 * Verifica se o funcionario possui determinada permissao.
+	 * 
+	 * @param permissao
+	 *            Permissao a ser verificada.
+	 * @return true se o funcionario possui a permissao.
 	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (!(obj instanceof Funcionario))
-			return false;
-		Funcionario outro = (Funcionario) obj;
-
-		if (this.matricula.equals(outro.matricula))
-			return true;
-		return false;
+	public boolean temPermissao(Permissao permissao) {
+		return this.cargo.temPermissao(permissao);
 	}
-
+	// VERIFICACAO DE PERMISSAO
+	// GETTERS E SETTERS
 	/**
 	 * Retorna o nome do funcionario.
 	 * 
@@ -138,6 +137,15 @@ public class Funcionario implements Serializable {
 	public String getSenha() {
 		return senha;
 	}
+	
+	/**
+	 * Metodo utilizado para consulta de senha.
+	 *  
+	 * @return {@code OperacaoInvalidaException}
+	 */
+	public String getSenhaProtegida() {
+		throw new OperacaoInvalidaException("A senha do funcionario eh protegida.");
+	}
 
 	/**
 	 * Muda a senha do funcionario.
@@ -171,20 +179,20 @@ public class Funcionario implements Serializable {
 		ValidadorDeDados.validaData(dataNascimento);
 		this.data = dataNascimento;
 	}
+	// GETTERS E SETTERS
 
 	/**
-	 * Verifica se o funcionario possui determinada permissao.
-	 * 
-	 * @param permissao
-	 *            Permissao a ser verificada.
-	 * @return true se o funcionario possui a permissao.
+	 * Equals de funcionario, tendo em vista que a matricula identifica cada um.
 	 */
-	public boolean temPermissao(Permissao permissao) {
-		return this.cargo.temPermissao(permissao);
-	}
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Funcionario))
+			return false;
+		Funcionario outro = (Funcionario) obj;
 
-	public String getSenhaProtegida() {
-		throw new OperacaoInvalidaException("A senha do funcionario eh protegida.");
+		if (this.matricula.equals(outro.matricula))
+			return true;
+		return false;
 	}
 
 }

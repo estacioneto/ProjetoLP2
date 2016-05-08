@@ -1,4 +1,4 @@
-package projeto.hospital.model;
+package projeto.hospital.controller;
 
 import java.io.Serializable;
 
@@ -20,7 +20,7 @@ import projeto.hospital.gerencia.prontuario.Prontuario;
  * @author Eric
  * @author Thaynan
  */
-public class Model implements Serializable {
+public class Controller implements Serializable {
 
 	/**
 	 * Serial gerado automaticamente.
@@ -37,7 +37,7 @@ public class Model implements Serializable {
 	/**
 	 * Construtor
 	 */
-	public Model() {
+	public Controller() {
 		this.gerenciadorDePaciente = new GerenciadorDePacienteProntuario();
 		this.gerenciadorDeMedicamento = new GerenciadorDeFarmacia();
 		this.gerenciadorFuncionarios = new GerenciadorDeFuncionarios();
@@ -45,6 +45,51 @@ public class Model implements Serializable {
 		this.funcionarioLogado = null;
 	}
 
+	// OPERACOES DO SISTEMA
+	/**
+	 * Fecha o sistema se nenhum usuario estiver mais logado
+	 */
+	public void fechaSistema() {
+		if (estaLogado())
+			throw new OperacaoInvalidaException("Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
+					+ funcionarioLogado.getNome() + ".");
+	}
+	
+	/**
+	 * Faz o login no sistema
+	 * 
+	 * @param matricula
+	 *            Matricula
+	 * @param senha
+	 *            Senha
+	 */
+	public void loginSistema(String matricula, String senha) {
+		if (estaLogado())
+			throw new OperacaoInvalidaException("Nao foi possivel realizar o login. Um funcionario ainda esta logado: "
+					+ funcionarioLogado.getNome() + ".");
+		this.funcionarioLogado = this.gerenciadorFuncionarios.acessaSistema(matricula, senha);
+	}
+
+	/**
+	 * Desloga do sistema
+	 */
+	public void logout() {
+		if (!estaLogado())
+			throw new OperacaoInvalidaException("Nao foi possivel realizar o logout. Nao ha um funcionario logado.");
+		funcionarioLogado = null;
+	}
+	
+
+	/**
+	 * Verifica se ha funcionario logado.
+	 * 
+	 * @return true se um funcionario esta logado.
+	 */
+	private boolean estaLogado() {
+		return this.funcionarioLogado != null;
+	}
+	// OPERACOES DO SISTEMA
+	// OPERACOES DE FUNCIONARIO
 	/**
 	 * Realiza o cadastro de um funcionario.
 	 * 
@@ -56,38 +101,15 @@ public class Model implements Serializable {
 	 *            Data de nascimento do novo usuario
 	 * @return Matricula do novo cadastro
 	 */
-	public String cadastraFuncionario(String nome, String cargo,
-			String dataNascimento) {
+	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
 		// Se o usuario esta logado vai ser verificado se ele pode realizar a
 		// operacao porque o diretor eh cadastrado quando nao existe ninguem
 		// logado, por isso precisa disso
 		if (!estaLogado()) {
 			if (!gerenciadorFuncionarios.isEmpty())
-				throw new OperacaoInvalidaException(
-						"Voce precisa estar logado no sistema para realizar cadastros.");
+				throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
 		}
-		return this.gerenciadorFuncionarios.cadastraFuncionario(nome, cargo,
-				dataNascimento, funcionarioLogado);
-	}
-
-	/**
-	 * Fecha o sistema se nenhum usuario estiver mais logado
-	 */
-	public void fechaSistema() {
-		if (estaLogado())
-			throw new OperacaoInvalidaException(
-					"Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
-							+ funcionarioLogado.getNome() + ".");
-	}
-
-	/**
-	 * Desloga do sistema
-	 */
-	public void logout() {
-		if (!estaLogado())
-			throw new OperacaoInvalidaException(
-					"Nao foi possivel realizar o logout. Nao ha um funcionario logado.");
-		funcionarioLogado = null;
+		return this.gerenciadorFuncionarios.cadastraFuncionario(nome, cargo, dataNascimento, funcionarioLogado);
 	}
 
 	/**
@@ -98,13 +120,10 @@ public class Model implements Serializable {
 	 * @param matriculaFuncionario
 	 *            Matricula do usuario a ser excluido
 	 */
-	public void excluiFuncionario(String senhaDiretor,
-			String matriculaFuncionario) {
+	public void excluiFuncionario(String senhaDiretor, String matriculaFuncionario) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException(
-					"Voce deve estar logado para acessar o sistema.");
-		this.gerenciadorFuncionarios.excluiFuncionario(
-				this.funcionarioLogado.getMatricula(), senhaDiretor,
+			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.excluiFuncionario(this.funcionarioLogado.getMatricula(), senhaDiretor,
 				matriculaFuncionario);
 	}
 
@@ -118,14 +137,12 @@ public class Model implements Serializable {
 	 * @param novoValor
 	 *            Novo valor do atributo
 	 */
-	public void atualizaInfoFuncionario(String matricula, String atributo,
-			String novoValor) {
-		this.gerenciadorFuncionarios.atualizaInfoFuncionario(
-				this.funcionarioLogado, matricula, atributo, novoValor);
+	public void atualizaInfoFuncionario(String matricula, String atributo, String novoValor) {
+		this.gerenciadorFuncionarios.atualizaInfoFuncionario(this.funcionarioLogado, matricula, atributo, novoValor);
 	}
 
 	/**
-	 * Atualiza o proprio usuario
+	 * Atualiza o proprio usuario.
 	 * 
 	 * @param atributo
 	 *            Atributo a ser atualizado
@@ -134,10 +151,9 @@ public class Model implements Serializable {
 	 */
 	public void atualizaInfoFuncionario(String atributo, String novoValor) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException(
-					"Voce deve estar logado para acessar o sistema.");
-		this.gerenciadorFuncionarios.atualizaInfoFuncionario(funcionarioLogado,
-				this.funcionarioLogado.getMatricula(), atributo, novoValor);
+			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.atualizaInfoFuncionario(funcionarioLogado, this.funcionarioLogado.getMatricula(),
+				atributo, novoValor);
 	}
 
 	/**
@@ -150,12 +166,11 @@ public class Model implements Serializable {
 	 */
 	public void atualizaSenha(String senhaAntiga, String novaSenha) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException(
-					"Voce deve estar logado para acessar o sistema.");
-		this.gerenciadorFuncionarios.atualizaSenha(this.funcionarioLogado,
-				senhaAntiga, novaSenha);
+			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.atualizaSenha(this.funcionarioLogado, senhaAntiga, novaSenha);
 	}
 
+		// CONSULTA DE FUNCIONARIO
 	/**
 	 * Pega informacao de um funcionario
 	 * 
@@ -168,32 +183,9 @@ public class Model implements Serializable {
 	public Object getInfoFuncionario(String matricula, String atributo) {
 		return this.gerenciadorFuncionarios.getInfoFuncionario(matricula, atributo);
 	}
-
-	/**
-	 * Faz o login no sistema
-	 * 
-	 * @param matricula
-	 *            Matricula
-	 * @param senha
-	 *            Senha
-	 */
-	public void loginSistema(String matricula, String senha) {
-		if (estaLogado())
-			throw new OperacaoInvalidaException(
-					"Nao foi possivel realizar o login. Um funcionario ainda esta logado: "
-							+ funcionarioLogado.getNome() + ".");
-		this.funcionarioLogado = this.gerenciadorFuncionarios.acessaSistema(
-				matricula, senha);
-	}
-
-	/**
-	 * Verifica se ha funcionario logado.
-	 * 
-	 * @return true se um funcionario esta logado.
-	 */
-	private boolean estaLogado() {
-		return this.funcionarioLogado != null;
-	}
+    	// CONSULTA DE FUNCIONARIO	
+	// OPERACOES DE FUNCIONARIO	
+	// OPERACOES DE PACIENTE/PRONTUARIO
 
 	/**
 	 * Realiza o cadastro de um paciente
@@ -212,17 +204,18 @@ public class Model implements Serializable {
 	 *            Tipo sanguineo do paciente
 	 * @return Id do paciente cadastrado
 	 */
-	public long cadastraPaciente(String nome, String data, double peso,
-			String sexo, String genero, String tipoSanguineo) {
+	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
+			String tipoSanguineo) {
 		if (!estaLogado()) {
 			throw new OperacaoInvalidaException(
 					"Voce precisa estar logado no sistema para realizar cadastros de pacientes.");
 		}
 
-		return this.gerenciadorDePaciente.cadastraPaciente(nome, data, peso,
-				sexo, genero, tipoSanguineo, funcionarioLogado);
+		return this.gerenciadorDePaciente.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo,
+				funcionarioLogado);
 	}
 
+		// CONSULTA DE PACIENTE/PRONTUARIO
 	/**
 	 * Acessa uma informacao especifica sobre um paciente
 	 * 
@@ -234,8 +227,7 @@ public class Model implements Serializable {
 	 */
 	public Object getInfoPaciente(long idPaciente, String atributo) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException(
-					"Voce precisa estar logado no sistema para realizar cadastros.");
+			throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
 		return this.gerenciadorDePaciente.getInfoPaciente(idPaciente, atributo);
 	}
 
@@ -249,7 +241,9 @@ public class Model implements Serializable {
 	public Long getProntuario(int posicao) {
 		return this.gerenciadorDePaciente.getIdProntuarioPosicao(posicao);
 	}
-
+		// CONSULTA DE PACIENTE/PRONTUARIO
+	// OPERACOES DE PACIENTE/PRONTUARIO
+	// OPERACOES DE MEDICAMENTO/FARMACIA
 	/**
 	 * Metodo que cadastra um medicamento.
 	 * 
@@ -265,29 +259,13 @@ public class Model implements Serializable {
 	 *            do medicamento.
 	 * @return Nome do medicamento.
 	 */
-	public String cadastraMedicamento(String nome, String tipo, Double preco,
-			int quantidade, String categorias) {
+	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException(
-					"Voce precisa estar logado no sistema para realizar cadastros.");
-		return gerenciadorDeMedicamento.cadastraMedicamento(nome, tipo, preco,
-				quantidade, categorias, funcionarioLogado);
+			throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
+		return gerenciadorDeMedicamento.cadastraMedicamento(nome, tipo, preco, quantidade, categorias,
+				funcionarioLogado);
 	}
-
-	/**
-	 * Metodo que retorna um determinado atributo de um medicamento, passado o
-	 * seu nome.
-	 * 
-	 * @param atributo
-	 *            Atributo do medicamento.
-	 * @param nome
-	 *            Nome do medicamento.
-	 * @return atributo do medicamento.
-	 */
-	public Object getInfoMedicamento(String atributo, String nome) {
-		return gerenciadorDeMedicamento.getInfoMedicamento(atributo, nome);
-	}
-
+	
 	/**
 	 * Metodo que atualiza um atributo de um medicamento.
 	 * 
@@ -300,6 +278,21 @@ public class Model implements Serializable {
 	 */
 	public void atualizaMedicamento(String nome, String atributo, String novo) {
 		this.gerenciadorDeMedicamento.atualizaMedicamento(nome, atributo, novo);
+	}
+
+		// CONSULTA DE MEDICAMENTO/FARMACIA
+	/**
+	 * Metodo que retorna um determinado atributo de um medicamento, passado o
+	 * seu nome.
+	 * 
+	 * @param atributo
+	 *            Atributo do medicamento.
+	 * @param nome
+	 *            Nome do medicamento.
+	 * @return atributo do medicamento.
+	 */
+	public Object getInfoMedicamento(String atributo, String nome) {
+		return gerenciadorDeMedicamento.getInfoMedicamento(atributo, nome);
 	}
 
 	/**
@@ -336,8 +329,11 @@ public class Model implements Serializable {
 	public String getEstoqueFarmacia(String ordenacao) {
 		return this.gerenciadorDeMedicamento.getEstoqueFarmacia(ordenacao);
 	}
-	
-	public void realizaProcedimento(String procedimento, String nomeOrgao, int prontuarioPosicao){
+		// CONSULTA DE MEDICAMENTO/FARMACIA
+	// OPERACOES DE MEDICAMENTO/FARMACIA
+	// OPERACOES DE PROCEDIMENTO
+
+	public void realizaProcedimento(String procedimento, String nomeOrgao, int prontuarioPosicao) {
 		Prontuario prontuario = gerenciadorDePaciente.getProntuarioPosicao(prontuarioPosicao);
 		Orgao orgao = bancoDeOrgaos.getOrgao(nomeOrgao, prontuario.getPaciente().getTipoSanguineo());
 		gerenciadorProcedimento.realizaProcedimento(procedimento, prontuario, orgao);

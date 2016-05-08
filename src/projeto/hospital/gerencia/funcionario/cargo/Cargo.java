@@ -30,7 +30,20 @@ public abstract class Cargo implements Serializable {
 		this.nome = cargo;
 		this.permissoes = new HashSet<Permissao>();
 	}
-
+	
+	// VERIFICACAO DE PERMISSAO
+	/**
+	 * Verifica se o cargo possui determinada permissao.
+	 * 
+	 * @param permissao
+	 *            Permissao a ser verificada.
+	 * @return true se o cargo permite determinada operacao.
+	 */
+	public boolean temPermissao(Permissao permissao) {
+		return this.permissoes.contains(permissao);
+	}
+	// VERIFICACAO DE PERMISSAO
+	//GETTERS
 	/**
 	 * Metodo que retorna as permissoes de um cargo.
 	 * 
@@ -48,15 +61,5 @@ public abstract class Cargo implements Serializable {
 	public String getNome() {
 		return nome;
 	}
-
-	/**
-	 * Verifica se o cargo possui determinada permissao.
-	 * 
-	 * @param permissao
-	 *            Permissao a ser verificada.
-	 * @return true se o cargo permite determinada operacao.
-	 */
-	public boolean temPermissao(Permissao permissao) {
-		return this.permissoes.contains(permissao);
-	}
+	//GETTERS
 }

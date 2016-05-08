@@ -2,7 +2,7 @@ package projeto.hospital.facade;
 
 import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.model.Model;
+import projeto.hospital.controller.Controller;
 import projeto.util.Constantes;
 import projeto.util.Util;
 
@@ -17,7 +17,7 @@ import projeto.util.Util;
 public class Facade {
 
 	private final String CHAVE_DESBLOQUEIO = "c041ebf8";
-	private Model controller;
+	private Controller controller;
 	private boolean sistemaJaLiberado;
 
 	/**
@@ -28,38 +28,8 @@ public class Facade {
 		this.sistemaJaLiberado = false;
 	}
 
-	/**
-	 * Inicia o sistema.
-	 */
-	public void iniciaSistema() {
-		if (this.controller != null)
-			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
-		
-		try {
-			this.controller = (Model) Util
-					.getObjeto(Constantes.ARQUIVO_CONTROLLER);
-		} catch (Exception excecao) {
-			this.controller = new Model();
-			Util.criaArquivo(Constantes.ARQUIVO_CONTROLLER);
-		}
-	}
-
-	/**
-	 * Fecha o sistema.
-	 */
-	public void fechaSistema() {
-		this.controller.fechaSistema();
-		Util.setObjeto(Constantes.ARQUIVO_CONTROLLER, this.controller);
-		this.controller= null;
-	}
-
-	/**
-	 * Usuario sai da sua conta.
-	 */
-	public void logout() {
-		this.controller.logout();
-	}
-
+	// OPERACOES DO SISTEMA
+	
 	/**
 	 * Libera o sistema pela primeira vez.
 	 * 
@@ -87,6 +57,31 @@ public class Facade {
 	}
 
 	/**
+	 * Inicia o sistema.
+	 */
+	public void iniciaSistema() {
+		if (this.controller != null)
+			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
+		
+		try {
+			this.controller = (Controller) Util
+					.getObjeto(Constantes.ARQUIVO_CONTROLLER);
+		} catch (Exception excecao) {
+			this.controller = new Controller();
+			Util.criaArquivo(Constantes.ARQUIVO_CONTROLLER);
+		}
+	}
+
+	/**
+	 * Fecha o sistema.
+	 */
+	public void fechaSistema() {
+		this.controller.fechaSistema();
+		Util.setObjeto(Constantes.ARQUIVO_CONTROLLER, this.controller);
+		this.controller= null;
+	}
+	
+	/**
 	 * Usuario entra no sistema.
 	 * 
 	 * @param matricula
@@ -99,18 +94,13 @@ public class Facade {
 	}
 
 	/**
-	 * Pega determinada informacao do funcionario desejado.
-	 * 
-	 * @param matricula
-	 *            Matricula do funcionario.
-	 * @param atributo
-	 *            Atributo do funcionario.
-	 * @return Informacao do funcionario.
+	 * Usuario sai da sua conta.
 	 */
-	public Object getInfoFuncionario(String matricula, String atributo) {
-		return this.controller.getInfoFuncionario(matricula, atributo);
+	public void logout() {
+		this.controller.logout();
 	}
-
+	// OPERACOES DO SISTEMA
+	// OPERACOES DE FUNCIONARIO
 	/**
 	 * Cadastra um funcionario.
 	 * 
@@ -138,7 +128,7 @@ public class Facade {
 	public void excluiFuncionario(String matriculaFuncionario, String senha) {
 		this.controller.excluiFuncionario(senha, matriculaFuncionario);
 	}
-
+	
 	/**
 	 * Atualiza determinado atributo do funcionario.
 	 * 
@@ -153,6 +143,47 @@ public class Facade {
 			String novoValor) {
 		this.controller.atualizaInfoFuncionario(matricula, atributo, novoValor);
 	}
+	
+	/**
+	 * Atualiza determinado atributo do usuario (funcionario logado).
+	 * 
+	 * @param atributo
+	 *            Atributo do usuario.
+	 * @param novoValor
+	 *            Novo valor do atributo.
+	 */
+	public void atualizaInfoFuncionario(String atributo, String novoValor) {
+		this.controller.atualizaInfoFuncionario(atributo, novoValor);
+	}
+	
+	/**
+	 * Atualiza a senha do usuario.
+	 * 
+	 * @param senhaAntiga
+	 *            Senha antiga.
+	 * @param novaSenha
+	 *            Nova senha.
+	 */
+	public void atualizaSenha(String senhaAntiga, String novaSenha) {
+		this.controller.atualizaSenha(senhaAntiga, novaSenha);
+	}
+
+		// CONSULTA DE FUNCIONARIO
+	/**
+	 * Pega determinada informacao do funcionario desejado.
+	 * 
+	 * @param matricula
+	 *            Matricula do funcionario.
+	 * @param atributo
+	 *            Atributo do funcionario.
+	 * @return Informacao do funcionario.
+	 */
+	public Object getInfoFuncionario(String matricula, String atributo) {
+		return this.controller.getInfoFuncionario(matricula, atributo);
+	}
+		// CONSULTA DE FUNCIONARIO
+	// OPERACOES DE FUNCIONARIO
+	// OPERACOES DE PACIENTE/PRONTUARIO
 
 	/**
 	 * Realiza o cadastro de um paciente
@@ -177,6 +208,7 @@ public class Facade {
 				tipoSanguineo);
 	}
 
+		// CONSULTA DE PACIENTE/PRONTUARIO
 	/**
 	 * Acessa uma informacao especifica sobre um paciente
 	 * 
@@ -200,30 +232,9 @@ public class Facade {
 	public Long getProntuario(int posicao) {
 		return this.controller.getProntuario(posicao);
 	}
-
-	/**
-	 * Atualiza a senha do usuario.
-	 * 
-	 * @param senhaAntiga
-	 *            Senha antiga.
-	 * @param novaSenha
-	 *            Nova senha.
-	 */
-	public void atualizaSenha(String senhaAntiga, String novaSenha) {
-		this.controller.atualizaSenha(senhaAntiga, novaSenha);
-	}
-
-	/**
-	 * Atualiza determinado atributo do usuario.
-	 * 
-	 * @param atributo
-	 *            Atributo do usuario.
-	 * @param novoValor
-	 *            Novo valor do atributo.
-	 */
-	public void atualizaInfoFuncionario(String atributo, String novoValor) {
-		this.controller.atualizaInfoFuncionario(atributo, novoValor);
-	}
+		// CONSULTA DE PACIENTE/PRONTUARIO	
+	// OPERACOES DE PACIENTE/PRONTUARIO
+	// OPERACOES DE MEDICAMENTO/FARMACIA
 
 	/**
 	 * Metodo que cadastra um medicamento.
@@ -247,20 +258,6 @@ public class Facade {
 	}
 
 	/**
-	 * Metodo que retorna um determinado atributo de um medicamento, passado o
-	 * seu nome.
-	 * 
-	 * @param atributo
-	 *            Atributo do medicamento.
-	 * @param nome
-	 *            Nome do medicamento.
-	 * @return atributo do medicamento.
-	 */
-	public Object getInfoMedicamento(String atributo, String nome) {
-		return this.controller.getInfoMedicamento(atributo, nome);
-	}
-
-	/**
 	 * Metodo que atualiza um atributo de um medicamento.
 	 * 
 	 * @param nome
@@ -273,6 +270,21 @@ public class Facade {
 	public void atualizaMedicamento(String nome, String atributo,
 			String novoValor) {
 		this.controller.atualizaMedicamento(nome, atributo, novoValor);
+	}
+
+		// CONSULTA DE MEDICAMENTO/FARMACIA	
+	/**
+	 * Metodo que retorna um determinado atributo de um medicamento, passado o
+	 * seu nome.
+	 * 
+	 * @param atributo
+	 *            Atributo do medicamento.
+	 * @param nome
+	 *            Nome do medicamento.
+	 * @return atributo do medicamento.
+	 */
+	public Object getInfoMedicamento(String atributo, String nome) {
+		return this.controller.getInfoMedicamento(atributo, nome);
 	}
 
 	/**
@@ -309,4 +321,6 @@ public class Facade {
 	public String getEstoqueFarmacia(String ordenacao) {
 		return this.controller.getEstoqueFarmacia(ordenacao);
 	}
+		// CONSULTA DE MEDICAMENTO/FARMACIA	
+	// OPERACOES DE MEDICAMENTO/FARMACIA
 }

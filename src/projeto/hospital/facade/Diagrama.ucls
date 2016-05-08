@@ -15,13 +15,13 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="3" language="java" name="projeto.hospital.model" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/model" binary="false" corner="BOTTOM_RIGHT">    
+  <package id="3" language="java" name="projeto.hospital.controller" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/controller" binary="false" corner="BOTTOM_RIGHT">    
     <position height="524" width="374" x="17" y="578"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="4" language="java" name="projeto.hospital.model.Model" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/model/Model.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="projeto.hospital.controller.Controller" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="206" y="856"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

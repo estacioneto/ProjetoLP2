@@ -32,19 +32,6 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 	}
 
 	/**
-	 * Gera uma senha automaticamente.
-	 * 
-	 * @param matricula
-	 *            Matricula do funcionario.
-	 * @param ano
-	 *            Ano de nascimento do funcionario.
-	 * @return Senha gerada.
-	 */
-	public String geraSenha(String matricula, String ano) {
-		return ano + Util.quatroDigitosIniciais(matricula);
-	}
-
-	/**
 	 * Gera uma matricula automaticamente.
 	 * 
 	 * @param cargo
@@ -86,4 +73,18 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 	private void novoCadastroEfetuado() {
 		this.cadastros++;
 	}
+
+	/**
+	 * Gera uma senha automaticamente.
+	 * 
+	 * @param matricula
+	 *            Matricula do funcionario.
+	 * @param ano
+	 *            Ano de nascimento do funcionario.
+	 * @return Senha gerada.
+	 */
+	public String geraSenha(String matricula, String ano) {
+		return ano + Util.quatroDigitosIniciais(matricula);
+	}
+
 }

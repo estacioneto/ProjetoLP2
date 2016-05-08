@@ -2,6 +2,7 @@ package projeto.util;
 
 public class ConstantesReflection {
 
+	//GETTERS
 	public static final String GET_DATA_NASCIMENTO = "getDataNascimento";
 	public static final String GET_IDADE = "getIdade";
 	public static final String GET_SENHA_PROTEGIDA = "getSenhaProtegida";
@@ -16,10 +17,12 @@ public class ConstantesReflection {
 	public static final String GET_TIPO_SANGUINEO = "getTipoSanguineo";
 	public static final String GET_SEXO = "getSexo";
 	public static final String GET_GENERO = "getGenero";
+	//GETTERS
 	
+	//SETTERS
 	public static final String SET_NOME = "setNome";
 	public static final String SET_DATA = "setData";
 	public static final String SET_PRECO = "setPreco";
 	public static final String SET_QUANTIDADE = "setQuantidade";
-	
+	//SETTERS	
 }
