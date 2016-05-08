@@ -6,6 +6,8 @@ import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
+import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
+import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineoFactory;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
@@ -17,17 +19,19 @@ public class BancoDeOrgaos implements Serializable {
 	private static final long serialVersionUID = -6166436844133077051L;
 	
 	private List<Orgao> orgaos;
+	private TipoSanguineoFactory tipoSanguineoFactory;
 
 	public BancoDeOrgaos() {
 		this.orgaos = new ArrayList<Orgao>();
+		this.tipoSanguineoFactory = TipoSanguineoFactory.getInstacia();
 	}
 
 	public void adicionaOrgao(String nome, String tipoSanguineo) {
 		try {
 			ValidadorDeDados.validaString(Constantes.NOME, nome);
-			ValidadorDeDados.validaString(Constantes.TIPOS_SANGUINEO, tipoSanguineo);
-
-			this.orgaos.add(new Orgao(nome, tipoSanguineo));
+			TipoSanguineo sangue = tipoSanguineoFactory.criaTipo(tipoSanguineo);
+			
+			this.orgaos.add(new Orgao(nome, sangue));
 		} catch (DadoInvalidoException excecao) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_ORGAO + excecao.getMessage());
 		}
@@ -36,9 +40,9 @@ public class BancoDeOrgaos implements Serializable {
 	public void removeOrgao(String nome, String tipoSanguineo) {
 		try {
 			ValidadorDeDados.validaString(Constantes.NOME, nome);
-			ValidadorDeDados.validaString(Constantes.TIPOS_SANGUINEO, tipoSanguineo);
-
-			Orgao orgao = new Orgao(nome, tipoSanguineo);
+			TipoSanguineo sangue = tipoSanguineoFactory.criaTipo(tipoSanguineo);
+			
+			Orgao orgao = new Orgao(nome, sangue);
 
 			if (this.orgaos.contains(orgao)) {
 				int indice = this.orgaos.indexOf(orgao);
@@ -54,9 +58,9 @@ public class BancoDeOrgaos implements Serializable {
 	public Orgao getOrgao(String nome, String tipoSanguineo) {
 		try {
 			ValidadorDeDados.validaString(Constantes.NOME, nome);
-			ValidadorDeDados.validaString(Constantes.TIPOS_SANGUINEO, tipoSanguineo);
+			TipoSanguineo sangue = tipoSanguineoFactory.criaTipo(tipoSanguineo);
 
-			Orgao orgao = new Orgao(nome, tipoSanguineo);
+			Orgao orgao = new Orgao(nome, sangue);
 
 			if (this.orgaos.contains(orgao)) {
 				int indice = this.orgaos.indexOf(orgao);
@@ -88,5 +92,4 @@ public class BancoDeOrgaos implements Serializable {
 	public int getQuantidadeTotal() {
 		return this.orgaos.size();
 	}
-
 }

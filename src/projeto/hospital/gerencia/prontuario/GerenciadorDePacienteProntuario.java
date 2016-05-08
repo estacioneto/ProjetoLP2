@@ -11,6 +11,8 @@ import projeto.hospital.gerencia.funcionario.Funcionario;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.hospital.gerencia.prontuario.paciente.GeradorIdPaciente;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;
+import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
+import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineoFactory;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
@@ -29,6 +31,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 
 	private Map<Paciente, Prontuario> pacientes;
 	private GeradorIdPaciente geradorIdPaciente;
+	private TipoSanguineoFactory tipoSanguineoFactory;
 
 	/**
 	 * Construtor
@@ -36,6 +39,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	public GerenciadorDePacienteProntuario() {
 		geradorIdPaciente = new GeradorIdPaciente();
 		pacientes = new TreeMap<>();
+		tipoSanguineoFactory = TipoSanguineoFactory.getInstacia();		
 	}
 
 	/**
@@ -65,11 +69,12 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 			ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE, peso);
 			ValidadorDeDados.validaSexoBiologico(sexo);
 			ValidadorDeDados.validaString(Constantes.GENERO, genero);
-			ValidadorDeDados.validaTipoSanguineo(tipoSanguineo);
-
+			
+			TipoSanguineo sangue = tipoSanguineoFactory.criaTipo(tipoSanguineo);
+			
 			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
 					Permissao.CADASTRAR_PACIENTES, funcionarioLogado);
-			Paciente novoPaciente = new Paciente(nome, data, peso, tipoSanguineo, sexo, genero);
+			Paciente novoPaciente = new Paciente(nome, data, peso, sangue, sexo, genero);
 			if (pacientes.containsKey(novoPaciente))
 				throw new DadoInvalidoException(MensagensDeErro.PACIENTE_JA_CADASTRADO);
 

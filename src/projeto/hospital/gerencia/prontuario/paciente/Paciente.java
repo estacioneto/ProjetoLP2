@@ -3,6 +3,8 @@ package projeto.hospital.gerencia.prontuario.paciente;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
 import projeto.util.Constantes;
 import projeto.util.ConstantesReflection;
 import projeto.util.MetodoAssociado;
@@ -28,7 +30,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	@MetodoAssociado(get = ConstantesReflection.GET_PESO)
 	private Double peso;
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO_SANGUINEO)
-	private String tipoSanguineo;
+	private TipoSanguineo tipoSanguineo;
 	@MetodoAssociado(get = ConstantesReflection.GET_SEXO)
 	private String sexo;
 	@MetodoAssociado(get = ConstantesReflection.GET_GENERO)
@@ -53,7 +55,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 * @param genero
 	 *            Genero
 	 */
-	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
+	public Paciente(String nome, String dataNascimento, Double peso, TipoSanguineo tipoSanguineo, String sexoBiologico,
 			String genero) {
 		this.nome = nome;
 		this.data = dataNascimento;
@@ -107,7 +109,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 * @return Tipo sanguineo
 	 */
 	public String getTipoSanguineo() {
-		return tipoSanguineo;
+		return tipoSanguineo.toString();
 	}
 
 	/**
@@ -161,6 +163,10 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		return idade;
 	}
 
+	public void verificaCompatibilidadeSanguineaCom(String outroTipo) throws DadoInvalidoException{
+		this.tipoSanguineo.recebeDe(outroTipo);		
+	}
+	
 	/**
 	 * Registra gastos do paciente em procedimentos
 	 * 

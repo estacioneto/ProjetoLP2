@@ -177,19 +177,6 @@ public abstract class ValidadorDeDados {
 	}
 
 	/**
-	 * Verifica se um tipo saguineo eh valido
-	 * 
-	 * @param tipoSanguineo
-	 *            tipo sanguineo
-	 * @throws DadoInvalidoException
-	 *             Caso o tipo sanguineo nao exista.
-	 */
-	public static void validaTipoSanguineo(String tipoSanguineo) throws DadoInvalidoException {
-		if (!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipoSanguineo))
-			throw new DadoInvalidoException(MensagensDeErro.TIPO_SANGUINEO + " invalido.");
-	}
-
-	/**
 	 * Verifica se um sexo biologico eh valido
 	 * 
 	 * @param sexoBiologico

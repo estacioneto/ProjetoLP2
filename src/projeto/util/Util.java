@@ -326,28 +326,28 @@ public abstract class Util {
 	 * @throws DadoInvalidoException
 	 *             Caso os tipos nao sejam compativeis
 	 */
-	public static void validaCompatibilidadeTipoSanguineo(String tipoSanguineoPaciente, String tipoSanguineoOrgao)
-			throws DadoInvalidoException {
-		// Nao eh preciso validar os tipos sanguineos pq isso deve ser feito na
-		// criacao dos orgaos e dos pacientes
-		List<String> tipos = Constantes.TIPOS_SANGUINEOS_VALIDOS;
-		int sanguePaciente = tipos.indexOf(tipoSanguineoPaciente);
-		int sangueOrgao = tipos.indexOf(tipoSanguineoOrgao);
-
-		// Matriz que identifica a compatibilidade dos tipos sanguineos
-		// forma O- O+ A- A+ B- B+ AB- AB+ por ela mesma
-		boolean[][] matrizCompatibilidade = { 
-				{ true, false, false, false, false, false, false, false },
-				{ true, true, false, false, false, false, false, false },
-				{ true, false, true, false, false, false, false, false },
-				{ true, true, true, true, false, false, false, false },
-				{ true, false, false, false, true, false, false, false },
-				{ true, true, false, false, true, true, false, false },
-				{ true, false, true, false, true, false, true, false },
-				{ true, true, true, true, true, true, true, true } };
-
-		// TODO arrumar essa mensagem de erro quando sairem os testes
-		if (!matrizCompatibilidade[sanguePaciente][sangueOrgao])
-			throw new DadoInvalidoException("Tipo de sangue nao compativel.");
-	}
+//	public static void validaCompatibilidadeTipoSanguineo(String tipoSanguineoPaciente, String tipoSanguineoOrgao)
+//			throws DadoInvalidoException {
+//		// Nao eh preciso validar os tipos sanguineos pq isso deve ser feito na
+//		// criacao dos orgaos e dos pacientes
+//		List<String> tipos = Constantes.TIPOS_SANGUINEOS_VALIDOS;
+//		int sanguePaciente = tipos.indexOf(tipoSanguineoPaciente);
+//		int sangueOrgao = tipos.indexOf(tipoSanguineoOrgao);
+//
+//		// Matriz que identifica a compatibilidade dos tipos sanguineos
+//		// forma O- O+ A- A+ B- B+ AB- AB+ por ela mesma
+//		boolean[][] matrizCompatibilidade = { 
+//				{ true, false, false, false, false, false, false, false },
+//				{ true, true, false, false, false, false, false, false },
+//				{ true, false, true, false, false, false, false, false },
+//				{ true, true, true, true, false, false, false, false },
+//				{ true, false, false, false, true, false, false, false },
+//				{ true, true, false, false, true, true, false, false },
+//				{ true, false, true, false, true, false, true, false },
+//				{ true, true, true, true, true, true, true, true } };
+//
+//		// TODO arrumar essa mensagem de erro quando sairem os testes
+//		if (!matrizCompatibilidade[sanguePaciente][sangueOrgao])
+//			throw new DadoInvalidoException("Tipo de sangue nao compativel.");
+//	}
 }

@@ -7,7 +7,6 @@ import projeto.hospital.gerencia.bancodeorgaos.Orgao;
 import projeto.hospital.gerencia.prontuario.Prontuario;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;
 import projeto.util.Constantes;
-import projeto.util.Util;
 
 /**
  * Classe responsavel por realizar os procedimentos
@@ -92,7 +91,7 @@ public class Procedimentos implements Serializable {
 	public void transplante(Prontuario prontuarioPaciente, Orgao orgao) throws DadoInvalidoException {
 		String procedimentoRealizado = "Transplante de " + orgao.getNome();
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		Util.validaCompatibilidadeTipoSanguineo(paciente.getTipoSanguineo(), orgao.getTipoSanguineo());
+		paciente.verificaCompatibilidadeSanguineaCom(orgao.getTipoSanguineo());
 
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		paciente.registraGasto(PRECO_TRANSPLANTE);

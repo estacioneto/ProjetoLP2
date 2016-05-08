@@ -2,6 +2,7 @@ package projeto.hospital.gerencia.bancodeorgaos;
 
 import java.io.Serializable;
 
+import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
 import projeto.util.Constantes;
 
 public class Orgao implements Serializable {
@@ -11,10 +12,10 @@ public class Orgao implements Serializable {
 	private static final long serialVersionUID = -6346901598202920798L;
 	
 	private String nome;
-	private String tipoSanguineo;
+	private TipoSanguineo tipoSanguineo;
 	private int quantidade;
 
-	public Orgao(String nome, String tipoSanguineo) {
+	public Orgao(String nome, TipoSanguineo tipoSanguineo) {
 		this.nome = nome;
 		this.tipoSanguineo = tipoSanguineo;
 		this.quantidade = Constantes.UM;
@@ -29,10 +30,10 @@ public class Orgao implements Serializable {
 	}
 
 	public String getTipoSanguineo() {
-		return tipoSanguineo;
+		return tipoSanguineo.toString();
 	}
 
-	public void setTipoSanguineo(String tipoSanguineo) {
+	public void setTipoSanguineo(TipoSanguineo tipoSanguineo) {
 		this.tipoSanguineo = tipoSanguineo;
 	}
 
