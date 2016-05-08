@@ -339,7 +339,7 @@ public class Model implements Serializable {
 	
 	public void realizaProcedimento(String procedimento, String nomeOrgao, int prontuarioPosicao){
 		Prontuario prontuario = gerenciadorDePaciente.getProntuarioPosicao(prontuarioPosicao);
-		Orgao orgao = bancoDeOrgaos.getOrgao(nomeOrgao, prontuario.getPaciente().getTiposanguineo());
+		Orgao orgao = bancoDeOrgaos.getOrgao(nomeOrgao, prontuario.getPaciente().getTipoSanguineo());
 		gerenciadorProcedimento.realizaProcedimento(procedimento, prontuario, orgao);
 	}
 }

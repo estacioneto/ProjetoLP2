@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import projeto.util.Constantes;
+import projeto.util.ConstantesReflection;
 import projeto.util.ExMetodo;
 import projeto.util.Util;
 
@@ -18,14 +19,19 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 */
 	private static final long serialVersionUID = 1697453654897L;
 
+	@ExMetodo(get = ConstantesReflection.GET_NOME)
 	private String nome;
-	@ExMetodo(get = Constantes.FORMATA_DATA_METODO)
+	@ExMetodo(get = ConstantesReflection.GET_DATA_NASCIMENTO)
 	private String data;
-	@ExMetodo(get = Constantes.GET_IDADE_PACIENTE)
+	@ExMetodo(get = ConstantesReflection.GET_IDADE)
 	private int idade;
+	@ExMetodo(get = ConstantesReflection.GET_PESO)
 	private Double peso;
+	@ExMetodo(get = ConstantesReflection.GET_TIPO_SANGUINEO)
 	private String tipoSanguineo;
+	@ExMetodo(get = ConstantesReflection.GET_SEXO)
 	private String sexo;
+	@ExMetodo(get = ConstantesReflection.GET_GENERO)
 	private String genero;
 	@ExMetodo(get = "getGastosPaciente")
 	private double gastos;
@@ -100,14 +106,14 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	/**
 	 * @return Tipo sanguineo
 	 */
-	public String getTiposanguineo() {
+	public String getTipoSanguineo() {
 		return tipoSanguineo;
 	}
 
 	/**
 	 * @return Sexo biologico
 	 */
-	public String getSexoBiologico() {
+	public String getSexo() {
 		return sexo;
 	}
 

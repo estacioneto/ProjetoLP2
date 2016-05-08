@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
-import projeto.util.Constantes;
+import projeto.util.ConstantesReflection;
 import projeto.util.ExMetodo;
 
 /**
@@ -22,14 +22,15 @@ public class Medicamento implements Serializable {
 	private static final long serialVersionUID = -7166091567180515070L;
 	// Para pegar a informacao da subclasse, ela tem que conhecer os seus
 	// atributos.
+	@ExMetodo(get = ConstantesReflection.GET_NOME)
 	private String nome;
-	@ExMetodo(get = Constantes.GET_QUANTIDADE, set = Constantes.SET_QUANTIDADE)
+	@ExMetodo(get = ConstantesReflection.GET_QUANTIDADE, set = ConstantesReflection.SET_QUANTIDADE)
 	private int quantidade;
-	@ExMetodo(get = Constantes.GET_CATEGORIAS)
+	@ExMetodo(get = ConstantesReflection.GET_CATEGORIAS)
 	private String categorias;
-	@ExMetodo(get = Constantes.GET_TIPO)
+	@ExMetodo(get = ConstantesReflection.GET_TIPO)
 	private String tipo;
-	@ExMetodo(get = Constantes.GET_PRECO, set = Constantes.SET_PRECO)
+	@ExMetodo(get = ConstantesReflection.GET_PRECO, set = ConstantesReflection.SET_PRECO)
 	private Double preco;
 
 	/**

@@ -76,20 +76,6 @@ public abstract class Constantes {
 	public static final int QUATRO = 4;
 	public static final int NOME_TAMANHO_MAXIMO = 50;
 	public static final int SENHA_TAMANHO_MINIMO = 8;
-	public static final String FORMATA_DATA_METODO = "getDataNascimento";
-	public static final String GET_IDADE_PACIENTE = "getIdade";
-	public static final String SENHA_PROTEGIDA = "getSenhaProtegida";
-	public static final String GET_CARGO = "getCargoNome";
 	public static final int SENHA_TAMANHO_MAXIMO = 12;
 	public static final int INDICE_INVALIDO = -1;
-	public static final String GET_TIPO = "getTipo";
-	public static final String GET_QUANTIDADE = "getQuantidade";
-	public static final String GET_CATEGORIAS = "getCategorias";
-	public static final String GET_PRECO = "getPreco";
-	public static final String GET_NOME = "getNome";
-	public static final String SET_NOME = "setNome";
-	public static final String SET_DATA = "setData";
-	public static final String FUNCIONARIO_NAO_ATUALIZAVEL = "Atributo nao atualizavel.";
-	public static final String SET_PRECO = "setPreco";
-	public static final String SET_QUANTIDADE = "setQuantidade";
 }

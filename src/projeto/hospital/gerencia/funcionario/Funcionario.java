@@ -6,7 +6,7 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
-import projeto.util.Constantes;
+import projeto.util.ConstantesReflection;
 import projeto.util.ExMetodo;
 import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
@@ -24,14 +24,15 @@ public class Funcionario implements Serializable {
 	 */
 	private static final long serialVersionUID = 1948219698630791794L;
 
-	@ExMetodo(get = Constantes.GET_NOME, set = Constantes.SET_NOME)
+	@ExMetodo(get = ConstantesReflection.GET_NOME, set = ConstantesReflection.SET_NOME)
 	private String nome;
+	@ExMetodo(get = ConstantesReflection.GET_MATRICULA)
 	private String matricula;
-	@ExMetodo(get = Constantes.GET_CARGO)
+	@ExMetodo(get = ConstantesReflection.GET_CARGO)
 	private Cargo cargo;
-	@ExMetodo(get = Constantes.SENHA_PROTEGIDA)
+	@ExMetodo(get = ConstantesReflection.GET_SENHA_PROTEGIDA)
 	private String senha;
-	@ExMetodo(get = Constantes.FORMATA_DATA_METODO, set = Constantes.SET_DATA)
+	@ExMetodo(get = ConstantesReflection.GET_DATA_NASCIMENTO, set = ConstantesReflection.SET_DATA)
 	private String data;
 
 	/**

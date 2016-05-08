@@ -91,7 +91,7 @@ public class Procedimentos implements Serializable {
 	public void transplante(Prontuario prontuarioPaciente, Orgao orgao) throws DadoInvalidoException {
 		String procedimentoRealizado = "Transplante de " + orgao.getNome();
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		Util.validaCompatibilidadeTipoSanguineo(paciente.getTiposanguineo(), orgao.getTipoSanguineo());
+		Util.validaCompatibilidadeTipoSanguineo(paciente.getTipoSanguineo(), orgao.getTipoSanguineo());
 
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		paciente.registraGasto(PRECO_TRANSPLANTE);
