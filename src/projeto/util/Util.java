@@ -9,7 +9,6 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
@@ -289,7 +288,7 @@ public abstract class Util {
 	public static void atualizaInfo(Object objeto, String atributo, Object novoValor, String erroAtualizacao) throws DadoInvalidoException {
 		Class clazz = objeto.getClass(); // Classe do objeto
 		Field campo = null; // Campo a ser requisitado.
-		Method metodo; // Metodo possivel de ser invocado.
+		Method metodo, validacao; // Metodos possiveis de serem invocados.
 		
 		/*
 		 * Caso o campo nao seja da classe,
@@ -307,6 +306,11 @@ public abstract class Util {
 			campo.setAccessible(true); // Faz com que seja possivel acessar o campo.
 			if (campo.isAnnotationPresent(MetodoAssociado.class)) { // Caso precise executar um metodo, executa.
 				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class); // Pega a anotacao do metodo.
+				if(campo.isAnnotationPresent(Validacao.class)){
+					Validacao anotacaoValidacao = campo.getAnnotation(Validacao.class); // Pega a anotacao de validacao do campo.
+					Method valida = ValidadorDeDados.class.getMethod(anotacaoValidacao.metodo(), anotacaoValidacao.erro().getClass(), novoValor.getClass());
+					valida.invoke(null, anotacaoValidacao.erro(), novoValor);
+				}
 				metodo = clazz.getMethod(anotacao.set(), novoValor.getClass()); // Pega o metodo.
 				metodo.invoke(objeto, novoValor); // Invoca o metodo pelo objeto.
 			}else{

@@ -64,10 +64,10 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
 			String tipoSanguineo, Funcionario funcionarioLogado) {
 		try {
-			ValidadorDeDados.validaNome(Constantes.DO_PACIENTE, nome);
-			ValidadorDeDados.validaData(data);
-			ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE, peso);
-			ValidadorDeDados.validaSexoBiologico(sexo);
+			ValidadorDeDados.validaNome(Constantes.NOME + Constantes.DO_PACIENTE, nome);
+			ValidadorDeDados.validaData(Constantes.DATA, data);
+			ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE + MensagensDeErro.NAO_PODE_SER_NEGATIVO, peso);
+			ValidadorDeDados.validaSexoBiologico(MensagensDeErro.SEXO_INVALIDO, sexo);
 			ValidadorDeDados.validaString(Constantes.GENERO, genero);
 			
 			TipoSanguineo sangue = tipoSanguineoFactory.criaTipo(tipoSanguineo);
@@ -130,7 +130,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 */
 	public Long getIdProntuarioPosicao(int posicao) {
 		try {
-			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
+			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO + MensagensDeErro.NAO_PODE_SER_NEGATIVO, posicao);
 
 			return getPacientePosicao(posicao).getId();
 		} catch (DadoInvalidoException e) {

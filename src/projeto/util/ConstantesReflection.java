@@ -24,5 +24,12 @@ public class ConstantesReflection {
 	public static final String SET_DATA = "setData";
 	public static final String SET_PRECO = "setPreco";
 	public static final String SET_QUANTIDADE = "setQuantidade";
-	//SETTERS	
+	public static final String SET_SENHA = "setSenha";
+	//SETTERS
+	
+	//VALIDACAO
+	public static final String VALIDA_NOME = "validaNome";
+	public static final String VALIDA_DATA = "validaData";
+	public static final String VALIDA_SENHA = "validaSenha";
+	//VALIDACAO
 }
