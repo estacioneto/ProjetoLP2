@@ -64,5 +64,7 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_MEDICAMENTO_CATEGORIA_INVALIDA = "Categoria invalida.";
 	public static final String ERRO_MEDICAMENTO_NAO_CADASTRADO = "Medicamento nao cadastrado.";
 	public static final String ERRO_ORGAO_INEXISTENTE = "Orgao nao cadastrado.";
+	public static final String SEXO_INVALIDO = "Sexo biologico invalido.";
+	public static final String NAO_PODE_SER_NEGATIVO = " nao pode ser negativo.";
 	// ERROS DE DADOS
 }

@@ -1,6 +1,6 @@
 package projeto.util.reflexao;
 
-public class ConstantesReflection {
+public abstract class ConstantesReflection {
 
 	//GETTERS
 	public static final String GET_DATA_NASCIMENTO = "getDataNascimento";
@@ -24,5 +24,17 @@ public class ConstantesReflection {
 	public static final String SET_DATA = "setData";
 	public static final String SET_PRECO = "setPreco";
 	public static final String SET_QUANTIDADE = "setQuantidade";
-	//SETTERS	
+	public static final String SET_SENHA = "setSenha";
+	//SETTERS
+	
+	//VALIDACAO
+	public static final String VALIDA_NOME = "validaNome";
+	public static final String VALIDA_DATA = "validaData";
+	public static final String VALIDA_SENHA = "validaSenha";
+	public static final String VALIDA_POSITIVO = "validaPositivo";
+	//	CONVERSAO
+	public static final String STRING_INTEIRO = "stringParaInteiro";
+	public static final String STRING_DOUBLE = "stringParaDouble";
+	//	CONVERSAO
+	//VALIDACAO
 }

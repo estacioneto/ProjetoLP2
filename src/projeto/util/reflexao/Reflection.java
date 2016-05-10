@@ -5,9 +5,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.util.Conversor;
 import projeto.util.Util;
+import projeto.util.ValidadorDeDados;
 
-public class Reflection {
+public abstract class Reflection {
 	
 	// REFLECTION
 
@@ -92,6 +94,16 @@ public class Reflection {
 			campo.setAccessible(true); // Faz com que seja possivel acessar o campo.
 			if (campo.isAnnotationPresent(MetodoAssociado.class)) { // Caso precise executar um metodo, executa.
 				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class); // Pega a anotacao do metodo.
+				if(campo.isAnnotationPresent(Validacao.class)){
+					Validacao anotacaoValidacao = campo.getAnnotation(Validacao.class); // Pega a anotacao de validacao do campo.
+					if(campo.isAnnotationPresent(Conversao.class)){
+						Conversao conversao = campo.getAnnotation(Conversao.class);
+						Method converte = Conversor.class.getMethod(conversao.conversor(), novoValor.getClass());
+						novoValor = converte.invoke(null, novoValor);
+					}
+					Method valida = ValidadorDeDados.class.getMethod(anotacaoValidacao.metodo(), anotacaoValidacao.erro().getClass(), novoValor.getClass());
+					valida.invoke(null, anotacaoValidacao.erro(), novoValor);
+				}
 				metodo = clazz.getMethod(anotacao.set(), novoValor.getClass()); // Pega o metodo.
 				metodo.invoke(objeto, novoValor); // Invoca o metodo pelo objeto.
 			}else{

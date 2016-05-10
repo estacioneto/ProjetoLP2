@@ -7,9 +7,10 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.util.Util;
-import projeto.util.ValidadorDeDados;
 import projeto.util.reflexao.ConstantesReflection;
 import projeto.util.reflexao.MetodoAssociado;
+import projeto.util.reflexao.Validacao;
+import projeto.util.Constantes;
 
 /**
  * Entidade Funcionario. Trata-se da entidade generica do sistema que tera todos
@@ -24,14 +25,17 @@ public class Funcionario implements Serializable {
 	 */
 	private static final long serialVersionUID = 1948219698630791794L;
 
+	@Validacao(metodo = ConstantesReflection.VALIDA_NOME, erro = Constantes.NOME + Constantes.DO_FUNCIONARIO)
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME, set = ConstantesReflection.SET_NOME)
 	private String nome;
 	@MetodoAssociado(get = ConstantesReflection.GET_MATRICULA)
 	private String matricula;
 	@MetodoAssociado(get = ConstantesReflection.GET_CARGO)
 	private Cargo cargo;
-	@MetodoAssociado(get = ConstantesReflection.GET_SENHA_PROTEGIDA)
+	@Validacao(metodo = ConstantesReflection.VALIDA_SENHA, erro = Constantes.SENHA)
+	@MetodoAssociado(get = ConstantesReflection.GET_SENHA_PROTEGIDA, set = ConstantesReflection.SET_SENHA)
 	private String senha;
+	@Validacao(metodo = ConstantesReflection.VALIDA_DATA, erro = Constantes.DATA)
 	@MetodoAssociado(get = ConstantesReflection.GET_DATA_NASCIMENTO, set = ConstantesReflection.SET_DATA)
 	private String data;
 
@@ -176,7 +180,6 @@ public class Funcionario implements Serializable {
 	 */
 	public void setData(String dataNascimento)
 			throws DadoInvalidoException {
-		ValidadorDeDados.validaData(dataNascimento);
 		this.data = dataNascimento;
 	}
 	// GETTERS E SETTERS

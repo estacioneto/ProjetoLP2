@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
+import projeto.util.Constantes;
 import projeto.util.reflexao.ConstantesReflection;
+import projeto.util.reflexao.Conversao;
 import projeto.util.reflexao.MetodoAssociado;
+import projeto.util.reflexao.Validacao;
 
 /**
  * Classe que possui o tipo basico que caracteriza todos os medicamentos.
@@ -20,16 +23,23 @@ public class Medicamento implements Serializable {
 	 * Serial gerado automaticamente.
 	 */
 	private static final long serialVersionUID = -7166091567180515070L;
-	// Para pegar a informacao da subclasse, ela tem que conhecer os seus
-	// atributos.
+	
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME)
 	private String nome;
+	
+	@Conversao(formato = Integer.class, conversor = ConstantesReflection.STRING_INTEIRO)
+	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.QUANTIDADE)
 	@MetodoAssociado(get = ConstantesReflection.GET_QUANTIDADE, set = ConstantesReflection.SET_QUANTIDADE)
-	private int quantidade;
+	private Integer quantidade;
+	
 	@MetodoAssociado(get = ConstantesReflection.GET_CATEGORIAS)
 	private String categorias;
+	
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO)
 	private String tipo;
+	
+	@Conversao(formato = Double.class, conversor = ConstantesReflection.STRING_DOUBLE)
+	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.PRECO)
 	@MetodoAssociado(get = ConstantesReflection.GET_PRECO, set = ConstantesReflection.SET_PRECO)
 	private Double preco;
 
@@ -81,7 +91,7 @@ public class Medicamento implements Serializable {
 	 * @param quantidade
 	 *            Quantidade nova do medicamento.
 	 */
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 	

@@ -26,7 +26,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	@MetodoAssociado(get = ConstantesReflection.GET_DATA_NASCIMENTO)
 	private String data;
 	@MetodoAssociado(get = ConstantesReflection.GET_IDADE)
-	private int idade;
+	private Integer idade;
 	@MetodoAssociado(get = ConstantesReflection.GET_PESO)
 	private Double peso;
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO_SANGUINEO)
@@ -36,7 +36,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	@MetodoAssociado(get = ConstantesReflection.GET_GENERO)
 	private String genero;
 	@MetodoAssociado(get = "getGastosPaciente")
-	private double gastos;
+	private Double gastos;
 	private Long id;
 
 	/**
@@ -63,7 +63,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.tipoSanguineo = tipoSanguineo;
 		this.sexo = sexoBiologico;
 		this.genero = genero;
-		this.gastos = 0;
+		this.gastos = Double.parseDouble(Integer.toString(Constantes.ZERO));
 	}
 
 	/**
