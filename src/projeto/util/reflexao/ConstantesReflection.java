@@ -35,6 +35,7 @@ public abstract class ConstantesReflection {
 	public static final String VALIDA_MATRICULA = "validaPadraoMatricula";
 	public static final String VALIDA_CARGO = "validaCargo";
 	public static final String VALIDA_STRING = "validaString";
+	public static final String VALIDA_SEXO = "validaSexoBiologico";
 	//	CONVERSAO
 	public static final String STRING_INTEIRO = "stringParaInteiro";
 	public static final String STRING_DOUBLE = "stringParaDouble";

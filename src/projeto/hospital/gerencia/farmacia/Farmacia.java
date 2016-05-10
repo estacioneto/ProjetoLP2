@@ -11,6 +11,7 @@ import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
+import projeto.util.reflexao.Reflection;
 
 /**
  * Classe que representa uma farmacia, sedo a mesma responsavel pela gerencia e
@@ -89,8 +90,11 @@ public class Farmacia implements Serializable {
 		ValidadorDeDados.validaPositivo(Constantes.PRECO + Constantes.DO_MEDICAMENTO, preco);
 		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO, quantidade);
 		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO, categorias);
+		
 		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome, tipoMedicamento, preco, quantidade,
 				categorias);
+		//Validacao poderia ser mais simples
+		//Reflection.validaObjeto(medicamento);
 		this.listaMedicamentos.add(medicamento);
 		return nome;
 	}

@@ -3,7 +3,6 @@ package projeto.util.reflexao;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.util.Conversor;
@@ -137,7 +136,7 @@ public abstract class Reflection {
 				try{
 					if(campo.isAnnotationPresent(Validacao.class)){
 						Validacao anotacaoValidacao = campo.getAnnotation(Validacao.class); // Pega a anotacao de validacao do campo.
-						if(campo.isAnnotationPresent(MetodoAssociado.class)){
+						if(anotacaoValidacao.get()){
 							MetodoAssociado get = campo.getAnnotation(MetodoAssociado.class);
 							Method metodoGet = clazz.getMethod(get.get());
 							valor = metodoGet.invoke(objeto);

@@ -69,7 +69,9 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 			ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE, peso);
 			ValidadorDeDados.validaSexoBiologico(MensagensDeErro.SEXO_INVALIDO, sexo);
 			ValidadorDeDados.validaString(Constantes.GENERO, genero);
-			
+			// Validacao poderia ser mais simples
+			//Paciente paciente = new Paciente(nome, data, peso, null, sexo, genero);
+			//Reflection.validaObjeto(paciente);
 			TipoSanguineo sangue = tipoSanguineoFactory.criaTipo(tipoSanguineo);
 			
 			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,

@@ -9,6 +9,7 @@ import projeto.util.Constantes;
 import projeto.util.Util;
 import projeto.util.reflexao.ConstantesReflection;
 import projeto.util.reflexao.MetodoAssociado;
+import projeto.util.reflexao.Validacao;
 
 /**
  * Classe para representar os pacientes
@@ -21,22 +22,35 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 */
 	private static final long serialVersionUID = 1697453654897L;
 
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.NOME + Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME)
 	private String nome;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_DATA, erro = Constantes.DATA)
 	@MetodoAssociado(get = ConstantesReflection.GET_DATA_NASCIMENTO)
 	private String data;
+	
 	@MetodoAssociado(get = ConstantesReflection.GET_IDADE)
 	private Integer idade;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.PESO + Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_PESO)
 	private Double peso;
+	
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO_SANGUINEO)
 	private TipoSanguineo tipoSanguineo;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_SEXO, erro = Constantes.SEXO + Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_SEXO)
 	private String sexo;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.GENERO + Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_GENERO)
 	private String genero;
+	
 	@MetodoAssociado(get = "getGastosPaciente")
 	private Double gastos;
+	
 	private Long id;
 
 	/**

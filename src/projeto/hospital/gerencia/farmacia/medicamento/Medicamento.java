@@ -37,7 +37,7 @@ public class Medicamento implements Serializable {
 	@MetodoAssociado(get = ConstantesReflection.GET_CATEGORIAS)
 	private String categorias;
 	
-	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.TIPO + Constantes.DO_MEDICAMENTO)
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.TIPO + Constantes.DO_MEDICAMENTO, get = true)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO)
 	private String tipo;
 	
