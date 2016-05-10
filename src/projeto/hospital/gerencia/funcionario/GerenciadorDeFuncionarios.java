@@ -15,6 +15,7 @@ import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
+import projeto.util.reflexao.Reflection;
 
 /**
  * Gerenciador de funcionarios. Este gerenciador trata de toda a logica do
@@ -186,7 +187,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 					|| funcionarioLogado.temPermissao(Permissao.ATUALIZAR_INFORMACOES_FUNCIONARIOS)))
 				throw new OperacaoInvalidaException(
 						MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + MensagensDeErro.PERMISSAO_NEGADA_ATUALIZACAO);
-			Util.atualizaInfo(this.funcionarios.get(matricula), atributo, novoValor,
+			Reflection.atualizaInfo(this.funcionarios.get(matricula), atributo, novoValor,
 					MensagensDeErro.ATRIBUTO_NAO_ATUALIZAVEL);
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + e.getMessage());
@@ -231,7 +232,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 			ValidadorDeDados.validaPadraoMatricula(matricula);
 			ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
 			if (this.contemFuncionario(matricula)) {
-				return Util.getInfo(this.funcionarios.get(matricula), atributo);
+				return Reflection.getInfo(this.funcionarios.get(matricula), atributo);
 			}
 			throw new OperacaoInvalidaException(
 					MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);

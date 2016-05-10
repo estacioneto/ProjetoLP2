@@ -6,10 +6,10 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
-import projeto.util.ConstantesReflection;
-import projeto.util.MetodoAssociado;
 import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
+import projeto.util.reflexao.ConstantesReflection;
+import projeto.util.reflexao.MetodoAssociado;
 
 /**
  * Entidade Funcionario. Trata-se da entidade generica do sistema que tera todos

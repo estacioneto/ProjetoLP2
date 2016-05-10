@@ -6,9 +6,9 @@ import java.time.LocalDate;
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
 import projeto.util.Constantes;
-import projeto.util.ConstantesReflection;
-import projeto.util.MetodoAssociado;
 import projeto.util.Util;
+import projeto.util.reflexao.ConstantesReflection;
+import projeto.util.reflexao.MetodoAssociado;
 
 /**
  * Classe para representar os pacientes

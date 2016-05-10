@@ -324,6 +324,6 @@ public abstract class ValidadorDeDados {
 //		if (atributo.equals(Constantes.NOME))
 //			validaNome(Constantes.DO_FUNCIONARIO, valor);
 //		else if (atributo.equals(Constantes.DATA))
-//			validaData(valor);
+//	x		validaData(valor);
 //	}
 }

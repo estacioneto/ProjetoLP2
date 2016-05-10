@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
-import projeto.util.ConstantesReflection;
-import projeto.util.MetodoAssociado;
+import projeto.util.reflexao.ConstantesReflection;
+import projeto.util.reflexao.MetodoAssociado;
 
 /**
  * Classe que possui o tipo basico que caracteriza todos os medicamentos.

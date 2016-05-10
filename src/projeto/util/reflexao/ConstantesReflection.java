@@ -1,4 +1,4 @@
-package projeto.util;
+package projeto.util.reflexao;
 
 public class ConstantesReflection {
 

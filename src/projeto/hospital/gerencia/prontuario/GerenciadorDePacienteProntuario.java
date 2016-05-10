@@ -15,8 +15,8 @@ import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
 import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineoFactory;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
-import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
+import projeto.util.reflexao.Reflection;
 
 /**
  * Gerencia os pacientes e prontuarios
@@ -100,7 +100,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 		try {
 			Paciente paciente = buscaPacientePorId(idPaciente);
 
-			return Util.getInfo(paciente, atributo);
+			return Reflection.getInfo(paciente, atributo);
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
