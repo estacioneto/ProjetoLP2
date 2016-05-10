@@ -8,6 +8,7 @@ import projeto.exceptions.dados.DataInvalidaException;
 import projeto.exceptions.dados.ObjetoNuloException;
 import projeto.exceptions.dados.StringVaziaException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
+import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 
 /**
  * Classe com validadores de dados
@@ -87,6 +88,18 @@ public abstract class ValidadorDeDados {
 		validaString(erro, cargo);
 		if (!Constantes.CARGOS_VALIDOS.contains(cargo.toLowerCase()))
 			throw new DadoInvalidoException(MensagensDeErro.CARGO_INVALIDO_FUNCIONARIO);
+	}
+	
+	/**
+	 * Verifica se o cargo eh valido de ser cadastrado
+	 * 
+	 * @param cargo
+	 *            Cargo a ser verificado
+	 * @throws DadoInvalidoException
+	 *             Caso o cargo nao exista.
+	 */
+	public static void validaCargo(String erro, Cargo cargo) throws DadoInvalidoException {
+		validaCargo(erro, cargo.getNome());
 	}
 	
 	/**

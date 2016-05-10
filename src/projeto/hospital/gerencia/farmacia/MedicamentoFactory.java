@@ -9,6 +9,7 @@ import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoGenerico;
 import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoReferencia;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
+import projeto.util.reflexao.Reflection;
 
 /**
  * Classe responsavel por criar um medicamento.

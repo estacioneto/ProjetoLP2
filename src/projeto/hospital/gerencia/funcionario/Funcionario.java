@@ -8,6 +8,7 @@ import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.util.Util;
 import projeto.util.reflexao.ConstantesReflection;
+import projeto.util.reflexao.Conversao;
 import projeto.util.reflexao.MetodoAssociado;
 import projeto.util.reflexao.Validacao;
 import projeto.util.Constantes;
@@ -28,13 +29,20 @@ public class Funcionario implements Serializable {
 	@Validacao(metodo = ConstantesReflection.VALIDA_NOME, erro = Constantes.NOME + Constantes.DO_FUNCIONARIO)
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME, set = ConstantesReflection.SET_NOME)
 	private String nome;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_MATRICULA, erro = Constantes.MATRICULA + Constantes.DO_FUNCIONARIO)
 	@MetodoAssociado(get = ConstantesReflection.GET_MATRICULA)
 	private String matricula;
+	
+	@Conversao(formato = Cargo.class, conversor = ConstantesReflection.CARGO_STRING)
+	@Validacao(metodo = ConstantesReflection.VALIDA_CARGO, erro = Constantes.CARGO + Constantes.DO_FUNCIONARIO)
 	@MetodoAssociado(get = ConstantesReflection.GET_CARGO)
 	private Cargo cargo;
+	
 	@Validacao(metodo = ConstantesReflection.VALIDA_SENHA, erro = Constantes.SENHA)
 	@MetodoAssociado(get = ConstantesReflection.GET_SENHA_PROTEGIDA, set = ConstantesReflection.SET_SENHA)
 	private String senha;
+	
 	@Validacao(metodo = ConstantesReflection.VALIDA_DATA, erro = Constantes.DATA)
 	@MetodoAssociado(get = ConstantesReflection.GET_DATA_NASCIMENTO, set = ConstantesReflection.SET_DATA)
 	private String data;

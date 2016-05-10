@@ -24,22 +24,25 @@ public class Medicamento implements Serializable {
 	 */
 	private static final long serialVersionUID = -7166091567180515070L;
 	
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.NOME + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME)
 	private String nome;
 	
 	@Conversao(formato = Integer.class, conversor = ConstantesReflection.STRING_INTEIRO)
-	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.QUANTIDADE)
+	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_QUANTIDADE, set = ConstantesReflection.SET_QUANTIDADE)
 	private Integer quantidade;
 	
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_CATEGORIAS)
 	private String categorias;
 	
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.TIPO + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO)
 	private String tipo;
 	
 	@Conversao(formato = Double.class, conversor = ConstantesReflection.STRING_DOUBLE)
-	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.PRECO)
+	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.PRECO + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_PRECO, set = ConstantesReflection.SET_PRECO)
 	private Double preco;
 

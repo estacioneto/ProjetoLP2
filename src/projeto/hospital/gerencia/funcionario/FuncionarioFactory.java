@@ -2,11 +2,13 @@ package projeto.hospital.gerencia.funcionario;
 
 import java.io.Serializable;
 
+import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 import projeto.hospital.gerencia.funcionario.cargo.Diretor;
 import projeto.hospital.gerencia.funcionario.cargo.Medico;
 import projeto.hospital.gerencia.funcionario.cargo.TecnicoAdministrativo;
 import projeto.util.Constantes;
+import projeto.util.reflexao.Reflection;
 
 /**
  * Factory de funcionarios. Cria os funcionarios de acordo com seus dados.

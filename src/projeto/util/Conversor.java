@@ -1,5 +1,7 @@
 package projeto.util;
 
+import projeto.hospital.gerencia.funcionario.cargo.Cargo;
+
 /**
  * Classe de conversao de dados. Contem algumas conversoes uteis para validacao
  * de dados.
@@ -40,7 +42,7 @@ public abstract class Conversor {
 	public static String doubleParaString(double numero) {
 		return Double.toString(numero);
 	}
-	
+
 	/**
 	 * Transforma um dado Double para String
 	 * 
@@ -61,5 +63,16 @@ public abstract class Conversor {
 	 */
 	public static String inteiroParaString(int numero) {
 		return Integer.toString(numero);
+	}
+
+	/**
+	 * Converte o cargo para uma String
+	 * 
+	 * @param cargo
+	 *            Cargo.
+	 * @return Nome do cargo.
+	 */
+	public static String cargoParaString(Cargo cargo) {
+		return cargo.getNome();
 	}
 }
