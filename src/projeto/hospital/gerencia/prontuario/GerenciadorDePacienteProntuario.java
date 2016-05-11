@@ -11,9 +11,6 @@ import projeto.hospital.gerencia.funcionario.Funcionario;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.hospital.gerencia.prontuario.paciente.GeradorIdPaciente;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;
-import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
-import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineoFactory;
-import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
 import projeto.util.reflexao.Reflection;
@@ -31,7 +28,6 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 
 	private Map<Paciente, Prontuario> pacientes;
 	private GeradorIdPaciente geradorIdPaciente;
-	private TipoSanguineoFactory tipoSanguineoFactory;
 
 	/**
 	 * Construtor
@@ -39,7 +35,6 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	public GerenciadorDePacienteProntuario() {
 		geradorIdPaciente = new GeradorIdPaciente();
 		pacientes = new TreeMap<>();
-		tipoSanguineoFactory = TipoSanguineoFactory.getInstacia();		
 	}
 
 	/**
@@ -64,25 +59,21 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
 			String tipoSanguineo, Funcionario funcionarioLogado) {
 		try {
-			ValidadorDeDados.validaNome(Constantes.NOME + Constantes.DO_PACIENTE, nome);
-			ValidadorDeDados.validaData(Constantes.DATA, data);
-			ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE, peso);
-			ValidadorDeDados.validaSexoBiologico(MensagensDeErro.SEXO_INVALIDO, sexo);
-			ValidadorDeDados.validaString(Constantes.GENERO, genero);
-			// Validacao poderia ser mais simples
-			//Paciente paciente = new Paciente(nome, data, peso, null, sexo, genero);
-			//Reflection.validaObjeto(paciente);
-			TipoSanguineo sangue = tipoSanguineoFactory.criaTipo(tipoSanguineo);
+//			ValidadorDeDados.validaNome(Constantes.NOME + Constantes.DO_PACIENTE, nome);
+//			ValidadorDeDados.validaData(Constantes.DATA, data);
+//			ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE, peso);
+//			ValidadorDeDados.validaSexoBiologico(MensagensDeErro.SEXO_INVALIDO, sexo);
+//			ValidadorDeDados.validaString(Constantes.GENERO, genero);
 			
 			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
 					Permissao.CADASTRAR_PACIENTES, funcionarioLogado);
-			Paciente novoPaciente = new Paciente(nome, data, peso, sangue, sexo, genero);
-			if (pacientes.containsKey(novoPaciente))
+			Paciente paciente = (Paciente) Reflection.godFactory(Paciente.class, nome, data, peso, tipoSanguineo, sexo, genero);
+			if (pacientes.containsKey(paciente))
 				throw new DadoInvalidoException(MensagensDeErro.PACIENTE_JA_CADASTRADO);
 
 			Long novoId = geradorIdPaciente.getProximoId();
-			novoPaciente.setId(novoId);
-			pacientes.put(novoPaciente, new Prontuario(novoPaciente));
+			paciente.setId(novoId);
+			pacientes.put(paciente, new Prontuario(paciente));
 			return novoId;
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());

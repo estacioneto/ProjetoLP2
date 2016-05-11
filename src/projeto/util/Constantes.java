@@ -46,6 +46,7 @@ public abstract class Constantes {
 	public static final String NOME = "Nome";
 	public static final String PRECO = "Preco";
 	public static final String CARGO = "Cargo";
+	public static final String DO_CARGO = " do cargo";
 	public static final String ATRIBUTO = "Atributo";
 	public static final String DATA = "Data";
 	public static final String SENHA = "Senha";

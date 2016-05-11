@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
@@ -25,11 +26,8 @@ public abstract class Util {
 	 * @param cargo
 	 *            Nome do cargo.
 	 * @return Codigo do cargo.
-	 * 
-	 * @throws DadoInvalidoException
-	 *             Caso o cargo nao exista.
 	 */
-	public static String getCodigoPorCargo(String cargo) throws DadoInvalidoException {
+	public static String getCodigoPorCargo(String cargo) {
 		// Validacao da string ser valida ja deve ter sido feita antes de chamar
 		// esse metodo
 
@@ -37,9 +35,7 @@ public abstract class Util {
 			return Constantes.CODIGO_DIRETOR;
 		if (cargo.equals(Constantes.MEDICO))
 			return Constantes.CODIGO_MEDICO;
-		if (cargo.equals(Constantes.TECNICO_ADMINISTATIVO))
-			return Constantes.CODIGO_TECNICO;
-		throw new DadoInvalidoException("Cargo inexistente!");
+		return Constantes.CODIGO_TECNICO;
 	}
 	
 	/**
@@ -125,6 +121,17 @@ public abstract class Util {
 		String formatoSaida = String.join("-", dataQuebrada[2],
 				dataQuebrada[1], dataQuebrada[0]);
 		return formatoSaida;
+	}
+	
+	
+	/**
+	 * Retorna o ano atual.
+	 * 
+	 * @return Ano atual.
+	 */
+	public static String getAnoAtual() {
+		LocalDate dataAtual = LocalDate.now();
+		return Integer.toString(dataAtual.getYear());
 	}
 	// DATA
 	// ARQUIVOS

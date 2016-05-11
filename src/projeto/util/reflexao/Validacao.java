@@ -12,4 +12,6 @@ public @interface Validacao {
 	String metodo() default "";
 	String erro() default "";
 	boolean get() default false;
+	boolean cadastro() default true;
+	boolean atualizacao() default true;
 }

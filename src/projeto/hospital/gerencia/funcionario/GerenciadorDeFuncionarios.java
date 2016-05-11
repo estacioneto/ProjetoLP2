@@ -1,7 +1,6 @@
 package projeto.hospital.gerencia.funcionario;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,16 +29,12 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	private static final long serialVersionUID = 5781785073141058466L;
 
 	private Map<String, Funcionario> funcionarios;
-	private FuncionarioFactory factoryFuncionarios;
-	private GeradorDeDadosDeSeguranca geradorDadosSeguranca;
 
 	/**
 	 * Construtor padrao.
 	 */
 	public GerenciadorDeFuncionarios() {
 		this.funcionarios = new HashMap<String, Funcionario>();
-		this.factoryFuncionarios = new FuncionarioFactory();
-		this.geradorDadosSeguranca = new GeradorDeDadosDeSeguranca();
 	}
 
 	// OPERACAO DE VALIDACAO DO SISTEMA
@@ -84,12 +79,9 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 */
 	public String cadastraFuncionario(String nome, String cargo, String dataNascimento, Funcionario funcionarioLogado) {
 		try {
-			// Validacao necessaria antes de realizar o cadastro
+			// Validacao NAO necessaria antes de realizar o cadastro
 			// A ordem importa e a geracao de uma matricula depende de um cargo
 			// valido e uma data valida.
-			ValidadorDeDados.validaNome(Constantes.NOME + Constantes.DO_FUNCIONARIO, nome);
-			ValidadorDeDados.validaCargo(MensagensDeErro.CARGO_FUNCIONARIO, cargo);
-			ValidadorDeDados.validaData(Constantes.DATA, dataNascimento);
 
 			if (Constantes.DIRETOR_GERAL.equals(cargo) && !this.isEmpty())
 				throw new OperacaoInvalidaException(
@@ -99,12 +91,9 @@ public class GerenciadorDeFuncionarios implements Serializable {
 				ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_FUNCIONARIO,
 						Permissao.CADASTRAR_FUNCIONARIOS, funcionarioLogado);
 
-			String matricula = geradorDadosSeguranca.geraMatricula(cargo, getAnoAtual());
-			String senha = geradorDadosSeguranca.geraSenha(matricula, Util.getAnoPorData(dataNascimento));
-			Funcionario funcionario = this.factoryFuncionarios.criaFuncionario(nome, cargo, dataNascimento, matricula,
-					senha);
+			Funcionario funcionario = (Funcionario)Reflection.godFactory(Funcionario.class, nome, cargo, dataNascimento);
 			if (this.adicionaFuncionario(funcionario))
-				return matricula;
+				return funcionario.getMatricula();
 			else
 				throw new OperacaoInvalidaException("Funcionario ja cadastrado!");
 		} catch (DadoInvalidoException e) {
@@ -258,16 +247,6 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 */
 	public boolean isEmpty() {
 		return this.funcionarios.isEmpty();
-	}
-
-	/**
-	 * Retorna o ano atual.
-	 * 
-	 * @return Ano atual.
-	 */
-	private String getAnoAtual() {
-		LocalDate dataAtual = LocalDate.now();
-		return Integer.toString(dataAtual.getYear());
 	}
 	// CONSULTA DE FUNCIONARIO
 }

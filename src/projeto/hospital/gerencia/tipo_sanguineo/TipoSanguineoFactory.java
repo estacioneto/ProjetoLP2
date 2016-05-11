@@ -7,9 +7,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import projeto.exceptions.dados.DadoInvalidoException;
-import projeto.util.Constantes;
-
 /**
  * Factory singleton de tipos sanguineos
  * 
@@ -48,13 +45,8 @@ public class TipoSanguineoFactory implements Serializable {
 	 * @param tipo
 	 *            Tipo
 	 * @return Tipo sanguineo criado
-	 * @throws DadoInvalidoException
-	 *             Caso o tipo seja invalido
 	 */
-	public TipoSanguineo criaTipo(String tipo) throws DadoInvalidoException {
-		if (!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipo))
-			throw new DadoInvalidoException("Tipo sanguineo invalido.");
-
+	public TipoSanguineo criaTipo(String tipo) {
 		return new TipoSanguineo(tipo, this.mapaTipos.get(tipo));
 	}
 

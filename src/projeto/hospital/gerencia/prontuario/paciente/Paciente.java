@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
+import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineoFactory;
 import projeto.util.Constantes;
 import projeto.util.Util;
 import projeto.util.reflexao.ConstantesReflection;
@@ -37,6 +38,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	@MetodoAssociado(get = ConstantesReflection.GET_PESO)
 	private Double peso;
 	
+	@Validacao(metodo = ConstantesReflection.VALIDA_TIPO_SANGUINEO, erro = Constantes.TIPOS_SANGUINEO)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO_SANGUINEO)
 	private TipoSanguineo tipoSanguineo;
 	
@@ -69,12 +71,12 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 * @param genero
 	 *            Genero
 	 */
-	public Paciente(String nome, String dataNascimento, Double peso, TipoSanguineo tipoSanguineo, String sexoBiologico,
+	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {
 		this.nome = nome;
 		this.data = dataNascimento;
 		this.peso = peso;
-		this.tipoSanguineo = tipoSanguineo;
+		this.tipoSanguineo = TipoSanguineoFactory.getInstacia().criaTipo(tipoSanguineo);
 		this.sexo = sexoBiologico;
 		this.genero = genero;
 		this.gastos = Double.parseDouble(Integer.toString(Constantes.ZERO));

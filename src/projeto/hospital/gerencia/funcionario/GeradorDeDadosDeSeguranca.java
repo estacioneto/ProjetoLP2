@@ -3,7 +3,6 @@ package projeto.hospital.gerencia.funcionario;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
-import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.util.Constantes;
 import projeto.util.Util;
 
@@ -22,13 +21,21 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 
 	private int cadastros;
 	private DecimalFormat formatadorDecimal;
+	private static GeradorDeDadosDeSeguranca instancia;
 
 	/**
 	 * Construtor padrao.
 	 */
-	public GeradorDeDadosDeSeguranca() {
+	private GeradorDeDadosDeSeguranca() {
 		this.cadastros = 1;
 		this.formatadorDecimal = new DecimalFormat(Constantes.FORMATO_TRES_NUMEROS);
+	}
+	
+	public static GeradorDeDadosDeSeguranca getIncancia(){
+		if(instancia == null){
+			instancia = new GeradorDeDadosDeSeguranca();
+		}
+		return instancia;
 	}
 
 	/**
@@ -39,10 +46,8 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 	 * @param ano
 	 *            Ano de nascimento do funcionario.
 	 * @return Matricula gerada.
-	 * @throws DadoInvalidoException
-	 *             Caso o cargo nao exista.
 	 */
-	public String geraMatricula(String cargo, String ano) throws DadoInvalidoException {
+	public String geraMatricula(String cargo, String ano) {
 		String matricula = getMatriculaCadastro(cargo, ano, Integer.toString(cadastros));
 		this.novoCadastroEfetuado();
 		return matricula;
@@ -58,10 +63,8 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 	 * @param cadastro
 	 *            Cadastro desejado.
 	 * @return Matricula gerada no determinado cadastro.
-	 * @throws DadoInvalidoException
-	 *             Caso o cargo nao exista.
 	 */
-	public String getMatriculaCadastro(String cargo, String ano, String cadastro) throws DadoInvalidoException {
+	public String getMatriculaCadastro(String cargo, String ano, String cadastro) {
 		String codigo = Util.getCodigoPorCargo(cargo);
 		String matricula = codigo + ano + formatadorDecimal.format(Integer.parseInt(cadastro));
 		return matricula;
