@@ -9,17 +9,17 @@ public abstract class Constantes {
 	// CONTANTES DE IMPRESSAO E STRINGS
 	public static final String BARRA = "/";
 	public static final String FORMATO_TRES_NUMEROS = "000";
-	
+
 	public static final String DIRETOR_GERAL = "Diretor Geral";
 	public static final String MEDICO = "Medico";
 	public static final String TECNICO_ADMINISTATIVO = "Tecnico Administrativo";
 	public static final String TECNICO = "Tecnico";
 	public static final String FUNCIONARIO = "Funcionario";
 	public static final String PACIENTE = "Paciente";
-	
+
 	public static final String DO_PACIENTE = " do paciente";
 	public static final String DO_FUNCIONARIO = " do funcionario";
-	public static final String DO_MEDICAMENTO= " do medicamento";
+	public static final String DO_MEDICAMENTO = " do medicamento";
 	// CONTANTES DE IMPRESSAO E STRINGS
 
 	// CONSTANTES DE VALIDACAO
@@ -27,7 +27,7 @@ public abstract class Constantes {
 	public final static String CODIGO_MEDICO = "2";
 	public final static String CODIGO_TECNICO = "3";
 	public final static String PRIMEIRO_CADASTRO = "001";
-	
+
 	public static final String DATA_REGEX = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d{2})";
 	public static final ArrayList<String> TIPOS_SANGUINEOS_VALIDOS = new ArrayList<String>(
 			Arrays.asList(new String[] { "O-", "O+", "B-", "B+", "A-", "A+",
@@ -40,8 +40,14 @@ public abstract class Constantes {
 			Arrays.asList(new String[] { DIRETOR_GERAL.toLowerCase(),
 					MEDICO.toLowerCase(), TECNICO.toLowerCase(),
 					TECNICO_ADMINISTATIVO.toLowerCase() }));
+
+	public static final String TIPO_GENERICO = "Generico";
+	public static final String TIPO_REFERENCIA = "Referencia";
+	public static final ArrayList<String> TIPOS_MEDICAMENTO_VALIDOS = new ArrayList<String>(
+			Arrays.asList(new String[] { TIPO_REFERENCIA.toLowerCase(),
+					TIPO_GENERICO.toLowerCase()}));
 	// CONSTANTES DE VALIDACAO
-	
+
 	// CONSTANTES DE ATRIBUTOS
 	public static final String NOME = "Nome";
 	public static final String PRECO = "Preco";
@@ -63,8 +69,6 @@ public abstract class Constantes {
 	public static final String QUANTIDADE = "Quantidade";
 	public static final String CATEGORIAS = "Categorias";
 	public static final String TIPO = "Tipo";
-	public static final String TIPO_GENERICO = "Generico";
-	public static final String TIPO_REFERENCIA = "Referencia";
 	// CONSTANTES DE ATRIBUTOS
 
 	// CONSTANTES DE PERSISTENCIA
@@ -72,7 +76,8 @@ public abstract class Constantes {
 	public static final File ARQUIVO_DADOS = new File(DADOS_DIRETORIO);
 	public static final String ARQUIVO_GERENCIADOR_FUNCIONARIOS = DADOS_DIRETORIO
 			+ "gerenciadorFuncionarios.txt";
-	public static final String ARQUIVO_CONTROLLER = DADOS_DIRETORIO + "controller.txt";
+	public static final String ARQUIVO_CONTROLLER = DADOS_DIRETORIO
+			+ "controller.txt";
 	// CONSTANTES DE PERSISTENCIA
 
 	// CONSTANTES NUMERICAS

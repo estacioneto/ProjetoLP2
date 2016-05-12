@@ -9,8 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
-import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoGenerico;
-import projeto.hospital.gerencia.farmacia.medicamento.MedicamentoReferencia;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoGenerico;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoReferencia;
 
 public class MedicamentoTest {
 

@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoGenerico;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoReferencia;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.TipoMedicamento;
 import projeto.util.Constantes;
 import projeto.util.reflexao.ConstantesReflection;
 import projeto.util.reflexao.Conversao;
@@ -27,21 +30,21 @@ public class Medicamento implements Serializable {
 	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.NOME + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME)
 	private String nome;
-
-	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.TIPO + Constantes.DO_MEDICAMENTO, get = true)
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_TIPO_MEDICAMENTO, erro = Constantes.TIPO + Constantes.DO_MEDICAMENTO, get = true)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO)
-	private String tipo;
+	private TipoMedicamento tipo;
 	
 	@Conversao(formato = Double.class, conversor = ConstantesReflection.STRING_DOUBLE)
 	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.PRECO + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_PRECO, set = ConstantesReflection.SET_PRECO)
 	private Double preco;
-	
+
 	@Conversao(formato = Integer.class, conversor = ConstantesReflection.STRING_INTEIRO)
 	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_QUANTIDADE, set = ConstantesReflection.SET_QUANTIDADE)
 	private Integer quantidade;
-
+	
 	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_CATEGORIAS)
 	private String categorias;
@@ -58,18 +61,19 @@ public class Medicamento implements Serializable {
 	 * @param categorias
 	 *            Categorias do medicamento
 	 */
-	public Medicamento(String nome, Double preco, int quantidade, String categorias) {
+	public Medicamento(String nome,  String tipo, Double preco, int quantidade, String categoria) {
 		this.nome = nome;
 		this.preco = preco;
 		this.quantidade = quantidade;
-		this.categorias = categorias;
+		this.categorias = categoria;
+		this.setTipo(tipo);
 	}
 
 	/**
 	 * @return Tipo do medicamento.
 	 */
 	public String getTipo() {
-		return this.tipo;
+		return this.tipo.getTipo();
 	}
 
 	/**
@@ -79,14 +83,18 @@ public class Medicamento implements Serializable {
 	 *            Tipo do medicamento.
 	 */
 	public void setTipo(String tipo) {
-		this.tipo = tipo;
+		if (tipo.equalsIgnoreCase(Constantes.TIPO_GENERICO)) {
+			this.tipo = new MedicamentoGenerico();
+		} else {
+			this.tipo = new MedicamentoReferencia();
+		}
 	}
 
 	/**
 	 * @return Preco original do medicamento.
 	 */
 	public double getPreco() {
-		return preco;
+		return this.tipo.calculaPreco(preco);
 	}
 
 	/**
@@ -173,7 +181,7 @@ public class Medicamento implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		String formatacao = String.format(" %s - Preco: R$ %.2f - Disponivel: %d - Categorias: %s", this.getNome(),
+		String formatacao = String.format("%s %s - Preco: R$ %.2f - Disponivel: %d - Categorias: %s", this.tipo.toString(),this.getNome(),
 				this.getPreco(), this.getQuantidade(), this.getCategorias());
 		return formatacao;
 	}

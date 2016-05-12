@@ -265,6 +265,12 @@ public abstract class ValidadorDeDados {
 		if(!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipo))
 			throw new DadoInvalidoException(erro);
 	}
+	
+	public static void validaTipoMedicamento(String atributo, String tipo) throws DadoInvalidoException{
+		if(!Constantes.TIPOS_MEDICAMENTO_VALIDOS.contains(tipo))
+			throw new DadoInvalidoException(atributo + " invalido.");
+	}
+	
 	// ATRIBUTOS
 	// NUMEROS
 	/**
