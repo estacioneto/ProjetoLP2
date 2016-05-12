@@ -261,7 +261,7 @@ public abstract class ValidadorDeDados {
 		}
 	}
 	
-	public void validaTipoSanguineo(String erro, String tipo) throws DadoInvalidoException{
+	public static void validaTipoSanguineo(String erro, String tipo) throws DadoInvalidoException{
 		if(!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipo))
 			throw new DadoInvalidoException(erro);
 	}

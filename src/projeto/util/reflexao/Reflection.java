@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.funcionario.Funcionario;
+import projeto.hospital.gerencia.prontuario.paciente.Paciente;
 import projeto.util.Constantes;
 import projeto.util.Conversor;
 import projeto.util.Util;
@@ -164,4 +165,5 @@ public abstract class Reflection {
 		}
 	}
 	// REFLECTION
+	
 }

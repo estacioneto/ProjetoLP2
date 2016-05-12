@@ -7,6 +7,7 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
 import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineoFactory;
 import projeto.util.Constantes;
+import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 import projeto.util.reflexao.ConstantesReflection;
 import projeto.util.reflexao.MetodoAssociado;
@@ -38,7 +39,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	@MetodoAssociado(get = ConstantesReflection.GET_PESO)
 	private Double peso;
 	
-	@Validacao(metodo = ConstantesReflection.VALIDA_TIPO_SANGUINEO, erro = Constantes.TIPOS_SANGUINEO)
+	@Validacao(metodo = ConstantesReflection.VALIDA_TIPO_SANGUINEO, erro = MensagensDeErro.TIPO_SANGUINEO_INVALIDO)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO_SANGUINEO)
 	private TipoSanguineo tipoSanguineo;
 	

@@ -30,6 +30,7 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_PRONTUARIOS_INSUFICIENTES = "Nao ha prontuarios suficientes (max = %d).";
 	public static final String ERRO_CADASTRO_PACIENTE = "Nao foi possivel cadastrar o paciente. ";
 	public static final String TIPO_SANGUINEO = "Tipo sanguineo";
+	public static final String TIPO_SANGUINEO_INVALIDO = TIPO_SANGUINEO + " invalido.";
 	public static final String PACIENTE_JA_CADASTRADO = "Paciente ja cadastrado.";
 
 	// PACIENTE
