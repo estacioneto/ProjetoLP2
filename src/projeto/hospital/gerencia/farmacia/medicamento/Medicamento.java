@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
+import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoGenerico;
 import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoReferencia;
 import projeto.hospital.gerencia.farmacia.medicamento.tipos.TipoMedicamento;
@@ -12,6 +14,7 @@ import projeto.util.Constantes;
 import projeto.util.reflexao.ConstantesReflection;
 import projeto.util.reflexao.Conversao;
 import projeto.util.reflexao.MetodoAssociado;
+import projeto.util.reflexao.Reflection;
 import projeto.util.reflexao.Validacao;
 
 /**
@@ -83,10 +86,14 @@ public class Medicamento implements Serializable {
 	 *            Tipo do medicamento.
 	 */
 	public void setTipo(String tipo) {
-		if (tipo.equalsIgnoreCase(Constantes.TIPO_GENERICO)) {
-			this.tipo = new MedicamentoGenerico();
-		} else {
-			this.tipo = new MedicamentoReferencia();
+		try{
+			if (tipo.equalsIgnoreCase(Constantes.TIPO_GENERICO)) {
+				this.tipo = (TipoMedicamento) Reflection.godFactory(MedicamentoGenerico.class);
+			} else {
+				this.tipo = (TipoMedicamento) Reflection.godFactory(MedicamentoReferencia.class);
+			}
+		}catch(DadoInvalidoException excecao){
+			throw new OperacaoInvalidaException(excecao.getMessage());
 		}
 	}
 

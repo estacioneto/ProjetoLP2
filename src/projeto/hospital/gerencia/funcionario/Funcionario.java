@@ -14,6 +14,7 @@ import projeto.util.Util;
 import projeto.util.reflexao.ConstantesReflection;
 import projeto.util.reflexao.Conversao;
 import projeto.util.reflexao.MetodoAssociado;
+import projeto.util.reflexao.Reflection;
 import projeto.util.reflexao.Validacao;
 
 /**
@@ -137,14 +138,18 @@ public class Funcionario implements Serializable {
 	 *            Cargo novo do funcionario.
 	 */
 	public void setCargo(String cargo) {
-		if (Constantes.DIRETOR_GERAL.equals(cargo)) {
-			this.cargo = new Diretor();
-		} else if (Constantes.TECNICO_ADMINISTATIVO.equals(cargo)) {
-			this.cargo = new TecnicoAdministrativo();
-		} else if (Constantes.MEDICO.equals(cargo)) {
-			this.cargo = new Medico();
-		}else{
-			this.cargo = null;
+		try{
+			if (Constantes.DIRETOR_GERAL.equals(cargo)) {
+				this.cargo = (Cargo) Reflection.godFactory(Diretor.class);
+			} else if (Constantes.TECNICO_ADMINISTATIVO.equals(cargo)) {
+				this.cargo = (Cargo) Reflection.godFactory(TecnicoAdministrativo.class);
+			} else if (Constantes.MEDICO.equals(cargo)) {
+				this.cargo = (Cargo) Reflection.godFactory(Medico.class);
+			}else{
+				this.cargo = null;
+			}
+		} catch (DadoInvalidoException excecao){
+			throw new OperacaoInvalidaException(excecao.getMessage());
 		}
 	}
 
