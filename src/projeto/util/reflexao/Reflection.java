@@ -12,7 +12,7 @@ import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
 
 public abstract class Reflection {
-	
+
 	// REFLECTION
 
 	/**
@@ -28,147 +28,215 @@ public abstract class Reflection {
 	 * @throws DadoInvalidoException
 	 *             Caso o atributo seja invalido
 	 */
-	public static Object getInfo(Object objeto, String atributo) throws DadoInvalidoException {
-		Class clazz = objeto.getClass(); // Classe do objeto
-		Field campo = null; // Campo a ser requisitado.
-		Method metodo; // Metodo possivel de ser invocado.
-		
+	public static Object getInfo(Object objeto, String atributo)
+			throws DadoInvalidoException {
+		// Classe do objeto
+		Class clazz = objeto.getClass();
+		// Campo a ser requisitado.
+		Field campo = null;
+		// Metodo possivel de ser invocado.
+		Method metodo;
+
 		/*
-		 * Caso o campo nao seja da classe,
-		 * pega o da superclasse.
+		 * Caso o campo nao seja da classe, pega o da superclasse.
 		 */
-		do{
-			try{
-				campo = clazz.getDeclaredField(Util.getNomeCampo(atributo)); // Pega o campo referente ao atributo
-			}catch(NoSuchFieldException noField){ 
-				clazz = clazz.getSuperclass(); // Caso o campo nao exista, procura na superclasse.
+		do {
+			try {
+				// Pega o campo referente ao atributo
+				campo = clazz.getDeclaredField(Util.getNomeCampo(atributo));
+			} catch (NoSuchFieldException noField) {
+				// Caso o campo nao exista, procura na superclasse.
+				clazz = clazz.getSuperclass();
 			}
-		}while(campo == null);
-		
+		} while (campo == null);
+
 		try {
-			campo.setAccessible(true); // Faz com que seja possivel acessar o campo.
-			if (campo.isAnnotationPresent(MetodoAssociado.class)) { // Caso precise executar um metodo, executa.
-				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class); // Pega a anotacao do metodo.
-				metodo = clazz.getMethod(anotacao.get()); // Pega o metodo.
-				return metodo.invoke(objeto); // Invoca o metodo pelo objeto.
+			// Faz com que seja possivel acessar o campo.
+			campo.setAccessible(true);
+			// Caso precise executar um metodo, executa.
+			if (campo.isAnnotationPresent(MetodoAssociado.class)) {
+				// Pega a anotacao do metodo.
+				MetodoAssociado anotacao = campo
+						.getAnnotation(MetodoAssociado.class);
+				// Pega o metodo.
+				metodo = clazz.getMethod(anotacao.get());
+				// Invoca o metodo pelo objeto.
+				return metodo.invoke(objeto);
 			}
-			return campo.get(objeto); // Caso nao precise executar nenhum metodo, retorna o proprio campo.
-		} catch (IllegalArgumentException
-				| IllegalAccessException | NoSuchMethodException
-				| SecurityException e){
-			//Caso o atributo passado nao seja compativel.
-			throw new DadoInvalidoException("Atributo nao valido: " + Util.getNomeCampo(atributo) + "."); 
-		}catch(InvocationTargetException excecao) {
-			throw new DadoInvalidoException(excecao.getCause().getMessage()); // Caso o metodo lance uma excecao.
+			// Caso nao precise executar nenhum metodo, retorna o proprio campo.
+			return campo.get(objeto);
+		} catch (IllegalArgumentException | IllegalAccessException
+				| NoSuchMethodException | SecurityException e) {
+			// Caso o atributo passado nao seja compativel.
+			throw new DadoInvalidoException("Atributo nao valido: "
+					+ Util.getNomeCampo(atributo) + ".");
+		} catch (InvocationTargetException excecao) {
+			// Caso o metodo lance uma excecao.
+			throw new DadoInvalidoException(excecao.getCause().getMessage());
 		}
 	}
-	
+
 	/**
 	 * Atualiza a informacao de uma entidade.
 	 * 
-	 * @param objeto 
-	 *               Entidade.
+	 * @param objeto
+	 *            Entidade.
 	 * @param atributo
-	 *               Atributo a ser atualizado.
+	 *            Atributo a ser atualizado.
 	 * @param novoValor
-	 *               Novo valor da entidade.
-	 * @throws DadoInvalidoException 
-	 *               Caso algo nao saia como desejado.
+	 *            Novo valor da entidade.
+	 * @throws DadoInvalidoException
+	 *             Caso algo nao saia como desejado.
 	 */
-	public static void atualizaInfo(Object objeto, String atributo, Object novoValor, String erroAtualizacao) throws DadoInvalidoException {
-		Class clazz = objeto.getClass(); // Classe do objeto
-		Field campo = null; // Campo a ser requisitado.
-		Method metodo; // Metodo possivel de ser invocado.
-		
+	public static void atualizaInfo(Object objeto, String atributo,
+			Object novoValor, String erroAtualizacao)
+			throws DadoInvalidoException {
+		// Classe do objeto
+		Class clazz = objeto.getClass();
+		// Campo a ser requisitado.
+		Field campo = null;
+		// Metodo possivel de ser invocado.
+		Method metodo;
+
 		/*
-		 * Caso o campo nao seja da classe,
-		 * pega o da superclasse.
+		 * Caso o campo nao seja da classe, pega o da superclasse.
 		 */
-		do{
-			try{
-				campo = clazz.getDeclaredField(Util.getNomeCampo(atributo)); // Pega o campo referente ao atributo
-			}catch(NoSuchFieldException noField){ 
-				clazz = clazz.getSuperclass(); // Caso o campo nao exista, procura na superclasse.
+		do {
+			try {
+				// Pega o campo referente ao atributo
+				campo = clazz.getDeclaredField(Util.getNomeCampo(atributo));
+			} catch (NoSuchFieldException noField) {
+				// Caso o campo nao exista, procura na superclasse.
+				clazz = clazz.getSuperclass();
 			}
-		}while(campo == null);
-		
+		} while (campo == null);
+
 		try {
-			campo.setAccessible(true); // Faz com que seja possivel acessar o campo.
-			if (campo.isAnnotationPresent(MetodoAssociado.class)) { // Caso precise executar um metodo, executa.
-				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class); // Pega a anotacao do metodo.
-				if(campo.isAnnotationPresent(Validacao.class)){
-					if(campo.getAnnotation(Validacao.class).atualizacao()){
-						Validacao anotacaoValidacao = campo.getAnnotation(Validacao.class); // Pega a anotacao de validacao do campo.
-						if(campo.isAnnotationPresent(Conversao.class)){ // Caso precise realizar conversao 
-							Conversao conversao = campo.getAnnotation(Conversao.class);
-							Method converte = Conversor.class.getMethod(conversao.conversor(), novoValor.getClass());
-							novoValor = converte.invoke(null, novoValor); // Converte o dado
+			// Faz com que seja possivel acessar o campo.
+			campo.setAccessible(true);
+			// Caso precise executar um metodo, executa.
+			if (campo.isAnnotationPresent(MetodoAssociado.class)) {
+				// Pega a anotacao do metodo.
+				MetodoAssociado anotacao = campo
+						.getAnnotation(MetodoAssociado.class);
+				// Se tiver validacao
+				if (campo.isAnnotationPresent(Validacao.class)) {
+					// Se a validacao deve ser feita na atualizacao
+					if (campo.getAnnotation(Validacao.class).atualizacao()) {
+						// Pega a anotacao de validacao do campo.
+						Validacao anotacaoValidacao = campo
+								.getAnnotation(Validacao.class);
+						// Caso precise realizar conversao
+						if (campo.isAnnotationPresent(Conversao.class)) {
+							Conversao conversao = campo
+									.getAnnotation(Conversao.class);
+							Method converte = Conversor.class
+									.getMethod(conversao.conversor(),
+											novoValor.getClass());
+							// Converte o dado
+							novoValor = converte.invoke(null, novoValor);
 						}
-						Method valida = ValidadorDeDados.class.getMethod(anotacaoValidacao.metodo(), anotacaoValidacao.erro().getClass(), novoValor.getClass());
-						valida.invoke(null, anotacaoValidacao.erro(), novoValor); // Valida o dado
+						Method valida = ValidadorDeDados.class.getMethod(
+								anotacaoValidacao.metodo(), anotacaoValidacao
+										.erro().getClass(), novoValor
+										.getClass());
+						// Valida o dado
+						valida.invoke(null, anotacaoValidacao.erro(), novoValor);
 					}
 				}
-				metodo = clazz.getMethod(anotacao.set(), novoValor.getClass()); // Pega o metodo.
-				metodo.invoke(objeto, novoValor); // Invoca o metodo pelo objeto.
-			}else{
-				throw new DadoInvalidoException(erroAtualizacao); // Caso nao tenha como atualizar 
+				// Pega o metodo.
+				metodo = clazz.getMethod(anotacao.set(), novoValor.getClass());
+				// Invoca o metodo pelo objeto.
+				metodo.invoke(objeto, novoValor);
+			} else {
+				// Caso nao tenha como atualizar
+				throw new DadoInvalidoException(erroAtualizacao);
 			}
-		} catch (IllegalArgumentException
-				| IllegalAccessException | NoSuchMethodException
-				| SecurityException e){
-			//Caso o atributo passado nao seja compativel.
-			//e.printStackTrace();
-			throw new DadoInvalidoException(erroAtualizacao); 
-		}catch(InvocationTargetException excecao) {
-			throw new DadoInvalidoException(excecao.getCause().getMessage()); // Caso o metodo lance uma excecao.
+		} catch (IllegalArgumentException | IllegalAccessException
+				| NoSuchMethodException | SecurityException e) {
+			// Caso o atributo passado nao seja compativel.
+			// e.printStackTrace();
+			throw new DadoInvalidoException(erroAtualizacao);
+		} catch (InvocationTargetException excecao) {
+			// Caso o metodo lance uma excecao.
+			throw new DadoInvalidoException(excecao.getCause().getMessage());
 		}
 	}
-	
-	public static Object godFactory(Class<?> clazz, Object... params) throws DadoInvalidoException {
+
+	/**
+	 * Cria um objeto dada sua classe e os seus atributos do construtor.
+	 * 
+	 * @param clazz
+	 *            Classe do objeto.
+	 * @param params
+	 *            Parametros do construtor.
+	 * @return Objeto criado com aqueles parametros.
+	 * @throws DadoInvalidoException
+	 *             Caso algum parametro seja invalido.
+	 */
+	public static Object godFactory(Class<?> clazz, Object... params)
+			throws DadoInvalidoException {
 		/*
-		 * 1 - Recuperar campos;
-		 * 2 - Validar os parametros na ordem dos campos
-		 * 3 - Construir objeto
+		 * 1 - Recuperar campos; 2 - Validar os parametros na ordem dos campos 3
+		 * - Construir objeto
 		 */
 		Class<?> klazz = clazz;
+		// Campos do objeto.
 		ArrayList<Field> campos = new ArrayList<>();
-		do{
-			Field[] camposTemp = klazz.getDeclaredFields();
-			for(int i = camposTemp.length - 1; i > -1; i--){
-				if(camposTemp[i].isAnnotationPresent(Validacao.class))
-					if(camposTemp[i].getAnnotation(Validacao.class).cadastro())
-						campos.add(Constantes.ZERO, camposTemp[i]);
-			}
+		/*
+		 * Pega os campos tanto da classe em si, quanto da superclasse, no caso
+		 * de um campo nao estar na subclasse, mas seja preciso ser utilizado na
+		 * construcao do objeto.
+		 */
+		do {
+			// Campos que necessitam de validacao.
+			camposValidacao(klazz, campos);
+			// Muda para a superclasse
 			klazz = klazz.getSuperclass();
-		}while(klazz != Object.class);
-		
+		} while (klazz != Object.class);
+
 		int parametros = clazz.getConstructors()[0].getParameterCount();
-		try{
-			for(int i = 0; i < parametros && i < campos.size(); i++){
+		try {
+			// Itera pelos parametros do construtor para validar cada campo
+			for (int i = 0; i < parametros && i < campos.size(); i++) {
 				Field campo = campos.get(i);
 				campo.setAccessible(true);
-				if(campo.isAnnotationPresent(Validacao.class)){
-					Validacao validacao = campo.getAnnotation(Validacao.class);
-					Method valida = ValidadorDeDados.class.getMethod(validacao.metodo(), validacao.erro().getClass(), params[i].getClass());
-					valida.invoke(null, validacao.erro(), params[i]); // Valida o dado.
-				}
+				Validacao validacao = campo.getAnnotation(Validacao.class);
+				Method valida = ValidadorDeDados.class.getMethod(
+						validacao.metodo(), validacao.erro().getClass(),
+						params[i].getClass());
+				// Valida o dado.
+				valida.invoke(null, validacao.erro(), params[i]);
 			}
-			Object objeto = clazz.getConstructors()[0].newInstance(params);
-			return objeto;
-		}catch( IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException | InstantiationException excecao) {
+			// Retorna o objeto.
+			return clazz.getConstructors()[0].newInstance(params);
+		} catch (IllegalAccessException | IllegalArgumentException
+				| NoSuchMethodException | SecurityException
+				| InstantiationException excecao) {
 			excecao.printStackTrace();
 			throw new DadoInvalidoException(excecao.getCause().getMessage());
-		}catch(InvocationTargetException excecao){
+		} catch (InvocationTargetException excecao) {
+			// Caso algum dado foi invalido
 			throw new DadoInvalidoException(excecao.getCause().getMessage());
 		}
 	}
-	// REFLECTION
 
-	public static void main(String[] args) {
-		try {
-			Integer l = (Integer) godFactory(Integer.class, 1);
-		} catch (DadoInvalidoException e) {
-			e.printStackTrace();
+	/**
+	 * Adiciona campos que necessitam de validacao.
+	 * 
+	 * @param klazz
+	 *            Classe analisada.
+	 * @param campos
+	 *            Lista de campos.
+	 */
+	private static void camposValidacao(Class<?> klazz, ArrayList<Field> campos) {
+		Field[] camposTemp = klazz.getDeclaredFields();
+		for (int i = camposTemp.length - 1; i > -1; i--) {
+			if (camposTemp[i].isAnnotationPresent(Validacao.class))
+				if (camposTemp[i].getAnnotation(Validacao.class).cadastro())
+					campos.add(Constantes.ZERO, camposTemp[i]);
 		}
 	}
+
+	// REFLECTION
 }
