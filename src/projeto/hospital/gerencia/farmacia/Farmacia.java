@@ -8,7 +8,6 @@ import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
-import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
 import projeto.util.reflexao.Reflection;
@@ -84,10 +83,10 @@ public class Farmacia implements Serializable {
 	 */
 	public String addMedicamento(String nome, Double preco, int quantidade, String tipoMedicamento, String categorias)
 			throws DadoInvalidoException {
-		ValidadorDeDados.validaNome(Constantes.NOME + Constantes.DO_MEDICAMENTO, nome);
-		ValidadorDeDados.validaPositivo(Constantes.PRECO + Constantes.DO_MEDICAMENTO, preco);
-		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO, quantidade);
-		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO, categorias);
+//		ValidadorDeDados.validaNome(Constantes.NOME + Constantes.DO_MEDICAMENTO, nome);
+//		ValidadorDeDados.validaPositivo(Constantes.PRECO + Constantes.DO_MEDICAMENTO, preco);
+//		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO, quantidade);
+//		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO, categorias);
 		
 		Medicamento medicamento = (Medicamento)Reflection.godFactory(Medicamento.class, nome, tipoMedicamento, preco, quantidade,
 				categorias);

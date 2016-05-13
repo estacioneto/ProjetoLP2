@@ -89,7 +89,7 @@ public class Medicamento implements Serializable {
 		try{
 			if (tipo.equalsIgnoreCase(Constantes.TIPO_GENERICO)) {
 				this.tipo = (TipoMedicamento) Reflection.godFactory(MedicamentoGenerico.class);
-			} else {
+			} else if (tipo.equalsIgnoreCase(Constantes.TIPO_REFERENCIA)) {
 				this.tipo = (TipoMedicamento) Reflection.godFactory(MedicamentoReferencia.class);
 			}
 		}catch(DadoInvalidoException excecao){

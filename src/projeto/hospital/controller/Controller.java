@@ -331,6 +331,39 @@ public class Controller implements Serializable {
 	}
 		// CONSULTA DE MEDICAMENTO/FARMACIA
 	// OPERACOES DE MEDICAMENTO/FARMACIA
+	// OPERACOES DE ORGAO
+	public void cadastraOrgao(String nome, String tipoSanguineo) {
+		this.bancoDeOrgaos.cadastraOrgao(nome, tipoSanguineo);
+	}
+
+	public void retiraOrgao(String nome, String tipoSanguineo) {
+		this.bancoDeOrgaos.retiraOrgao(nome, tipoSanguineo);
+	}
+
+	public Orgao getOrgao(String nome, String tipoSanguineo) {
+		return this.bancoDeOrgaos.getOrgao(nome, tipoSanguineo);
+	}
+	
+	public boolean buscaOrgao(String nome, String tipoSanguineo) {
+		return this.bancoDeOrgaos.buscaOrgao(nome, tipoSanguineo);
+	}
+	
+	public String buscaOrgPorNome(String nome) {
+		return this.bancoDeOrgaos.buscaOrgPorNome(nome);
+	}
+	
+	public String buscaOrgPorSangue(String tipoSanguineo) {
+		return this.bancoDeOrgaos.buscaOrgPorSangue(tipoSanguineo);
+	}
+
+	public int qtdOrgaos(String nome) {
+		return this.bancoDeOrgaos.qtdOrgaos(nome);
+	}
+
+	public int totalOrgaosDisponiveis() {
+		return this.bancoDeOrgaos.totalOrgaosDisponiveis();
+	}
+	// OPERACOES DE ORGAO	
 	// OPERACOES DE PROCEDIMENTO
 
 	public void realizaProcedimento(String procedimento, String nomeOrgao, int prontuarioPosicao) {

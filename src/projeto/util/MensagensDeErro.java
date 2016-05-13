@@ -44,7 +44,10 @@ public abstract class MensagensDeErro {
 	// ORGAO
 	public static final String ERRO_CADASTRO_ORGAO = "Erro ao cadastrar orgao. ";
 	public static final String ERRO_CONSULTA_ORGAO = "Erro na consulta de orgaos. ";
-	public static final String ERRO_REMOCAO_ORGAO = "Erro ao excluir orgao. ";
+	public static final String ERRO_RETIRADA_ORGAO = "Erro na retirada de orgaos. ";
+	public static final String ERRO_BANCO_ORGAO = "O banco de orgaos apresentou um erro. ";
+	public static final String ORGAO_TIPO_NAO_CADASTRADO = "Nao ha orgaos cadastrados para esse tipo sanguineo.";
+	public static final String ORGAO_NAO_CADASTRADO = "Orgao nao cadastrado.";
 	// ORGAO
 	// GERAL
 	public static final String ERRO_CADASTRO = "Erro no cadastro ";

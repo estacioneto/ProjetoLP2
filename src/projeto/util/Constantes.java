@@ -8,6 +8,7 @@ import java.util.HashSet;
 public abstract class Constantes {
 	// CONTANTES DE IMPRESSAO E STRINGS
 	public static final String BARRA = "/";
+	public static final Object VIRGULA = ",";
 	public static final String FORMATO_TRES_NUMEROS = "000";
 
 	public static final String DIRETOR_GERAL = "Diretor Geral";
@@ -53,6 +54,7 @@ public abstract class Constantes {
 	public static final String PRECO = "Preco";
 	public static final String CARGO = "Cargo";
 	public static final String DO_CARGO = " do cargo";
+	public static final String DO_ORGAO = " do orgao";
 	public static final String ATRIBUTO = "Atributo";
 	public static final String DATA = "Data";
 	public static final String SENHA = "Senha";

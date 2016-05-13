@@ -6,8 +6,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import projeto.exceptions.dados.DadoInvalidoException;
-import projeto.hospital.gerencia.funcionario.Funcionario;
-import projeto.hospital.gerencia.prontuario.paciente.Paciente;
 import projeto.util.Constantes;
 import projeto.util.Conversor;
 import projeto.util.Util;
@@ -146,7 +144,7 @@ public abstract class Reflection {
 		
 		int parametros = clazz.getConstructors()[0].getParameterCount();
 		try{
-			for(int i = 0; i < parametros; i++){
+			for(int i = 0; i < parametros && i < campos.size(); i++){
 				Field campo = campos.get(i);
 				campo.setAccessible(true);
 				if(campo.isAnnotationPresent(Validacao.class)){
@@ -165,5 +163,12 @@ public abstract class Reflection {
 		}
 	}
 	// REFLECTION
-	
+
+	public static void main(String[] args) {
+		try {
+			Integer l = (Integer) godFactory(Integer.class, 1);
+		} catch (DadoInvalidoException e) {
+			e.printStackTrace();
+		}
+	}
 }

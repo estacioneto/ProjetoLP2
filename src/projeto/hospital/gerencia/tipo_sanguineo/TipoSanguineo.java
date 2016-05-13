@@ -49,4 +49,16 @@ public class TipoSanguineo implements Serializable {
 	public String toString() {
 		return tipo;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof TipoSanguineo))
+			return false;
+
+		TipoSanguineo tipoSanguineo = (TipoSanguineo) obj;
+		if (this.tipo.equals(tipoSanguineo.tipo)){
+			return true;
+		}
+		return false;
+	}
 }

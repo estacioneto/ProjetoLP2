@@ -145,8 +145,6 @@ public class Funcionario implements Serializable {
 				this.cargo = (Cargo) Reflection.godFactory(TecnicoAdministrativo.class);
 			} else if (Constantes.MEDICO.equals(cargo)) {
 				this.cargo = (Cargo) Reflection.godFactory(Medico.class);
-			}else{
-				this.cargo = null;
 			}
 		} catch (DadoInvalidoException excecao){
 			throw new OperacaoInvalidaException(excecao.getMessage());

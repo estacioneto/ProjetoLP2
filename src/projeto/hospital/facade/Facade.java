@@ -3,6 +3,7 @@ package projeto.hospital.facade;
 import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.controller.Controller;
+import projeto.hospital.gerencia.bancodeorgaos.Orgao;
 import projeto.util.Constantes;
 import projeto.util.Util;
 
@@ -323,4 +324,37 @@ public class Facade {
 	}
 		// CONSULTA DE MEDICAMENTO/FARMACIA	
 	// OPERACOES DE MEDICAMENTO/FARMACIA
+	// OPERACOES DE ORGAO
+	public void cadastraOrgao(String nome, String tipoSanguineo) {
+		this.controller.cadastraOrgao(nome, tipoSanguineo);
+	}
+
+	public void retiraOrgao(String nome, String tipoSanguineo) {
+		this.controller.retiraOrgao(nome, tipoSanguineo);
+	}
+
+	public String buscaOrgPorNome(String nome) {
+		return this.controller.buscaOrgPorNome(nome);
+	}
+	
+	public String buscaOrgPorSangue(String tipoSanguineo) {
+		return this.controller.buscaOrgPorSangue(tipoSanguineo);
+	}
+	
+	public Orgao getOrgao(String nome, String tipoSanguineo) {
+		return this.controller.getOrgao(nome, tipoSanguineo);
+	}
+	
+	public boolean buscaOrgao(String nome, String tipoSanguineo) {
+		return this.controller.buscaOrgao(nome, tipoSanguineo);
+	}
+	
+	public int qtdOrgaos(String nome) {
+		return this.controller.qtdOrgaos(nome);
+	}
+
+	public int totalOrgaosDisponiveis() {
+		return this.controller.totalOrgaosDisponiveis();
+	}
+	// OPERACOES DE ORGAO
 }
