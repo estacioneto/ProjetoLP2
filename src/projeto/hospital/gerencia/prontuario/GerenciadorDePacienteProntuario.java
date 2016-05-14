@@ -11,12 +11,10 @@ import projeto.hospital.gerencia.funcionario.Funcionario;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.hospital.gerencia.prontuario.paciente.GeradorIdPaciente;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;
-import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
-import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineoFactory;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
-import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
+import projeto.util.reflexao.Reflection;
 
 /**
  * Gerencia os pacientes e prontuarios
@@ -31,7 +29,6 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 
 	private Map<Paciente, Prontuario> pacientes;
 	private GeradorIdPaciente geradorIdPaciente;
-	private TipoSanguineoFactory tipoSanguineoFactory;
 
 	/**
 	 * Construtor
@@ -39,7 +36,6 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	public GerenciadorDePacienteProntuario() {
 		geradorIdPaciente = new GeradorIdPaciente();
 		pacientes = new TreeMap<>();
-		tipoSanguineoFactory = TipoSanguineoFactory.getInstacia();		
 	}
 
 	/**
@@ -61,26 +57,28 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Funcionario Logado.
 	 * @return Id do paciente cadastrado
 	 */
-	public long cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
+	public String cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
 			String tipoSanguineo, Funcionario funcionarioLogado) {
 		try {
-			ValidadorDeDados.validaNome(Constantes.DO_PACIENTE, nome);
-			ValidadorDeDados.validaData(data);
-			ValidadorDeDados.validaPositivo(Constantes.PESO + Constantes.DO_PACIENTE, peso);
-			ValidadorDeDados.validaSexoBiologico(sexo);
-			ValidadorDeDados.validaString(Constantes.GENERO, genero);
-			
-			TipoSanguineo sangue = tipoSanguineoFactory.criaTipo(tipoSanguineo);
-			
+			// ValidadorDeDados.validaNome(Constantes.NOME +
+			// Constantes.DO_PACIENTE, nome);
+			// ValidadorDeDados.validaData(Constantes.DATA, data);
+			// ValidadorDeDados.validaPositivo(Constantes.PESO +
+			// Constantes.DO_PACIENTE, peso);
+			// ValidadorDeDados.validaSexoBiologico(MensagensDeErro.SEXO_INVALIDO,
+			// sexo);
+			// ValidadorDeDados.validaString(Constantes.GENERO, genero);
+
 			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
 					Permissao.CADASTRAR_PACIENTES, funcionarioLogado);
-			Paciente novoPaciente = new Paciente(nome, data, peso, sangue, sexo, genero);
-			if (pacientes.containsKey(novoPaciente))
+			Paciente paciente = (Paciente) Reflection.godFactory(Paciente.class, nome, data, peso, tipoSanguineo, sexo,
+					genero);
+			if (pacientes.containsKey(paciente))
 				throw new DadoInvalidoException(MensagensDeErro.PACIENTE_JA_CADASTRADO);
 
-			Long novoId = geradorIdPaciente.getProximoId();
-			novoPaciente.setId(novoId);
-			pacientes.put(novoPaciente, new Prontuario(novoPaciente));
+			String novoId = geradorIdPaciente.getProximoId();
+			paciente.setId(novoId);
+			pacientes.put(paciente, new Prontuario(paciente));
 			return novoId;
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
@@ -96,11 +94,11 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Informacao a ser requisitada
 	 * @return Informacao requisitada
 	 */
-	public Object getInfoPaciente(Long idPaciente, String atributo) {
+	public Object getInfoPaciente(String idPaciente, String atributo) {
 		try {
 			Paciente paciente = buscaPacientePorId(idPaciente);
 
-			return Util.getInfo(paciente, atributo);
+			return Reflection.getInfo(paciente, atributo);
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
@@ -113,7 +111,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Id do paciente
 	 * @return Paciente
 	 */
-	private Paciente buscaPacientePorId(Long idPaciente) {
+	private Paciente buscaPacientePorId(String idPaciente) {
 		for (Paciente paciente : this.pacientes.keySet())
 			if (paciente.getId().equals(idPaciente))
 				return paciente;
@@ -128,7 +126,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Posicao do prontuario
 	 * @return Id do paciente
 	 */
-	public Long getIdProntuarioPosicao(int posicao) {
+	public String getIdProntuarioPosicao(int posicao) {
 		try {
 			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
 
@@ -148,7 +146,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	public Prontuario getProntuarioPosicao(int posicao) {
 		try {
 			Paciente paciente = getPacientePosicao(posicao);
-			
+
 			return this.pacientes.get(paciente);
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException();
@@ -173,5 +171,43 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 		}
 		throw new DadoInvalidoException(
 				String.format(MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES, pacientes.size()));
+	}
+
+	/**
+	 * Recupera o id de um paciente de acordo com seu nome
+	 * 
+	 * @param nome
+	 *            Nome do paciente
+	 * @return Id do paciente
+	 * @throws DadoInvalidoException
+	 *             Caso o paciente nao seja encontrado
+	 */
+	public String getIdPaciente(String nome) throws DadoInvalidoException {
+		for (Paciente paciente : this.pacientes.keySet())
+			if (paciente.getNome().equals(nome))
+				return paciente.getId();
+
+		// TODO
+		throw new DadoInvalidoException("Paciente nao encontrado.");
+	}
+
+	/**
+	 * Recupera o prontuario de um paciente
+	 * 
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @return Prontuario do paciente
+	 * @throws DadoInvalidoException
+	 *             Caso paciente nao seja encontrado
+	 */
+	public Prontuario getProntuarioPaciente(String idPaciente) throws DadoInvalidoException {
+		ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_PACIENTE, idPaciente);
+		
+		for (Paciente paciente : this.pacientes.keySet())
+			if (paciente.getId().equals(idPaciente))
+				return this.pacientes.get(paciente);
+
+		// TODO
+		throw new DadoInvalidoException("Paciente nao encontrado.");
 	}
 }

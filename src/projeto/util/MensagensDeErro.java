@@ -30,6 +30,7 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_PRONTUARIOS_INSUFICIENTES = "Nao ha prontuarios suficientes (max = %d).";
 	public static final String ERRO_CADASTRO_PACIENTE = "Nao foi possivel cadastrar o paciente. ";
 	public static final String TIPO_SANGUINEO = "Tipo sanguineo";
+	public static final String TIPO_SANGUINEO_INVALIDO = TIPO_SANGUINEO + " invalido.";
 	public static final String PACIENTE_JA_CADASTRADO = "Paciente ja cadastrado.";
 
 	// PACIENTE
@@ -43,7 +44,10 @@ public abstract class MensagensDeErro {
 	// ORGAO
 	public static final String ERRO_CADASTRO_ORGAO = "Erro ao cadastrar orgao. ";
 	public static final String ERRO_CONSULTA_ORGAO = "Erro na consulta de orgaos. ";
-	public static final String ERRO_REMOCAO_ORGAO = "Erro ao excluir orgao. ";
+	public static final String ERRO_RETIRADA_ORGAO = "Erro na retirada de orgaos. ";
+	public static final String ERRO_BANCO_ORGAO = "O banco de orgaos apresentou um erro. ";
+	public static final String ORGAO_TIPO_NAO_CADASTRADO = "Nao ha orgaos cadastrados para esse tipo sanguineo.";
+	public static final String ORGAO_NAO_CADASTRADO = "Orgao nao cadastrado.";
 	// ORGAO
 	// GERAL
 	public static final String ERRO_CADASTRO = "Erro no cadastro ";
@@ -64,5 +68,11 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_MEDICAMENTO_CATEGORIA_INVALIDA = "Categoria invalida.";
 	public static final String ERRO_MEDICAMENTO_NAO_CADASTRADO = "Medicamento nao cadastrado.";
 	public static final String ERRO_ORGAO_INEXISTENTE = "Orgao nao cadastrado.";
+	public static final String SEXO_INVALIDO = "Sexo biologico invalido.";
+	public static final String NAO_PODE_SER_NEGATIVO = " nao pode ser negativo.";
+	
+	// ERROS DE PROCEDIMENTOS
+	public static final String ERRO_REALIZAR_PROCEDIMENTO = "Erro na realizacao de procedimentos. ";
+	
 	// ERROS DE DADOS
 }

@@ -24,7 +24,7 @@ public class GeradorIdPaciente implements Serializable {
 	 * 
 	 * @return Proximo id
 	 */
-	public Long getProximoId() {
-		return id++;
+	public String getProximoId() {
+		return Long.toString(id++);
 	}
 }

@@ -41,7 +41,7 @@ public class Prontuario implements Serializable {
 	/**
 	 * @return Id do paciente do prontuario
 	 */
-	public Long getId() {
+	public String getId() {
 		return paciente.getId();
 	}
 

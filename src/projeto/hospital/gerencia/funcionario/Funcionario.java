@@ -5,11 +5,17 @@ import java.io.Serializable;
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
+import projeto.hospital.gerencia.funcionario.cargo.Diretor;
+import projeto.hospital.gerencia.funcionario.cargo.Medico;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
-import projeto.util.ConstantesReflection;
-import projeto.util.MetodoAssociado;
+import projeto.hospital.gerencia.funcionario.cargo.TecnicoAdministrativo;
+import projeto.util.Constantes;
 import projeto.util.Util;
-import projeto.util.ValidadorDeDados;
+import projeto.util.reflexao.ConstantesReflection;
+import projeto.util.reflexao.Conversao;
+import projeto.util.reflexao.MetodoAssociado;
+import projeto.util.reflexao.Reflection;
+import projeto.util.reflexao.Validacao;
 
 /**
  * Entidade Funcionario. Trata-se da entidade generica do sistema que tera todos
@@ -24,16 +30,32 @@ public class Funcionario implements Serializable {
 	 */
 	private static final long serialVersionUID = 1948219698630791794L;
 
+	@Validacao(metodo = ConstantesReflection.VALIDA_NOME, erro = Constantes.NOME
+			+ Constantes.DO_FUNCIONARIO)
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME, set = ConstantesReflection.SET_NOME)
 	private String nome;
-	@MetodoAssociado(get = ConstantesReflection.GET_MATRICULA)
-	private String matricula;
+
+	@Conversao(formato = Cargo.class, conversor = ConstantesReflection.CARGO_STRING)
+	@Validacao(metodo = ConstantesReflection.VALIDA_CARGO, erro = Constantes.NOME + Constantes.DO_CARGO)
 	@MetodoAssociado(get = ConstantesReflection.GET_CARGO)
 	private Cargo cargo;
-	@MetodoAssociado(get = ConstantesReflection.GET_SENHA_PROTEGIDA)
-	private String senha;
+
+	@Validacao(metodo = ConstantesReflection.VALIDA_DATA, erro = Constantes.DATA)
 	@MetodoAssociado(get = ConstantesReflection.GET_DATA_NASCIMENTO, set = ConstantesReflection.SET_DATA)
 	private String data;
+
+	@Validacao(metodo = ConstantesReflection.VALIDA_MATRICULA, erro = Constantes.MATRICULA + Constantes.DO_FUNCIONARIO, cadastro = false)
+	@MetodoAssociado(get = ConstantesReflection.GET_MATRICULA)
+	private String matricula;
+
+	@Validacao(metodo = ConstantesReflection.VALIDA_SENHA, erro = Constantes.SENHA, cadastro = false)
+	@MetodoAssociado(get = ConstantesReflection.GET_SENHA_PROTEGIDA, set = ConstantesReflection.SET_SENHA)
+	private String senha;
+
+	public Funcionario(String nome, String cargo, String dataNascimento) {
+		this(nome, cargo, dataNascimento, GeradorDeDadosDeSeguranca
+				.getIncancia().geraMatricula(cargo, Util.getAnoAtual()));
+	}
 
 	/**
 	 * Construtor padrao.
@@ -42,21 +64,19 @@ public class Funcionario implements Serializable {
 	 *            Nome do funcionario.
 	 * @param cargo
 	 *            Cargo do funcionario.
-	 * @param matricula
-	 *            Matricula do funcionario.
-	 * @param senha
-	 *            Senha do funcionario.
 	 * @param dataNascimento
 	 *            Data de nascimento do funcionario.
+	 * @param matricula
+	 *            Matricula do funcionario.
 	 */
-	public Funcionario(String nome, Cargo cargo, String matricula,
-			String senha, String dataNascimento) {
+	public Funcionario(String nome, String cargo, String dataNascimento, String matricula) {
 		// Nao eh necessario validar porque no Gerenciador ja eh feito isso
 		// la no gerenciador de funcionarios
 		this.nome = nome;
-		this.cargo = cargo;
+		this.setCargo(cargo);
 		this.matricula = matricula;
-		this.senha = senha;
+		this.senha = GeradorDeDadosDeSeguranca.getIncancia().geraSenha(matricula,
+				Util.getAnoPorData(dataNascimento));
 		this.data = dataNascimento;
 	}
 
@@ -71,6 +91,7 @@ public class Funcionario implements Serializable {
 	public boolean temPermissao(Permissao permissao) {
 		return this.cargo.temPermissao(permissao);
 	}
+
 	// VERIFICACAO DE PERMISSAO
 	// GETTERS E SETTERS
 	/**
@@ -116,8 +137,18 @@ public class Funcionario implements Serializable {
 	 * @param cargo
 	 *            Cargo novo do funcionario.
 	 */
-	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
+	public void setCargo(String cargo) {
+		try{
+			if (Constantes.DIRETOR_GERAL.equals(cargo)) {
+				this.cargo = (Cargo) Reflection.godFactory(Diretor.class);
+			} else if (Constantes.TECNICO_ADMINISTATIVO.equals(cargo)) {
+				this.cargo = (Cargo) Reflection.godFactory(TecnicoAdministrativo.class);
+			} else if (Constantes.MEDICO.equals(cargo)) {
+				this.cargo = (Cargo) Reflection.godFactory(Medico.class);
+			}
+		} catch (DadoInvalidoException excecao){
+			throw new OperacaoInvalidaException(excecao.getMessage());
+		}
 	}
 
 	/**
@@ -137,14 +168,15 @@ public class Funcionario implements Serializable {
 	public String getSenha() {
 		return senha;
 	}
-	
+
 	/**
 	 * Metodo utilizado para consulta de senha.
-	 *  
+	 * 
 	 * @return {@code OperacaoInvalidaException}
 	 */
 	public String getSenhaProtegida() {
-		throw new OperacaoInvalidaException("A senha do funcionario eh protegida.");
+		throw new OperacaoInvalidaException(
+				"A senha do funcionario eh protegida.");
 	}
 
 	/**
@@ -174,11 +206,10 @@ public class Funcionario implements Serializable {
 	 * @throws DadoInvalidoException
 	 *             Caso a data seja invalida.
 	 */
-	public void setData(String dataNascimento)
-			throws DadoInvalidoException {
-		ValidadorDeDados.validaData(dataNascimento);
+	public void setData(String dataNascimento) throws DadoInvalidoException {
 		this.data = dataNascimento;
 	}
+
 	// GETTERS E SETTERS
 
 	/**

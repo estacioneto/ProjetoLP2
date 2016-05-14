@@ -6,10 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.List;
+import java.time.LocalDate;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
@@ -29,11 +26,8 @@ public abstract class Util {
 	 * @param cargo
 	 *            Nome do cargo.
 	 * @return Codigo do cargo.
-	 * 
-	 * @throws DadoInvalidoException
-	 *             Caso o cargo nao exista.
 	 */
-	public static String getCodigoPorCargo(String cargo) throws DadoInvalidoException {
+	public static String getCodigoPorCargo(String cargo) {
 		// Validacao da string ser valida ja deve ter sido feita antes de chamar
 		// esse metodo
 
@@ -41,9 +35,7 @@ public abstract class Util {
 			return Constantes.CODIGO_DIRETOR;
 		if (cargo.equals(Constantes.MEDICO))
 			return Constantes.CODIGO_MEDICO;
-		if (cargo.equals(Constantes.TECNICO_ADMINISTATIVO))
-			return Constantes.CODIGO_TECNICO;
-		throw new DadoInvalidoException("Cargo inexistente!");
+		return Constantes.CODIGO_TECNICO;
 	}
 	
 	/**
@@ -97,9 +89,9 @@ public abstract class Util {
 	 * @param string Nome do atributo sem formatacao.
 	 * @return Nome do atributo.
 	 */
-	private static String getNomeCampo(String string) {
+	public static String getNomeCampo(String string) {
 		return string.substring(Constantes.ZERO, Constantes.UM).toLowerCase()
-				+ string.substring(Constantes.UM);
+				+ string.substring(Constantes.UM).trim();
 	}
 	// CODIGOS/SUBSTRINGS
 	
@@ -129,6 +121,34 @@ public abstract class Util {
 		String formatoSaida = String.join("-", dataQuebrada[2],
 				dataQuebrada[1], dataQuebrada[0]);
 		return formatoSaida;
+	}
+	
+	/**
+	 * Recebe um nome separado de metodo e o transforma para um tipo valido de nome de metodo
+	 * 
+	 * @param nomeEntrada Entrada
+	 * @return Nome valido de metodo
+	 */
+	public static String getNomeMetodo(String nomeEntrada) {
+		String saida = new String();
+		String[] nomes = nomeEntrada.split(" ");
+		saida += getNomeCampo(nomes[0]);
+		
+		for(int i=1; i<nomes.length; i++){
+			saida += capitalizaString(nomes[i]);
+		}
+		
+		return saida;
+	}
+	
+	/**
+	 * Retorna o ano atual.
+	 * 
+	 * @return Ano atual.
+	 */
+	public static String getAnoAtual() {
+		LocalDate dataAtual = LocalDate.now();
+		return Integer.toString(dataAtual.getYear());
 	}
 	// DATA
 	// ARQUIVOS
@@ -224,104 +244,8 @@ public abstract class Util {
 		return diretorio.delete();
 	}
 	// ARQUIVOS
-	// REFLECTION
 
-	/**
-	 * Pega informacao de um determinado objeto.
-	 * 
-	 * @param objeto
-	 *            Objeto a ser usado.
-	 * @param atributo
-	 *            Atributo a ser retornado.
-	 * @param erro
-	 *            Erro caso algo saia errado.
-	 * @return Atributo.
-	 * @throws DadoInvalidoException
-	 *             Caso o atributo seja invalido
-	 */
-	public static Object getInfo(Object objeto, String atributo) throws DadoInvalidoException {
-		Class clazz = objeto.getClass(); // Classe do objeto
-		Field campo = null; // Campo a ser requisitado.
-		Method metodo; // Metodo possivel de ser invocado.
-		
-		/*
-		 * Caso o campo nao seja da classe,
-		 * pega o da superclasse.
-		 */
-		do{
-			try{
-				campo = clazz.getDeclaredField(Util.getNomeCampo(atributo)); // Pega o campo referente ao atributo
-			}catch(NoSuchFieldException noField){ 
-				clazz = clazz.getSuperclass(); // Caso o campo nao exista, procura na superclasse.
-			}
-		}while(campo == null);
-		
-		try {
-			campo.setAccessible(true); // Faz com que seja possivel acessar o campo.
-			if (campo.isAnnotationPresent(MetodoAssociado.class)) { // Caso precise executar um metodo, executa.
-				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class); // Pega a anotacao do metodo.
-				metodo = clazz.getMethod(anotacao.get()); // Pega o metodo.
-				return metodo.invoke(objeto); // Invoca o metodo pelo objeto.
-			}
-			return campo.get(objeto); // Caso nao precise executar nenhum metodo, retorna o proprio campo.
-		} catch (IllegalArgumentException
-				| IllegalAccessException | NoSuchMethodException
-				| SecurityException e){
-			//Caso o atributo passado nao seja compativel.
-			throw new DadoInvalidoException("Atributo nao valido: " + Util.getNomeCampo(atributo) + "."); 
-		}catch(InvocationTargetException excecao) {
-			throw new DadoInvalidoException(excecao.getCause().getMessage()); // Caso o metodo lance uma excecao.
-		}
-	}
 	
-	/**
-	 * Atualiza a informacao de uma entidade.
-	 * 
-	 * @param objeto 
-	 *               Entidade.
-	 * @param atributo
-	 *               Atributo a ser atualizado.
-	 * @param novoValor
-	 *               Novo valor da entidade.
-	 * @throws DadoInvalidoException 
-	 *               Caso algo nao saia como desejado.
-	 */
-	public static void atualizaInfo(Object objeto, String atributo, Object novoValor, String erroAtualizacao) throws DadoInvalidoException {
-		Class clazz = objeto.getClass(); // Classe do objeto
-		Field campo = null; // Campo a ser requisitado.
-		Method metodo; // Metodo possivel de ser invocado.
-		
-		/*
-		 * Caso o campo nao seja da classe,
-		 * pega o da superclasse.
-		 */
-		do{
-			try{
-				campo = clazz.getDeclaredField(Util.getNomeCampo(atributo)); // Pega o campo referente ao atributo
-			}catch(NoSuchFieldException noField){ 
-				clazz = clazz.getSuperclass(); // Caso o campo nao exista, procura na superclasse.
-			}
-		}while(campo == null);
-		
-		try {
-			campo.setAccessible(true); // Faz com que seja possivel acessar o campo.
-			if (campo.isAnnotationPresent(MetodoAssociado.class)) { // Caso precise executar um metodo, executa.
-				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class); // Pega a anotacao do metodo.
-				metodo = clazz.getMethod(anotacao.set(), novoValor.getClass()); // Pega o metodo.
-				metodo.invoke(objeto, novoValor); // Invoca o metodo pelo objeto.
-			}else{
-				throw new DadoInvalidoException(erroAtualizacao); // Caso nao tenha como atualizar 
-			}
-		} catch (IllegalArgumentException
-				| IllegalAccessException | NoSuchMethodException
-				| SecurityException e){
-			//Caso o atributo passado nao seja compativel.
-			throw new DadoInvalidoException(erroAtualizacao); 
-		}catch(InvocationTargetException excecao) {
-			throw new DadoInvalidoException(excecao.getCause().getMessage()); // Caso o metodo lance uma excecao.
-		}
-	}
-	// REFLECTION
 	
 	/**
 	 * Valida a compatibilidade entre dois tipos sanguineos

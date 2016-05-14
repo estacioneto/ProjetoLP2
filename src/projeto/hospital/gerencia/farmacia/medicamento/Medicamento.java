@@ -5,8 +5,17 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
-import projeto.util.ConstantesReflection;
-import projeto.util.MetodoAssociado;
+import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.exceptions.logica.OperacaoInvalidaException;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoGenerico;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoReferencia;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.TipoMedicamento;
+import projeto.util.Constantes;
+import projeto.util.reflexao.ConstantesReflection;
+import projeto.util.reflexao.Conversao;
+import projeto.util.reflexao.MetodoAssociado;
+import projeto.util.reflexao.Reflection;
+import projeto.util.reflexao.Validacao;
 
 /**
  * Classe que possui o tipo basico que caracteriza todos os medicamentos.
@@ -20,18 +29,28 @@ public class Medicamento implements Serializable {
 	 * Serial gerado automaticamente.
 	 */
 	private static final long serialVersionUID = -7166091567180515070L;
-	// Para pegar a informacao da subclasse, ela tem que conhecer os seus
-	// atributos.
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.NOME + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME)
 	private String nome;
-	@MetodoAssociado(get = ConstantesReflection.GET_QUANTIDADE, set = ConstantesReflection.SET_QUANTIDADE)
-	private int quantidade;
-	@MetodoAssociado(get = ConstantesReflection.GET_CATEGORIAS)
-	private String categorias;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_TIPO_MEDICAMENTO, erro = Constantes.TIPO + Constantes.DO_MEDICAMENTO, get = true)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO)
-	private String tipo;
+	private TipoMedicamento tipo;
+	
+	@Conversao(formato = Double.class, conversor = ConstantesReflection.STRING_DOUBLE)
+	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.PRECO + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_PRECO, set = ConstantesReflection.SET_PRECO)
 	private Double preco;
+
+	@Conversao(formato = Integer.class, conversor = ConstantesReflection.STRING_INTEIRO)
+	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO)
+	@MetodoAssociado(get = ConstantesReflection.GET_QUANTIDADE, set = ConstantesReflection.SET_QUANTIDADE)
+	private Integer quantidade;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO)
+	@MetodoAssociado(get = ConstantesReflection.GET_CATEGORIAS)
+	private String categorias;
 
 	/**
 	 * Construtor
@@ -45,18 +64,19 @@ public class Medicamento implements Serializable {
 	 * @param categorias
 	 *            Categorias do medicamento
 	 */
-	public Medicamento(String nome, Double preco, int quantidade, String categorias) {
+	public Medicamento(String nome,  String tipo, Double preco, int quantidade, String categoria) {
 		this.nome = nome;
 		this.preco = preco;
 		this.quantidade = quantidade;
-		this.categorias = categorias;
+		this.categorias = categoria;
+		this.setTipo(tipo);
 	}
 
 	/**
 	 * @return Tipo do medicamento.
 	 */
 	public String getTipo() {
-		return this.tipo;
+		return this.tipo.getTipo();
 	}
 
 	/**
@@ -66,14 +86,22 @@ public class Medicamento implements Serializable {
 	 *            Tipo do medicamento.
 	 */
 	public void setTipo(String tipo) {
-		this.tipo = tipo;
+		try{
+			if (tipo.equalsIgnoreCase(Constantes.TIPO_GENERICO)) {
+				this.tipo = (TipoMedicamento) Reflection.godFactory(MedicamentoGenerico.class);
+			} else if (tipo.equalsIgnoreCase(Constantes.TIPO_REFERENCIA)) {
+				this.tipo = (TipoMedicamento) Reflection.godFactory(MedicamentoReferencia.class);
+			}
+		}catch(DadoInvalidoException excecao){
+			throw new OperacaoInvalidaException(excecao.getMessage());
+		}
 	}
 
 	/**
 	 * @return Preco original do medicamento.
 	 */
 	public double getPreco() {
-		return preco;
+		return this.tipo.calculaPreco(preco);
 	}
 
 	/**
@@ -81,7 +109,7 @@ public class Medicamento implements Serializable {
 	 * @param quantidade
 	 *            Quantidade nova do medicamento.
 	 */
-	public void setQuantidade(int quantidade) {
+	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 	
@@ -160,7 +188,7 @@ public class Medicamento implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		String formatacao = String.format(" %s - Preco: R$ %.2f - Disponivel: %d - Categorias: %s", this.getNome(),
+		String formatacao = String.format("%s %s - Preco: R$ %.2f - Disponivel: %d - Categorias: %s", this.tipo.toString(),this.getNome(),
 				this.getPreco(), this.getQuantidade(), this.getCategorias());
 		return formatacao;
 	}

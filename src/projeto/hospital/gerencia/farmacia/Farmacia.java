@@ -8,9 +8,9 @@ import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
-import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
+import projeto.util.reflexao.Reflection;
 
 /**
  * Classe que representa uma farmacia, sedo a mesma responsavel pela gerencia e
@@ -26,7 +26,6 @@ public class Farmacia implements Serializable {
 	 */
 	private static final long serialVersionUID = 4325301404289139683L;
 	private List<Medicamento> listaMedicamentos;
-	private MedicamentoFactory medicamentoFactory;
 	private Comparator<Medicamento> nomeComparator;
 	private Comparator<Medicamento> precoComparator;
 
@@ -35,7 +34,6 @@ public class Farmacia implements Serializable {
 	 */
 	public Farmacia() {
 		this.listaMedicamentos = new ArrayList<>();
-		this.medicamentoFactory = new MedicamentoFactory();
 		this.inicializaComparators();
 	}
 	
@@ -85,12 +83,15 @@ public class Farmacia implements Serializable {
 	 */
 	public String addMedicamento(String nome, Double preco, int quantidade, String tipoMedicamento, String categorias)
 			throws DadoInvalidoException {
-		ValidadorDeDados.validaNome(Constantes.DO_MEDICAMENTO, nome);
-		ValidadorDeDados.validaPositivo(Constantes.PRECO + Constantes.DO_MEDICAMENTO, preco);
-		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO, quantidade);
-		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO, categorias);
-		Medicamento medicamento = medicamentoFactory.criaMedicamento(nome, tipoMedicamento, preco, quantidade,
+//		ValidadorDeDados.validaNome(Constantes.NOME + Constantes.DO_MEDICAMENTO, nome);
+//		ValidadorDeDados.validaPositivo(Constantes.PRECO + Constantes.DO_MEDICAMENTO, preco);
+//		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO, quantidade);
+//		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO, categorias);
+		
+		Medicamento medicamento = (Medicamento)Reflection.godFactory(Medicamento.class, nome, tipoMedicamento, preco, quantidade,
 				categorias);
+		//Validacao poderia ser mais simples
+		//Reflection.validaObjeto(medicamento);
 		this.listaMedicamentos.add(medicamento);
 		return nome;
 	}

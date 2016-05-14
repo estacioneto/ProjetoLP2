@@ -5,10 +5,13 @@ import java.time.LocalDate;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
+import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineoFactory;
 import projeto.util.Constantes;
-import projeto.util.ConstantesReflection;
-import projeto.util.MetodoAssociado;
+import projeto.util.MensagensDeErro;
 import projeto.util.Util;
+import projeto.util.reflexao.ConstantesReflection;
+import projeto.util.reflexao.MetodoAssociado;
+import projeto.util.reflexao.Validacao;
 
 /**
  * Classe para representar os pacientes
@@ -21,23 +24,37 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 */
 	private static final long serialVersionUID = 1697453654897L;
 
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.NOME + Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME)
 	private String nome;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_DATA, erro = Constantes.DATA)
 	@MetodoAssociado(get = ConstantesReflection.GET_DATA_NASCIMENTO)
 	private String data;
+	
 	@MetodoAssociado(get = ConstantesReflection.GET_IDADE)
-	private int idade;
+	private Integer idade;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.PESO + Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_PESO)
 	private Double peso;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_TIPO_SANGUINEO, erro = MensagensDeErro.TIPO_SANGUINEO_INVALIDO)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO_SANGUINEO)
 	private TipoSanguineo tipoSanguineo;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_SEXO, erro = Constantes.SEXO + Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_SEXO)
 	private String sexo;
+	
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.GENERO + Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_GENERO)
 	private String genero;
+	
 	@MetodoAssociado(get = "getGastosPaciente")
-	private double gastos;
-	private Long id;
+	private Double gastos;
+	
+	private String id;
 
 	/**
 	 * Construtor
@@ -55,15 +72,15 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 * @param genero
 	 *            Genero
 	 */
-	public Paciente(String nome, String dataNascimento, Double peso, TipoSanguineo tipoSanguineo, String sexoBiologico,
+	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
 			String genero) {
 		this.nome = nome;
 		this.data = dataNascimento;
 		this.peso = peso;
-		this.tipoSanguineo = tipoSanguineo;
+		this.tipoSanguineo = TipoSanguineoFactory.getInstacia().criaTipo(tipoSanguineo);
 		this.sexo = sexoBiologico;
 		this.genero = genero;
-		this.gastos = 0;
+		this.gastos = Double.parseDouble(Integer.toString(Constantes.ZERO));
 	}
 
 	/**
@@ -129,7 +146,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	/**
 	 * @return Id
 	 */
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -139,7 +156,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 * @param id
 	 *            Novo id
 	 */
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

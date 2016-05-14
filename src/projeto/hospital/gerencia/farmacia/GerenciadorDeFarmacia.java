@@ -1,6 +1,8 @@
 package projeto.hospital.gerencia.farmacia;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
@@ -10,8 +12,8 @@ import projeto.hospital.gerencia.funcionario.Funcionario;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
-import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
+import projeto.util.reflexao.Reflection;
 
 /**
  * 
@@ -46,12 +48,13 @@ public class GerenciadorDeFarmacia implements Serializable {
 	 *            Quantidade do medicamento.
 	 * @param categorias
 	 *            do medicamento.
-	 * @param funcionarioLogado funcionario Logado no sistema.
+	 * @param funcionarioLogado
+	 *            funcionario Logado no sistema.
 	 * @return Nome do medicamento.
 	 */
-	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias, Funcionario funcionarioLogado) {
-		ValidadorDeLogica.validaOperacao(
-				MensagensDeErro.ERRO_PERMISSAO_CADASTRO_MEDICAMENTO,
+	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias,
+			Funcionario funcionarioLogado) {
+		ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_MEDICAMENTO,
 				Permissao.CADASTRAR_MEDICAMENTO, funcionarioLogado);
 		try {
 			return farmacia.addMedicamento(nome, preco, quantidade, tipo, categorias);
@@ -74,7 +77,7 @@ public class GerenciadorDeFarmacia implements Serializable {
 		try {
 			Medicamento medicamento = farmacia.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO,
 					nomeMedicamento);
-			return Util.getInfo(medicamento, atributo);
+			return Reflection.getInfo(medicamento, atributo);
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}
@@ -97,7 +100,8 @@ public class GerenciadorDeFarmacia implements Serializable {
 			Medicamento medicamento = farmacia.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO,
 					nomeMedicamento);
 			atributo = ValidadorDeDados.capitalizaString(atributo);
-			Util.atualizaInfo(medicamento, atributo, novoValor, String.format(MensagensDeErro.ERRO_ATRIBUTO_MEDICAMENTO_NAO_ATUALIZAVEL, atributo));
+			Reflection.atualizaInfo(medicamento, atributo, novoValor,
+					String.format(MensagensDeErro.ERRO_ATRIBUTO_MEDICAMENTO_NAO_ATUALIZAVEL, atributo));
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO + e.getMessage());
 		}
@@ -153,6 +157,54 @@ public class GerenciadorDeFarmacia implements Serializable {
 			}
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
+		}
+	}
+
+	/**
+	 * Dada uma lista com nomes de medicamentos separados por virgula ele
+	 * recupera os medicamentos
+	 * 
+	 * @param medicamentos
+	 *            Lista dos medicamentos
+	 * @return Medicamentos recuperados
+	 * @throws DadoInvalidoException
+	 *             Caso algum medicamento nao exista
+	 */
+	public List<Medicamento> getMedicamentos(String medicamentos) {
+		try {
+			String[] nomesMedicamentos = medicamentos.split(",");
+			List<Medicamento> medicamentosRecuperados = new ArrayList<>();
+
+			for (String nome : nomesMedicamentos) {
+				ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_MEDICAMENTO, nome);
+				medicamentosRecuperados
+						.add(this.farmacia.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO, nome));
+			}
+			return medicamentosRecuperados;
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
+		}
+	}
+
+	/**
+	 * Pega o valor dos medicamentos passados como string, separados por virgula
+	 * 
+	 * @param medicamentos
+	 *            Medicamentos
+	 * @return Valor
+	 */
+	public Double getValorMedicamentos(String medicamentos) {
+		try {
+			String[] nomesMedicamentos = medicamentos.split(",");
+			Double valorMedicamentos = new Double(0);
+
+			for (String nome : nomesMedicamentos) {
+				ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_MEDICAMENTO, nome);
+				valorMedicamentos += farmacia.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO, nome).getPreco();
+			}
+			return valorMedicamentos;
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(e.getMessage());
 		}
 	}
 }

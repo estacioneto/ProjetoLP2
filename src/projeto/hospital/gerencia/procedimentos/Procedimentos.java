@@ -38,11 +38,11 @@ public class Procedimentos implements Serializable {
 	 * @param prontuarioPaciente
 	 *            Prontuario do paciente a ser atendido
 	 */
-	public void consultaClinica(Prontuario prontuarioPaciente) {
+	public void consultaClinica(Prontuario prontuarioPaciente, Double valorMedicamentos) {
 		String procedimentoRealizado = "Consulta clinica";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		paciente.registraGasto(PRECO_CONSULTA);
+		paciente.registraGasto(PRECO_CONSULTA + valorMedicamentos);
 	}
 
 	/**
@@ -51,11 +51,11 @@ public class Procedimentos implements Serializable {
 	 * @param prontuarioPaciente
 	 *            Prontuario do paciente a ser atendido
 	 */
-	public void cirurgiaBariatrica(Prontuario prontuarioPaciente) {
+	public void cirurgiaBariatrica(Prontuario prontuarioPaciente, Double valorMedicamentos) {
 		String procedimentoRealizado = "Cirurgia Bariatrica";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		paciente.registraGasto(PRECO_CIRURGIA_BARIATRICA);
+		paciente.registraGasto(PRECO_CIRURGIA_BARIATRICA + valorMedicamentos);
 
 		double pesoPaciente = paciente.getPeso();
 		// Usado esse tipo de calculo para evitar erros de precisao
@@ -69,11 +69,11 @@ public class Procedimentos implements Serializable {
 	 * @param prontuarioPaciente
 	 *            Prontuario do paciente a ser atendido
 	 */
-	public void redesignicaoSexual(Prontuario prontuarioPaciente) {
+	public void redesignacaoSexual(Prontuario prontuarioPaciente, Double valorMedicamentos) {
 		String procedimentoRealizado = "Redesignacao Sexual";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		paciente.registraGasto(PRECO_REDESIGNICAO_SEXUAL);
+		paciente.registraGasto(PRECO_REDESIGNICAO_SEXUAL + valorMedicamentos);
 
 		paciente.mudaGenero();
 	}
@@ -88,13 +88,13 @@ public class Procedimentos implements Serializable {
 	 * @throws DadoInvalidoException
 	 *             Caso nao haja compatibilidade entre os tipos sanguineos
 	 */
-	public void transplante(Prontuario prontuarioPaciente, Orgao orgao) throws DadoInvalidoException {
+	public void transplanteDeOrgaos(Prontuario prontuarioPaciente, Orgao orgao, Double valorMedicamentos) throws DadoInvalidoException {
 		String procedimentoRealizado = "Transplante de " + orgao.getNome();
 		Paciente paciente = prontuarioPaciente.getPaciente();
 		paciente.verificaCompatibilidadeSanguineaCom(orgao.getTipoSanguineo());
 
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
-		paciente.registraGasto(PRECO_TRANSPLANTE);
+		paciente.registraGasto(PRECO_TRANSPLANTE + valorMedicamentos);
 
 	}
 }
