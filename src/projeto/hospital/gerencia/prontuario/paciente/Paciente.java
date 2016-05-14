@@ -3,6 +3,10 @@ package projeto.hospital.gerencia.prontuario.paciente;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import projeto.hospital.gerencia.prontuario.paciente.fidelidade.Fidelidade;
+import projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadeMaster;
+import projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadePadrao;
+import projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadeVIP;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
@@ -51,6 +55,11 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	@MetodoAssociado(get = "getGastosPaciente")
 	private Double gastos;
 	
+	@MetodoAssociado(get = "getPontuacao", set = "setPontuacao")
+	private Integer pontuacao;
+	
+	private Fidelidade fidelidade; 
+	
 	private String id;
 
 	/**
@@ -78,6 +87,8 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.sexo = sexoBiologico;
 		this.genero = genero;
 		this.gastos = Double.parseDouble(Integer.toString(Constantes.ZERO));
+		this.setPontuacao(Constantes.ZERO);
+		this.fidelidade = new FidelidadePadrao();
 	}
 
 	/**
@@ -157,6 +168,27 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.id = id;
 	}
 
+	public Integer getPontuacao() {
+		return pontuacao;
+	}
+
+	public void setPontuacao(Integer pontuacao) {
+		this.pontuacao = pontuacao;
+		this.verificaCondicaoFidelidade();
+	}
+	
+	private void verificaCondicaoFidelidade() {
+		if(this.fidelidade instanceof FidelidadePadrao){
+			if(this.pontuacao>= 150 && this.pontuacao <= 350){
+				fidelidade = new FidelidadeMaster();
+			}else if(pontuacao > 350){
+				fidelidade = new FidelidadeVIP();
+			}
+		}else if(this.fidelidade instanceof FidelidadeMaster && this.pontuacao > 350){
+			fidelidade = new FidelidadeVIP();
+		}
+	}
+
 	/**
 	 * Calcula a idade do paciente
 	 * 
@@ -206,6 +238,15 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 			this.genero = Constantes.MASCULINO;
 	}
 
+	public Double calculaDesconto(Double valor){
+		Double desconto = (this.fidelidade.getDescontoServico() * valor) / 100;
+		return desconto;
+	}
+	
+	public Integer calculaBonusPontuacao(Integer pontuacao){
+		Integer bonus = (this.fidelidade.getCreditoBonus()*pontuacao) / 100;
+		return bonus;
+	}
 	/**
 	 * Compara pacientes pelo nome
 	 */

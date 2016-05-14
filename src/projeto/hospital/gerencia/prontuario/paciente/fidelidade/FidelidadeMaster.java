@@ -1,23 +1,29 @@
 package projeto.hospital.gerencia.prontuario.paciente.fidelidade;
 
+import java.io.Serializable;
+
 /**
  * Fidelidade Master.
  * 
  * @author Estacio Pereira
  *
  */
-public class FidelidadeMaster implements Fidelidade {
+public class FidelidadeMaster implements Fidelidade, Serializable {
 
-	private final double DESCONTO = 15.0;
-	private final double BONUS = 5.0;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5195811085847684506L;
+	private final Double DESCONTO = 15.0;
+	private final Integer BONUS = 5;
 
 	@Override
-	public double getDescontoServico() {
+	public Double getDescontoServico() {
 		return this.DESCONTO;
 	}
 
 	@Override
-	public double getCreditoBonus() {
+	public Integer getCreditoBonus() {
 		return this.BONUS;
 	}
 

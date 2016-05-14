@@ -354,6 +354,10 @@ public class Facade {
 		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, orgao, medicamentos);
 	}
 
+	public void realizaProcedimento(String procedimento, String idPaciente){
+		this.controller.realizaProcedimento(procedimento, idPaciente);
+	}
+	
 	/**
 	 * Pega a quantidade de procedimentos realizados pelo paciente
 	 * 
@@ -396,4 +400,12 @@ public class Facade {
 		return this.controller.totalOrgaosDisponiveis();
 	}
 	// OPERACOES DE ORGAO
+	
+	public int getPontosFidelidade(String id){
+		return this.controller.getPontosFidelidade(id);
+	}
+	
+	public Double getGastosPaciente(String id){
+		return this.controller.getGastosPaciente(id);
+	}
 }
