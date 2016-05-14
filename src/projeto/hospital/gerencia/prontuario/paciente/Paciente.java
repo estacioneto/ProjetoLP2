@@ -3,9 +3,6 @@ package projeto.hospital.gerencia.prontuario.paciente;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import projeto.exceptions.dados.DadoInvalidoException;
-import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
-import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineoFactory;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
@@ -41,7 +38,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	
 	@Validacao(metodo = ConstantesReflection.VALIDA_TIPO_SANGUINEO, erro = MensagensDeErro.TIPO_SANGUINEO_INVALIDO)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO_SANGUINEO)
-	private TipoSanguineo tipoSanguineo;
+	private String tipoSanguineo;
 	
 	@Validacao(metodo = ConstantesReflection.VALIDA_SEXO, erro = Constantes.SEXO + Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_SEXO)
@@ -77,7 +74,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.nome = nome;
 		this.data = dataNascimento;
 		this.peso = peso;
-		this.tipoSanguineo = TipoSanguineoFactory.getInstacia().criaTipo(tipoSanguineo);
+		this.tipoSanguineo = tipoSanguineo;
 		this.sexo = sexoBiologico;
 		this.genero = genero;
 		this.gastos = Double.parseDouble(Integer.toString(Constantes.ZERO));
@@ -126,7 +123,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 * @return Tipo sanguineo
 	 */
 	public String getTipoSanguineo() {
-		return tipoSanguineo.toString();
+		return tipoSanguineo;
 	}
 
 	/**
@@ -179,10 +176,6 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 
 		return idade;
 	}
-
-	public void verificaCompatibilidadeSanguineaCom(String outroTipo) throws DadoInvalidoException{
-		this.tipoSanguineo.recebeDe(outroTipo);		
-	}
 	
 	/**
 	 * Registra gastos do paciente em procedimentos
@@ -198,9 +191,8 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 * 
 	 * @return Gastos do paciente
 	 */
-	public String getGastosPaciente() {
-		// TODO mudar isso quando sair os testes
-		return "O paciente ja gastou R$ " + this.gastos + ".";
+	public Double getGastosPaciente() {
+		return this.gastos;
 	}
 	
 	/**
@@ -208,10 +200,10 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 */
 	public void mudaGenero() {
 		if(this.genero.equalsIgnoreCase(Constantes.MASCULINO))
-			this.genero = Util.capitalizaString(Constantes.FEMININO);
+			this.genero = Constantes.FEMININO;
 		
 		else
-			this.genero = Util.capitalizaString(Constantes.MASCULINO);
+			this.genero = Constantes.MASCULINO;
 	}
 
 	/**

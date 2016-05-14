@@ -85,14 +85,14 @@ public class BancoDeOrgaos implements Serializable {
 	 *            Tipo sanguineo do orgao.
 	 * @return Orgao solicitado.
 	 */
-	public Orgao getOrgao(String nome) {
+	public Orgao getOrgao(String nome, String sanguePaciente) {
 		try {
-			for(Orgao orgao : this.orgaos)
-				if(orgao.getNome().equals(nome)){
+			for(Orgao orgao : this.orgaos){
+				if(orgao.getNome().equalsIgnoreCase(nome) && sanguePaciente.equals((orgao.getTipoSanguineo()))){
 					this.orgaos.remove(orgao);
 					return orgao;
 				}
-			
+			}
 			throw new DadoInvalidoException(MensagensDeErro.ERRO_ORGAO_INEXISTENTE);
 		} catch (DadoInvalidoException excecao) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());

@@ -2,8 +2,6 @@ package projeto.hospital.gerencia.bancodeorgaos;
 
 import java.io.Serializable;
 
-import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineo;
-import projeto.hospital.gerencia.tipo_sanguineo.TipoSanguineoFactory;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.reflexao.ConstantesReflection;
@@ -28,7 +26,7 @@ public class Orgao implements Serializable {
 
 	@Validacao(metodo = ConstantesReflection.VALIDA_TIPO_SANGUINEO, erro = MensagensDeErro.TIPO_SANGUINEO_INVALIDO)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO_SANGUINEO)
-	private TipoSanguineo tipoSanguineo;
+	private String tipoSanguineo;
 
 	/**
 	 * Construtor padrao.
@@ -78,8 +76,7 @@ public class Orgao implements Serializable {
 	 *            Tipo sanguineo do orgao.
 	 */
 	public void setTipoSanguineo(String tipoSanguineo) {
-		this.tipoSanguineo = TipoSanguineoFactory.getInstacia().criaTipo(
-				tipoSanguineo);
+		this.tipoSanguineo = tipoSanguineo;
 	}
 
 	/**

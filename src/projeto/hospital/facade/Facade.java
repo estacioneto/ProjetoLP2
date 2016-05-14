@@ -337,9 +337,32 @@ public class Facade {
 	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String medicamentos) {
 		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, medicamentos);
 	}
-	
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String orgao, String medicamentos){
+
+	/**
+	 * Realiza um procedimento
+	 * 
+	 * @param nomeProcedimento
+	 *            Nome do procedimento
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @param orgao
+	 *            Orgao a ser usado no procedimento
+	 * @param medicamentos
+	 *            Medicamentos necessarios
+	 */
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String orgao, String medicamentos) {
 		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, orgao, medicamentos);
+	}
+
+	/**
+	 * Pega a quantidade de procedimentos realizados pelo paciente
+	 * 
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @return Quantidade de procedimentos realizados
+	 */
+	public int getTotalProcedimento(String idPaciente) {
+		return this.controller.getTotalProcedimento(idPaciente);
 	}
 
 	// CONSULTA DE MEDICAMENTO/FARMACIA

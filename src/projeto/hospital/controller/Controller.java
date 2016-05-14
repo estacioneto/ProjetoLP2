@@ -1,14 +1,12 @@
 package projeto.hospital.controller;
 
 import java.io.Serializable;
-import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.bancodeorgaos.BancoDeOrgaos;
 import projeto.hospital.gerencia.bancodeorgaos.Orgao;
 import projeto.hospital.gerencia.farmacia.GerenciadorDeFarmacia;
-import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
 import projeto.hospital.gerencia.funcionario.Funcionario;
 import projeto.hospital.gerencia.funcionario.GerenciadorDeFuncionarios;
 import projeto.hospital.gerencia.procedimentos.GerenciadorProcedimento;
@@ -386,7 +384,7 @@ public class Controller implements Serializable {
 			ValidadorDeDados.validaProcedimento(nomeProcedimento);
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
 			Double valorMedicamentos = this.gerenciadorDeMedicamento.getValorMedicamentos(medicamentos);
-			
+
 			this.gerenciadorProcedimento.realizaProcedimento(nomeProcedimento, prontuario, valorMedicamentos);
 
 		} catch (DadoInvalidoException | OperacaoInvalidaException e) {
@@ -411,13 +409,19 @@ public class Controller implements Serializable {
 			ValidadorDeDados.validaProcedimento(nomeProcedimento);
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
 			ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_ORGAO, orgao);
-			Orgao orgaoRecuperado = this.bancoDeOrgaos.getOrgao(orgao);
+			String sanguePaciente = prontuario.getPaciente().getTipoSanguineo();
+			Orgao orgaoRecuperado = null;
+			try {
+				orgaoRecuperado = this.bancoDeOrgaos.getOrgao(orgao, sanguePaciente);
+			} catch (OperacaoInvalidaException e) {
+				throw new DadoInvalidoException("Banco nao possui o orgao especificado.");
+			}
 			Double valorMedicamento = this.gerenciadorDeMedicamento.getValorMedicamentos(medicamentos);
-			
-			this.gerenciadorProcedimento.realizaProcedimento(nomeProcedimento, prontuario, orgaoRecuperado, valorMedicamento);
+
+			this.gerenciadorProcedimento.realizaProcedimento(nomeProcedimento, prontuario, orgaoRecuperado,
+					valorMedicamento);
 
 		} catch (OperacaoInvalidaException | DadoInvalidoException e) {
-			// TODO
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
 		}
 	}
@@ -437,4 +441,14 @@ public class Controller implements Serializable {
 		}
 	}
 
+	/**
+	 * Pega a quantidade de procedimentos realizados pelo paciente
+	 * 
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @return Quantidade de procedimentos realizados
+	 */
+	public int getTotalProcedimento(String idPaciente) {
+		return this.gerenciadorDePaciente.getTotalProcedimento(idPaciente);
+	}
 }

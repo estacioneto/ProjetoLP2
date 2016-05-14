@@ -24,7 +24,7 @@ public class Procedimentos implements Serializable {
 	private final double PRECO_REDESIGNICAO_SEXUAL = 9300.00;
 	private final double PRECO_TRANSPLANTE = 12500.00;
 
-	private final double REDUCAO_PESO_BARIATRICA = 15;
+	private final double REDUCAO_PESO_BARIATRICA = 10;
 	
 	/**
 	 * Construtor
@@ -59,7 +59,7 @@ public class Procedimentos implements Serializable {
 
 		double pesoPaciente = paciente.getPeso();
 		// Usado esse tipo de calculo para evitar erros de precisao
-		double novoPeso = pesoPaciente * REDUCAO_PESO_BARIATRICA / Constantes.PORCENTAGEM_TOTAL;
+		double novoPeso = pesoPaciente - (pesoPaciente * REDUCAO_PESO_BARIATRICA / Constantes.PORCENTAGEM_TOTAL);
 		paciente.setPeso(novoPeso);
 	}
 
@@ -91,10 +91,8 @@ public class Procedimentos implements Serializable {
 	public void transplanteDeOrgaos(Prontuario prontuarioPaciente, Orgao orgao, Double valorMedicamentos) throws DadoInvalidoException {
 		String procedimentoRealizado = "Transplante de " + orgao.getNome();
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		paciente.verificaCompatibilidadeSanguineaCom(orgao.getTipoSanguineo());
 
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		paciente.registraGasto(PRECO_TRANSPLANTE + valorMedicamentos);
-
 	}
 }

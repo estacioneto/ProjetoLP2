@@ -3,12 +3,10 @@ package projeto.hospital.gerencia.procedimentos;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.bancodeorgaos.Orgao;
-import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
 import projeto.hospital.gerencia.prontuario.Prontuario;
 import projeto.util.Util;
 import projeto.util.reflexao.Reflection;
@@ -45,10 +43,10 @@ public class GerenciadorProcedimento implements Serializable {
 			String nomeProcedimento = Util.getNomeMetodo(procedimento);
 			Method metodo = Reflection.getMetodo(nomeProcedimento, Procedimentos.class, Prontuario.class, Orgao.class,
 					Double.class);
-			metodo.invoke(procedimentos, prontuario, valorMedicamentos);
+			metodo.invoke(procedimentos, prontuario, orgao, valorMedicamentos);
 
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
-			throw new OperacaoInvalidaException(e.getMessage());
+			throw new OperacaoInvalidaException("Este erro nao deveria ter ocorrido, relate ao suporte! " + e.getMessage());
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(e.getMessage());
 		}
@@ -71,7 +69,7 @@ public class GerenciadorProcedimento implements Serializable {
 			metodo.invoke(procedimentos, prontuario, valorMedicamentos);
 
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
-			throw new OperacaoInvalidaException(e.getMessage());
+			throw new OperacaoInvalidaException("Este erro nao deveria ter ocorrido, relate ao suporte! " + e.getMessage());
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(e.getMessage());
 		}

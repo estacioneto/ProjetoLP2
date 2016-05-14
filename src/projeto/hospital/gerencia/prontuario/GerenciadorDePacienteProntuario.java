@@ -202,12 +202,29 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 */
 	public Prontuario getProntuarioPaciente(String idPaciente) throws DadoInvalidoException {
 		ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_PACIENTE, idPaciente);
-		
+
 		for (Paciente paciente : this.pacientes.keySet())
 			if (paciente.getId().equals(idPaciente))
 				return this.pacientes.get(paciente);
 
-		// TODO
-		throw new DadoInvalidoException("Paciente nao encontrado.");
+		throw new OperacaoInvalidaException("Paciente nao encontrado.");
+	}
+
+	/**
+	 * Pega a quantidade de procedimentos realizados pelo paciente
+	 * 
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @return Quantidade de procedimentos realizados
+	 * @throws DadoInvalidoException
+	 *             Paciente nao existe
+	 */
+	public int getTotalProcedimento(String idPaciente) {
+		try {
+			Prontuario prontuario = getProntuarioPaciente(idPaciente);
+			return prontuario.qtdProcedimentos();
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(e.getMessage());
+		}
 	}
 }

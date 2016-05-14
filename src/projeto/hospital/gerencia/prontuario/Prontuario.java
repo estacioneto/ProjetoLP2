@@ -53,4 +53,11 @@ public class Prontuario implements Serializable {
 	public void registraProcedimento(String procedimentoRealizado) {
 		this.procedimentosRealizados.add(procedimentoRealizado);
 	}
+
+	/**
+	 * @return Quantidade de procedimentos ja realizados
+	 */
+	public int qtdProcedimentos() {
+		return this.procedimentosRealizados.size();
+	}
 }
