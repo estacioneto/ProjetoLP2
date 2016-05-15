@@ -201,7 +201,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *             Caso paciente nao seja encontrado
 	 */
 	public Prontuario getProntuarioPaciente(String idPaciente) throws DadoInvalidoException {
-		ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_PACIENTE, idPaciente);
+		ValidadorDeDados.validaString(Constantes.ID.toUpperCase() + Constantes.DO_PACIENTE, idPaciente);
 
 		for (Paciente paciente : this.pacientes.keySet())
 			if (paciente.getId().equals(idPaciente))
