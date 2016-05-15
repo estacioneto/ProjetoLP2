@@ -483,7 +483,7 @@ public class Controller implements Serializable {
 		}
 	}
 	
-	public double getGastosPaciente(String id){
+	public Double getGastosPaciente(String id){
 		try {
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(id);
 			Paciente paciente = prontuario.getPaciente();

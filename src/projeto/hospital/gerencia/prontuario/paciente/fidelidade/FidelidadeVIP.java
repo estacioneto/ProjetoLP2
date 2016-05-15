@@ -14,8 +14,8 @@ public class FidelidadeVIP implements Fidelidade, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 3376099012314637696L;
-	private final double DESCONTO = 0.3;
-	private final double BONUS = 0.1;
+	private final double DESCONTO = 30;
+	private final double BONUS = 10;
 	
 	@Override
 	public double getDescontoServico() {

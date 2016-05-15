@@ -18,7 +18,7 @@ public class Procedimentos implements Serializable {
 	 * Id gerado automaticamente
 	 */
 	private static final long serialVersionUID = 6731797048997438464L;
-	
+
 	private final double PRECO_CONSULTA = 350.0;
 	private final double PRECO_CIRURGIA_BARIATRICA = 7600.00;
 	private final double PRECO_REDESIGNICAO_SEXUAL = 9300.00;
@@ -28,30 +28,32 @@ public class Procedimentos implements Serializable {
 	private final int PONTUACAO_CIRURGIA_BARIATRICA = 100;
 	private final int PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL = 130;
 	private final int PONTUACAO_TRANSPLANTE_ORGAOS = 160;
-	
+
 	private final double REDUCAO_PESO_BARIATRICA = 10;
-	
+
 	/**
 	 * Construtor
 	 */
-	public Procedimentos(){
+	public Procedimentos() {
 	}
-	
+
 	/**
 	 * ~ Procedimento de consulta clinica
 	 * 
 	 * @param prontuarioPaciente
 	 *            Prontuario do paciente a ser atendido
 	 */
-	public void consultaClinica(Prontuario prontuarioPaciente, Double valorMedicamentos) {
+	public void consultaClinica(Prontuario prontuarioPaciente,
+			Double valorMedicamentos) {
 		String procedimentoRealizado = "Consulta clinica";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		Double gastoComDesconto = (PRECO_CONSULTA + valorMedicamentos) - (paciente.calculaDesconto(PRECO_CONSULTA + valorMedicamentos));
-		System.out.println(gastoComDesconto + paciente.getNome() + " clinica");
-		System.out.println();
+		Double gastoComDesconto = (PRECO_CONSULTA + valorMedicamentos)
+				- (paciente.calculaDesconto(PRECO_CONSULTA + valorMedicamentos));
 		paciente.registraGasto(gastoComDesconto);
-		int pontuacaoFinalPaciente = paciente.getPontuacao() + paciente.calculaBonus(PONTUACAO_CONSULTA_CLINICA) + PONTUACAO_CONSULTA_CLINICA;
+		int pontuacaoFinalPaciente = paciente.getPontuacao()
+				+ paciente.calculaBonus(PONTUACAO_CONSULTA_CLINICA)
+				+ PONTUACAO_CONSULTA_CLINICA;
 		paciente.setPontuacao(pontuacaoFinalPaciente);
 	}
 
@@ -61,18 +63,25 @@ public class Procedimentos implements Serializable {
 	 * @param prontuarioPaciente
 	 *            Prontuario do paciente a ser atendido
 	 */
-	public void cirurgiaBariatrica(Prontuario prontuarioPaciente, Double valorMedicamentos) {
+	public void cirurgiaBariatrica(Prontuario prontuarioPaciente,
+			Double valorMedicamentos) {
 		String procedimentoRealizado = "Cirurgia Bariatrica";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		Double gastoComDesconto = PRECO_CIRURGIA_BARIATRICA  + valorMedicamentos - paciente.calculaDesconto(PRECO_CIRURGIA_BARIATRICA + valorMedicamentos);
+		Double gastoComDesconto = PRECO_CIRURGIA_BARIATRICA
+				+ valorMedicamentos
+				- paciente.calculaDesconto(PRECO_CIRURGIA_BARIATRICA
+						+ valorMedicamentos);
 		paciente.registraGasto(gastoComDesconto);
-		int pontuacaoFinalPaciente = paciente.getPontuacao() + paciente.calculaBonus(PONTUACAO_CIRURGIA_BARIATRICA) + PONTUACAO_CIRURGIA_BARIATRICA;
+		int pontuacaoFinalPaciente = paciente.getPontuacao()
+				+ paciente.calculaBonus(PONTUACAO_CIRURGIA_BARIATRICA)
+				+ PONTUACAO_CIRURGIA_BARIATRICA;
 		paciente.setPontuacao(pontuacaoFinalPaciente);
 
 		double pesoPaciente = paciente.getPeso();
 		// Usado esse tipo de calculo para evitar erros de precisao
-		double novoPeso = pesoPaciente - (pesoPaciente * REDUCAO_PESO_BARIATRICA / Constantes.PORCENTAGEM_TOTAL);
+		double novoPeso = pesoPaciente
+				- (pesoPaciente * REDUCAO_PESO_BARIATRICA / Constantes.PORCENTAGEM_TOTAL);
 		paciente.setPeso(novoPeso);
 	}
 
@@ -82,14 +91,20 @@ public class Procedimentos implements Serializable {
 	 * @param prontuarioPaciente
 	 *            Prontuario do paciente a ser atendido
 	 */
-	public void redesignacaoSexual(Prontuario prontuarioPaciente, Double valorMedicamentos) {
+	public void redesignacaoSexual(Prontuario prontuarioPaciente,
+			Double valorMedicamentos) {
 		String procedimentoRealizado = "Redesignacao Sexual";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		
-		Double gastoComDesconto = PRECO_REDESIGNICAO_SEXUAL + valorMedicamentos - paciente.calculaDesconto(PRECO_REDESIGNICAO_SEXUAL + valorMedicamentos);
+
+		Double gastoComDesconto = PRECO_REDESIGNICAO_SEXUAL
+				+ valorMedicamentos
+				- paciente.calculaDesconto(PRECO_REDESIGNICAO_SEXUAL
+						+ valorMedicamentos);
 		paciente.registraGasto(gastoComDesconto);
-		int pontuacaoFinalPaciente = paciente.getPontuacao() + paciente.calculaBonus(PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL) + PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL;
+		int pontuacaoFinalPaciente = paciente.getPontuacao()
+				+ paciente.calculaBonus(PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL)
+				+ PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL;
 		paciente.setPontuacao(pontuacaoFinalPaciente);
 		paciente.mudaGenero();
 	}
@@ -104,17 +119,20 @@ public class Procedimentos implements Serializable {
 	 * @throws DadoInvalidoException
 	 *             Caso nao haja compatibilidade entre os tipos sanguineos
 	 */
-	public void transplanteDeOrgaos(Prontuario prontuarioPaciente, Orgao orgao, Double valorMedicamentos) throws DadoInvalidoException {
+	public void transplanteDeOrgaos(Prontuario prontuarioPaciente, Orgao orgao,
+			Double valorMedicamentos) throws DadoInvalidoException {
 		String procedimentoRealizado = "Transplante de " + orgao.getNome();
 		Paciente paciente = prontuarioPaciente.getPaciente();
 
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
-		
-		Double gastoComDesconto = (PRECO_TRANSPLANTE + valorMedicamentos) - (paciente.calculaDesconto(PRECO_TRANSPLANTE + valorMedicamentos));
-		System.out.println(gastoComDesconto + paciente.getNome() + " transplante" + valorMedicamentos);
-		System.out.println();
+
+		Double gastoComDesconto = (PRECO_TRANSPLANTE + valorMedicamentos)
+				- (paciente.calculaDesconto(PRECO_TRANSPLANTE
+						+ valorMedicamentos));
 		paciente.registraGasto(gastoComDesconto);
-		int pontuacaoFinalPaciente = paciente.getPontuacao() + paciente.calculaBonus(PONTUACAO_TRANSPLANTE_ORGAOS) + PONTUACAO_TRANSPLANTE_ORGAOS;
+		int pontuacaoFinalPaciente = paciente.getPontuacao()
+				+ paciente.calculaBonus(PONTUACAO_TRANSPLANTE_ORGAOS)
+				+ PONTUACAO_TRANSPLANTE_ORGAOS;
 		paciente.setPontuacao(pontuacaoFinalPaciente);
 	}
 }

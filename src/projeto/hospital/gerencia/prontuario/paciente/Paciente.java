@@ -198,11 +198,11 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	}
 	
 	public Double calculaDesconto(Double valor){
-		return (this.fidelidade.getDescontoServico()*valor);
+		return (this.fidelidade.getDescontoServico()*valor/100);
 	}
 	
 	public int calculaBonus(int valor){
-		return (int) (this.fidelidade.getCreditoBonus()*valor);
+		return (int) (this.fidelidade.getCreditoBonus()*valor/100);
 	}
 	
 	private void verificaMudancaStatus(){
