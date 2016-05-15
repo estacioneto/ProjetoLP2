@@ -24,6 +24,11 @@ public class Procedimentos implements Serializable {
 	private final double PRECO_REDESIGNICAO_SEXUAL = 9300.00;
 	private final double PRECO_TRANSPLANTE = 12500.00;
 
+	private final int PONTUACAO_CONSULTA_CLINICA = 50;
+	private final int PONTUACAO_CIRURGIA_BARIATRICA = 100;
+	private final int PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL = 130;
+	private final int PONTUACAO_TRANSPLANTE_ORGAOS = 160;
+	
 	private final double REDUCAO_PESO_BARIATRICA = 10;
 	
 	/**
@@ -42,7 +47,12 @@ public class Procedimentos implements Serializable {
 		String procedimentoRealizado = "Consulta clinica";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		paciente.registraGasto(PRECO_CONSULTA + valorMedicamentos);
+		Double gastoComDesconto = (PRECO_CONSULTA + valorMedicamentos) - (paciente.calculaDesconto(PRECO_CONSULTA + valorMedicamentos));
+		System.out.println(gastoComDesconto + paciente.getNome() + " clinica");
+		System.out.println();
+		paciente.registraGasto(gastoComDesconto);
+		int pontuacaoFinalPaciente = paciente.getPontuacao() + paciente.calculaBonus(PONTUACAO_CONSULTA_CLINICA) + PONTUACAO_CONSULTA_CLINICA;
+		paciente.setPontuacao(pontuacaoFinalPaciente);
 	}
 
 	/**
@@ -55,7 +65,10 @@ public class Procedimentos implements Serializable {
 		String procedimentoRealizado = "Cirurgia Bariatrica";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		paciente.registraGasto(PRECO_CIRURGIA_BARIATRICA + valorMedicamentos);
+		Double gastoComDesconto = PRECO_CIRURGIA_BARIATRICA  + valorMedicamentos - paciente.calculaDesconto(PRECO_CIRURGIA_BARIATRICA + valorMedicamentos);
+		paciente.registraGasto(gastoComDesconto);
+		int pontuacaoFinalPaciente = paciente.getPontuacao() + paciente.calculaBonus(PONTUACAO_CIRURGIA_BARIATRICA) + PONTUACAO_CIRURGIA_BARIATRICA;
+		paciente.setPontuacao(pontuacaoFinalPaciente);
 
 		double pesoPaciente = paciente.getPeso();
 		// Usado esse tipo de calculo para evitar erros de precisao
@@ -73,8 +86,11 @@ public class Procedimentos implements Serializable {
 		String procedimentoRealizado = "Redesignacao Sexual";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		paciente.registraGasto(PRECO_REDESIGNICAO_SEXUAL + valorMedicamentos);
-
+		
+		Double gastoComDesconto = PRECO_REDESIGNICAO_SEXUAL + valorMedicamentos - paciente.calculaDesconto(PRECO_REDESIGNICAO_SEXUAL + valorMedicamentos);
+		paciente.registraGasto(gastoComDesconto);
+		int pontuacaoFinalPaciente = paciente.getPontuacao() + paciente.calculaBonus(PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL) + PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL;
+		paciente.setPontuacao(pontuacaoFinalPaciente);
 		paciente.mudaGenero();
 	}
 
@@ -93,6 +109,12 @@ public class Procedimentos implements Serializable {
 		Paciente paciente = prontuarioPaciente.getPaciente();
 
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
-		paciente.registraGasto(PRECO_TRANSPLANTE + valorMedicamentos);
+		
+		Double gastoComDesconto = (PRECO_TRANSPLANTE + valorMedicamentos) - (paciente.calculaDesconto(PRECO_TRANSPLANTE + valorMedicamentos));
+		System.out.println(gastoComDesconto + paciente.getNome() + " transplante" + valorMedicamentos);
+		System.out.println();
+		paciente.registraGasto(gastoComDesconto);
+		int pontuacaoFinalPaciente = paciente.getPontuacao() + paciente.calculaBonus(PONTUACAO_TRANSPLANTE_ORGAOS) + PONTUACAO_TRANSPLANTE_ORGAOS;
+		paciente.setPontuacao(pontuacaoFinalPaciente);
 	}
 }

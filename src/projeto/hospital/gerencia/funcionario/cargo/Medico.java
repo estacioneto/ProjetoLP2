@@ -13,5 +13,6 @@ public class Medico extends Cargo {
 	 */
 	public Medico() {
 		super(Constantes.MEDICO);
+		this.permissoes.add(Permissao.REALIZA_PROCEDIMENTO);
 	}
 }

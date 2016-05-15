@@ -3,6 +3,10 @@ package projeto.hospital.gerencia.prontuario.paciente;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import projeto.hospital.gerencia.prontuario.paciente.fidelidade.Fidelidade;
+import projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadeMaster;
+import projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadePadrao;
+import projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadeVIP;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
@@ -51,7 +55,12 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	@MetodoAssociado(get = "getGastosPaciente")
 	private Double gastos;
 	
+	@MetodoAssociado(get = "getPontuacao", set = "setPontuacao")
+	private Integer pontuacao;
+	
 	private String id;
+	
+	private Fidelidade fidelidade;
 
 	/**
 	 * Construtor
@@ -78,8 +87,19 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.sexo = sexoBiologico;
 		this.genero = genero;
 		this.gastos = Double.parseDouble(Integer.toString(Constantes.ZERO));
+		this.pontuacao = Constantes.ZERO;
+		this.fidelidade = new FidelidadePadrao();
 	}
 
+	public Integer getPontuacao() {
+		return pontuacao;
+	}
+
+	public void setPontuacao(Integer pontuacao) {
+		this.pontuacao = pontuacao;
+		//this.verificaMudancaStatus();
+	}
+	
 	/**
 	 * @return Nome
 	 */
@@ -175,6 +195,26 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 			idade++;
 
 		return idade;
+	}
+	
+	public Double calculaDesconto(Double valor){
+		return (this.fidelidade.getDescontoServico()*valor);
+	}
+	
+	public int calculaBonus(int valor){
+		return (int) (this.fidelidade.getCreditoBonus()*valor);
+	}
+	
+	private void verificaMudancaStatus(){
+		if(this.fidelidade instanceof FidelidadePadrao){
+			if((this.pontuacao >= 150) && (this.pontuacao <= 350)){
+				this.fidelidade = new FidelidadeMaster();
+			}else if(this.pontuacao > 350){
+				this.fidelidade = new FidelidadeVIP();
+			}
+		}else if((this.fidelidade instanceof FidelidadeMaster) && (this.pontuacao > 350)){
+			this.fidelidade = new FidelidadeVIP();
+		}
 	}
 	
 	/**
