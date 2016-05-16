@@ -58,10 +58,10 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	@MetodoAssociado(get = "getPontuacao", set = "setPontuacao")
 	private Integer pontuacao;
 	
+	private Fidelidade fidelidade; 
+	
 	private String id;
 	
-	private Fidelidade fidelidade;
-
 	/**
 	 * Construtor
 	 * 
@@ -176,6 +176,18 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	private void verificaCondicaoFidelidade() {
+		if(this.fidelidade instanceof FidelidadePadrao){
+			if(this.pontuacao>= 150 && this.pontuacao <= 350){
+				fidelidade = new FidelidadeMaster();
+			}else if(pontuacao > 350){
+				fidelidade = new FidelidadeVIP();
+			}
+		}else if(this.fidelidade instanceof FidelidadeMaster && this.pontuacao > 350){
+			fidelidade = new FidelidadeVIP();
+		}
+	}
 
 	/**
 	 * Calcula a idade do paciente
@@ -245,7 +257,11 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		else
 			this.genero = Constantes.MASCULINO;
 	}
-
+	
+	public Integer calculaBonusPontuacao(Integer pontuacao){
+		Integer bonus = (this.fidelidade.getCreditoBonus()*pontuacao) / 100;
+		return bonus;
+	}
 	/**
 	 * Compara pacientes pelo nome
 	 */
