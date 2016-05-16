@@ -52,7 +52,6 @@ public class Procedimentos implements Serializable {
 				- (paciente.calculaDesconto(PRECO_CONSULTA + valorMedicamentos));
 		paciente.registraGasto(gastoComDesconto);
 		int pontuacaoFinalPaciente = paciente.getPontuacao()
-				+ paciente.calculaBonus(PONTUACAO_CONSULTA_CLINICA)
 				+ PONTUACAO_CONSULTA_CLINICA;
 		paciente.setPontuacao(pontuacaoFinalPaciente);
 	}
@@ -74,7 +73,6 @@ public class Procedimentos implements Serializable {
 						+ valorMedicamentos);
 		paciente.registraGasto(gastoComDesconto);
 		int pontuacaoFinalPaciente = paciente.getPontuacao()
-				+ paciente.calculaBonus(PONTUACAO_CIRURGIA_BARIATRICA)
 				+ PONTUACAO_CIRURGIA_BARIATRICA;
 		paciente.setPontuacao(pontuacaoFinalPaciente);
 
@@ -103,7 +101,6 @@ public class Procedimentos implements Serializable {
 						+ valorMedicamentos);
 		paciente.registraGasto(gastoComDesconto);
 		int pontuacaoFinalPaciente = paciente.getPontuacao()
-				+ paciente.calculaBonus(PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL)
 				+ PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL;
 		paciente.setPontuacao(pontuacaoFinalPaciente);
 		paciente.mudaGenero();
@@ -131,7 +128,6 @@ public class Procedimentos implements Serializable {
 						+ valorMedicamentos));
 		paciente.registraGasto(gastoComDesconto);
 		int pontuacaoFinalPaciente = paciente.getPontuacao()
-				+ paciente.calculaBonus(PONTUACAO_TRANSPLANTE_ORGAOS)
 				+ PONTUACAO_TRANSPLANTE_ORGAOS;
 		paciente.setPontuacao(pontuacaoFinalPaciente);
 	}

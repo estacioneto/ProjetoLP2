@@ -405,7 +405,7 @@ public class Facade {
 		return this.controller.getPontosFidelidade(id);
 	}
 	
-	public Double getGastosPaciente(String id){
+	public String getGastosPaciente(String id){
 		return this.controller.getGastosPaciente(id);
 	}
 }

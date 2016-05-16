@@ -97,7 +97,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 
 	public void setPontuacao(Integer pontuacao) {
 		this.pontuacao = pontuacao;
-		//this.verificaMudancaStatus();
+		this.verificaMudancaStatus();
 	}
 	
 	/**

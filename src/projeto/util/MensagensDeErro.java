@@ -73,6 +73,7 @@ public abstract class MensagensDeErro {
 	
 	// ERROS DE PROCEDIMENTOS
 	public static final String ERRO_REALIZAR_PROCEDIMENTO = "Erro na realizacao de procedimentos. ";
+	public static final String ERRO_SEM_PERMISSAO_PROCEDIMENTO = " nao tem permissao para realizar procedimentos.";
 	
 	// ERROS DE DADOS
 }
