@@ -52,7 +52,7 @@ public class Procedimentos implements Serializable {
 		Double valorComDesconto = (PRECO_CONSULTA+valorMedicamentos) - paciente.calculaDesconto(PRECO_CONSULTA+valorMedicamentos);
 		paciente.registraGasto(valorComDesconto);
 		
-		Integer pontuacaoAtual = paciente.getPontuacao() + paciente.calculaBonusPontuacao(PONTUACAO_CONSULTA_CLINICA);
+		Integer pontuacaoAtual = paciente.getPontuacao();
 		paciente.setPontuacao(pontuacaoAtual + PONTUACAO_CONSULTA_CLINICA);
 	}
 
@@ -73,7 +73,7 @@ public class Procedimentos implements Serializable {
 		// Usado esse tipo de calculo para evitar erros de precisao
 		double novoPeso = pesoPaciente - (pesoPaciente * REDUCAO_PESO_BARIATRICA / Constantes.PORCENTAGEM_TOTAL);
 		paciente.setPeso(novoPeso);
-		Integer pontuacaoAtual = paciente.getPontuacao() + paciente.calculaBonusPontuacao(PONTUACAO_CIRURGIA_BARIATRICA);
+		Integer pontuacaoAtual = paciente.getPontuacao();// + paciente.calculaBonusPontuacao(PONTUACAO_CIRURGIA_BARIATRICA)
 		paciente.setPontuacao(pontuacaoAtual + PONTUACAO_CIRURGIA_BARIATRICA);
 	}
 
@@ -93,7 +93,7 @@ public class Procedimentos implements Serializable {
 
 		paciente.mudaGenero();
 		
-		Integer pontuacaoAtual = paciente.getPontuacao() + paciente.calculaBonusPontuacao(PONTUACAO_CIRURGIA_REDESIGNICAO_SEXUAL);
+		Integer pontuacaoAtual = paciente.getPontuacao();// + paciente.calculaBonusPontuacao(PONTUACAO_CIRURGIA_REDESIGNICAO_SEXUAL)
 		paciente.setPontuacao(pontuacaoAtual + PONTUACAO_CIRURGIA_REDESIGNICAO_SEXUAL);
 	}
 
@@ -115,7 +115,7 @@ public class Procedimentos implements Serializable {
 		Double valorComDesconto = (PRECO_TRANSPLANTE+valorMedicamentos) - paciente.calculaDesconto(PRECO_TRANSPLANTE+valorMedicamentos);
 		paciente.registraGasto(valorComDesconto + valorMedicamentos);
 		
-		Integer pontuacaoAtual = paciente.getPontuacao() + paciente.calculaBonusPontuacao(PONTUACAO_TRANSPLANTE_ORGAOS);
+		Integer pontuacaoAtual = paciente.getPontuacao();//+ paciente.calculaBonusPontuacao(PONTUACAO_TRANSPLANTE_ORGAOS)
 		paciente.setPontuacao(pontuacaoAtual + PONTUACAO_TRANSPLANTE_ORGAOS);
 	}
 }
