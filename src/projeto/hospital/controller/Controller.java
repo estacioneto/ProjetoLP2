@@ -485,11 +485,12 @@ public class Controller implements Serializable {
 		}
 	}
 
-	public Double getGastosPaciente(String id) {
+	public String getGastosPaciente(String id) {
 		try {
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(id);
 			Paciente paciente = prontuario.getPaciente();
-			return paciente.getGastosPaciente();
+			String gastoFormatado = String.format("%.2f", paciente.getGastosPaciente()).replace(",", ".");
+			return gastoFormatado;
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
