@@ -23,12 +23,12 @@ public class Procedimentos implements Serializable {
 	private final double PRECO_CIRURGIA_BARIATRICA = 7600.00;
 	private final double PRECO_REDESIGNICAO_SEXUAL = 9300.00;
 	private final double PRECO_TRANSPLANTE = 12500.00;
-
-	private final int PONTUACAO_CONSULTA_CLINICA = 50;
-	private final int PONTUACAO_CIRURGIA_BARIATRICA = 100;
+	
+	private final Integer PONTUACAO_CONSULTA_CLINICA = 50;
+	private final Integer PONTUACAO_CIRURGIA_BARIATRICA = 100;
+	private final Integer PONTUACAO_CIRURGIA_REDESIGNICAO_SEXUAL = 130;
+	private final Integer PONTUACAO_TRANSPLANTE_ORGAOS = 160;
 	private final int PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL = 130;
-	private final int PONTUACAO_TRANSPLANTE_ORGAOS = 160;
-
 	private final double REDUCAO_PESO_BARIATRICA = 10;
 
 	/**
@@ -81,6 +81,8 @@ public class Procedimentos implements Serializable {
 		double novoPeso = pesoPaciente
 				- (pesoPaciente * REDUCAO_PESO_BARIATRICA / Constantes.PORCENTAGEM_TOTAL);
 		paciente.setPeso(novoPeso);
+		Integer pontuacaoAtual = paciente.getPontuacao();// + paciente.calculaBonusPontuacao(PONTUACAO_CIRURGIA_BARIATRICA)
+		paciente.setPontuacao(pontuacaoAtual + PONTUACAO_CIRURGIA_BARIATRICA);
 	}
 
 	/**
@@ -94,6 +96,8 @@ public class Procedimentos implements Serializable {
 		String procedimentoRealizado = "Redesignacao Sexual";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
+		Double valorComDesconto = (PRECO_REDESIGNICAO_SEXUAL+valorMedicamentos) - paciente.calculaDesconto(PRECO_REDESIGNICAO_SEXUAL+valorMedicamentos);
+		paciente.registraGasto(valorComDesconto);
 
 		Double gastoComDesconto = PRECO_REDESIGNICAO_SEXUAL
 				+ valorMedicamentos
@@ -104,6 +108,9 @@ public class Procedimentos implements Serializable {
 				+ PONTUACAO_CIRURGIA_REDESIGNACAO_SEXUAL;
 		paciente.setPontuacao(pontuacaoFinalPaciente);
 		paciente.mudaGenero();
+		
+		Integer pontuacaoAtual = paciente.getPontuacao();// + paciente.calculaBonusPontuacao(PONTUACAO_CIRURGIA_REDESIGNICAO_SEXUAL)
+		paciente.setPontuacao(pontuacaoAtual + PONTUACAO_CIRURGIA_REDESIGNICAO_SEXUAL);
 	}
 
 	/**

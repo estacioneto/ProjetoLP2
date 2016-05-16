@@ -17,12 +17,13 @@ public class FidelidadePadrao implements Fidelidade, Serializable {
 	private static final long serialVersionUID = 2425017466808695066L;
 
 	@Override
-	public double getDescontoServico() {
-		return Constantes.ZERO;
+	public Double getDescontoServico() {
+		Double zero = 0.0; 
+		return zero;
 	}
 
 	@Override
-	public double getCreditoBonus() {
+	public Integer getCreditoBonus() {
 		return Constantes.ZERO;
 	}
 

@@ -58,10 +58,10 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	@MetodoAssociado(get = "getPontuacao", set = "setPontuacao")
 	private Integer pontuacao;
 	
+	private Fidelidade fidelidade; 
+	
 	private String id;
 	
-	private Fidelidade fidelidade;
-
 	/**
 	 * Construtor
 	 * 
@@ -89,10 +89,6 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.gastos = Double.parseDouble(Integer.toString(Constantes.ZERO));
 		this.pontuacao = Constantes.ZERO;
 		this.fidelidade = new FidelidadePadrao();
-	}
-
-	public Integer getPontuacao() {
-		return pontuacao;
 	}
 
 	public void setPontuacao(Integer pontuacao) {
@@ -177,6 +173,10 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.id = id;
 	}
 
+	public Integer getPontuacao() {
+		return pontuacao;
+	}
+
 	/**
 	 * Calcula a idade do paciente
 	 * 
@@ -195,10 +195,6 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 			idade++;
 
 		return idade;
-	}
-	
-	public Double calculaDesconto(Double valor){
-		return (this.fidelidade.getDescontoServico()*valor/100);
 	}
 	
 	public int calculaBonus(int valor){
@@ -246,6 +242,15 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 			this.genero = Constantes.MASCULINO;
 	}
 
+	public Double calculaDesconto(Double valor){
+		Double desconto = (this.fidelidade.getDescontoServico() * valor) / 100;
+		return desconto;
+	}
+	
+	public Integer calculaBonusPontuacao(Integer pontuacao){
+		Integer bonus = (this.fidelidade.getCreditoBonus()*pontuacao) / 100;
+		return bonus;
+	}
 	/**
 	 * Compara pacientes pelo nome
 	 */

@@ -372,6 +372,10 @@ public class Controller implements Serializable {
 	// OPERACOES DE ORGAO
 	// OPERACOES DE PROCEDIMENTO
 
+	public void realizaProcedimento(String procedimento, String idPaciente) {
+		this.realizaProcedimento(procedimento, idPaciente, "");
+	}
+	
 	/**
 	 * Realiza um procedimento
 	 * 
@@ -386,7 +390,7 @@ public class Controller implements Serializable {
 		try {
 			ValidadorDeDados.validaProcedimento(nomeProcedimento);
 			ValidadorDeLogica.validaOperacao("O funcionario %s" + MensagensDeErro.ERRO_SEM_PERMISSAO_PROCEDIMENTO,
-					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
+					Permissao.REALIZAR_PROCEDIMENTO, funcionarioLogado);
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
 			Double valorMedicamentos = this.gerenciadorDeMedicamento.getValorMedicamentos(medicamentos);
 
@@ -415,7 +419,7 @@ public class Controller implements Serializable {
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
 			ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_ORGAO, orgao);
 			ValidadorDeLogica.validaOperacao("O funcionario %s" + MensagensDeErro.ERRO_SEM_PERMISSAO_PROCEDIMENTO,
-					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
+					Permissao.REALIZAR_PROCEDIMENTO, funcionarioLogado);
 			String sanguePaciente = prontuario.getPaciente().getTipoSanguineo();
 			Orgao orgaoRecuperado = null;
 			try {
@@ -433,20 +437,6 @@ public class Controller implements Serializable {
 		}
 	}
 
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente){
-		try {
-			ValidadorDeDados.validaProcedimento(nomeProcedimento);
-			ValidadorDeLogica.validaOperacao("O funcionario %s" + MensagensDeErro.ERRO_SEM_PERMISSAO_PROCEDIMENTO,
-					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
-			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
-			double valorMedicamentos = 0;
-			this.gerenciadorProcedimento.realizaProcedimento(nomeProcedimento, prontuario, valorMedicamentos);
-
-		} catch (OperacaoInvalidaException | DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
-		}
-	}
-	
 	/**
 	 * Pega o id de um paciente de acordo com seu nome
 	 * 
@@ -455,11 +445,7 @@ public class Controller implements Serializable {
 	 * @return Id do paciente
 	 */
 	public String getPacienteId(String nome) {
-		try {
-			return this.gerenciadorDePaciente.getIdPaciente(nome);
-		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
-		}
+		return this.gerenciadorDePaciente.getIdPaciente(nome);
 	}
 
 	/**
@@ -482,13 +468,13 @@ public class Controller implements Serializable {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
 	}
-	
-	public String getGastosPaciente(String id){
+
+	public String getGastosPaciente(String id) {
 		try {
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(id);
 			Paciente paciente = prontuario.getPaciente();
-			String valorFormatado = String.format("%.2f", paciente.getGastosPaciente()).replace(",", ".");
-			return valorFormatado;
+			String gastoFormatado = String.format("%.2f", paciente.getGastosPaciente()).replace(",", ".");
+			return gastoFormatado;
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
