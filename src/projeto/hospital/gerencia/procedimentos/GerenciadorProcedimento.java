@@ -41,12 +41,10 @@ public class GerenciadorProcedimento implements Serializable {
 	public void realizaProcedimento(String procedimento, Prontuario prontuario, Orgao orgao, Double valorMedicamentos) {
 		try {
 			String nomeProcedimento = Util.getNomeMetodo(procedimento);
-			Method metodo = Reflection.getMetodo(nomeProcedimento, Procedimentos.class, Prontuario.class, Orgao.class,
-					Double.class);
-			metodo.invoke(procedimentos, prontuario, orgao, valorMedicamentos);
+			Class<?>[] classesArgumentos = { Prontuario.class, Orgao.class, Double.class };
+			Object[] argumentos = { prontuario, orgao, valorMedicamentos };
+			Reflection.executaMetodo(nomeProcedimento, this.procedimentos, classesArgumentos, argumentos);
 
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
-			throw new OperacaoInvalidaException("Este erro nao deveria ter ocorrido, relate ao suporte! " + e.getMessage());
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(e.getMessage());
 		}
@@ -65,11 +63,10 @@ public class GerenciadorProcedimento implements Serializable {
 	public void realizaProcedimento(String procedimento, Prontuario prontuario, Double valorMedicamentos) {
 		try {
 			String nomeProcedimento = Util.getNomeMetodo(procedimento);
-			Method metodo = Reflection.getMetodo(nomeProcedimento, Procedimentos.class, Prontuario.class, Double.class);
-			metodo.invoke(procedimentos, prontuario, valorMedicamentos);
+			Class<?>[] classesArgumentos = { Prontuario.class, Double.class };
+			Object[] argumentos = { prontuario, valorMedicamentos };
+			Reflection.executaMetodo(nomeProcedimento, this.procedimentos, classesArgumentos, argumentos);
 
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
-			throw new OperacaoInvalidaException("Este erro nao deveria ter ocorrido, relate ao suporte! " + e.getMessage());
 		} catch (DadoInvalidoException e) {
 			throw new OperacaoInvalidaException(e.getMessage());
 		}

@@ -31,7 +31,7 @@ public abstract class Reflection {
 	public static Object getInfo(Object objeto, String atributo)
 			throws DadoInvalidoException {
 		// Classe do objeto
-		Class clazz = objeto.getClass();
+		Class<?> clazz = objeto.getClass();
 		// Campo a ser requisitado.
 		Field campo = null;
 		// Metodo possivel de ser invocado.
@@ -92,7 +92,7 @@ public abstract class Reflection {
 			Object novoValor, String erroAtualizacao)
 			throws DadoInvalidoException {
 		// Classe do objeto
-		Class clazz = objeto.getClass();
+		Class<?> clazz = objeto.getClass();
 		// Campo a ser requisitado.
 		Field campo = null;
 		// Metodo possivel de ser invocado.
@@ -242,21 +242,27 @@ public abstract class Reflection {
 	 * Pega um metodo de uma determinada classe
 	 * 
 	 * @param nomeMetodo
-	 *            Nome do metodo
-	 * @param clazz
-	 *            Classe
-	 * @return Meotod
+	 *            Nome do metodo a ser executado
+	 * @param objeto
+	 *            Objeto de que vai executar o metodo
+	 * @param paramsClasses
+	 *            Classes dos parametros do metodo
+	 * @param params
+	 *            Parametros a serem passados na execucao
 	 * @throws DadoInvalidoException
-	 *             Caso o metodo nao seja encontrado
+	 *             Caso o metodo nao exista
 	 */
-	public static Method getMetodo(String nomeMetodo, Class<?> clazz, Class<?>...params) throws DadoInvalidoException {
+	public static void executaMetodo(String nomeMetodo, Object objeto, Class<?>[] paramsClasses, Object[] params)
+			throws DadoInvalidoException {
 		try {
-			Method metodo = clazz.getMethod(nomeMetodo, params);
+			Class<?> clazz = objeto.getClass();
+			Method metodo = clazz.getMethod(nomeMetodo, paramsClasses);
 			metodo.setAccessible(true);
-			return metodo;
-		} catch (NoSuchMethodException | SecurityException e) {
-			throw new DadoInvalidoException(e.getMessage());
-		}		
+			
+			metodo.invoke(objeto, params);
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			throw new DadoInvalidoException("Este erro nao deveria ter acontecido! Contate o suporte.");
+		}
 	}
 
 	// REFLECTION
