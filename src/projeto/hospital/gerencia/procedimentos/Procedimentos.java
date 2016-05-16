@@ -29,7 +29,6 @@ public class Procedimentos implements Serializable {
 	private final Integer PONTUACAO_CIRURGIA_REDESIGNICAO_SEXUAL = 130;
 	private final Integer PONTUACAO_TRANSPLANTE_ORGAOS = 160;
 
-
 	private final double REDUCAO_PESO_BARIATRICA = 10;
 
 	/**
@@ -68,7 +67,6 @@ public class Procedimentos implements Serializable {
 		String procedimentoRealizado = "Cirurgia Bariatrica";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-
 		Double gastoComDesconto = PRECO_CIRURGIA_BARIATRICA
 				+ valorMedicamentos
 				- paciente.calculaDesconto(PRECO_CIRURGIA_BARIATRICA
@@ -77,6 +75,7 @@ public class Procedimentos implements Serializable {
 		int pontuacaoFinalPaciente = paciente.getPontuacao()
 				+ PONTUACAO_CIRURGIA_BARIATRICA;
 		paciente.setPontuacao(pontuacaoFinalPaciente);	
+
 		double pesoPaciente = paciente.getPeso();
 		// Usado esse tipo de calculo para evitar erros de precisao
 		double novoPeso = pesoPaciente
@@ -119,7 +118,6 @@ public class Procedimentos implements Serializable {
 		Paciente paciente = prontuarioPaciente.getPaciente();
 
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
-
 
 		Double gastoComDesconto = (PRECO_TRANSPLANTE + valorMedicamentos)
 				- (paciente.calculaDesconto(PRECO_TRANSPLANTE

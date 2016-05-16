@@ -13,10 +13,10 @@ public class FidelidadeMaster implements Fidelidade, Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6401691713873953862L;
-	private final double DESCONTO = 15;
-	private final double BONUS = 5;
-	
+	private static final long serialVersionUID = 5195811085847684506L;
+	private final Double DESCONTO = 15.0;
+	private final Integer BONUS = 5;
+
 	@Override
 	public Double getDescontoServico() {
 		return this.DESCONTO;

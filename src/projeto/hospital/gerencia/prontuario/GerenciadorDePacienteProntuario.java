@@ -182,13 +182,16 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @throws DadoInvalidoException
 	 *             Caso o paciente nao seja encontrado
 	 */
-	public String getIdPaciente(String nome) throws DadoInvalidoException {
-		for (Paciente paciente : this.pacientes.keySet())
-			if (paciente.getNome().equals(nome))
-				return paciente.getId();
+	public String getIdPaciente(String nome) {
+		try {
+			for (Paciente paciente : this.pacientes.keySet())
+				if (paciente.getNome().equals(nome))
+					return paciente.getId();
 
-		// TODO
-		throw new DadoInvalidoException("Paciente nao encontrado.");
+			throw new DadoInvalidoException("Paciente nao encontrado.");
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+		}
 	}
 
 	/**
