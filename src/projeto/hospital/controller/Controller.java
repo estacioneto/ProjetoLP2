@@ -342,30 +342,84 @@ public class Controller implements Serializable {
 	// CONSULTA DE MEDICAMENTO/FARMACIA
 	// OPERACOES DE MEDICAMENTO/FARMACIA
 	// OPERACOES DE ORGAO
+	
+	/**
+	 * Cadastra um orgao no banco de orgaos.
+	 * 
+	 * @param nome
+	 *            Nome do orgao.
+	 * @param tipoSanguineo
+	 *            Tipo sanguineo do orgao.
+	 */
 	public void cadastraOrgao(String nome, String tipoSanguineo) {
 		this.bancoDeOrgaos.cadastraOrgao(nome, tipoSanguineo);
 	}
 
+	/**
+	 * Retira orgao do banco de orgaos.
+	 * 
+	 * @param nome
+	 *            Nome do orgao.
+	 * @param tipoSanguineo
+	 *            Tipo sanguineo do orgao.
+	 */
 	public void retiraOrgao(String nome, String tipoSanguineo) {
 		this.bancoDeOrgaos.retiraOrgao(nome, tipoSanguineo);
 	}
 
-	public boolean buscaOrgao(String nome, String tipoSanguineo) {
-		return this.bancoDeOrgaos.buscaOrgao(nome, tipoSanguineo);
-	}
-
+	/**
+	 * Busca os orgaos com o nome solicitado.
+	 * 
+	 * @param nome
+	 *            Nome do orgao.
+	 * @return String com tipos sanguineos dos orgaos de nome solicitado,
+	 *         separados por virgula.
+	 */
 	public String buscaOrgPorNome(String nome) {
 		return this.bancoDeOrgaos.buscaOrgPorNome(nome);
 	}
 
+	/**
+	 * Busca os orgaos com o tipo sanguineo solicitado.
+	 * 
+	 * @param tipoSanguineo
+	 *            tipo sanguineo do orgao.
+	 * @return String com nomes dos orgaos de tipo sanguineo solicitado,
+	 *         separados por virgula.
+	 */
 	public String buscaOrgPorSangue(String tipoSanguineo) {
 		return this.bancoDeOrgaos.buscaOrgPorSangue(tipoSanguineo);
 	}
+	
+	/**
+	 * Verifica a existencia de um determinado orgao.
+	 * 
+	 * @param nome
+	 *            Nome do orgao.
+	 * @param tipoSanguineo
+	 *            Tipo sanguineo do orgao.
+	 * @return {@code true} se o banco tiver o orgao.
+	 */
+	public boolean buscaOrgao(String nome, String tipoSanguineo) {
+		return this.bancoDeOrgaos.buscaOrgao(nome, tipoSanguineo);
+	}
 
+	/**
+	 * Retorna a quantidade de orgaos com o nome solicitado.
+	 * 
+	 * @param nome
+	 *            Nome do orgao.
+	 * @return Quantidade de orgaos com o nome solicitado.
+	 */
 	public int qtdOrgaos(String nome) {
 		return this.bancoDeOrgaos.qtdOrgaos(nome);
 	}
 
+	/**
+	 * Retorna a quantidade total de orgaos no banco.
+	 * 
+	 * @return Quantidade de orgaos no banco de orgaos.
+	 */
 	public int totalOrgaosDisponiveis() {
 		return this.bancoDeOrgaos.totalOrgaosDisponiveis();
 	}

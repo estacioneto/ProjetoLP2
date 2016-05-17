@@ -23,7 +23,7 @@ public class Procedimentos implements Serializable {
 	private final double PRECO_CIRURGIA_BARIATRICA = 7600.00;
 	private final double PRECO_REDESIGNICAO_SEXUAL = 9300.00;
 	private final double PRECO_TRANSPLANTE = 12500.00;
-	
+
 	private final Integer PONTUACAO_CONSULTA_CLINICA = 50;
 	private final Integer PONTUACAO_CIRURGIA_BARIATRICA = 100;
 	private final Integer PONTUACAO_CIRURGIA_REDESIGNICAO_SEXUAL = 130;
@@ -48,25 +48,27 @@ public class Procedimentos implements Serializable {
 		String procedimentoRealizado = "Consulta clinica";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		
+
 		this.registradorDeGastos(paciente, PRECO_CONSULTA, valorMedicamentos);
 		paciente.registradorDePontos(PONTUACAO_CONSULTA_CLINICA);
 	}
 
-	
 	/**
 	 * Procedimento de cirugia bariatrica
 	 * 
 	 * @param prontuarioPaciente
 	 *            Prontuario do paciente a ser atendido
+	 * @param valorMedicamentos
+	 *            Valor do medicamento necessario.
 	 */
 	public void cirurgiaBariatrica(Prontuario prontuarioPaciente,
 			Double valorMedicamentos) {
 		String procedimentoRealizado = "Cirurgia Bariatrica";
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
-		
-		this.registradorDeGastos(paciente, PRECO_CIRURGIA_BARIATRICA, valorMedicamentos);
+
+		this.registradorDeGastos(paciente, PRECO_CIRURGIA_BARIATRICA,
+				valorMedicamentos);
 		paciente.registradorDePontos(PONTUACAO_CIRURGIA_BARIATRICA);
 
 		double pesoPaciente = paciente.getPeso();
@@ -81,6 +83,8 @@ public class Procedimentos implements Serializable {
 	 * 
 	 * @param prontuarioPaciente
 	 *            Prontuario do paciente a ser atendido
+	 * @param valorMedicamentos
+	 *            Valor dos medicamentos necessarios
 	 */
 	public void redesignacaoSexual(Prontuario prontuarioPaciente,
 			Double valorMedicamentos) {
@@ -88,9 +92,10 @@ public class Procedimentos implements Serializable {
 		prontuarioPaciente.registraProcedimento(procedimentoRealizado);
 		Paciente paciente = prontuarioPaciente.getPaciente();
 
-		this.registradorDeGastos(paciente, PRECO_REDESIGNICAO_SEXUAL, valorMedicamentos);
+		this.registradorDeGastos(paciente, PRECO_REDESIGNICAO_SEXUAL,
+				valorMedicamentos);
 		paciente.registradorDePontos(PONTUACAO_CIRURGIA_REDESIGNICAO_SEXUAL);
-		
+
 		paciente.mudaGenero();
 	}
 
@@ -101,6 +106,8 @@ public class Procedimentos implements Serializable {
 	 *            Prontuario do paciente a ser atendido
 	 * @param orgao
 	 *            Orgao a ser transplantado
+	 * @param valorMedicamentos
+	 *            Valor dos medicamentos necessarios
 	 * @throws DadoInvalidoException
 	 *             Caso nao haja compatibilidade entre os tipos sanguineos
 	 */
@@ -113,10 +120,13 @@ public class Procedimentos implements Serializable {
 		paciente.registradorDePontos(PONTUACAO_TRANSPLANTE_ORGAOS);
 	}
 
-	//Metodo responsavel por calcular o gasto do paciente e repassar para ser registrado no Paciente.
-	private void registradorDeGastos(Paciente paciente, Double valorProcedimento, Double valorMedicamentos){
+	// Metodo responsavel por calcular o gasto do paciente e repassar para ser
+	// registrado no Paciente.
+	private void registradorDeGastos(Paciente paciente,
+			Double valorProcedimento, Double valorMedicamentos) {
 		Double gastoComDesconto = (valorProcedimento + valorMedicamentos)
-				- (paciente.calculaDesconto(valorProcedimento + valorMedicamentos));
+				- (paciente.calculaDesconto(valorProcedimento
+						+ valorMedicamentos));
 		paciente.registraGasto(gastoComDesconto);
 	}
 }

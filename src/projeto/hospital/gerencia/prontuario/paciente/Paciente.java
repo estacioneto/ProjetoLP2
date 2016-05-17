@@ -232,7 +232,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	/**
 	 * Registra gastos do paciente em procedimentos
 	 * 
-	 * @param gasto
+	 * @param gasto Gasto efetuado
 	 */
 	public void registraGasto(double gasto) {
 		this.gastos += gasto;

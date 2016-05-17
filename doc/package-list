@@ -7,9 +7,13 @@ projeto.hospital.gerencia
 projeto.hospital.gerencia.bancodeorgaos
 projeto.hospital.gerencia.farmacia
 projeto.hospital.gerencia.farmacia.medicamento
+projeto.hospital.gerencia.farmacia.medicamento.tipos
 projeto.hospital.gerencia.funcionario
 projeto.hospital.gerencia.funcionario.cargo
+projeto.hospital.gerencia.procedimentos
 projeto.hospital.gerencia.prontuario
 projeto.hospital.gerencia.prontuario.paciente
+projeto.hospital.gerencia.prontuario.paciente.fidelidade
 projeto.hospital.paciente
 projeto.util
+projeto.util.reflexao
