@@ -14,17 +14,17 @@ public class FidelidadeMaster implements Fidelidade, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 5195811085847684506L;
-	private final Double DESCONTO = 15.0;
-	private final Integer BONUS = 5;
+	private final double DESCONTO = 0.15;
+	private final double BONUS = 0.05;
 
 	@Override
-	public Double getDescontoServico() {
+	public double getDescontoServico() {
 		return this.DESCONTO;
 	}
-
+	
 	@Override
-	public Integer getCreditoBonus() {
-		return (int) this.BONUS;
+	public double getCreditoBonus() {
+		return this.BONUS;
 	}
 
 }

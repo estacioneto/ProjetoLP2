@@ -25,43 +25,47 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 */
 	private static final long serialVersionUID = 1697453654897L;
 
-	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.NOME + Constantes.DO_PACIENTE)
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.NOME
+			+ Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME)
 	private String nome;
-	
+
 	@Validacao(metodo = ConstantesReflection.VALIDA_DATA, erro = Constantes.DATA)
 	@MetodoAssociado(get = ConstantesReflection.GET_DATA_NASCIMENTO)
 	private String data;
-	
+
 	@MetodoAssociado(get = ConstantesReflection.GET_IDADE)
 	private Integer idade;
-	
-	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.PESO + Constantes.DO_PACIENTE)
+
+	@Validacao(metodo = ConstantesReflection.VALIDA_POSITIVO, erro = Constantes.PESO
+			+ Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_PESO)
 	private Double peso;
-	
+
 	@Validacao(metodo = ConstantesReflection.VALIDA_TIPO_SANGUINEO, erro = MensagensDeErro.TIPO_SANGUINEO_INVALIDO)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO_SANGUINEO)
 	private String tipoSanguineo;
-	
-	@Validacao(metodo = ConstantesReflection.VALIDA_SEXO, erro = Constantes.SEXO + Constantes.DO_PACIENTE)
+
+	@Validacao(metodo = ConstantesReflection.VALIDA_SEXO, erro = Constantes.SEXO
+			+ Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_SEXO)
 	private String sexo;
-	
-	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.GENERO + Constantes.DO_PACIENTE)
+
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.GENERO
+			+ Constantes.DO_PACIENTE)
 	@MetodoAssociado(get = ConstantesReflection.GET_GENERO)
 	private String genero;
-	
+
 	@MetodoAssociado(get = "getGastosPaciente")
 	private Double gastos;
-	
+
 	@MetodoAssociado(get = "getPontuacao", set = "setPontuacao")
 	private Integer pontuacao;
-	
-	private Fidelidade fidelidade; 
-	
+
+	private Fidelidade fidelidade;
+
 	private String id;
-	
+
 	/**
 	 * Construtor
 	 * 
@@ -78,8 +82,8 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 * @param genero
 	 *            Genero
 	 */
-	public Paciente(String nome, String dataNascimento, Double peso, String tipoSanguineo, String sexoBiologico,
-			String genero) {
+	public Paciente(String nome, String dataNascimento, Double peso,
+			String tipoSanguineo, String sexoBiologico, String genero) {
 		this.nome = nome;
 		this.data = dataNascimento;
 		this.peso = peso;
@@ -91,11 +95,18 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.fidelidade = new FidelidadePadrao();
 	}
 
+	/**
+	 * Set a pontuacao do usuario e verifica se o usuario pode mudar de status
+	 * na fidelidade.
+	 * 
+	 * @param pontuacao
+	 *            Pontuacao nova ganha pelo usuario
+	 */
 	public void setPontuacao(Integer pontuacao) {
 		this.pontuacao = pontuacao;
 		this.verificaMudancaStatus();
 	}
-	
+
 	/**
 	 * @return Nome
 	 */
@@ -173,6 +184,11 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.id = id;
 	}
 
+	/**
+	 * Retorna a pontuacao atual do usario
+	 * 
+	 * @return pontuacao do usuario
+	 */
 	public Integer getPontuacao() {
 		return this.pontuacao;
 	}
@@ -186,33 +202,33 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		LocalDate hoje = LocalDate.now();
 
 		String[] nascimento = data.split(Constantes.BARRA);
-		int ano = Integer.parseInt(nascimento[Constantes.INDICE_ANO]),
-				mes = Integer.parseInt(nascimento[Constantes.INDICE_MES]),
-				dia = Integer.parseInt(nascimento[Constantes.INDICE_DIA]);
+		int ano = Integer.parseInt(nascimento[Constantes.INDICE_ANO]), mes = Integer
+				.parseInt(nascimento[Constantes.INDICE_MES]), dia = Integer
+				.parseInt(nascimento[Constantes.INDICE_DIA]);
 
 		int idade = hoje.getYear() - ano - 1;
-		if (mes < hoje.getMonthValue() || mes == hoje.getMonthValue() && dia <= hoje.getDayOfMonth())
+		if (mes < hoje.getMonthValue() || mes == hoje.getMonthValue()
+				&& dia <= hoje.getDayOfMonth())
 			idade++;
 
 		return idade;
 	}
-	
-	public int calculaBonus(int valor){
-		return (int) (this.fidelidade.getCreditoBonus()*valor/100);
-	}
-	
-	private void verificaMudancaStatus(){
-		if(this.fidelidade instanceof FidelidadePadrao){
-			if((this.pontuacao >= 150) && (this.pontuacao <= 350)){
+
+	// Metodo responsavel por mudar dinamicamente a fidelidade do usuario.
+	private void verificaMudancaStatus() {
+		if (this.fidelidade instanceof FidelidadePadrao) {
+			if ((this.pontuacao >= Constantes.PONTUACAO_MINIMA_MASTER)
+					&& (this.pontuacao <= Constantes.PONTUACAO_MAXIMA_MASTER)) {
 				this.fidelidade = new FidelidadeMaster();
-			}else if(this.pontuacao > 350){
+			} else if (this.pontuacao > Constantes.PONTUACAO_MAXIMA_MASTER) {
 				this.fidelidade = new FidelidadeVIP();
 			}
-		}else if((this.fidelidade instanceof FidelidadeMaster) && (this.pontuacao > 350)){
+		} else if ((this.fidelidade instanceof FidelidadeMaster)
+				&& (this.pontuacao > Constantes.PONTUACAO_MAXIMA_MASTER)) {
 			this.fidelidade = new FidelidadeVIP();
 		}
 	}
-	
+
 	/**
 	 * Registra gastos do paciente em procedimentos
 	 * 
@@ -230,22 +246,40 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	public Double getGastosPaciente() {
 		return this.gastos;
 	}
-	
+
 	/**
 	 * Muda o genero do paciente
 	 */
 	public void mudaGenero() {
-		if(this.genero.equalsIgnoreCase(Constantes.MASCULINO))
+		if (this.genero.equalsIgnoreCase(Constantes.MASCULINO))
 			this.genero = Constantes.FEMININO;
-		
+
 		else
 			this.genero = Constantes.MASCULINO;
 	}
-	
-	public Integer calculaBonusPontuacao(Integer pontuacao){
-		Integer bonus = (this.fidelidade.getCreditoBonus()*pontuacao) / 100;
+
+	// Metodo que calcular o bonus ganho na pontuacao a partir de sua
+	// fidelidade.
+	private Integer calculaBonusPontuacao(Integer pontuacao) {
+		Integer bonus = (int) (this.fidelidade.getCreditoBonus() * pontuacao);
 		return bonus;
 	}
+
+	/**
+	 * Metodo responsavel por registrar os pontos ganhos pelo paciente
+	 * 
+	 * @param pontuacaoProcedimento
+	 *            Pontuacao ganha pelo paciente no procedimento.
+	 */
+	public void registradorDePontos(Integer pontuacaoProcedimento) {
+		pontuacao += pontuacaoProcedimento /*
+											 * + this.calculaBonus(
+											 * pontuacaoProcedimento)
+											 */;
+		this.verificaMudancaStatus();
+
+	}
+
 	/**
 	 * Compara pacientes pelo nome
 	 */
@@ -256,7 +290,8 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 
 	@Override
 	public String toString() {
-		String saida = "Nome: " + nome + ". ID: " + id + ". Data Nascimento: " + data;
+		String saida = "Nome: " + nome + ". ID: " + id + ". Data Nascimento: "
+				+ data;
 		return saida;
 	}
 
@@ -281,7 +316,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	}
 
 	public double calculaDesconto(double d) {
-		double valor = d * fidelidade.getDescontoServico() /100; 
+		double valor = d * fidelidade.getDescontoServico();
 		return valor;
 	}
 }

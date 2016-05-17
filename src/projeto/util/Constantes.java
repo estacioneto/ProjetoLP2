@@ -94,5 +94,7 @@ public abstract class Constantes {
 	public static final int QUATRO = 4;
 	public static final int INDICE_INVALIDO = -1;
 	public static final double PORCENTAGEM_TOTAL = 100.0;
+	public static final Integer PONTUACAO_MINIMA_MASTER = 150;
+	public static final Integer PONTUACAO_MAXIMA_MASTER = 350;
 	// CONSTANTES NUMERICAS
 }

@@ -13,7 +13,7 @@ public interface Fidelidade{
 	 * 
 	 * @return Porcentagem do desconto em servicos do SOOS.
 	 */
-	public Double getDescontoServico();
+	public double getDescontoServico();
 
 	/**
 	 * Retorna a porcentagem de bonus que um paciente recebe em relacao aos
@@ -21,5 +21,5 @@ public interface Fidelidade{
 	 * 
 	 * @return Porcentagem do bonus de pontos no SOOS.
 	 */
-	public Integer getCreditoBonus();
+	public double getCreditoBonus();
 }

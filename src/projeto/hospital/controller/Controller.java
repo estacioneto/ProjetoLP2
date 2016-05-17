@@ -372,10 +372,20 @@ public class Controller implements Serializable {
 	// OPERACOES DE ORGAO
 	// OPERACOES DE PROCEDIMENTO
 
+	/**
+	 * Realiza um procedimento sem mewdicamentos.
+	 * 
+	 * @param nomeProcedimento
+	 *            Nome do procedimento
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @param medicamentos
+	 *            Medicamentos necessarios
+	 */
 	public void realizaProcedimento(String procedimento, String idPaciente) {
 		try {
 			ValidadorDeDados.validaProcedimento(procedimento);
-			ValidadorDeLogica.validaOperacao("O funcionario %s" + MensagensDeErro.ERRO_SEM_PERMISSAO_PROCEDIMENTO,
+			ValidadorDeLogica.validaOperacao(MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
 					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
 			Double valorMedicamentos = 0.0;
@@ -400,7 +410,7 @@ public class Controller implements Serializable {
 	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String medicamentos) {
 		try {
 			ValidadorDeDados.validaProcedimento(nomeProcedimento);
-			ValidadorDeLogica.validaOperacao("O funcionario %s" + MensagensDeErro.ERRO_SEM_PERMISSAO_PROCEDIMENTO,
+			ValidadorDeLogica.validaOperacao(MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
 					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
 			Double valorMedicamentos = this.gerenciadorDeMedicamento.getValorMedicamentos(medicamentos);
@@ -429,7 +439,7 @@ public class Controller implements Serializable {
 			ValidadorDeDados.validaProcedimento(nomeProcedimento);
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
 			ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_ORGAO, orgao);
-			ValidadorDeLogica.validaOperacao("O funcionario %s" + MensagensDeErro.ERRO_SEM_PERMISSAO_PROCEDIMENTO,
+			ValidadorDeLogica.validaOperacao(MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
 					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);	
 			String sanguePaciente = prontuario.getPaciente().getTipoSanguineo();
 			Orgao orgaoRecuperado = null;
