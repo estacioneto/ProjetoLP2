@@ -372,20 +372,19 @@ public class Controller implements Serializable {
 	// OPERACOES DE ORGAO
 	// OPERACOES DE PROCEDIMENTO
 
-
-
 	public void realizaProcedimento(String procedimento, String idPaciente) {
 		try {
 			ValidadorDeDados.validaProcedimento(procedimento);
+			ValidadorDeLogica.validaOperacao("O funcionario %s" + MensagensDeErro.ERRO_SEM_PERMISSAO_PROCEDIMENTO,
+					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
-			ValidadorDeLogica.validaOperacao("O funcionario ",
-					Permissao.REALIZAR_PROCEDIMENTO, funcionarioLogado);
 			Double valorMedicamentos = 0.0;
+
 			this.gerenciadorProcedimento.realizaProcedimento(procedimento, prontuario, valorMedicamentos);
+
 		} catch (DadoInvalidoException | OperacaoInvalidaException e) {
 			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
 		}
-		
 	}
 	
 	/**
@@ -401,6 +400,8 @@ public class Controller implements Serializable {
 	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String medicamentos) {
 		try {
 			ValidadorDeDados.validaProcedimento(nomeProcedimento);
+			ValidadorDeLogica.validaOperacao("O funcionario %s" + MensagensDeErro.ERRO_SEM_PERMISSAO_PROCEDIMENTO,
+					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
 			Double valorMedicamentos = this.gerenciadorDeMedicamento.getValorMedicamentos(medicamentos);
 
@@ -428,10 +429,8 @@ public class Controller implements Serializable {
 			ValidadorDeDados.validaProcedimento(nomeProcedimento);
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
 			ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_ORGAO, orgao);
-			
-			ValidadorDeLogica.validaOperacao("O funcionario ",
-					Permissao.REALIZAR_PROCEDIMENTO, funcionarioLogado);
-			
+			ValidadorDeLogica.validaOperacao("O funcionario %s" + MensagensDeErro.ERRO_SEM_PERMISSAO_PROCEDIMENTO,
+					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);	
 			String sanguePaciente = prontuario.getPaciente().getTipoSanguineo();
 			Orgao orgaoRecuperado = null;
 			try {
@@ -457,11 +456,7 @@ public class Controller implements Serializable {
 	 * @return Id do paciente
 	 */
 	public String getPacienteId(String nome) {
-		try {
-			return this.gerenciadorDePaciente.getIdPaciente(nome);
-		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
-		}
+		return this.gerenciadorDePaciente.getIdPaciente(nome);
 	}
 
 	/**
@@ -485,6 +480,7 @@ public class Controller implements Serializable {
 		}
 	}
 
+	
 	public String getGastosPaciente(String id) {
 		try {
 			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(id);

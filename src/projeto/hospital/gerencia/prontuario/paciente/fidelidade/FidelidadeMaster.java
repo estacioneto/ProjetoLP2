@@ -24,7 +24,7 @@ public class FidelidadeMaster implements Fidelidade, Serializable {
 
 	@Override
 	public Integer getCreditoBonus() {
-		return this.BONUS;
+		return (int) this.BONUS;
 	}
 
 }

@@ -32,8 +32,8 @@ public class MedicamentoGenerico implements Serializable, TipoMedicamento {
 	 */
 	@Override
 	public Double calculaPreco(Double preco) {
-		return preco * DESCONTO_GENERICO
-				/ DESCONTO_GENERICO_PORCENTAGEM;
+		return (preco * DESCONTO_GENERICO
+				/ DESCONTO_GENERICO_PORCENTAGEM);
 	}
 
 	/**

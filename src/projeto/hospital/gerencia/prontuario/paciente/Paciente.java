@@ -61,7 +61,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	private Fidelidade fidelidade; 
 	
 	private String id;
-
+	
 	/**
 	 * Construtor
 	 * 
@@ -87,10 +87,15 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		this.sexo = sexoBiologico;
 		this.genero = genero;
 		this.gastos = Double.parseDouble(Integer.toString(Constantes.ZERO));
-		this.setPontuacao(Constantes.ZERO);
+		this.pontuacao = Constantes.ZERO;
 		this.fidelidade = new FidelidadePadrao();
 	}
 
+	public void setPontuacao(Integer pontuacao) {
+		this.pontuacao = pontuacao;
+		this.verificaMudancaStatus();
+	}
+	
 	/**
 	 * @return Nome
 	 */
@@ -169,24 +174,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	}
 
 	public Integer getPontuacao() {
-		return pontuacao;
-	}
-
-	public void setPontuacao(Integer pontuacao) {
-		this.pontuacao = pontuacao;
-		this.verificaCondicaoFidelidade();
-	}
-	
-	private void verificaCondicaoFidelidade() {
-		if(this.fidelidade instanceof FidelidadePadrao){
-			if(this.pontuacao>= 150 && this.pontuacao <= 350){
-				fidelidade = new FidelidadeMaster();
-			}else if(pontuacao > 350){
-				fidelidade = new FidelidadeVIP();
-			}
-		}else if(this.fidelidade instanceof FidelidadeMaster && this.pontuacao > 350){
-			fidelidade = new FidelidadeVIP();
-		}
+		return this.pontuacao;
 	}
 
 	/**
@@ -207,6 +195,22 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 			idade++;
 
 		return idade;
+	}
+	
+	public int calculaBonus(int valor){
+		return (int) (this.fidelidade.getCreditoBonus()*valor/100);
+	}
+	
+	private void verificaMudancaStatus(){
+		if(this.fidelidade instanceof FidelidadePadrao){
+			if((this.pontuacao >= 150) && (this.pontuacao <= 350)){
+				this.fidelidade = new FidelidadeMaster();
+			}else if(this.pontuacao > 350){
+				this.fidelidade = new FidelidadeVIP();
+			}
+		}else if((this.fidelidade instanceof FidelidadeMaster) && (this.pontuacao > 350)){
+			this.fidelidade = new FidelidadeVIP();
+		}
 	}
 	
 	/**
@@ -236,11 +240,6 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 		
 		else
 			this.genero = Constantes.MASCULINO;
-	}
-
-	public Double calculaDesconto(Double valor){
-		Double desconto = (this.fidelidade.getDescontoServico() * valor) / 100;
-		return desconto;
 	}
 	
 	public Integer calculaBonusPontuacao(Integer pontuacao){
@@ -279,5 +278,10 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 
 		Paciente paciente = (Paciente) obj;
 		return paciente.nome.equals(this.nome);
+	}
+
+	public double calculaDesconto(double d) {
+		double valor = d * fidelidade.getDescontoServico() /100; 
+		return valor;
 	}
 }

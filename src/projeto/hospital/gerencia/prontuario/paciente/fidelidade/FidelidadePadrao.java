@@ -14,7 +14,7 @@ public class FidelidadePadrao implements Fidelidade, Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8170936533271144437L;
+	private static final long serialVersionUID = 2425017466808695066L;
 
 	@Override
 	public Double getDescontoServico() {

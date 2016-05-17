@@ -20,7 +20,7 @@ public class Diretor extends Cargo {
 		this.permissoes.add(Permissao.ATUALIZAR_INFORMACOES_FUNCIONARIOS);
 		this.permissoes.add(Permissao.CADASTRAR_MEDICAMENTO);
 		this.permissoes.add(Permissao.CADASTRAR_PACIENTES);
-		this.permissoes.add(Permissao.REALIZAR_PROCEDIMENTO);
+		this.permissoes.add(Permissao.REALIZA_PROCEDIMENTO);
 	}
 
 }
