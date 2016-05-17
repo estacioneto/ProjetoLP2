@@ -18,6 +18,7 @@ import projeto.util.reflexao.Validacao;
  * Classe para representar os pacientes
  * 
  * @author Eric
+ * @author Thaynan Andrey
  */
 public class Paciente implements Serializable, Comparable<Paciente> {
 	/**

@@ -11,7 +11,8 @@ import projeto.util.Constantes;
 /**
  * Classe responsavel por realizar os procedimentos
  * 
- * @author Er1c
+ * @author Eric
+ * @author Thaynan
  */
 public class Procedimentos implements Serializable {
 	/**

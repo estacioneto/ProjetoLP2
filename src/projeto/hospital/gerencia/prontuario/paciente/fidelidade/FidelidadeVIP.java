@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Fidelidade VIP.
  * 
  * @author Estacio Pereira
- *
+ * @author Thaynan Andrey
  */
 public class FidelidadeVIP implements Fidelidade, Serializable {
 
