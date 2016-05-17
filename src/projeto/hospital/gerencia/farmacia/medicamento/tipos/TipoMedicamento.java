@@ -14,7 +14,10 @@ public interface TipoMedicamento {
 	public String getTipo();
 
 	/**
+	 * Metodo responsavel por calcular o preco final de um medicamento.
 	 * 
+	 * @param preco
+	 *            Preco atual sem desconto.
 	 * @return Preco final do medicamento.
 	 */
 	public abstract Double calculaPreco(Double preco);

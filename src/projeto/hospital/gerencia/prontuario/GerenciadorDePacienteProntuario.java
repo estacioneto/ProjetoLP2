@@ -57,8 +57,9 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Funcionario Logado.
 	 * @return Id do paciente cadastrado
 	 */
-	public String cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
-			String tipoSanguineo, Funcionario funcionarioLogado) {
+	public String cadastraPaciente(String nome, String data, double peso,
+			String sexo, String genero, String tipoSanguineo,
+			Funcionario funcionarioLogado) {
 		try {
 			// ValidadorDeDados.validaNome(Constantes.NOME +
 			// Constantes.DO_PACIENTE, nome);
@@ -69,19 +70,23 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 			// sexo);
 			// ValidadorDeDados.validaString(Constantes.GENERO, genero);
 
-			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
+			ValidadorDeLogica.validaOperacao(
+					MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
 					Permissao.CADASTRAR_PACIENTES, funcionarioLogado);
-			Paciente paciente = (Paciente) Reflection.godFactory(Paciente.class, nome, data, peso, tipoSanguineo, sexo,
+			Paciente paciente = (Paciente) Reflection.godFactory(
+					Paciente.class, nome, data, peso, tipoSanguineo, sexo,
 					genero);
 			if (pacientes.containsKey(paciente))
-				throw new DadoInvalidoException(MensagensDeErro.PACIENTE_JA_CADASTRADO);
+				throw new DadoInvalidoException(
+						MensagensDeErro.PACIENTE_JA_CADASTRADO);
 
 			String novoId = geradorIdPaciente.getProximoId();
 			paciente.setId(novoId);
 			pacientes.put(paciente, new Prontuario(paciente));
 			return novoId;
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
+			throw new OperacaoInvalidaException(
+					MensagensDeErro.ERRO_CADASTRO_PACIENTE + e.getMessage());
 		}
 	}
 
@@ -100,7 +105,8 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 
 			return Reflection.getInfo(paciente, atributo);
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+			throw new OperacaoInvalidaException(
+					MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
 	}
 
@@ -128,11 +134,13 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 */
 	public String getIdProntuarioPosicao(int posicao) {
 		try {
-			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
+			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO,
+					posicao);
 
 			return getPacientePosicao(posicao).getId();
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+			throw new OperacaoInvalidaException(
+					MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
 	}
 
@@ -162,15 +170,17 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @throws DadoInvalidoException
 	 *             Caso nao haja a posicao requerida
 	 */
-	private Paciente getPacientePosicao(int posicao) throws DadoInvalidoException {
+	private Paciente getPacientePosicao(int posicao)
+			throws DadoInvalidoException {
 		int contadorPosicao = 0;
 		for (Paciente paciente : pacientes.keySet()) {
 			if (contadorPosicao == posicao)
 				return paciente;
 			contadorPosicao++;
 		}
-		throw new DadoInvalidoException(
-				String.format(MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES, pacientes.size()));
+		throw new DadoInvalidoException(String.format(
+				MensagensDeErro.ERRO_PRONTUARIOS_INSUFICIENTES,
+				pacientes.size()));
 	}
 
 	/**
@@ -179,8 +189,6 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @param nome
 	 *            Nome do paciente
 	 * @return Id do paciente
-	 * @throws DadoInvalidoException
-	 *             Caso o paciente nao seja encontrado
 	 */
 	public String getIdPaciente(String nome) {
 		try {
@@ -190,7 +198,8 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 
 			throw new DadoInvalidoException("Paciente nao encontrado.");
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+			throw new OperacaoInvalidaException(
+					MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
 	}
 
@@ -203,8 +212,10 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @throws DadoInvalidoException
 	 *             Caso paciente nao seja encontrado
 	 */
-	public Prontuario getProntuarioPaciente(String idPaciente) throws DadoInvalidoException {
-		ValidadorDeDados.validaString(Constantes.ID.toUpperCase() + Constantes.DO_PACIENTE, idPaciente);
+	public Prontuario getProntuarioPaciente(String idPaciente)
+			throws DadoInvalidoException {
+		ValidadorDeDados.validaString(Constantes.ID.toUpperCase()
+				+ Constantes.DO_PACIENTE, idPaciente);
 
 		for (Paciente paciente : this.pacientes.keySet())
 			if (paciente.getId().equals(idPaciente))
@@ -219,7 +230,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @param idPaciente
 	 *            Id do paciente
 	 * @return Quantidade de procedimentos realizados
-	 * @throws DadoInvalidoException
+	 * @throws OperacaoInvalidaException
 	 *             Paciente nao existe
 	 */
 	public int getTotalProcedimento(String idPaciente) {

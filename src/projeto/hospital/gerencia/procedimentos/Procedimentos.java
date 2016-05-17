@@ -42,6 +42,8 @@ public class Procedimentos implements Serializable {
 	 * 
 	 * @param prontuarioPaciente
 	 *            Prontuario do paciente a ser atendido
+	 * @param valorMedicamentos
+	 *            Valor dos medicamentos utilizados no procedimento.
 	 */
 	public void consultaClinica(Prontuario prontuarioPaciente,
 			Double valorMedicamentos) {
