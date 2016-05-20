@@ -11,7 +11,8 @@ import projeto.util.Constantes;
 /**
  * Classe responsavel por realizar os procedimentos
  * 
- * @author Er1c
+ * @author Eric
+ * @author Thaynan
  */
 public class Procedimentos implements Serializable {
 	/**
@@ -42,6 +43,8 @@ public class Procedimentos implements Serializable {
 	 * 
 	 * @param prontuarioPaciente
 	 *            Prontuario do paciente a ser atendido
+	 * @param valorMedicamentos
+	 *            Valor dos medicamentos utilizados no procedimento.
 	 */
 	public void consultaClinica(Prontuario prontuarioPaciente,
 			Double valorMedicamentos) {

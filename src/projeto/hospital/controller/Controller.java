@@ -59,8 +59,9 @@ public class Controller implements Serializable {
 	 */
 	public void fechaSistema() {
 		if (estaLogado())
-			throw new OperacaoInvalidaException("Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
-					+ funcionarioLogado.getNome() + ".");
+			throw new OperacaoInvalidaException(
+					"Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
+							+ funcionarioLogado.getNome() + ".");
 	}
 
 	/**
@@ -73,9 +74,11 @@ public class Controller implements Serializable {
 	 */
 	public void loginSistema(String matricula, String senha) {
 		if (estaLogado())
-			throw new OperacaoInvalidaException("Nao foi possivel realizar o login. Um funcionario ainda esta logado: "
-					+ funcionarioLogado.getNome() + ".");
-		this.funcionarioLogado = this.gerenciadorFuncionarios.acessaSistema(matricula, senha);
+			throw new OperacaoInvalidaException(
+					"Nao foi possivel realizar o login. Um funcionario ainda esta logado: "
+							+ funcionarioLogado.getNome() + ".");
+		this.funcionarioLogado = this.gerenciadorFuncionarios.acessaSistema(
+				matricula, senha);
 	}
 
 	/**
@@ -83,7 +86,8 @@ public class Controller implements Serializable {
 	 */
 	public void logout() {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Nao foi possivel realizar o logout. Nao ha um funcionario logado.");
+			throw new OperacaoInvalidaException(
+					"Nao foi possivel realizar o logout. Nao ha um funcionario logado.");
 		funcionarioLogado = null;
 	}
 
@@ -109,15 +113,18 @@ public class Controller implements Serializable {
 	 *            Data de nascimento do novo usuario
 	 * @return Matricula do novo cadastro
 	 */
-	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
+	public String cadastraFuncionario(String nome, String cargo,
+			String dataNascimento) {
 		// Se o usuario esta logado vai ser verificado se ele pode realizar a
 		// operacao porque o diretor eh cadastrado quando nao existe ninguem
 		// logado, por isso precisa disso
 		if (!estaLogado()) {
 			if (!gerenciadorFuncionarios.isEmpty())
-				throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
+				throw new OperacaoInvalidaException(
+						"Voce precisa estar logado no sistema para realizar cadastros.");
 		}
-		return this.gerenciadorFuncionarios.cadastraFuncionario(nome, cargo, dataNascimento, funcionarioLogado);
+		return this.gerenciadorFuncionarios.cadastraFuncionario(nome, cargo,
+				dataNascimento, funcionarioLogado);
 	}
 
 	/**
@@ -128,10 +135,13 @@ public class Controller implements Serializable {
 	 * @param matriculaFuncionario
 	 *            Matricula do usuario a ser excluido
 	 */
-	public void excluiFuncionario(String senhaDiretor, String matriculaFuncionario) {
+	public void excluiFuncionario(String senhaDiretor,
+			String matriculaFuncionario) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
-		this.gerenciadorFuncionarios.excluiFuncionario(this.funcionarioLogado.getMatricula(), senhaDiretor,
+			throw new OperacaoInvalidaException(
+					"Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.excluiFuncionario(
+				this.funcionarioLogado.getMatricula(), senhaDiretor,
 				matriculaFuncionario);
 	}
 
@@ -145,8 +155,10 @@ public class Controller implements Serializable {
 	 * @param novoValor
 	 *            Novo valor do atributo
 	 */
-	public void atualizaInfoFuncionario(String matricula, String atributo, String novoValor) {
-		this.gerenciadorFuncionarios.atualizaInfoFuncionario(this.funcionarioLogado, matricula, atributo, novoValor);
+	public void atualizaInfoFuncionario(String matricula, String atributo,
+			String novoValor) {
+		this.gerenciadorFuncionarios.atualizaInfoFuncionario(
+				this.funcionarioLogado, matricula, atributo, novoValor);
 	}
 
 	/**
@@ -159,9 +171,10 @@ public class Controller implements Serializable {
 	 */
 	public void atualizaInfoFuncionario(String atributo, String novoValor) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
-		this.gerenciadorFuncionarios.atualizaInfoFuncionario(funcionarioLogado, this.funcionarioLogado.getMatricula(),
-				atributo, novoValor);
+			throw new OperacaoInvalidaException(
+					"Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.atualizaInfoFuncionario(funcionarioLogado,
+				this.funcionarioLogado.getMatricula(), atributo, novoValor);
 	}
 
 	/**
@@ -174,8 +187,10 @@ public class Controller implements Serializable {
 	 */
 	public void atualizaSenha(String senhaAntiga, String novaSenha) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Voce deve estar logado para acessar o sistema.");
-		this.gerenciadorFuncionarios.atualizaSenha(this.funcionarioLogado, senhaAntiga, novaSenha);
+			throw new OperacaoInvalidaException(
+					"Voce deve estar logado para acessar o sistema.");
+		this.gerenciadorFuncionarios.atualizaSenha(this.funcionarioLogado,
+				senhaAntiga, novaSenha);
 	}
 
 	// CONSULTA DE FUNCIONARIO
@@ -189,8 +204,10 @@ public class Controller implements Serializable {
 	 * @return Atributo requisitado
 	 */
 	public Object getInfoFuncionario(String matricula, String atributo) {
-		return this.gerenciadorFuncionarios.getInfoFuncionario(matricula, atributo);
+		return this.gerenciadorFuncionarios.getInfoFuncionario(matricula,
+				atributo);
 	}
+
 	// CONSULTA DE FUNCIONARIO
 	// OPERACOES DE FUNCIONARIO
 	// OPERACOES DE PACIENTE/PRONTUARIO
@@ -212,15 +229,15 @@ public class Controller implements Serializable {
 	 *            Tipo sanguineo do paciente
 	 * @return Id do paciente cadastrado
 	 */
-	public String cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
-			String tipoSanguineo) {
+	public String cadastraPaciente(String nome, String data, double peso,
+			String sexo, String genero, String tipoSanguineo) {
 		if (!estaLogado()) {
 			throw new OperacaoInvalidaException(
 					"Voce precisa estar logado no sistema para realizar cadastros de pacientes.");
 		}
 
-		return this.gerenciadorDePaciente.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo,
-				funcionarioLogado);
+		return this.gerenciadorDePaciente.cadastraPaciente(nome, data, peso,
+				sexo, genero, tipoSanguineo, funcionarioLogado);
 	}
 
 	// CONSULTA DE PACIENTE/PRONTUARIO
@@ -235,7 +252,8 @@ public class Controller implements Serializable {
 	 */
 	public Object getInfoPaciente(String idPaciente, String atributo) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
+			throw new OperacaoInvalidaException(
+					"Voce precisa estar logado no sistema para realizar cadastros.");
 		return this.gerenciadorDePaciente.getInfoPaciente(idPaciente, atributo);
 	}
 
@@ -268,11 +286,13 @@ public class Controller implements Serializable {
 	 *            do medicamento.
 	 * @return Nome do medicamento.
 	 */
-	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias) {
+	public String cadastraMedicamento(String nome, String tipo, Double preco,
+			int quantidade, String categorias) {
 		if (!estaLogado())
-			throw new OperacaoInvalidaException("Voce precisa estar logado no sistema para realizar cadastros.");
-		return gerenciadorDeMedicamento.cadastraMedicamento(nome, tipo, preco, quantidade, categorias,
-				funcionarioLogado);
+			throw new OperacaoInvalidaException(
+					"Voce precisa estar logado no sistema para realizar cadastros.");
+		return gerenciadorDeMedicamento.cadastraMedicamento(nome, tipo, preco,
+				quantidade, categorias, funcionarioLogado);
 	}
 
 	/**
@@ -342,7 +362,7 @@ public class Controller implements Serializable {
 	// CONSULTA DE MEDICAMENTO/FARMACIA
 	// OPERACOES DE MEDICAMENTO/FARMACIA
 	// OPERACOES DE ORGAO
-	
+
 	/**
 	 * Cadastra um orgao no banco de orgaos.
 	 * 
@@ -390,7 +410,7 @@ public class Controller implements Serializable {
 	public String buscaOrgPorSangue(String tipoSanguineo) {
 		return this.bancoDeOrgaos.buscaOrgPorSangue(tipoSanguineo);
 	}
-	
+
 	/**
 	 * Verifica a existencia de um determinado orgao.
 	 * 
@@ -423,34 +443,37 @@ public class Controller implements Serializable {
 	public int totalOrgaosDisponiveis() {
 		return this.bancoDeOrgaos.totalOrgaosDisponiveis();
 	}
+
 	// OPERACOES DE ORGAO
 	// OPERACOES DE PROCEDIMENTO
 
 	/**
-	 * Realiza um procedimento sem mewdicamentos.
+	 * Realiza um procedimento sem medicamentos.
 	 * 
-	 * @param nomeProcedimento
+	 * @param procedimento
 	 *            Nome do procedimento
 	 * @param idPaciente
 	 *            Id do paciente
-	 * @param medicamentos
-	 *            Medicamentos necessarios
 	 */
 	public void realizaProcedimento(String procedimento, String idPaciente) {
 		try {
 			ValidadorDeDados.validaProcedimento(procedimento);
-			ValidadorDeLogica.validaOperacao(MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
+			ValidadorDeLogica.validaOperacao(
+					MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
 					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
-			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
+			Prontuario prontuario = this.gerenciadorDePaciente
+					.getProntuarioPaciente(idPaciente);
 			Double valorMedicamentos = 0.0;
 
-			this.gerenciadorProcedimento.realizaProcedimento(procedimento, prontuario, valorMedicamentos);
+			this.gerenciadorProcedimento.realizaProcedimento(procedimento,
+					prontuario, valorMedicamentos);
 
 		} catch (DadoInvalidoException | OperacaoInvalidaException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
+			throw new OperacaoInvalidaException(
+					MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Realiza um procedimento
 	 * 
@@ -461,18 +484,24 @@ public class Controller implements Serializable {
 	 * @param medicamentos
 	 *            Medicamentos necessarios
 	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String medicamentos) {
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente,
+			String medicamentos) {
 		try {
 			ValidadorDeDados.validaProcedimento(nomeProcedimento);
-			ValidadorDeLogica.validaOperacao(MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
+			ValidadorDeLogica.validaOperacao(
+					MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
 					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
-			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
-			Double valorMedicamentos = this.gerenciadorDeMedicamento.getValorMedicamentos(medicamentos);
+			Prontuario prontuario = this.gerenciadorDePaciente
+					.getProntuarioPaciente(idPaciente);
+			Double valorMedicamentos = this.gerenciadorDeMedicamento
+					.getValorMedicamentos(medicamentos);
 
-			this.gerenciadorProcedimento.realizaProcedimento(nomeProcedimento, prontuario, valorMedicamentos);
+			this.gerenciadorProcedimento.realizaProcedimento(nomeProcedimento,
+					prontuario, valorMedicamentos);
 
 		} catch (DadoInvalidoException | OperacaoInvalidaException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
+			throw new OperacaoInvalidaException(
+					MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
 		}
 	}
 
@@ -488,27 +517,35 @@ public class Controller implements Serializable {
 	 * @param medicamentos
 	 *            Medicamentos necessarios
 	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String orgao, String medicamentos) {
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente,
+			String orgao, String medicamentos) {
 		try {
 			ValidadorDeDados.validaProcedimento(nomeProcedimento);
-			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(idPaciente);
-			ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_ORGAO, orgao);
-			ValidadorDeLogica.validaOperacao(MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
-					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);	
+			Prontuario prontuario = this.gerenciadorDePaciente
+					.getProntuarioPaciente(idPaciente);
+			ValidadorDeDados.validaString(
+					Constantes.NOME + Constantes.DO_ORGAO, orgao);
+			ValidadorDeLogica.validaOperacao(
+					MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
+					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
 			String sanguePaciente = prontuario.getPaciente().getTipoSanguineo();
 			Orgao orgaoRecuperado = null;
 			try {
-				orgaoRecuperado = this.bancoDeOrgaos.getOrgao(orgao, sanguePaciente);
+				orgaoRecuperado = this.bancoDeOrgaos.getOrgao(orgao,
+						sanguePaciente);
 			} catch (OperacaoInvalidaException e) {
-				throw new DadoInvalidoException("Banco nao possui o orgao especificado.");
+				throw new DadoInvalidoException(
+						"Banco nao possui o orgao especificado.");
 			}
-			Double valorMedicamento = this.gerenciadorDeMedicamento.getValorMedicamentos(medicamentos);
+			Double valorMedicamento = this.gerenciadorDeMedicamento
+					.getValorMedicamentos(medicamentos);
 
-			this.gerenciadorProcedimento.realizaProcedimento(nomeProcedimento, prontuario, orgaoRecuperado,
-					valorMedicamento);
+			this.gerenciadorProcedimento.realizaProcedimento(nomeProcedimento,
+					prontuario, orgaoRecuperado, valorMedicamento);
 
 		} catch (OperacaoInvalidaException | DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
+			throw new OperacaoInvalidaException(
+					MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
 		}
 	}
 
@@ -536,23 +573,34 @@ public class Controller implements Serializable {
 
 	public int getPontosFidelidade(String id) {
 		try {
-			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(id);
+			Prontuario prontuario = this.gerenciadorDePaciente
+					.getProntuarioPaciente(id);
 			Paciente paciente = prontuario.getPaciente();
 			return paciente.getPontuacao();
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+			throw new OperacaoInvalidaException(
+					MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
 	}
 
-	
+	/**
+	 * Metodo responsavel por retornar os gastos do paciente.
+	 * 
+	 * @param id
+	 *            Id do paciente
+	 * @return String Gastos do paciente
+	 */
 	public String getGastosPaciente(String id) {
 		try {
-			Prontuario prontuario = this.gerenciadorDePaciente.getProntuarioPaciente(id);
+			Prontuario prontuario = this.gerenciadorDePaciente
+					.getProntuarioPaciente(id);
 			Paciente paciente = prontuario.getPaciente();
-			String gastoFormatado = String.format("%.2f", paciente.getGastosPaciente()).replace(",", ".");
+			String gastoFormatado = String.format("%.2f",
+					paciente.getGastosPaciente()).replace(",", ".");
 			return gastoFormatado;
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+			throw new OperacaoInvalidaException(
+					MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
 	}
 }

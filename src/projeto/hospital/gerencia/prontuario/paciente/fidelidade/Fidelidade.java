@@ -4,7 +4,7 @@ package projeto.hospital.gerencia.prontuario.paciente.fidelidade;
  * Interface que define a relacao de fidelidade com o SOOS
  * 
  * @author Estacio Pereira
- *
+ * @author Thaynan
  */
 public interface Fidelidade{
 

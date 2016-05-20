@@ -8,6 +8,7 @@ import projeto.util.Constantes;
  * Fidelidade padrao.
  * 
  * @author Estacio Pereira
+ * @author Thaynan Andrey
  */
 public class FidelidadePadrao implements Fidelidade, Serializable {
 

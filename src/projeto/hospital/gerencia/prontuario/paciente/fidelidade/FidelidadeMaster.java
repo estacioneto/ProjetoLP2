@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Fidelidade Master.
  * 
  * @author Estacio Pereira
- *
+ * @author Thaynan Andrey
  */
 public class FidelidadeMaster implements Fidelidade, Serializable {
 
@@ -21,7 +21,7 @@ public class FidelidadeMaster implements Fidelidade, Serializable {
 	public double getDescontoServico() {
 		return this.DESCONTO;
 	}
-	
+
 	@Override
 	public double getCreditoBonus() {
 		return this.BONUS;

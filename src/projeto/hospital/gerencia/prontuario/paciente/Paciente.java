@@ -18,6 +18,7 @@ import projeto.util.reflexao.Validacao;
  * Classe para representar os pacientes
  * 
  * @author Eric
+ * @author Thaynan Andrey
  */
 public class Paciente implements Serializable, Comparable<Paciente> {
 	/**
@@ -232,7 +233,8 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	/**
 	 * Registra gastos do paciente em procedimentos
 	 * 
-	 * @param gasto Gasto efetuado
+	 * @param gasto
+	 *            Gasto efetuado
 	 */
 	public void registraGasto(double gasto) {
 		this.gastos += gasto;

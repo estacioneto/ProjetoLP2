@@ -22,8 +22,6 @@ public abstract class Reflection {
 	 *            Objeto a ser usado.
 	 * @param atributo
 	 *            Atributo a ser retornado.
-	 * @param erro
-	 *            Erro caso algo saia errado.
 	 * @return Atributo.
 	 * @throws DadoInvalidoException
 	 *             Caso o atributo seja invalido
@@ -85,6 +83,8 @@ public abstract class Reflection {
 	 *            Atributo a ser atualizado.
 	 * @param novoValor
 	 *            Novo valor da entidade.
+	 * @param erroAtualizacao
+	 *            Mensagem de erro
 	 * @throws DadoInvalidoException
 	 *             Caso algo nao saia como desejado.
 	 */
@@ -252,16 +252,20 @@ public abstract class Reflection {
 	 * @throws DadoInvalidoException
 	 *             Caso o metodo nao exista
 	 */
-	public static void executaMetodo(String nomeMetodo, Object objeto, Class<?>[] paramsClasses, Object[] params)
+	public static void executaMetodo(String nomeMetodo, Object objeto,
+			Class<?>[] paramsClasses, Object[] params)
 			throws DadoInvalidoException {
 		try {
 			Class<?> clazz = objeto.getClass();
 			Method metodo = clazz.getMethod(nomeMetodo, paramsClasses);
 			metodo.setAccessible(true);
-			
+
 			metodo.invoke(objeto, params);
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			throw new DadoInvalidoException("Este erro nao deveria ter acontecido! Contate o suporte.");
+		} catch (NoSuchMethodException | SecurityException
+				| IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException e) {
+			throw new DadoInvalidoException(
+					"Este erro nao deveria ter acontecido! Contate o suporte.");
 		}
 	}
 
