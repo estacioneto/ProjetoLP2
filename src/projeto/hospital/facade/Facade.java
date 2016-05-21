@@ -43,13 +43,16 @@ public class Facade {
 	 */
 	public String liberaSistema(String chave, String nome, String dataNascimento) {
 		if (sistemaJaLiberado) {
-			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Sistema liberado anteriormente.");
+			throw new AcessoBloqueadoException(
+					"Erro ao liberar o sistema. Sistema liberado anteriormente.");
 		} else if (CHAVE_DESBLOQUEIO.equals(chave)) {
-			String matricula = this.cadastraFuncionario(nome, Constantes.DIRETOR_GERAL, dataNascimento);
+			String matricula = this.cadastraFuncionario(nome,
+					Constantes.DIRETOR_GERAL, dataNascimento);
 			sistemaJaLiberado = true;
 			return matricula;
 		} else {
-			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Chave invalida.");
+			throw new AcessoBloqueadoException(
+					"Erro ao liberar o sistema. Chave invalida.");
 		}
 	}
 
@@ -61,7 +64,8 @@ public class Facade {
 			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
 
 		try {
-			this.controller = (Controller) Util.getObjeto(Constantes.ARQUIVO_CONTROLLER);
+			this.controller = (Controller) Util
+					.getObjeto(Constantes.ARQUIVO_CONTROLLER);
 		} catch (Exception excecao) {
 			this.controller = new Controller();
 			Util.criaArquivo(Constantes.ARQUIVO_CONTROLLER);
@@ -109,7 +113,8 @@ public class Facade {
 	 *            Data de nascimento do funcionario.
 	 * @return Matricula do funcionario cadastrado.
 	 */
-	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
+	public String cadastraFuncionario(String nome, String cargo,
+			String dataNascimento) {
 		return this.controller.cadastraFuncionario(nome, cargo, dataNascimento);
 	}
 
@@ -135,7 +140,8 @@ public class Facade {
 	 * @param novoValor
 	 *            Valor do novo atributo.
 	 */
-	public void atualizaInfoFuncionario(String matricula, String atributo, String novoValor) {
+	public void atualizaInfoFuncionario(String matricula, String atributo,
+			String novoValor) {
 		this.controller.atualizaInfoFuncionario(matricula, atributo, novoValor);
 	}
 
@@ -176,6 +182,7 @@ public class Facade {
 	public Object getInfoFuncionario(String matricula, String atributo) {
 		return this.controller.getInfoFuncionario(matricula, atributo);
 	}
+
 	// CONSULTA DE FUNCIONARIO
 	// OPERACOES DE FUNCIONARIO
 	// OPERACOES DE PACIENTE/PRONTUARIO
@@ -197,9 +204,10 @@ public class Facade {
 	 *            Tipo sanguineo do paciente
 	 * @return Id do paciente cadastrado
 	 */
-	public String cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
-			String tipoSanguineo) {
-		return this.controller.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo);
+	public String cadastraPaciente(String nome, String data, double peso,
+			String sexo, String genero, String tipoSanguineo) {
+		return this.controller.cadastraPaciente(nome, data, peso, sexo, genero,
+				tipoSanguineo);
 	}
 
 	// CONSULTA DE PACIENTE/PRONTUARIO
@@ -226,6 +234,7 @@ public class Facade {
 	public String getProntuario(int posicao) {
 		return this.controller.getProntuario(posicao);
 	}
+
 	// CONSULTA DE PACIENTE/PRONTUARIO
 	// OPERACOES DE PACIENTE/PRONTUARIO
 	// OPERACOES DE MEDICAMENTO/FARMACIA
@@ -245,8 +254,10 @@ public class Facade {
 	 *            do medicamento.
 	 * @return Nome do medicamento.
 	 */
-	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias) {
-		return this.controller.cadastraMedicamento(nome, tipo, preco, quantidade, categorias);
+	public String cadastraMedicamento(String nome, String tipo, Double preco,
+			int quantidade, String categorias) {
+		return this.controller.cadastraMedicamento(nome, tipo, preco,
+				quantidade, categorias);
 	}
 
 	/**
@@ -259,7 +270,8 @@ public class Facade {
 	 * @param novoValor
 	 *            Novo valor do atributo
 	 */
-	public void atualizaMedicamento(String nome, String atributo, String novoValor) {
+	public void atualizaMedicamento(String nome, String atributo,
+			String novoValor) {
 		this.controller.atualizaMedicamento(nome, atributo, novoValor);
 	}
 
@@ -334,8 +346,10 @@ public class Facade {
 	 * @param medicamentos
 	 *            Medicamentos necessarios
 	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String medicamentos) {
-		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, medicamentos);
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente,
+			String medicamentos) {
+		this.controller.realizaProcedimento(nomeProcedimento, idPaciente,
+				medicamentos);
 	}
 
 	/**
@@ -350,14 +364,16 @@ public class Facade {
 	 * @param medicamentos
 	 *            Medicamentos necessarios
 	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String orgao, String medicamentos) {
-		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, orgao, medicamentos);
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente,
+			String orgao, String medicamentos) {
+		this.controller.realizaProcedimento(nomeProcedimento, idPaciente,
+				orgao, medicamentos);
 	}
 
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente){
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente) {
 		this.controller.realizaProcedimento(nomeProcedimento, idPaciente);
 	}
-	
+
 	/**
 	 * Pega a quantidade de procedimentos realizados pelo paciente
 	 * 
@@ -372,40 +388,94 @@ public class Facade {
 	// CONSULTA DE MEDICAMENTO/FARMACIA
 	// OPERACOES DE MEDICAMENTO/FARMACIA
 	// OPERACOES DE ORGAO
+	/**
+	 * Cadastra um orgao no banco de orgaos.
+	 * 
+	 * @param nome
+	 *            Nome do orgao.
+	 * @param tipoSanguineo
+	 *            Tipo sanguineo do orgao.
+	 */
 	public void cadastraOrgao(String nome, String tipoSanguineo) {
 		this.controller.cadastraOrgao(nome, tipoSanguineo);
 	}
 
+	/**
+	 * Retira orgao do banco de orgaos.
+	 * 
+	 * @param nome
+	 *            Nome do orgao.
+	 * @param tipoSanguineo
+	 *            Tipo sanguineo do orgao.
+	 */
 	public void retiraOrgao(String nome, String tipoSanguineo) {
 		this.controller.retiraOrgao(nome, tipoSanguineo);
 	}
 
+	/**
+	 * Busca os orgaos com o nome solicitado.
+	 * 
+	 * @param nome
+	 *            Nome do orgao.
+	 * @return String com tipos sanguineos dos orgaos de nome solicitado,
+	 *         separados por virgula.
+	 */
 	public String buscaOrgPorNome(String nome) {
 		return this.controller.buscaOrgPorNome(nome);
 	}
 
+	/**
+	 * Busca os orgaos com o tipo sanguineo solicitado.
+	 * 
+	 * @param tipoSanguineo
+	 *            tipo sanguineo do orgao.
+	 * @return String com nomes dos orgaos de tipo sanguineo solicitado,
+	 *         separados por virgula.
+	 */
 	public String buscaOrgPorSangue(String tipoSanguineo) {
 		return this.controller.buscaOrgPorSangue(tipoSanguineo);
 	}
 
+	/**
+	 * Verifica a existencia de um determinado orgao.
+	 * 
+	 * @param nome
+	 *            Nome do orgao.
+	 * @param tipoSanguineo
+	 *            Tipo sanguineo do orgao.
+	 * @return {@code true} se o banco tiver o orgao.
+	 */
 	public boolean buscaOrgao(String nome, String tipoSanguineo) {
 		return this.controller.buscaOrgao(nome, tipoSanguineo);
 	}
 
+	/**
+	 * Retorna a quantidade de orgaos com o nome solicitado.
+	 * 
+	 * @param nome
+	 *            Nome do orgao.
+	 * @return Quantidade de orgaos com o nome solicitado.
+	 */
 	public int qtdOrgaos(String nome) {
 		return this.controller.qtdOrgaos(nome);
 	}
 
+	/**
+	 * Retorna a quantidade total de orgaos no banco.
+	 * 
+	 * @return Quantidade de orgaos no banco de orgaos.
+	 */
 	public int totalOrgaosDisponiveis() {
 		return this.controller.totalOrgaosDisponiveis();
 	}
+
 	// OPERACOES DE ORGAO
-	
-	public int getPontosFidelidade(String id){
+
+	public int getPontosFidelidade(String id) {
 		return this.controller.getPontosFidelidade(id);
 	}
-	
-	public String getGastosPaciente(String id){
+
+	public String getGastosPaciente(String id) {
 		return this.controller.getGastosPaciente(id);
 	}
 }

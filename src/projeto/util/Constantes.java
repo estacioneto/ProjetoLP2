@@ -77,12 +77,10 @@ public abstract class Constantes {
 	// CONSTANTES DE ATRIBUTOS
 
 	// CONSTANTES DE PERSISTENCIA
-	public static final String DADOS_DIRETORIO = "BD/";
+	public static final String DADOS_DIRETORIO = "system_data/";
 	public static final File ARQUIVO_DADOS = new File(DADOS_DIRETORIO);
-	public static final String ARQUIVO_GERENCIADOR_FUNCIONARIOS = DADOS_DIRETORIO
-			+ "gerenciadorFuncionarios.txt";
 	public static final String ARQUIVO_CONTROLLER = DADOS_DIRETORIO
-			+ "controller.txt";
+			+ "soos.dat";
 	// CONSTANTES DE PERSISTENCIA
 
 	// CONSTANTES NUMERICAS
@@ -94,5 +92,7 @@ public abstract class Constantes {
 	public static final int QUATRO = 4;
 	public static final int INDICE_INVALIDO = -1;
 	public static final double PORCENTAGEM_TOTAL = 100.0;
+	public static final Integer PONTUACAO_MINIMA_MASTER = 150;
+	public static final Integer PONTUACAO_MAXIMA_MASTER = 350;
 	// CONSTANTES NUMERICAS
 }

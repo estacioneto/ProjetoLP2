@@ -36,7 +36,8 @@ public class Funcionario implements Serializable {
 	private String nome;
 
 	@Conversao(formato = Cargo.class, conversor = ConstantesReflection.CARGO_STRING)
-	@Validacao(metodo = ConstantesReflection.VALIDA_CARGO, erro = Constantes.NOME + Constantes.DO_CARGO)
+	@Validacao(metodo = ConstantesReflection.VALIDA_CARGO, erro = Constantes.NOME
+			+ Constantes.DO_CARGO)
 	@MetodoAssociado(get = ConstantesReflection.GET_CARGO)
 	private Cargo cargo;
 
@@ -44,18 +45,14 @@ public class Funcionario implements Serializable {
 	@MetodoAssociado(get = ConstantesReflection.GET_DATA_NASCIMENTO, set = ConstantesReflection.SET_DATA)
 	private String data;
 
-	@Validacao(metodo = ConstantesReflection.VALIDA_MATRICULA, erro = Constantes.MATRICULA + Constantes.DO_FUNCIONARIO, cadastro = false)
+	@Validacao(metodo = ConstantesReflection.VALIDA_MATRICULA, erro = Constantes.MATRICULA
+			+ Constantes.DO_FUNCIONARIO, cadastro = false)
 	@MetodoAssociado(get = ConstantesReflection.GET_MATRICULA)
 	private String matricula;
 
 	@Validacao(metodo = ConstantesReflection.VALIDA_SENHA, erro = Constantes.SENHA, cadastro = false)
 	@MetodoAssociado(get = ConstantesReflection.GET_SENHA_PROTEGIDA, set = ConstantesReflection.SET_SENHA)
 	private String senha;
-
-	public Funcionario(String nome, String cargo, String dataNascimento) {
-		this(nome, cargo, dataNascimento, GeradorDeDadosDeSeguranca
-				.getIncancia().geraMatricula(cargo, Util.getAnoAtual()));
-	}
 
 	/**
 	 * Construtor padrao.
@@ -66,17 +63,33 @@ public class Funcionario implements Serializable {
 	 *            Cargo do funcionario.
 	 * @param dataNascimento
 	 *            Data de nascimento do funcionario.
+	 */
+	public Funcionario(String nome, String cargo, String dataNascimento) {
+		this(nome, cargo, dataNascimento, GeradorDeDadosDeSeguranca
+				.getIncancia().geraMatricula(cargo, Util.getAnoAtual()));
+	}
+
+	/**
+	 * Construtor com matricula.
+	 * 
+	 * @param nome
+	 *            Nome do funcionario.
+	 * @param cargo
+	 *            Cargo do funcionario.
+	 * @param dataNascimento
+	 *            Data de nascimento do funcionario.
 	 * @param matricula
 	 *            Matricula do funcionario.
 	 */
-	public Funcionario(String nome, String cargo, String dataNascimento, String matricula) {
+	public Funcionario(String nome, String cargo, String dataNascimento,
+			String matricula) {
 		// Nao eh necessario validar porque no Gerenciador ja eh feito isso
 		// la no gerenciador de funcionarios
 		this.nome = nome;
 		this.setCargo(cargo);
 		this.matricula = matricula;
-		this.senha = GeradorDeDadosDeSeguranca.getIncancia().geraSenha(matricula,
-				Util.getAnoPorData(dataNascimento));
+		this.senha = GeradorDeDadosDeSeguranca.getIncancia().geraSenha(
+				matricula, Util.getAnoPorData(dataNascimento));
 		this.data = dataNascimento;
 	}
 
@@ -138,15 +151,16 @@ public class Funcionario implements Serializable {
 	 *            Cargo novo do funcionario.
 	 */
 	public void setCargo(String cargo) {
-		try{
+		try {
 			if (Constantes.DIRETOR_GERAL.equals(cargo)) {
 				this.cargo = (Cargo) Reflection.godFactory(Diretor.class);
 			} else if (Constantes.TECNICO_ADMINISTATIVO.equals(cargo)) {
-				this.cargo = (Cargo) Reflection.godFactory(TecnicoAdministrativo.class);
+				this.cargo = (Cargo) Reflection
+						.godFactory(TecnicoAdministrativo.class);
 			} else if (Constantes.MEDICO.equals(cargo)) {
 				this.cargo = (Cargo) Reflection.godFactory(Medico.class);
 			}
-		} catch (DadoInvalidoException excecao){
+		} catch (DadoInvalidoException excecao) {
 			throw new OperacaoInvalidaException(excecao.getMessage());
 		}
 	}

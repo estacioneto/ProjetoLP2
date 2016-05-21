@@ -49,6 +49,7 @@ public class Prontuario implements Serializable {
 	 * Registra um procedimento realizado no paciente
 	 * 
 	 * @param procedimentoRealizado
+	 *            Procedimento realizado no momento.
 	 */
 	public void registraProcedimento(String procedimentoRealizado) {
 		this.procedimentosRealizados.add(procedimentoRealizado);
