@@ -1,10 +1,11 @@
-package projeto.hospital.gerencia.procedimentos;
+package projeto.hospital.gerencia.procedimento;
 
 import java.io.Serializable;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.bancodeorgaos.Orgao;
+import projeto.hospital.gerencia.procedimentos.Procedimentos;
 import projeto.hospital.gerencia.prontuario.Prontuario;
 import projeto.util.Util;
 import projeto.util.reflexao.Reflection;

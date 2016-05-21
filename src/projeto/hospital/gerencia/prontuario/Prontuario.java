@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import projeto.hospital.gerencia.procedimento.Procedimento;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;
 
 /**
@@ -18,7 +19,7 @@ public class Prontuario implements Serializable {
 	private static final long serialVersionUID = 21463754771L;
 
 	private Paciente paciente;
-	private List<String> procedimentosRealizados;
+	private List<Procedimento> procedimentosRealizados;
 
 	/**
 	 * Construtor
@@ -51,7 +52,7 @@ public class Prontuario implements Serializable {
 	 * @param procedimentoRealizado
 	 *            Procedimento realizado no momento.
 	 */
-	public void registraProcedimento(String procedimentoRealizado) {
+	public void registraProcedimento(Procedimento procedimentoRealizado) {
 		this.procedimentosRealizados.add(procedimentoRealizado);
 	}
 

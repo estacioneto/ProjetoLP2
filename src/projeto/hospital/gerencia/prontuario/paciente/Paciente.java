@@ -260,13 +260,6 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 			this.genero = Constantes.MASCULINO;
 	}
 
-	// Metodo que calcular o bonus ganho na pontuacao a partir de sua
-	// fidelidade.
-	private Integer calculaBonusPontuacao(Integer pontuacao) {
-		Integer bonus = (int) (this.fidelidade.getCreditoBonus() * pontuacao);
-		return bonus;
-	}
-
 	/**
 	 * Metodo responsavel por registrar os pontos ganhos pelo paciente
 	 * 

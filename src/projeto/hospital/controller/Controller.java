@@ -11,7 +11,7 @@ import projeto.hospital.gerencia.farmacia.GerenciadorDeFarmacia;
 import projeto.hospital.gerencia.funcionario.Funcionario;
 import projeto.hospital.gerencia.funcionario.GerenciadorDeFuncionarios;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
-import projeto.hospital.gerencia.procedimentos.GerenciadorProcedimento;
+import projeto.hospital.gerencia.procedimento.GerenciadorProcedimento;
 import projeto.hospital.gerencia.prontuario.GerenciadorDePacienteProntuario;
 import projeto.hospital.gerencia.prontuario.Prontuario;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;

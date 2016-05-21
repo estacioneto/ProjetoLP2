@@ -7,6 +7,7 @@ import java.util.HashSet;
 
 public abstract class Constantes {
 	// CONTANTES DE IMPRESSAO E STRINGS
+	public final static String QUEBRA_LINHA = System.getProperty("line.separator");
 	public static final String BARRA = "/";
 	public static final Object VIRGULA = ",";
 	public static final String FORMATO_TRES_NUMEROS = "000";
