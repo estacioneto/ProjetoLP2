@@ -15,7 +15,7 @@ public abstract class Procedimento implements Serializable {
 	 * Id gerado automaticamente
 	 */
 	protected static final long serialVersionUID = 5826036344611544945L;
-	
+
 	// Nao eh necessario validar os atributos pois so usa informacoes
 	// de outros objetos do programa, que ja sao validados
 	private String dataRealizacao;
@@ -38,6 +38,7 @@ public abstract class Procedimento implements Serializable {
 	 * Realiza um procedimento
 	 * 
 	 * @param prontuario
+	 *            Prontuario do paciente a ser submetido ao procedimento
 	 */
 	public abstract void realizaProcedimento(Prontuario prontuario, Double valorMedicamentos);
 
