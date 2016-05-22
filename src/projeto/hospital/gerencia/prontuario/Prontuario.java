@@ -82,7 +82,7 @@ public class Prontuario implements Serializable {
 	public String toString() {
 		String saida = new String();
 		saida += "Paciente: " + paciente.getNome() + Constantes.QUEBRA_LINHA;
-		saida += String.format("Peso: %.2f", paciente.getPeso()) + " kg Tipo Sanguíneo: " + paciente.getTipoSanguineo() + Constantes.QUEBRA_LINHA;
+		saida += String.format("Peso: %.2f", paciente.getPeso()) + " kg Tipo Sanguineo: " + paciente.getTipoSanguineo() + Constantes.QUEBRA_LINHA;
 		saida += "Sexo: " + paciente.getSexo() + " Genero: " + paciente.getGenero() + Constantes.QUEBRA_LINHA;
 		saida += String.format("Gasto total: R$ %.2f", paciente.getGastosPaciente()) + " Pontos acumulados: " + paciente.getPontuacao() + Constantes.QUEBRA_LINHA;
 		saida += "Resumo dos procedimentos: " + this.procedimentosRealizados.size() + " procedimento(s)" + Constantes.QUEBRA_LINHA;
