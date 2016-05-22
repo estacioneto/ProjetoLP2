@@ -19,8 +19,7 @@ public class Orgao implements Serializable {
 	 */
 	private static final long serialVersionUID = -6346901598202920798L;
 
-	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.NOME
-			+ Constantes.DO_ORGAO)
+	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.NOME + Constantes.DO_ORGAO)
 	@MetodoAssociado(get = ConstantesReflection.GET_NOME)
 	private String nome;
 
@@ -88,10 +87,6 @@ public class Orgao implements Serializable {
 			return false;
 
 		Orgao orgao = (Orgao) obj;
-		if (this.nome.equals(orgao.nome)
-				&& this.tipoSanguineo.equals(orgao.tipoSanguineo)) {
-			return true;
-		}
-		return false;
+		return this.nome.equals(orgao.nome)	&& this.tipoSanguineo.equals(orgao.tipoSanguineo);
 	}
 }

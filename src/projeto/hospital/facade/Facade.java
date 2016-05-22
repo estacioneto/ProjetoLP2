@@ -1,6 +1,5 @@
 package projeto.hospital.facade;
 
-import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.controller.Controller;
 import projeto.util.Constantes;
@@ -15,17 +14,13 @@ import projeto.util.Util;
  * @author Thaynan
  */
 public class Facade {
-
-	private final String CHAVE_DESBLOQUEIO = "c041ebf8";
 	private Controller controller;
-	private boolean sistemaJaLiberado;
 
 	/**
 	 * Construtor padrao.
 	 */
 	public Facade() {
 		this.controller = null;
-		this.sistemaJaLiberado = false;
 	}
 
 	// OPERACOES DO SISTEMA
@@ -42,18 +37,7 @@ public class Facade {
 	 * @return Matricula gerada para o usuario.
 	 */
 	public String liberaSistema(String chave, String nome, String dataNascimento) {
-		if (sistemaJaLiberado) {
-			throw new AcessoBloqueadoException(
-					"Erro ao liberar o sistema. Sistema liberado anteriormente.");
-		} else if (CHAVE_DESBLOQUEIO.equals(chave)) {
-			String matricula = this.cadastraFuncionario(nome,
-					Constantes.DIRETOR_GERAL, dataNascimento);
-			sistemaJaLiberado = true;
-			return matricula;
-		} else {
-			throw new AcessoBloqueadoException(
-					"Erro ao liberar o sistema. Chave invalida.");
-		}
+		return this.controller.liberaSistema(chave, nome, dataNascimento);
 	}
 
 	/**
@@ -62,14 +46,8 @@ public class Facade {
 	public void iniciaSistema() {
 		if (this.controller != null)
 			throw new OperacaoInvalidaException("O sistema ja foi iniciado.");
-
-		try {
-			this.controller = (Controller) Util
-					.getObjeto(Constantes.ARQUIVO_CONTROLLER);
-		} catch (Exception excecao) {
-			this.controller = new Controller();
-			Util.criaArquivo(Constantes.ARQUIVO_CONTROLLER);
-		}
+		this.controller = new Controller();
+		this.controller.iniciaSistema();
 	}
 
 	/**

@@ -33,17 +33,6 @@ public abstract class Conversor {
 	}
 
 	/**
-	 * Transforma um dado double para String
-	 * 
-	 * @param numero
-	 *            Numero.
-	 * @return Numero em String.
-	 */
-	public static String doubleParaString(double numero) {
-		return Double.toString(numero);
-	}
-
-	/**
 	 * Transforma um dado Double para String
 	 * 
 	 * @param numero
