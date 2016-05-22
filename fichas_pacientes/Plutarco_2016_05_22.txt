@@ -1,0 +1,7 @@
+Paciente: Plutarco
+Peso: 85.0 Tipo Sanguíneo: O-
+Sexo: masculino Genero: masculino
+Gasto total: R$ 12665,00 Pontos acumulados: 160
+Resumo dos procedimentos: 1 procedimento(s)
+--> Transplante de Coracao:
+....... Data: 2016-05-22 Medico: Ada Lovelace

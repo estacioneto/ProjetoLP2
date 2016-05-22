@@ -72,7 +72,8 @@ public class Prontuario implements Serializable {
 	public void exportaFichaPaciente() {
 		LocalDate dataAtual = LocalDate.now();
 		String[] dataSeparada = dataAtual.toString().split("-");
-		String nomeArquivo = paciente.getNome() + "_" + dataSeparada[0] + "_" + dataSeparada[1] + "_" + dataSeparada[2] + ".txt";
+		// Substitui espacos no nome do paciente e data por underscores 
+		String nomeArquivo = String.join("_", paciente.getNome().split(" ")) + "_" + String.join("_", dataSeparada) + ".txt";
 		
 		Util.criaRelatorioPaciente(nomeArquivo, this.toString());
 	}
