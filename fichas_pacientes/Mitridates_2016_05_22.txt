@@ -1,9 +1,0 @@
-Paciente: Mitridates
-Peso: 64.8 Tipo Sanguíneo: AB+
-Sexo: feminino Genero: masculino
-Gasto total: R$ 8207,00 Pontos acumulados: 150
-Resumo dos procedimentos: 2 procedimento(s)
---> Cirurgia Bariatrica:
-....... Data: 2016-05-22 Medico: Ada Lovelace
---> Consulta clinica:
-....... Data: 2016-05-22 Medico: Ada Lovelace
