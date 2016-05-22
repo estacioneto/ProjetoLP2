@@ -370,6 +370,14 @@ public class Facade {
 				medicamentos, orgao);
 	}
 
+	/**
+	 * Realiza um procedimento
+	 * 
+	 * @param nomeProcedimento
+	 *            Nome do procedimento
+	 * @param idPaciente
+	 *            Id do paciente
+	 */
 	public void realizaProcedimento(String nomeProcedimento, String idPaciente) {
 		this.controller.realizaProcedimento(nomeProcedimento, idPaciente);
 	}

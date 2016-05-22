@@ -455,7 +455,7 @@ public class Controller implements Serializable {
 	 * @param idPaciente
 	 *            Id do paciente
 	 */
-	public void realizaProcedimento(String procedimento, String idPaciente, String... valorMedicamentosEOrgao) {
+	public void realizaProcedimento(String procedimento, String idPaciente, String... argumentosExtras) {
 		try {
 			//Validacoes necessarias na ordem
 			ValidadorDeDados.validaProcedimento(procedimento);
@@ -468,20 +468,20 @@ public class Controller implements Serializable {
 			
 			Double valorMedicamentos = 0.0;
 			// Caso tenha valor de medicamentos, eh o primeiro argumento extra
-			if(valorMedicamentosEOrgao.length > Constantes.ZERO){
+			if(argumentosExtras.length > Constantes.ZERO){
 				valorMedicamentos = this.gerenciadorDeMedicamento
-				.getValorMedicamentos(valorMedicamentosEOrgao[Constantes.ZERO]);
+				.getValorMedicamentos(argumentosExtras[Constantes.ZERO]);
 			}
 			
 			// Caso tenha necessidade de um orgao, eh o segundo argumento extra
-			if(valorMedicamentosEOrgao.length > Constantes.UM){
+			if(argumentosExtras.length > Constantes.UM){
 				String sanguePaciente = prontuario.getPaciente().getTipoSanguineo();
 				Orgao orgaoRecuperado = null;
 				
 				// Validacao de orgao de nome vazio
-				ValidadorDeDados.validaString("Nome do orgao", valorMedicamentosEOrgao[Constantes.UM]);
+				ValidadorDeDados.validaString("Nome do orgao", argumentosExtras[Constantes.UM]);
 				try {
-					orgaoRecuperado = this.bancoDeOrgaos.getOrgao(valorMedicamentosEOrgao[Constantes.UM],
+					orgaoRecuperado = this.bancoDeOrgaos.getOrgao(argumentosExtras[Constantes.UM],
 							sanguePaciente);
 				} catch (OperacaoInvalidaException e) {
 					// Excecao diferente no controller
