@@ -74,8 +74,6 @@ public class Prontuario implements Serializable {
 		String[] dataSeparada = dataAtual.toString().split("-");
 		String nomeArquivo = paciente.getNome() + "_" + dataSeparada[0] + "_" + dataSeparada[1] + "_" + dataSeparada[2] + ".txt";
 		
-		System.out.println("Criei relatorio para " + paciente.getNome());
-		
 		Util.criaRelatorioPaciente(nomeArquivo, this.toString());
 	}
 	

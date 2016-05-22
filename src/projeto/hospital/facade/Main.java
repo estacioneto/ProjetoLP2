@@ -6,6 +6,7 @@ import easyaccept.EasyAccept;
 
 public class Main {
 	public static void main(String[] args) {
+		// Aqui ele vai resetar todos os dados guardados, e o sistema inicia do zero sempre
 		Util.limpaDados(Constantes.ARQUIVO_DADOS);
 		Util.limpaDados(Constantes.PACIENTES_DADOS);
 		args = new String[] { "projeto.hospital.facade.Facade", "acceptTests/usecase_1.txt",
