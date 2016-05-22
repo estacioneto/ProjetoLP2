@@ -18,7 +18,7 @@ public class TransplanteDeOrgaos extends Procedimento {
 
 	private Orgao orgao;
 
-	private final String NOME_PROCEDIMENTO = "Transplante de ";
+	private final String NOME_PROCEDIMENTO = "Transplante de Orgaos";
 	private final Double PRECO_TRANSPLANTE = 12500.00;
 	private final Integer PONTUACAO_TRANSPLANTE_ORGAOS = 160;
 
@@ -48,8 +48,9 @@ public class TransplanteDeOrgaos extends Procedimento {
 	@Override
 	public String toString() {
 		String saida = new String();
-		saida += "--> " + NOME_PROCEDIMENTO + orgao.getNome() + ":" + Constantes.QUEBRA_LINHA;
-		saida += super.toString();
+		saida += "--> " + NOME_PROCEDIMENTO + ":" + Constantes.QUEBRA_LINHA;
+		saida += super.toString() + Constantes.QUEBRA_LINHA;
+		saida += "....... Orgao transplantado: " + this.orgao.getNome(); 
 		return saida;
 	}
 }
