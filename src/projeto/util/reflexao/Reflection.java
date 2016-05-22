@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.util.Constantes;
@@ -209,6 +210,7 @@ public abstract class Reflection {
 				valida.invoke(null, validacao.erro(), params[i]);
 			}
 			// Retorna o objeto.
+			//System.out.println(Arrays.asList(params));
 			return clazz.getConstructors()[0].newInstance(params);
 		} catch (IllegalAccessException | IllegalArgumentException
 				| NoSuchMethodException | SecurityException

@@ -1,4 +1,4 @@
-package projeto.hospital.gerencia.procedimento;
+package projeto.hospital.gerencia.procedimento.procedimentos;
 
 import java.io.Serializable;
 

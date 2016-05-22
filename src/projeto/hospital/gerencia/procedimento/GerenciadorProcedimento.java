@@ -1,12 +1,12 @@
 package projeto.hospital.gerencia.procedimento;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import projeto.exceptions.dados.DadoInvalidoException;
-import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.gerencia.bancodeorgaos.Orgao;
-import projeto.hospital.gerencia.procedimentos.Procedimentos;
+import projeto.hospital.gerencia.procedimento.procedimentos.Procedimento;
 import projeto.hospital.gerencia.prontuario.Prontuario;
+import projeto.util.Constantes;
 import projeto.util.Util;
 import projeto.util.reflexao.Reflection;
 
@@ -16,39 +16,6 @@ public class GerenciadorProcedimento implements Serializable {
 	 */
 	private static final long serialVersionUID = 588210554771048672L;
 
-	private Procedimentos procedimentos;
-
-	/**
-	 * Construtor
-	 */
-	public GerenciadorProcedimento() {
-		this.procedimentos = new Procedimentos();
-	}
-
-	/**
-	 * Vai realizar um procedimento
-	 * 
-	 * @param procedimento
-	 *            Procedimento a ser realizado
-	 * @param prontuario
-	 *            Prontuario do paciente
-	 * @param orgao
-	 *            Orgao a ser utilizado no procedimento
-	 * @param valorMedicamentos
-	 *            Valor dos medicamentos usados
-	 */
-	public void realizaProcedimento(String procedimento, Prontuario prontuario, Orgao orgao, Double valorMedicamentos) {
-		try {
-			String nomeProcedimento = Util.getNomeMetodo(procedimento);
-			Class<?>[] classesArgumentos = { Prontuario.class, Orgao.class, Double.class };
-			Object[] argumentos = { prontuario, orgao, valorMedicamentos };
-			Reflection.executaMetodo(nomeProcedimento, this.procedimentos, classesArgumentos, argumentos);
-
-		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(e.getMessage());
-		}
-	}
-
 	/**
 	 * Vai realizar um procedimento
 	 * 
@@ -59,15 +26,27 @@ public class GerenciadorProcedimento implements Serializable {
 	 * @param valorMedicamentos
 	 *            Valor dos medicamentos usados
 	 */
-	public void realizaProcedimento(String procedimento, Prontuario prontuario, Double valorMedicamentos) {
-		try {
-			String nomeProcedimento = Util.getNomeMetodo(procedimento);
-			Class<?>[] classesArgumentos = { Prontuario.class, Double.class };
-			Object[] argumentos = { prontuario, valorMedicamentos };
-			Reflection.executaMetodo(nomeProcedimento, this.procedimentos, classesArgumentos, argumentos);
+	public void realizaProcedimento(String procedimento, Prontuario prontuario, String nomeMedico, Double valorMedicamentos, Object...argumentosExtras) throws DadoInvalidoException {
+		try{
+			//Necessidade da data de procedimento
+			LocalDate data = LocalDate.now();
 
-		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(e.getMessage());
+			Object[] argumentosConstrutor = null;
+			if(argumentosExtras.length > Constantes.ZERO){
+				//Caso tenha orgao associado, sera o primeiro indice
+				argumentosConstrutor = new Object[]{data.toString(), nomeMedico, argumentosExtras[Constantes.ZERO]};
+			}else{
+				argumentosConstrutor = new Object[]{data.toString(), nomeMedico};
+			}
+			//Pega a classe do procedimento desejado e invoca o construtor
+			Class<?> klazz = Class.forName(Constantes.PROCEDIMENTO_PATH + Util.getNomeClasse(procedimento));
+			Procedimento procedimentoRealizado = (Procedimento) Reflection.godFactory(klazz, argumentosConstrutor);
+
+			//Realiza o procedimento
+			procedimentoRealizado.realizaProcedimento(prontuario, valorMedicamentos);
+		}catch(ClassNotFoundException classeNaoEncontrada){
+			classeNaoEncontrada.printStackTrace();
+			throw new DadoInvalidoException("Procedimento invalido.");
 		}
 	}
 }

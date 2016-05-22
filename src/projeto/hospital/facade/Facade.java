@@ -367,7 +367,7 @@ public class Facade {
 	public void realizaProcedimento(String nomeProcedimento, String idPaciente,
 			String orgao, String medicamentos) {
 		this.controller.realizaProcedimento(nomeProcedimento, idPaciente,
-				orgao, medicamentos);
+				medicamentos, orgao);
 	}
 
 	public void realizaProcedimento(String nomeProcedimento, String idPaciente) {

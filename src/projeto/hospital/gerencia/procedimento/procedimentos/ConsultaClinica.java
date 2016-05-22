@@ -1,6 +1,5 @@
 package projeto.hospital.gerencia.procedimento.procedimentos;
 
-import projeto.hospital.gerencia.procedimento.Procedimento;
 import projeto.hospital.gerencia.prontuario.Prontuario;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;
 import projeto.util.Constantes;

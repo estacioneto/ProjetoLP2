@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import projeto.hospital.gerencia.procedimento.Procedimento;
+import projeto.hospital.gerencia.procedimento.procedimentos.Procedimento;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;
 
 /**

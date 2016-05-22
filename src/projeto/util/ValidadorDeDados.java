@@ -40,7 +40,7 @@ public abstract class ValidadorDeDados {
 	public static void validaString(String erroAtributo, String atributo)
 			throws StringVaziaException, ObjetoNuloException {
 		validaNaoNulo(erroAtributo, atributo);
-		if (atributo.trim().length() == Constantes.ZERO)
+		if (atributo.trim().isEmpty())
 			throw new StringVaziaException(erroAtributo
 					+ " nao pode ser vazio.");
 	}

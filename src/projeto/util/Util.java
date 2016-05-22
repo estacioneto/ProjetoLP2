@@ -142,6 +142,24 @@ public abstract class Util {
 	}
 	
 	/**
+	 * Recebe um nome separado de classe e o transforma para um tipo valido de nome de classe
+	 * 
+	 * @param nomeEntrada Entrada
+	 * @return Nome valido de classe
+	 */
+	public static String getNomeClasse(String nomeEntrada) {
+		String saida = new String();
+		String[] nomes = nomeEntrada.split(" ");
+		saida += nomes[0];
+		
+		for(int i=1; i<nomes.length; i++){
+			saida += capitalizaString(nomes[i]);
+		}
+		
+		return saida;
+	}
+	
+	/**
 	 * Retorna o ano atual.
 	 * 
 	 * @return Ano atual.

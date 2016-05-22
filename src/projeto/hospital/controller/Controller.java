@@ -446,104 +446,58 @@ public class Controller implements Serializable {
 
 	// OPERACOES DE ORGAO
 	// OPERACOES DE PROCEDIMENTO
-
+	
 	/**
-	 * Realiza um procedimento sem medicamentos.
+	 * Realiza um procedimento com medicamentos e/ou orgao.
 	 * 
 	 * @param procedimento
 	 *            Nome do procedimento
 	 * @param idPaciente
 	 *            Id do paciente
 	 */
-	public void realizaProcedimento(String procedimento, String idPaciente) {
+	public void realizaProcedimento(String procedimento, String idPaciente, String... valorMedicamentosEOrgao) {
 		try {
+			//Validacoes necessarias na ordem
 			ValidadorDeDados.validaProcedimento(procedimento);
 			ValidadorDeLogica.validaOperacao(
 					MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
 					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
+			
 			Prontuario prontuario = this.gerenciadorDePaciente
 					.getProntuarioPaciente(idPaciente);
+			
 			Double valorMedicamentos = 0.0;
-
-			this.gerenciadorProcedimento.realizaProcedimento(procedimento,
-					prontuario, valorMedicamentos);
-
-		} catch (DadoInvalidoException | OperacaoInvalidaException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
-		}
-	}
-
-	/**
-	 * Realiza um procedimento
-	 * 
-	 * @param nomeProcedimento
-	 *            Nome do procedimento
-	 * @param idPaciente
-	 *            Id do paciente
-	 * @param medicamentos
-	 *            Medicamentos necessarios
-	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente,
-			String medicamentos) {
-		try {
-			ValidadorDeDados.validaProcedimento(nomeProcedimento);
-			ValidadorDeLogica.validaOperacao(
-					MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
-					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
-			Prontuario prontuario = this.gerenciadorDePaciente
-					.getProntuarioPaciente(idPaciente);
-			Double valorMedicamentos = this.gerenciadorDeMedicamento
-					.getValorMedicamentos(medicamentos);
-
-			this.gerenciadorProcedimento.realizaProcedimento(nomeProcedimento,
-					prontuario, valorMedicamentos);
-
-		} catch (DadoInvalidoException | OperacaoInvalidaException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
-		}
-	}
-
-	/**
-	 * Realiza um procedimento
-	 * 
-	 * @param nomeProcedimento
-	 *            Nome do procedimento
-	 * @param idPaciente
-	 *            Id do paciente
-	 * @param orgao
-	 *            Orgao para o procedimento
-	 * @param medicamentos
-	 *            Medicamentos necessarios
-	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente,
-			String orgao, String medicamentos) {
-		try {
-			ValidadorDeDados.validaProcedimento(nomeProcedimento);
-			Prontuario prontuario = this.gerenciadorDePaciente
-					.getProntuarioPaciente(idPaciente);
-			ValidadorDeDados.validaString(
-					Constantes.NOME + Constantes.DO_ORGAO, orgao);
-			ValidadorDeLogica.validaOperacao(
-					MensagensDeErro.FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO,
-					Permissao.REALIZA_PROCEDIMENTO, funcionarioLogado);
-			String sanguePaciente = prontuario.getPaciente().getTipoSanguineo();
-			Orgao orgaoRecuperado = null;
-			try {
-				orgaoRecuperado = this.bancoDeOrgaos.getOrgao(orgao,
-						sanguePaciente);
-			} catch (OperacaoInvalidaException e) {
-				throw new DadoInvalidoException(
-						"Banco nao possui o orgao especificado.");
+			// Caso tenha valor de medicamentos, eh o primeiro argumento extra
+			if(valorMedicamentosEOrgao.length > Constantes.ZERO){
+				valorMedicamentos = this.gerenciadorDeMedicamento
+				.getValorMedicamentos(valorMedicamentosEOrgao[Constantes.ZERO]);
 			}
-			Double valorMedicamento = this.gerenciadorDeMedicamento
-					.getValorMedicamentos(medicamentos);
+			
+			// Caso tenha necessidade de um orgao, eh o segundo argumento extra
+			if(valorMedicamentosEOrgao.length > Constantes.UM){
+				String sanguePaciente = prontuario.getPaciente().getTipoSanguineo();
+				Orgao orgaoRecuperado = null;
+				
+				// Validacao de orgao de nome vazio
+				ValidadorDeDados.validaString("Nome do orgao", valorMedicamentosEOrgao[Constantes.UM]);
+				try {
+					orgaoRecuperado = this.bancoDeOrgaos.getOrgao(valorMedicamentosEOrgao[Constantes.UM],
+							sanguePaciente);
+				} catch (OperacaoInvalidaException e) {
+					// Excecao diferente no controller
+					throw new DadoInvalidoException(
+						"Banco nao possui o orgao especificado.");
+				}
+				//Chamada do metodo com orgao
+				this.gerenciadorProcedimento.realizaProcedimento(procedimento,
+						prontuario, this.funcionarioLogado.getNome(), valorMedicamentos, orgaoRecuperado);
+			}else{
+				//Chamada do metodo sem orgao
+				this.gerenciadorProcedimento.realizaProcedimento(procedimento,
+						prontuario, this.funcionarioLogado.getNome(), valorMedicamentos);
+			}
 
-			this.gerenciadorProcedimento.realizaProcedimento(nomeProcedimento,
-					prontuario, orgaoRecuperado, valorMedicamento);
-
-		} catch (OperacaoInvalidaException | DadoInvalidoException e) {
+		} catch (DadoInvalidoException | OperacaoInvalidaException e) {
 			throw new OperacaoInvalidaException(
 					MensagensDeErro.ERRO_REALIZAR_PROCEDIMENTO + e.getMessage());
 		}
