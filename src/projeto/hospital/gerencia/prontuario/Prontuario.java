@@ -1,11 +1,14 @@
 package projeto.hospital.gerencia.prontuario;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import projeto.hospital.gerencia.procedimento.procedimentos.Procedimento;
 import projeto.hospital.gerencia.prontuario.paciente.Paciente;
+import projeto.util.Constantes;
+import projeto.util.Util;
 
 /**
  * Classe para representar os prontuarios
@@ -61,5 +64,33 @@ public class Prontuario implements Serializable {
 	 */
 	public int qtdProcedimentos() {
 		return this.procedimentosRealizados.size();
+	}
+
+	/**
+	 * Gera uma ficha de um paciente e guarda
+	 */
+	public void exportaFichaPaciente() {
+		LocalDate dataAtual = LocalDate.now();
+		String[] dataSeparada = dataAtual.toString().split("-");
+		String nomeArquivo = paciente.getNome() + "_" + dataSeparada[0] + "_" + dataSeparada[1] + "_" + dataSeparada[2] + ".txt";
+		
+		System.out.println("Criei relatorio para " + paciente.getNome());
+		
+		Util.criaRelatorioPaciente(nomeArquivo, this.toString());
+	}
+	
+	@Override
+	public String toString() {
+		String saida = new String();
+		saida += "Paciente: " + paciente.getNome() + Constantes.QUEBRA_LINHA;
+		saida += "Peso: " + paciente.getPeso() + " Tipo Sanguíneo: " + paciente.getTipoSanguineo() + Constantes.QUEBRA_LINHA;
+		saida += "Sexo: " + paciente.getSexo() + " Genero: " + paciente.getGenero() + Constantes.QUEBRA_LINHA;
+		saida += String.format("Gasto total: R$ %.2f", paciente.getGastosPaciente()) + " Pontos acumulados: " + paciente.getPontuacao() + Constantes.QUEBRA_LINHA;
+		saida += "Resumo dos procedimentos: " + this.procedimentosRealizados.size() + " procedimento(s)" + Constantes.QUEBRA_LINHA;
+		
+		for(Procedimento procedimento : this.procedimentosRealizados)
+			saida += procedimento.toString() + Constantes.QUEBRA_LINHA;
+		
+		return saida;
 	}
 }

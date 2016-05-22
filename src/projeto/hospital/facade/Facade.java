@@ -476,6 +476,15 @@ public class Facade {
 	public int totalOrgaosDisponiveis() {
 		return this.controller.totalOrgaosDisponiveis();
 	}
+	
+	/**
+	 * Gera uma ficha de um paciente e guarda
+	 * 
+	 * @param idPaciente
+	 */
+	public void exportaFichaPaciente(String idPaciente){
+		this.controller.exportaFichaPaciente(idPaciente);
+	}
 
 	// OPERACOES DE ORGAO
 

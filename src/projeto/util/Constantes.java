@@ -82,6 +82,8 @@ public abstract class Constantes {
 	public static final File ARQUIVO_DADOS = new File(DADOS_DIRETORIO);
 	public static final String ARQUIVO_CONTROLLER = DADOS_DIRETORIO
 			+ "soos.dat";
+	public static final String DADOS_PACIENTES_DIRETORIO="fichas_pacientes/";
+	public static final File PACIENTES_DADOS = new File(DADOS_PACIENTES_DIRETORIO);
 	// CONSTANTES DE PERSISTENCIA
 
 	// CONSTANTES NUMERICAS

@@ -70,6 +70,10 @@ expect 2 getTotalProcedimento nomePaciente=${id2}
 expect 1 getTotalProcedimento nomePaciente=${id3}
 expect 1 getTotalProcedimento nomePaciente=${id4}
 
+exportaFichaPaciente idPaciente=${id1}
+exportaFichaPaciente idPaciente=${id2}
+exportaFichaPaciente idPaciente=${id3}
+exportaFichaPaciente idPaciente=${id4}
 
 logout
 

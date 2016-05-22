@@ -15,6 +15,12 @@ public class GerenciadorProcedimento implements Serializable {
 	 * Id gerado automaticamente
 	 */
 	private static final long serialVersionUID = 588210554771048672L;
+	
+	/**
+	 * Construtor
+	 */
+	public GerenciadorProcedimento() {
+	}
 
 	/**
 	 * Vai realizar um procedimento

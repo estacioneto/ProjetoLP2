@@ -241,4 +241,18 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 			throw new OperacaoInvalidaException(e.getMessage());
 		}
 	}
+
+	/**
+	 * Gera uma ficha de um paciente e guarda
+	 * 
+	 * @param idPaciente
+	 */
+	public void exportaFichaPaciente(String idPaciente) {
+		try {
+			Prontuario prontuario = getProntuarioPaciente(idPaciente);
+			prontuario.exportaFichaPaciente();
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException("Erro ao exportar paciente. " + e.getMessage());
+		}		
+	}
 }

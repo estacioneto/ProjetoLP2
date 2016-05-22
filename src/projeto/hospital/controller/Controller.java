@@ -557,4 +557,13 @@ public class Controller implements Serializable {
 					MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
 		}
 	}
+
+	/**
+	 * Gera uma ficha de um paciente e guarda
+	 * 
+	 * @param idPaciente
+	 */
+	public void exportaFichaPaciente(String idPaciente) {
+		this.gerenciadorDePaciente.exportaFichaPaciente(idPaciente);
+	}
 }

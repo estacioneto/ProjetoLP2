@@ -3,6 +3,7 @@ package projeto.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -124,24 +125,6 @@ public abstract class Util {
 	}
 	
 	/**
-	 * Recebe um nome separado de metodo e o transforma para um tipo valido de nome de metodo
-	 * 
-	 * @param nomeEntrada Entrada
-	 * @return Nome valido de metodo
-	 */
-	public static String getNomeMetodo(String nomeEntrada) {
-		String saida = new String();
-		String[] nomes = nomeEntrada.split(" ");
-		saida += getNomeCampo(nomes[0]);
-		
-		for(int i=1; i<nomes.length; i++){
-			saida += capitalizaString(nomes[i]);
-		}
-		
-		return saida;
-	}
-	
-	/**
 	 * Recebe um nome separado de classe e o transforma para um tipo valido de nome de classe
 	 * 
 	 * @param nomeEntrada Entrada
@@ -195,24 +178,14 @@ public abstract class Util {
 	 *             Caso o caminho nao exista.
 	 */
 	public static Object getObjeto(String caminho) throws DadoInvalidoException {
-		ObjectInputStream leitorDeObjetos = null;
 		Object objeto = null;
-		try {
-			leitorDeObjetos = new ObjectInputStream(
-					new FileInputStream(caminho));
+		try (ObjectInputStream leitorDeObjetos = new ObjectInputStream(
+				new FileInputStream(caminho));){
 			objeto = leitorDeObjetos.readObject();
 			return objeto;
 		} catch (Exception excecao) {
 			throw new DadoInvalidoException("Arquivo " + caminho
 					+ "nao existe!");
-		} finally {
-			try {
-				if (leitorDeObjetos != null) {
-					leitorDeObjetos.close();
-				}
-			} catch (IOException excecao) {
-				throw new OperacaoInvalidaException("Nao foi possivel fechar o arquivo " + caminho + "!");
-			}
 		}
 	}
 	
@@ -225,21 +198,11 @@ public abstract class Util {
 	 *            Objeto a ser escrito
 	 */
 	public static void setObjeto(String caminho, Object objeto) {
-		ObjectOutputStream escritorObjeto = null;
-		try {
-			escritorObjeto = new ObjectOutputStream(new FileOutputStream(
-					caminho));
+		try (ObjectOutputStream escritorObjeto = new ObjectOutputStream(new FileOutputStream(caminho))) {
 			escritorObjeto.writeObject(objeto);
 		} catch (Exception excecao) {
 			criaArquivo(caminho);
 			setObjeto(caminho, objeto);
-		} finally {
-			try {
-				if (escritorObjeto != null)
-					escritorObjeto.close();
-			} catch (IOException excecao) {
-				throw new OperacaoInvalidaException("Nao foi possivel fechar o arquivo " + caminho + "!");
-			}
 		}
 	}
 
@@ -261,42 +224,24 @@ public abstract class Util {
 		}
 		return diretorio.delete();
 	}
-	// ARQUIVOS
 
-	
-	
 	/**
-	 * Valida a compatibilidade entre dois tipos sanguineos
+	 * Cria um arquivo de relatorio de um paciente
 	 * 
-	 * @param tipoSanguineoPaciente
-	 *            Tipo sanguineo do paciente
-	 * @param tipoSanguineoOrgao
-	 *            Tipo sanguineo do orgao
-	 * @throws DadoInvalidoException
-	 *             Caso os tipos nao sejam compativeis
+	 * @param nomeArq
+	 *            Nome do arquivo que deve ser criado
+	 * @param relatorio
+	 *            Informacoes do relatorio
 	 */
-//	public static void validaCompatibilidadeTipoSanguineo(String tipoSanguineoPaciente, String tipoSanguineoOrgao)
-//			throws DadoInvalidoException {
-//		// Nao eh preciso validar os tipos sanguineos pq isso deve ser feito na
-//		// criacao dos orgaos e dos pacientes
-//		List<String> tipos = Constantes.TIPOS_SANGUINEOS_VALIDOS;
-//		int sanguePaciente = tipos.indexOf(tipoSanguineoPaciente);
-//		int sangueOrgao = tipos.indexOf(tipoSanguineoOrgao);
-//
-//		// Matriz que identifica a compatibilidade dos tipos sanguineos
-//		// forma O- O+ A- A+ B- B+ AB- AB+ por ela mesma
-//		boolean[][] matrizCompatibilidade = { 
-//				{ true, false, false, false, false, false, false, false },
-//				{ true, true, false, false, false, false, false, false },
-//				{ true, false, true, false, false, false, false, false },
-//				{ true, true, true, true, false, false, false, false },
-//				{ true, false, false, false, true, false, false, false },
-//				{ true, true, false, false, true, true, false, false },
-//				{ true, false, true, false, true, false, true, false },
-//				{ true, true, true, true, true, true, true, true } };
-//
-//		// TODO arrumar essa mensagem de erro quando sairem os testes
-//		if (!matrizCompatibilidade[sanguePaciente][sangueOrgao])
-//			throw new DadoInvalidoException("Tipo de sangue nao compativel.");
-//	}
+	public static void criaRelatorioPaciente(String nomeArq, String relatorio) {
+		criaArquivo(Constantes.DADOS_PACIENTES_DIRETORIO + nomeArq);
+		try (FileWriter escritor = new FileWriter(new File(Constantes.DADOS_PACIENTES_DIRETORIO + nomeArq))) {
+			// Se um arquivo com mesmo nome existir ele sera sobrescrito
+			escritor.write(relatorio);
+		} catch (IOException e) {
+			throw new OperacaoInvalidaException(e.getMessage());
+		}
+	}
+	
+	// ARQUIVOS
 }

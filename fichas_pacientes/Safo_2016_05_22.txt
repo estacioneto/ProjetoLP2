@@ -1,0 +1,7 @@
+Paciente: Safo
+Peso: 63.0 Tipo Sanguíneo: A+
+Sexo: feminino Genero: feminino
+Gasto total: R$ 512,00 Pontos acumulados: 50
+Resumo dos procedimentos: 1 procedimento(s)
+--> Consulta clinica:
+....... Data: 2016-05-22 Medico: Ada Lovelace
