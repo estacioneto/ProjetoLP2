@@ -184,6 +184,69 @@ public class Facade {
 			String tipoSanguineo) {
 		return this.controller.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo);
 	}
+	
+	/**
+	 * Realiza um procedimento
+	 * 
+	 * @param nomeProcedimento
+	 *            Nome do procedimento
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @param medicamentos
+	 *            Medicamentos necessarios
+	 */
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String medicamentos) {
+		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, medicamentos);
+	}
+
+	/**
+	 * Realiza um procedimento
+	 * 
+	 * @param nomeProcedimento
+	 *            Nome do procedimento
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @param orgao
+	 *            Orgao a ser usado no procedimento
+	 * @param medicamentos
+	 *            Medicamentos necessarios
+	 */
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String orgao, String medicamentos) {
+		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, medicamentos, orgao);
+	}
+
+	/**
+	 * Realiza um procedimento
+	 * 
+	 * @param nomeProcedimento
+	 *            Nome do procedimento
+	 * @param idPaciente
+	 *            Id do paciente
+	 */
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente) {
+		this.controller.realizaProcedimento(nomeProcedimento, idPaciente);
+	}
+
+	/**
+	 * Pega a quantidade de procedimentos realizados pelo paciente
+	 * 
+	 * @param idPaciente
+	 *            Id do paciente
+	 * @return Quantidade de procedimentos realizados
+	 */
+	public int getTotalProcedimento(String idPaciente) {
+		return this.controller.getTotalProcedimento(idPaciente);
+	}
+	
+	/**
+	 * Gera uma ficha de um paciente e guarda
+	 * 
+	 * @param idPaciente
+	 *            id do paciente
+	 */
+	public void exportaFichaPaciente(String idPaciente) {
+		this.controller.exportaFichaPaciente(idPaciente);
+	}
 
 	// CONSULTA DE PACIENTE/PRONTUARIO
 	/**
@@ -208,6 +271,39 @@ public class Facade {
 	 */
 	public String getProntuario(int posicao) {
 		return this.controller.getProntuario(posicao);
+	}
+
+	/**
+	 * Pega o id de um paciente de acordo com seu nome
+	 * 
+	 * @param nome
+	 *            Nome do paciente
+	 * @return Id do paciente
+	 */
+	public String getPacienteID(String nome) {
+		return this.controller.getPacienteId(nome);
+	}
+	
+	/**
+	 * Informa os pontos de fidelidade de um determinado paciente.
+	 * 
+	 * @param id
+	 *            Id do paciente.
+	 * @return Quantidade de pontos de fidelidade do paciente.
+	 */
+	public int getPontosFidelidade(String id) {
+		return this.controller.getPontosFidelidade(id);
+	}
+
+	/**
+	 * Informa os gastos do paciente.
+	 * 
+	 * @param id
+	 *            Id do paciente.
+	 * @return Gastos do paciente.
+	 */
+	public String getGastosPaciente(String id) {
+		return this.controller.getGastosPaciente(id);
 	}
 
 	// CONSULTA DE PACIENTE/PRONTUARIO
@@ -297,70 +393,6 @@ public class Facade {
 		return this.controller.getEstoqueFarmacia(ordenacao);
 	}
 
-	/**
-	 * Pega o id de um paciente de acordo com seu nome
-	 * 
-	 * @param nome
-	 *            Nome do paciente
-	 * @return Id do paciente
-	 */
-	public String getPacienteID(String nome) {
-		return this.controller.getPacienteId(nome);
-	}
-
-	/**
-	 * Realiza um procedimento
-	 * 
-	 * @param nomeProcedimento
-	 *            Nome do procedimento
-	 * @param idPaciente
-	 *            Id do paciente
-	 * @param medicamentos
-	 *            Medicamentos necessarios
-	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String medicamentos) {
-		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, medicamentos);
-	}
-
-	/**
-	 * Realiza um procedimento
-	 * 
-	 * @param nomeProcedimento
-	 *            Nome do procedimento
-	 * @param idPaciente
-	 *            Id do paciente
-	 * @param orgao
-	 *            Orgao a ser usado no procedimento
-	 * @param medicamentos
-	 *            Medicamentos necessarios
-	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String orgao, String medicamentos) {
-		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, medicamentos, orgao);
-	}
-
-	/**
-	 * Realiza um procedimento
-	 * 
-	 * @param nomeProcedimento
-	 *            Nome do procedimento
-	 * @param idPaciente
-	 *            Id do paciente
-	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente) {
-		this.controller.realizaProcedimento(nomeProcedimento, idPaciente);
-	}
-
-	/**
-	 * Pega a quantidade de procedimentos realizados pelo paciente
-	 * 
-	 * @param idPaciente
-	 *            Id do paciente
-	 * @return Quantidade de procedimentos realizados
-	 */
-	public int getTotalProcedimento(String idPaciente) {
-		return this.controller.getTotalProcedimento(idPaciente);
-	}
-
 	// CONSULTA DE MEDICAMENTO/FARMACIA
 	// OPERACOES DE MEDICAMENTO/FARMACIA
 	// OPERACOES DE ORGAO
@@ -444,24 +476,5 @@ public class Facade {
 	public int totalOrgaosDisponiveis() {
 		return this.controller.totalOrgaosDisponiveis();
 	}
-
-	/**
-	 * Gera uma ficha de um paciente e guarda
-	 * 
-	 * @param idPaciente
-	 *            id do paciente
-	 */
-	public void exportaFichaPaciente(String idPaciente) {
-		this.controller.exportaFichaPaciente(idPaciente);
-	}
-
 	// OPERACOES DE ORGAO
-
-	public int getPontosFidelidade(String id) {
-		return this.controller.getPontosFidelidade(id);
-	}
-
-	public String getGastosPaciente(String id) {
-		return this.controller.getGastosPaciente(id);
-	}
 }
