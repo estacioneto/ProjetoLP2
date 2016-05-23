@@ -243,4 +243,39 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 			throw new OperacaoInvalidaException("Erro ao exportar paciente. " + e.getMessage());
 		}
 	}
+
+	/**
+	 * Pega a pontuacao de um paciente
+	 * 
+	 * @param id
+	 *            Id do paciente
+	 * @return Pontuacao do paciente
+	 */
+	public Integer getPontosFidelidade(String id) {
+		try {
+			Prontuario prontuario = this.getProntuarioPaciente(id);
+			Paciente paciente = prontuario.getPaciente();
+			return paciente.getPontuacao();
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+		}
+	}
+
+	/**
+	 * Pega os gastos de um paciente
+	 * 
+	 * @param id
+	 *            Id do paciente
+	 * @return Gastos do paciente
+	 */
+	public String getGastosPaciente(String id) {
+		try {
+			Prontuario prontuario = this.getProntuarioPaciente(id);
+			Paciente paciente = prontuario.getPaciente();
+			String gastoFormatado = String.format("%.2f", paciente.getGastosPaciente()).replace(",", ".");
+			return gastoFormatado;
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTAR_PRONTUARIO + e.getMessage());
+		}
+	}
 }

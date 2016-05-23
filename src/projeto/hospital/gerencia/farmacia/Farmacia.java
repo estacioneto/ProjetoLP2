@@ -38,21 +38,21 @@ public class Farmacia implements Serializable {
 		this.listaMedicamentos = new ArrayList<>();
 		this.inicializaComparators();
 	}
-	
+
 	private void inicializaComparators() {
-		this.nomeComparator = (Comparator<Medicamento> & Serializable)(Medicamento medicamentoA,
+		this.nomeComparator = (Comparator<Medicamento> & Serializable) (Medicamento medicamentoA,
 				Medicamento medicamentoB) -> {
 			return medicamentoA.getNome().compareTo(medicamentoB.getNome());
 		};
-		
-		this.precoComparator = (Comparator<Medicamento> & Serializable)(Medicamento medicamentoA,
+
+		this.precoComparator = (Comparator<Medicamento> & Serializable) (Medicamento medicamentoA,
 				Medicamento medicamentoB) -> {
-				if (medicamentoA.getPreco() > medicamentoB.getPreco()) {
-					return 1;
-				} else if (medicamentoA.getPreco() < medicamentoB.getPreco()) {
-					return -1;
-				}
-				return 0;
+			if (medicamentoA.getPreco() > medicamentoB.getPreco()) {
+				return 1;
+			} else if (medicamentoA.getPreco() < medicamentoB.getPreco()) {
+				return -1;
+			}
+			return 0;
 		};
 	}
 
@@ -80,22 +80,19 @@ public class Farmacia implements Serializable {
 	 * @param categorias
 	 *            Categorias do medicamento.
 	 * @return Nome do medicamento.
-	 * @throws DadoInvalidoException
-	 *             Caso algum dos dados do medicamento seja invalido.
 	 */
-	public String addMedicamento(String nome, Double preco, int quantidade, String tipoMedicamento, String categorias)
-			throws DadoInvalidoException {
-//		ValidadorDeDados.validaNome(Constantes.NOME + Constantes.DO_MEDICAMENTO, nome);
-//		ValidadorDeDados.validaPositivo(Constantes.PRECO + Constantes.DO_MEDICAMENTO, preco);
-//		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO, quantidade);
-//		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO, categorias);
-		Medicamento medicamento;
-		medicamento = (Medicamento)Reflection.godFactory(Medicamento.class, nome, preco, quantidade,
-				categorias, tipoMedicamento);
-		//Validacao poderia ser mais simples
-		//Reflection.validaObjeto(medicamento);
-		this.listaMedicamentos.add(medicamento);
-		return nome;
+	public String addMedicamento(String nome, Double preco, int quantidade, String tipoMedicamento, String categorias) {
+		try {
+			Medicamento medicamento;
+			medicamento = (Medicamento) Reflection.godFactory(Medicamento.class, nome, preco, quantidade, categorias,
+					tipoMedicamento);
+			// Validacao poderia ser mais simples
+			// Reflection.validaObjeto(medicamento);
+			this.listaMedicamentos.add(medicamento);
+			return nome;
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_MEDICAMENTO + e.getMessage());
+		}
 	}
 
 	/**
@@ -108,30 +105,19 @@ public class Farmacia implements Serializable {
 	 * @param novoValor
 	 *            Novo valor do atributo
 	 */
-	public void atualizaMedicamento(String nomeMedicamento, String atributo,
-			String novoValor) {
+	public void atualizaMedicamento(String nomeMedicamento, String atributo, String novoValor) {
 		try {
 			ValidadorDeDados.validaString(atributo, novoValor);
-			ValidadorDeDados.validaString(Constantes.NOME
-					+ Constantes.DO_MEDICAMENTO, nomeMedicamento);
-			Medicamento medicamento = this.pegaMedicamento(
-					MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO,
-					nomeMedicamento);
+			ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_MEDICAMENTO, nomeMedicamento);
+			Medicamento medicamento = this.pegaMedicamento("", nomeMedicamento);
 			atributo = ValidadorDeDados.capitalizaString(atributo);
-			Reflection
-					.atualizaInfo(
-							medicamento,
-							atributo,
-							novoValor,
-							String.format(
-									MensagensDeErro.ERRO_ATRIBUTO_MEDICAMENTO_NAO_ATUALIZAVEL,
-									atributo));
-		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO + e.getMessage());
+			Reflection.atualizaInfo(medicamento, atributo, novoValor,
+					String.format(MensagensDeErro.ERRO_ATRIBUTO_MEDICAMENTO_NAO_ATUALIZAVEL, atributo));
+		} catch (DadoInvalidoException | OperacaoInvalidaException e) {
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZAR_MEDICAMENTO + e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Metodo que retorna um determinado atributo de um medicamento, passado o
 	 * seu nome.
@@ -144,17 +130,14 @@ public class Farmacia implements Serializable {
 	 */
 	public Object getInfoMedicamento(String atributo, String nomeMedicamento) {
 		try {
-			Medicamento medicamento = this.pegaMedicamento(
-					MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO,
+			Medicamento medicamento = this.pegaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO,
 					nomeMedicamento);
 			return Reflection.getInfo(medicamento, atributo);
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}
 	}
 
-	
 	/**
 	 * Verifica se um determinado medicamento existe a partir do nome.
 	 * 
@@ -163,16 +146,18 @@ public class Farmacia implements Serializable {
 	 * @param nomeMedicamento
 	 *            Nome do medicamento em busca.
 	 * @return Medicamento.
-	 * @throws DadoInvalidoException
-	 *             Caso o medicamento nao esteja cadasatrado.
 	 */
-	public Medicamento pegaMedicamento(String erro, String nomeMedicamento) throws DadoInvalidoException {
-		for (Medicamento medicamentoAtual : this.listaMedicamentos) {
-			if (medicamentoAtual.getNome().equalsIgnoreCase(nomeMedicamento)) {
-				return medicamentoAtual;
+	public Medicamento pegaMedicamento(String erro, String nomeMedicamento) {
+		try {
+			for (Medicamento medicamentoAtual : this.listaMedicamentos) {
+				if (medicamentoAtual.getNome().equalsIgnoreCase(nomeMedicamento)) {
+					return medicamentoAtual;
+				}
 			}
+			throw new DadoInvalidoException(erro);
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(e.getMessage() + MensagensDeErro.ERRO_MEDICAMENTO_INEXISTENTE);
 		}
-		throw new DadoInvalidoException(erro);
 	}
 
 	/**
@@ -211,7 +196,7 @@ public class Farmacia implements Serializable {
 	 * @param ordenacao
 	 *            Ordenacao desejada.
 	 * @return lista ordenada em String dos medicamentos.
-	 * @throws DadoInvalidoException 
+	 * @throws DadoInvalidoException
 	 */
 	public String getEstoqueFarmacia(String ordenacao) throws DadoInvalidoException {
 		if (ordenacao.equalsIgnoreCase("preco")) {
@@ -219,8 +204,7 @@ public class Farmacia implements Serializable {
 		} else if (ordenacao.equalsIgnoreCase("alfabetica")) {
 			return this.consultaMedicamentosOrdemAlfabetica();
 		} else {
-			throw new DadoInvalidoException(
-					MensagensDeErro.ERRO_ORDENCAO_MEDICAMENTO);
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_ORDENCAO_MEDICAMENTO);
 		}
 	}
 
@@ -234,13 +218,17 @@ public class Farmacia implements Serializable {
 	 * @throws DadoInvalidoException
 	 *             Caso a categoria nao existir.
 	 */
-	public String consultaMedicamentoPorCategoria(String categoria) throws DadoInvalidoException {
-		ValidadorDeDados.validaCategoriaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_CATEGORIA_INVALIDA, categoria);
-		List<String> listaNomeMedicamentosCategoria = this.nomesNaLista(this.medicamentoComCategoria(categoria));
-		if (listaNomeMedicamentosCategoria.isEmpty()) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTOS_NA_CATEGORIA);
+	public String consultaMedicamentoPorCategoria(String categoria) {
+		try {
+			ValidadorDeDados.validaCategoriaMedicamento(MensagensDeErro.ERRO_MEDICAMENTO_CATEGORIA_INVALIDA, categoria);
+			List<String> listaNomeMedicamentosCategoria = this.nomesNaLista(this.medicamentoComCategoria(categoria));
+			if (listaNomeMedicamentosCategoria.isEmpty()) {
+				throw new DadoInvalidoException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTOS_NA_CATEGORIA);
+			}
+			return String.join(",", listaNomeMedicamentosCategoria);
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}
-		return String.join(",", listaNomeMedicamentosCategoria);
 	}
 
 	/**
@@ -250,7 +238,8 @@ public class Farmacia implements Serializable {
 	 */
 	public String consultaMedicamentosOrdemAlfabetica() {
 		List<Medicamento> copiaLista = new ArrayList<>(this.listaMedicamentos);
-		//MedicamentoNomeComparator comparator = new MedicamentoNomeComparator();
+		// MedicamentoNomeComparator comparator = new
+		// MedicamentoNomeComparator();
 		Collections.sort(copiaLista, this.nomeComparator);
 		return String.join(",", this.nomesNaLista(copiaLista));
 	}
@@ -262,11 +251,12 @@ public class Farmacia implements Serializable {
 	 */
 	public String consultaMedicamentosOrdemPreco() {
 		List<Medicamento> copiaLista = new ArrayList<>(this.listaMedicamentos);
-//		MedicamentoPrecoComparator comparator = new MedicamentoPrecoComparator();
+		// MedicamentoPrecoComparator comparator = new
+		// MedicamentoPrecoComparator();
 		Collections.sort(copiaLista, this.precoComparator);
 		return String.join(",", this.nomesNaLista(copiaLista));
 	}
-	
+
 	/**
 	 * Pega o valor dos medicamentos passados como string, separados por virgula
 	 * 
@@ -280,11 +270,8 @@ public class Farmacia implements Serializable {
 			Double valorMedicamentos = new Double(0);
 
 			for (String nome : nomesMedicamentos) {
-				ValidadorDeDados.validaString(Constantes.NOME
-						+ Constantes.DO_MEDICAMENTO, nome);
-				valorMedicamentos += this.pegaMedicamento(
-						MensagensDeErro.ERRO_MEDICAMENTO_NAO_CADASTRADO, nome)
-						.getPreco();
+				ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_MEDICAMENTO, nome);
+				valorMedicamentos += this.pegaMedicamento("", nome).getPreco();
 			}
 			return valorMedicamentos;
 		} catch (DadoInvalidoException e) {
