@@ -8,6 +8,7 @@ import projeto.exceptions.dados.DataInvalidaException;
 import projeto.exceptions.dados.ObjetoNuloException;
 import projeto.exceptions.dados.StringVaziaException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
+import projeto.hospital.gerencia.farmacia.medicamento.CategoriasValidasMedicamentos;
 import projeto.hospital.gerencia.farmacia.medicamento.tipos.TipoMedicamentoValido;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 
@@ -250,12 +251,12 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaCategoriaMedicamento(String mensagemDeErro, String categoria)
 			throws DadoInvalidoException {
-		if (categoria == null || categoria.trim().isEmpty()) {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_CATEGORIA_INVALIDA_MEDICAMENTO);
-		}
 		String[] arrayCategorias = categoria.split(",");
 		for (int i = 0; i < arrayCategorias.length; i++) {
-			if (!Constantes.CATEGORIAS_MEDICAMENTOS.contains(arrayCategorias[i].toLowerCase())) {
+			try{
+				String categoriaAtual = arrayCategorias[i];
+				CategoriasValidasMedicamentos.valueOf(categoriaAtual.toUpperCase());
+			}catch(IllegalArgumentException excecao){
 				throw new DadoInvalidoException(mensagemDeErro);
 			}
 		}

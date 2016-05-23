@@ -34,10 +34,7 @@ public abstract class Constantes {
 	public static final ArrayList<String> TIPOS_SANGUINEOS_VALIDOS = new ArrayList<String>(
 			Arrays.asList(new String[] { "O-", "O+", "B-", "B+", "A-", "A+",
 					"AB-", "AB+" }));
-	public static final HashSet<String> CATEGORIAS_MEDICAMENTOS = new HashSet<String>(
-			Arrays.asList(new String[] { "analgesico", "antibiotico",
-					"antitermico", "antiinflamatorio", "hormonal",
-					"antiemetico" }));
+	//public static final HashSet<String> CATEGORIAS_MEDICAMENTOS = new HashSet<String>(Arrays.asList(new String[] { "analgesico", "antibiotico","antitermico", "antiinflamatorio", "hormonal","antiemetico" }));
 	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(
 			Arrays.asList(new String[] { DIRETOR_GERAL.toLowerCase(),
 					MEDICO.toLowerCase(), TECNICO.toLowerCase(),
