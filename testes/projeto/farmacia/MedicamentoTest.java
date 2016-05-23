@@ -9,8 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
-import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoGenerico;
-import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoReferencia;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.Generico;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.Referencia;
 
 public class MedicamentoTest {
 
@@ -23,9 +23,9 @@ public class MedicamentoTest {
 	@Before
 	public void inicializaObjetosValidos() {
 		try {
-			apracur = new MedicamentoReferencia("Apracur", 7.18, 300,
+			apracur = new Referencia("Apracur", 7.18, 300,
 					"analgesico,hormonal");
-			dimeticona = new MedicamentoGenerico("Dimeticona", 14.90, 200,
+			dimeticona = new Generico("Dimeticona", 14.90, 200,
 					"analgesico,antiemetico");
 		} catch (Exception e) {
 			fail();
@@ -38,31 +38,31 @@ public class MedicamentoTest {
 	@Test
 	public void testCriaMedicamentos() {
 		try {
-			Medicamento dipirona = new MedicamentoReferencia("Dipirona", 9.98,
+			Medicamento dipirona = new Referencia("Dipirona", 9.98,
 					550, "analgesico,antiemetico,antitermico");
-			Medicamento dorflex = new MedicamentoReferencia("Dorflex", 10.50,
+			Medicamento dorflex = new Referencia("Dorflex", 10.50,
 					600, "antibiotico");
-			Medicamento morfina = new MedicamentoReferencia("Morfina", 374.90,
+			Medicamento morfina = new Referencia("Morfina", 374.90,
 					100, "analgesico,antitermico");
-			Medicamento roacutan = new MedicamentoReferencia("Roacutan",
+			Medicamento roacutan = new Referencia("Roacutan",
 					189.80, 350, "analgesico,antiemetico");
-			Medicamento viagra = new MedicamentoReferencia("Viagra", 48.90, 70,
+			Medicamento viagra = new Referencia("Viagra", 48.90, 70,
 					"hormonal,antitermico");
-			Medicamento neosaldina = new MedicamentoReferencia("Neosaldina",
+			Medicamento neosaldina = new Referencia("Neosaldina",
 					19.62, 200, "analgesico,antiinflamatorio");
-			Medicamento claril = new MedicamentoReferencia("Claril", 10.38,
+			Medicamento claril = new Referencia("Claril", 10.38,
 					172, "antiinflamatorio");
-			Medicamento prednisona = new MedicamentoReferencia("Prednisona",
+			Medicamento prednisona = new Referencia("Prednisona",
 					10.38, 172, "antitermico");
 
-			Medicamento isotretinoina = new MedicamentoGenerico(
+			Medicamento isotretinoina = new Generico(
 					"Isotretinoina", 79.90, 200,
 					"analgesico,antiemetico,antitermico");
-			Medicamento aciclovir = new MedicamentoGenerico("Aciclovir", 10.50,
+			Medicamento aciclovir = new Generico("Aciclovir", 10.50,
 					600, "analgesico,antitermico");
-			Medicamento albendazol = new MedicamentoGenerico("Albendazol",
+			Medicamento albendazol = new Generico("Albendazol",
 					374.90, 100, "analgesico");
-			Medicamento amoxicilina = new MedicamentoGenerico("Amoxicilina",
+			Medicamento amoxicilina = new Generico("Amoxicilina",
 					189.80, 350, "analgesico,antiemetico,antitermico");
 		} catch (Exception e) {
 			fail();
@@ -75,7 +75,7 @@ public class MedicamentoTest {
 	@Test
 	public void testCriaMedicamentosInvalidos() {
 		try {
-			Medicamento dipirona = new MedicamentoReferencia("", 9.98, 550,
+			Medicamento dipirona = new Referencia("", 9.98, 550,
 					"analgesico,antiemetico,antitermico");
 			fail();
 		} catch (Exception e) {
@@ -83,7 +83,7 @@ public class MedicamentoTest {
 					"Erro no cadastro de medicamento. Nome do medicamento nao pode ser vazio.");
 		}
 		try {
-			Medicamento dipirona = new MedicamentoReferencia("   ", 9.98, 550,
+			Medicamento dipirona = new Referencia("   ", 9.98, 550,
 					"analgesico,antiemetico,antitermico");
 			fail();
 		} catch (Exception e) {
@@ -91,7 +91,7 @@ public class MedicamentoTest {
 					"Erro no cadastro de medicamento. Nome do medicamento nao pode ser vazio.");
 		}
 		try {
-			Medicamento isotretinoina = new MedicamentoGenerico(null, 79.90,
+			Medicamento isotretinoina = new Generico(null, 79.90,
 					200, "analgesico");
 			fail();
 		} catch (Exception e) {
@@ -99,7 +99,7 @@ public class MedicamentoTest {
 					"Erro no cadastro de medicamento. Nome do medicamento nao pode ser nulo(a)!");
 		}
 		try {
-			Medicamento dipirona = new MedicamentoReferencia("Dipirona", -9.8,
+			Medicamento dipirona = new Referencia("Dipirona", -9.8,
 					550, "analgesico");
 			fail();
 		} catch (Exception e) {
@@ -107,7 +107,7 @@ public class MedicamentoTest {
 					"Erro no cadastro de medicamento. Preco do medicamento nao pode ser negativo.");
 		}
 		try {
-			Medicamento dipirona = new MedicamentoReferencia("Dipirona", 9.8,
+			Medicamento dipirona = new Referencia("Dipirona", 9.8,
 					-10, "analgesico");
 			fail();
 		} catch (Exception e) {
@@ -116,7 +116,7 @@ public class MedicamentoTest {
 					"Erro no cadastro de medicamento. Quantidade do medicamento nao pode ser negativo.");
 		}
 		try {
-			Medicamento dipirona = new MedicamentoReferencia("Dipirona", 9.98, 550,
+			Medicamento dipirona = new Referencia("Dipirona", 9.98, 550,
 					"");
 			fail();
 		} catch (Exception e) {
@@ -124,7 +124,7 @@ public class MedicamentoTest {
 					"Erro no cadastro de medicamento. Categorias do medicamento nao pode ser nula ou vazia.");
 		}
 		try {
-			Medicamento dipirona = new MedicamentoReferencia("Dipirona", 9.98, 550,
+			Medicamento dipirona = new Referencia("Dipirona", 9.98, 550,
 					null);
 			fail();
 		} catch (Exception e) {
@@ -140,12 +140,12 @@ public class MedicamentoTest {
 	public void TestaEstadosDoObjeto() {
 
 		try {
-			Medicamento prednisona = new MedicamentoReferencia("Prednisona",
+			Medicamento prednisona = new Referencia("Prednisona",
 					10.38, 172, "antitermico");
-			Medicamento isotretinoina = new MedicamentoGenerico(
+			Medicamento isotretinoina = new Generico(
 					"Isotretinoina", 79.90, 200,
 					"analgesico,antiemetico,antitermico");
-			Medicamento aciclovir = new MedicamentoGenerico("Aciclovir", 10.50,
+			Medicamento aciclovir = new Generico("Aciclovir", 10.50,
 					600, "analgesico,antitermico");
 
 			assertEquals("Apracur", apracur.getNome());
@@ -187,7 +187,7 @@ public class MedicamentoTest {
 	@Test
 	public void buscaCategoria() {
 		try {
-			Medicamento isotretinoina = new MedicamentoGenerico(
+			Medicamento isotretinoina = new Generico(
 					"Isotretinoina", 79.90, 200,
 					"analgesico,antiemetico,antitermico");
 

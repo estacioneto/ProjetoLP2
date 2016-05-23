@@ -133,13 +133,17 @@ public abstract class Util {
 	public static String getNomeClasse(String nomeEntrada) {
 		String saida = new String();
 		String[] nomes = nomeEntrada.split(" ");
-		saida += nomes[0];
 		
-		for(int i=1; i<nomes.length; i++){
+		for(int i=0; i<nomes.length; i++){
 			saida += capitalizaString(nomes[i]);
 		}
 		
 		return saida;
+	}
+	
+	public static String getNomeClasse(Class<?> klazz, String nomeEntrada) {
+		String pack = klazz.getPackage().toString().split(" ")[Constantes.UM];
+		return pack + "." + getNomeClasse(nomeEntrada);
 	}
 	
 	/**

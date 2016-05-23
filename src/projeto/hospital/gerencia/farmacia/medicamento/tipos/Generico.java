@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Thaynan
  *
  */
-public class MedicamentoGenerico implements Serializable, TipoMedicamento {
+public class Generico implements Serializable, TipoMedicamento {
 
 	/**
 	 * Serial gerado automaticamente.

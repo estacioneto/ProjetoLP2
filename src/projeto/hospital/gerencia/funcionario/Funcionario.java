@@ -5,7 +5,7 @@ import java.io.Serializable;
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
-import projeto.hospital.gerencia.funcionario.cargo.Diretor;
+import projeto.hospital.gerencia.funcionario.cargo.DiretorGeral;
 import projeto.hospital.gerencia.funcionario.cargo.Medico;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.hospital.gerencia.funcionario.cargo.TecnicoAdministrativo;
@@ -152,14 +152,15 @@ public class Funcionario implements Serializable {
 	 */
 	public void setCargo(String cargo) {
 		try {
-			if (Constantes.DIRETOR_GERAL.equals(cargo)) {
-				this.cargo = (Cargo) Reflection.godFactory(Diretor.class);
-			} else if (Constantes.TECNICO_ADMINISTATIVO.equals(cargo)) {
-				this.cargo = (Cargo) Reflection
-						.godFactory(TecnicoAdministrativo.class);
-			} else if (Constantes.MEDICO.equals(cargo)) {
-				this.cargo = (Cargo) Reflection.godFactory(Medico.class);
-			}
+//			if (Constantes.DIRETOR_GERAL.equals(cargo)) {
+//				this.cargo = (Cargo) Reflection.godFactory(Diretor.class);
+//			} else if (Constantes.TECNICO_ADMINISTATIVO.equals(cargo)) {
+//				this.cargo = (Cargo) Reflection
+//						.godFactory(TecnicoAdministrativo.class);
+//			} else if (Constantes.MEDICO.equals(cargo)) {
+//				this.cargo = (Cargo) Reflection.godFactory(Medico.class);
+//			}
+			this.cargo = (Cargo) Reflection.godFactory(Util.getNomeClasse(Cargo.class, cargo), cargo);
 		} catch (DadoInvalidoException excecao) {
 			throw new OperacaoInvalidaException(excecao.getMessage());
 		}

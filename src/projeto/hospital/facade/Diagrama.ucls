@@ -137,8 +137,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="projeto.hospital.gerencia.funcionario.cargo.Diretor" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/Diretor.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="19" language="java" name="projeto.hospital.gerencia.funcionario.cargo.DiretorGeral" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/DiretorGeral.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1578" y="1128"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -214,10 +215,9 @@
     <position height="649" width="361" x="1318" y="67"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="28" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoGenerico" 
-    project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/tipos/MedicamentoGenerico.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="28" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.Generico" 
+    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/tipos/Generico.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1536" y="245"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -225,9 +225,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="29" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoReferencia" 
-    project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/tipos/MedicamentoReferencia.java" 
+  <class id="29" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.Referencia" 
+    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/tipos/Referencia.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1539" y="613"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -300,17 +299,7 @@
     <position height="433" width="1082" x="619" y="2720"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="37" language="java" name="projeto.hospital.gerencia.procedimento.Procedimentos" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento/Procedimentos.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1186" y="2970"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="38" language="java" name="projeto.hospital.gerencia.procedimento.GerenciadorProcedimento" 
+  <class id="37" language="java" name="projeto.hospital.gerencia.procedimento.GerenciadorProcedimento" 
     project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento/GerenciadorProcedimento.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="814" y="2874"/>    
@@ -320,134 +309,140 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <realization id="39">    
-    <end type="SOURCE" refId="35"/>    
-    <end type="TARGET" refId="32"/>  
-  </realization>  
-  <association id="40">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="41" name="tipo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="42" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="43">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="30"/>  
-  </realization>  
-  <association id="44">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="45" name="cargo">        
-        <position height="0" width="0" x="-58" y="-53"/>      
-      </attribute>      
-      <multiplicity id="46" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-58" y="-53"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="47">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="30"/>  
-  </realization>  
-  <association id="48">    
-    <bendpoint x="1137" y="1309"/>    
-    <bendpoint x="1136" y="1426"/>    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="49" name="permissoes">        
-        <position height="0" width="0" x="-29" y="-5"/>      
-      </attribute>      
-      <multiplicity id="50" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-29" y="-5"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="51">    
-    <end type="SOURCE" refId="33"/>    
-    <end type="TARGET" refId="32"/>  
-  </realization>  
-  <association id="52">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="53" name="controller">        
-        <position height="0" width="0" x="-13" y="341"/>      
-      </attribute>      
-      <multiplicity id="54" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-13" y="341"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="55">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <association id="56">    
-    <bendpoint x="1010" y="1970"/>    
-    <bendpoint x="924" y="1998"/>    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="57" name="paciente">        
-        <position height="0" width="0" x="-747" y="412"/>      
-      </attribute>      
-      <multiplicity id="58" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-747" y="412"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="59">    
-    <bendpoint x="583" y="1599"/>    
-    <bendpoint x="588" y="2764"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="60" name="gerenciadorProcedimento">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="61" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="38" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="62">    
-    <bendpoint x="879" y="318"/>    
-    <bendpoint x="947" y="323"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="63" name="listaMedicamentos">        
-        <position height="0" width="0" x="5" y="-243"/>      
-      </attribute>      
-      <multiplicity id="64" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="5" y="-243"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="65">    
+  <association id="38">    
     <bendpoint x="585" y="1564"/>    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="66" name="gerenciadorDePaciente">        
+      <attribute id="39" name="gerenciadorDePaciente">        
         <position height="0" width="0" x="-98" y="142"/>      
       </attribute>      
-      <multiplicity id="67" minimum="0" maximum="1">        
+      <multiplicity id="40" minimum="0" maximum="1">        
         <position height="0" width="0" x="-98" y="142"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="42" name="funcionarioLogado">        
+        <position height="0" width="0" x="-57" y="-32"/>      
+      </attribute>      
+      <multiplicity id="43" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-57" y="-32"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="44">    
+    <end type="SOURCE" refId="29"/>    
+    <end type="TARGET" refId="30"/>  
+  </realization>  
+  <association id="45">    
+    <bendpoint x="1137" y="1309"/>    
+    <bendpoint x="1136" y="1426"/>    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="46" name="permissoes">        
+        <position height="0" width="0" x="-29" y="-5"/>      
+      </attribute>      
+      <multiplicity id="47" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-29" y="-5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
+    <bendpoint x="587" y="860"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="49" name="gerenciadorFuncionarios">        
+        <position height="0" width="0" x="-66" y="-37"/>      
+      </attribute>      
+      <multiplicity id="50" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-66" y="-37"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="51">    
+    <end type="SOURCE" refId="35"/>    
+    <end type="TARGET" refId="32"/>  
+  </realization>  
+  <association id="52">    
+    <bendpoint x="526" y="612"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="53" name="gerenciadorDeMedicamento">        
+        <position height="0" width="0" x="36" y="-68"/>      
+      </attribute>      
+      <multiplicity id="54" minimum="0" maximum="1">        
+        <position height="0" width="0" x="36" y="-68"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="55">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="32"/>  
+  </realization>  
+  <association id="56">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="57" name="tipo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="58" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="59">    
+    <bendpoint x="1004" y="1930"/>    
+    <bendpoint x="1009" y="2024"/>    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="60" name="geradorIdPaciente">        
+        <position height="0" width="0" x="204" y="102"/>      
+      </attribute>      
+      <multiplicity id="61" minimum="0" maximum="1">        
+        <position height="0" width="0" x="204" y="102"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="62">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="63" name="controller">        
+        <position height="0" width="0" x="-13" y="341"/>      
+      </attribute>      
+      <multiplicity id="64" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-13" y="341"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="65">    
+    <bendpoint x="1290" y="1285"/>    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="66">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <generalization id="67">    
+    <bendpoint x="1282" y="1141"/>    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
   <association id="68">    
-    <end type="SOURCE" refId="38" navigable="false">      
-      <attribute id="69" name="procedimentos">        
+    <bendpoint x="583" y="1599"/>    
+    <bendpoint x="588" y="2764"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="69" name="gerenciadorProcedimento">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="70" minimum="0" maximum="1">        
@@ -458,119 +453,101 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="71">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="72" name="funcionarios">        
+        <position height="0" width="0" x="-57" y="-32"/>      
+      </attribute>      
+      <multiplicity id="73" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-57" y="-32"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <bendpoint x="1010" y="1970"/>    
+    <bendpoint x="924" y="1998"/>    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="75" name="paciente">        
+        <position height="0" width="0" x="-747" y="412"/>      
+      </attribute>      
+      <multiplicity id="76" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-747" y="412"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="77">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="32"/>  
+  </realization>  
+  <realization id="78">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="30"/>  
+  </realization>  
+  <association id="79">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="80" name="cargo">        
+        <position height="0" width="0" x="-58" y="-53"/>      
+      </attribute>      
+      <multiplicity id="81" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-58" y="-53"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
     <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="72" name="fidelidade">        
+      <attribute id="83" name="fidelidade">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="73" minimum="0" maximum="1">        
+      <multiplicity id="84" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="32" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="74">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="75" name="funcionarioLogado">        
-        <position height="0" width="0" x="-57" y="-32"/>      
+  <association id="85">    
+    <bendpoint x="879" y="318"/>    
+    <bendpoint x="947" y="323"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="86" name="listaMedicamentos">        
+        <position height="0" width="0" x="5" y="-243"/>      
       </attribute>      
-      <multiplicity id="76" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-57" y="-32"/>      
+      <multiplicity id="87" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="5" y="-243"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="77">    
+  <association id="88">    
     <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="78" name="pacientes">        
+      <attribute id="89" name="pacientes">        
         <position height="0" width="0" x="-74" y="37"/>      
       </attribute>      
-      <multiplicity id="79" minimum="0" maximum="2147483647">        
+      <multiplicity id="90" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="-74" y="37"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="26" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="80">    
+  <association id="91">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="81" name="farmacia">        
+      <attribute id="92" name="farmacia">        
         <position height="0" width="0" x="4" y="-97"/>      
       </attribute>      
-      <multiplicity id="82" minimum="0" maximum="1">        
+      <multiplicity id="93" minimum="0" maximum="1">        
         <position height="0" width="0" x="4" y="-97"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="83">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="84" name="funcionarios">        
-        <position height="0" width="0" x="-57" y="-32"/>      
-      </attribute>      
-      <multiplicity id="85" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-57" y="-32"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="86">    
-    <bendpoint x="1004" y="1930"/>    
-    <bendpoint x="1009" y="2024"/>    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="87" name="geradorIdPaciente">        
-        <position height="0" width="0" x="204" y="102"/>      
-      </attribute>      
-      <multiplicity id="88" minimum="0" maximum="1">        
-        <position height="0" width="0" x="204" y="102"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="89">    
-    <bendpoint x="1290" y="1285"/>    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <generalization id="90">    
-    <bendpoint x="1282" y="1141"/>    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <association id="91">    
-    <bendpoint x="526" y="612"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="92" name="gerenciadorDeMedicamento">        
-        <position height="0" width="0" x="36" y="-68"/>      
-      </attribute>      
-      <multiplicity id="93" minimum="0" maximum="1">        
-        <position height="0" width="0" x="36" y="-68"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="94">    
-    <bendpoint x="587" y="860"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="95" name="gerenciadorFuncionarios">        
-        <position height="0" width="0" x="-66" y="-37"/>      
-      </attribute>      
-      <multiplicity id="96" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-66" y="-37"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="97">    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="32"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

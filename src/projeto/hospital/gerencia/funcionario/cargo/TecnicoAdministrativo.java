@@ -1,7 +1,5 @@
 package projeto.hospital.gerencia.funcionario.cargo;
 
-import projeto.util.Constantes;
-
 public class TecnicoAdministrativo extends Cargo {
 
 	/**
@@ -12,8 +10,8 @@ public class TecnicoAdministrativo extends Cargo {
 	/**
 	 * Construtor de tecnico administrativo.
 	 */
-	public TecnicoAdministrativo() {
-		super(Constantes.TECNICO_ADMINISTATIVO);
+	public TecnicoAdministrativo(String nome) {
+		super(nome);
 		this.permissoes.add(Permissao.CADASTRAR_PACIENTES);
 		this.permissoes.add(Permissao.CADASTRAR_MEDICAMENTO);
 	}

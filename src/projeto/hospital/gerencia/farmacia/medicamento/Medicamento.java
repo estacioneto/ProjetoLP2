@@ -7,10 +7,11 @@ import java.util.TreeSet;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoGenerico;
-import projeto.hospital.gerencia.farmacia.medicamento.tipos.MedicamentoReferencia;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.Generico;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.Referencia;
 import projeto.hospital.gerencia.farmacia.medicamento.tipos.TipoMedicamento;
 import projeto.util.Constantes;
+import projeto.util.Util;
 import projeto.util.reflexao.ConstantesReflection;
 import projeto.util.reflexao.Conversao;
 import projeto.util.reflexao.MetodoAssociado;
@@ -95,13 +96,15 @@ public class Medicamento implements Serializable {
 	 */
 	public void setTipo(String tipo) {
 		try {
-			if (tipo.equalsIgnoreCase(Constantes.TIPO_GENERICO)) {
-				this.tipo = (TipoMedicamento) Reflection
-						.godFactory(MedicamentoGenerico.class);
-			} else if (tipo.equalsIgnoreCase(Constantes.TIPO_REFERENCIA)) {
-				this.tipo = (TipoMedicamento) Reflection
-						.godFactory(MedicamentoReferencia.class);
-			}
+//			if (tipo.equalsIgnoreCase(Constantes.TIPO_GENERICO)) {
+//				this.tipo = (TipoMedicamento) Reflection
+//						.godFactory(MedicamentoGenerico.class);
+//			} else if (tipo.equalsIgnoreCase(Constantes.TIPO_REFERENCIA)) {
+//				this.tipo = (TipoMedicamento) Reflection
+//						.godFactory(MedicamentoReferencia.class);
+//			}
+			
+			this.tipo = (TipoMedicamento) Reflection.godFactory(Util.getNomeClasse(TipoMedicamento.class, tipo));
 		} catch (DadoInvalidoException excecao) {
 			throw new OperacaoInvalidaException(excecao.getMessage());
 		}

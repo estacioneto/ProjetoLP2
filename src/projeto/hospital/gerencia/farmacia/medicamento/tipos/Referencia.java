@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Thaynan
  *
  */
-public class MedicamentoReferencia implements Serializable, TipoMedicamento {
+public class Referencia implements Serializable, TipoMedicamento {
 
 	
 	/**

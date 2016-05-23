@@ -40,7 +40,6 @@ public class GerenciadorProcedimento implements Serializable {
 	 */
 	public void realizaProcedimento(String procedimento, Prontuario prontuario, String nomeMedico,
 			Double valorMedicamentos, Object... argumentosExtras) throws DadoInvalidoException {
-		try {
 			// Necessidade da data de procedimento
 			LocalDate data = LocalDate.now();
 
@@ -51,15 +50,9 @@ public class GerenciadorProcedimento implements Serializable {
 			} else {
 				argumentosConstrutor = new Object[] { data.toString(), nomeMedico };
 			}
-			// Pega a classe do procedimento desejado e invoca o construtor
-			Class<?> klazz = Class.forName(Constantes.PROCEDIMENTO_PATH + Util.getNomeClasse(procedimento));
-			Procedimento procedimentoRealizado = (Procedimento) Reflection.godFactory(klazz, argumentosConstrutor);
+			Procedimento procedimentoRealizado = (Procedimento) Reflection.godFactory(Util.getNomeClasse(Procedimento.class, procedimento), argumentosConstrutor);
 
 			// Realiza o procedimento
 			procedimentoRealizado.realizaProcedimento(prontuario, valorMedicamentos);
-		} catch (ClassNotFoundException classeNaoEncontrada) {
-			classeNaoEncontrada.printStackTrace();
-			throw new DadoInvalidoException("Procedimento invalido.");
-		}
 	}
 }

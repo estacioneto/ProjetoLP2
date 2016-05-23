@@ -1,7 +1,5 @@
 package projeto.hospital.gerencia.funcionario.cargo;
 
-import projeto.util.Constantes;
-
 public class Medico extends Cargo {
 	/**
 	 * Serial gerado automaticamente.
@@ -11,8 +9,8 @@ public class Medico extends Cargo {
 	/**
 	 * Construtor de tecnico administrativo.
 	 */
-	public Medico() {
-		super(Constantes.MEDICO);
+	public Medico(String nome) {
+		super(nome);
 		this.permissoes.add(Permissao.REALIZA_PROCEDIMENTO);
 	}
 }

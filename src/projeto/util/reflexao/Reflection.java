@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import projeto.exceptions.dados.DadoInvalidoException;
+import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 import projeto.util.Constantes;
 import projeto.util.Conversor;
 import projeto.util.Util;
@@ -26,8 +27,7 @@ public abstract class Reflection {
 	 * @throws DadoInvalidoException
 	 *             Caso o atributo seja invalido
 	 */
-	public static Object getInfo(Object objeto, String atributo)
-			throws DadoInvalidoException {
+	public static Object getInfo(Object objeto, String atributo) throws DadoInvalidoException {
 		// Classe do objeto
 		Class<?> clazz = objeto.getClass();
 		// Campo a ser requisitado.
@@ -54,8 +54,7 @@ public abstract class Reflection {
 			// Caso precise executar um metodo, executa.
 			if (campo.isAnnotationPresent(MetodoAssociado.class)) {
 				// Pega a anotacao do metodo.
-				MetodoAssociado anotacao = campo
-						.getAnnotation(MetodoAssociado.class);
+				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class);
 				// Pega o metodo.
 				metodo = clazz.getMethod(anotacao.get());
 				// Invoca o metodo pelo objeto.
@@ -63,11 +62,9 @@ public abstract class Reflection {
 			}
 			// Caso nao precise executar nenhum metodo, retorna o proprio campo.
 			return campo.get(objeto);
-		} catch (IllegalArgumentException | IllegalAccessException
-				| NoSuchMethodException | SecurityException e) {
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException e) {
 			// Caso o atributo passado nao seja compativel.
-			throw new DadoInvalidoException("Atributo nao valido: "
-					+ Util.getNomeCampo(atributo) + ".");
+			throw new DadoInvalidoException("Atributo nao valido: " + Util.getNomeCampo(atributo) + ".");
 		} catch (InvocationTargetException excecao) {
 			// Caso o metodo lance uma excecao.
 			throw new DadoInvalidoException(excecao.getCause().getMessage());
@@ -88,8 +85,7 @@ public abstract class Reflection {
 	 * @throws DadoInvalidoException
 	 *             Caso algo nao saia como desejado.
 	 */
-	public static void atualizaInfo(Object objeto, String atributo,
-			Object novoValor, String erroAtualizacao)
+	public static void atualizaInfo(Object objeto, String atributo, Object novoValor, String erroAtualizacao)
 			throws DadoInvalidoException {
 		// Classe do objeto
 		Class<?> clazz = objeto.getClass();
@@ -117,29 +113,22 @@ public abstract class Reflection {
 			// Caso precise executar um metodo, executa.
 			if (campo.isAnnotationPresent(MetodoAssociado.class)) {
 				// Pega a anotacao do metodo.
-				MetodoAssociado anotacao = campo
-						.getAnnotation(MetodoAssociado.class);
+				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class);
 				// Se tiver validacao
 				if (campo.isAnnotationPresent(Validacao.class)) {
 					// Se a validacao deve ser feita na atualizacao
 					if (campo.getAnnotation(Validacao.class).atualizacao()) {
 						// Pega a anotacao de validacao do campo.
-						Validacao anotacaoValidacao = campo
-								.getAnnotation(Validacao.class);
+						Validacao anotacaoValidacao = campo.getAnnotation(Validacao.class);
 						// Caso precise realizar conversao
 						if (campo.isAnnotationPresent(Conversao.class)) {
-							Conversao conversao = campo
-									.getAnnotation(Conversao.class);
-							Method converte = Conversor.class
-									.getMethod(conversao.conversor(),
-											novoValor.getClass());
+							Conversao conversao = campo.getAnnotation(Conversao.class);
+							Method converte = Conversor.class.getMethod(conversao.conversor(), novoValor.getClass());
 							// Converte o dado
 							novoValor = converte.invoke(null, novoValor);
 						}
-						Method valida = ValidadorDeDados.class.getMethod(
-								anotacaoValidacao.metodo(), anotacaoValidacao
-										.erro().getClass(), novoValor
-										.getClass());
+						Method valida = ValidadorDeDados.class.getMethod(anotacaoValidacao.metodo(),
+								anotacaoValidacao.erro().getClass(), novoValor.getClass());
 						// Valida o dado
 						valida.invoke(null, anotacaoValidacao.erro(), novoValor);
 					}
@@ -152,8 +141,7 @@ public abstract class Reflection {
 				// Caso nao tenha como atualizar
 				throw new DadoInvalidoException(erroAtualizacao);
 			}
-		} catch (IllegalArgumentException | IllegalAccessException
-				| NoSuchMethodException | SecurityException e) {
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException e) {
 			// Caso o atributo passado nao seja compativel.
 			// e.printStackTrace();
 			throw new DadoInvalidoException(erroAtualizacao);
@@ -174,8 +162,7 @@ public abstract class Reflection {
 	 * @throws DadoInvalidoException
 	 *             Caso algum parametro seja invalido.
 	 */
-	public static Object godFactory(Class<?> clazz, Object... params)
-			throws DadoInvalidoException {
+	public static Object godFactory(Class<?> clazz, Object... params) throws DadoInvalidoException {
 		/*
 		 * 1 - Recuperar campos; 2 - Validar os parametros na ordem dos campos 3
 		 * - Construir objeto
@@ -202,17 +189,15 @@ public abstract class Reflection {
 				Field campo = campos.get(i);
 				campo.setAccessible(true);
 				Validacao validacao = campo.getAnnotation(Validacao.class);
-				Method valida = ValidadorDeDados.class.getMethod(
-						validacao.metodo(), validacao.erro().getClass(),
+				Method valida = ValidadorDeDados.class.getMethod(validacao.metodo(), validacao.erro().getClass(),
 						params[i].getClass());
 				// Valida o dado.
 				valida.invoke(null, validacao.erro(), params[i]);
 			}
 			// Retorna o objeto.
-			//System.out.println(Arrays.asList(params));
+			// System.out.println(Arrays.asList(params));
 			return clazz.getConstructors()[0].newInstance(params);
-		} catch (IllegalAccessException | IllegalArgumentException
-				| NoSuchMethodException | SecurityException
+		} catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException
 				| InstantiationException excecao) {
 			excecao.printStackTrace();
 			throw new DadoInvalidoException(excecao.getCause().getMessage());
@@ -253,8 +238,7 @@ public abstract class Reflection {
 	 * @throws DadoInvalidoException
 	 *             Caso o metodo nao exista
 	 */
-	public static void executaMetodo(String nomeMetodo, Object objeto,
-			Class<?>[] paramsClasses, Object[] params)
+	public static void executaMetodo(String nomeMetodo, Object objeto, Class<?>[] paramsClasses, Object[] params)
 			throws DadoInvalidoException {
 		try {
 			Class<?> clazz = objeto.getClass();
@@ -262,11 +246,29 @@ public abstract class Reflection {
 			metodo.setAccessible(true);
 
 			metodo.invoke(objeto, params);
-		} catch (NoSuchMethodException | SecurityException
-				| IllegalAccessException | IllegalArgumentException
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
-			throw new DadoInvalidoException(
-					"Este erro nao deveria ter acontecido! Contate o suporte.");
+			throw new DadoInvalidoException("Este erro nao deveria ter acontecido! Contate o suporte.");
+		}
+	}
+
+	/**
+	 * Factory generica que permite criar qualquer objeto dado o nome
+	 * <b>completo</b> de sua classe.
+	 * 
+	 * @param klazz
+	 *            Nome completo da classe (package + nome da classe).
+	 * @param params
+	 *            Parametros do construtor.
+	 * @return Objeto requisitado.
+	 * @throws DadoInvalidoException
+	 *             Caso a classe nao exista.
+	 */
+	public static Object godFactory(String klazz, Object... params) throws DadoInvalidoException {
+		try {
+			return godFactory(Class.forName(klazz), params);
+		} catch (ClassNotFoundException classeNaoEncontrada) {
+			throw new DadoInvalidoException("Classe nao encontrada! " + klazz);
 		}
 	}
 

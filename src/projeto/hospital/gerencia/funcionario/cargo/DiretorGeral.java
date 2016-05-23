@@ -1,8 +1,6 @@
 package projeto.hospital.gerencia.funcionario.cargo;
 
-import projeto.util.Constantes;
-
-public class Diretor extends Cargo {
+public class DiretorGeral extends Cargo {
 
 	/**
 	 * Serial gerado automaticamente.
@@ -12,8 +10,8 @@ public class Diretor extends Cargo {
 	/**
 	 * Construtor de diretor.
 	 */
-	public Diretor() {
-		super(Constantes.DIRETOR_GERAL);
+	public DiretorGeral(String nome) {
+		super(nome);
 		
 		this.permissoes.add(Permissao.CADASTRAR_FUNCIONARIOS);
 		this.permissoes.add(Permissao.EXCLUIR_FUNCIONARIOS);
