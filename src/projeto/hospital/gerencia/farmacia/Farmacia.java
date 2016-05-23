@@ -88,8 +88,8 @@ public class Farmacia implements Serializable {
 //		ValidadorDeDados.validaPositivo(Constantes.QUANTIDADE + Constantes.DO_MEDICAMENTO, quantidade);
 //		ValidadorDeDados.validaCategoriaMedicamento(Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO, categorias);
 		
-		Medicamento medicamento = (Medicamento)Reflection.godFactory(Medicamento.class, nome, tipoMedicamento, preco, quantidade,
-				categorias);
+		Medicamento medicamento = (Medicamento)Reflection.godFactory(Medicamento.class, nome, preco, quantidade,
+				categorias, tipoMedicamento);
 		//Validacao poderia ser mais simples
 		//Reflection.validaObjeto(medicamento);
 		this.listaMedicamentos.add(medicamento);

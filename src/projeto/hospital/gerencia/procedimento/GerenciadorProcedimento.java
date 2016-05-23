@@ -7,6 +7,7 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.hospital.gerencia.procedimento.procedimentos.Procedimento;
 import projeto.hospital.gerencia.prontuario.Prontuario;
 import projeto.util.Constantes;
+import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 import projeto.util.reflexao.Reflection;
 
@@ -15,7 +16,7 @@ public class GerenciadorProcedimento implements Serializable {
 	 * Id gerado automaticamente
 	 */
 	private static final long serialVersionUID = 588210554771048672L;
-	
+
 	/**
 	 * Construtor
 	 */
@@ -40,19 +41,21 @@ public class GerenciadorProcedimento implements Serializable {
 	 */
 	public void realizaProcedimento(String procedimento, Prontuario prontuario, String nomeMedico,
 			Double valorMedicamentos, Object... argumentosExtras) throws DadoInvalidoException {
-			// Necessidade da data de procedimento
-			LocalDate data = LocalDate.now();
+		// Necessidade da data de procedimento
+		LocalDate data = LocalDate.now();
 
-			Object[] argumentosConstrutor = null;
-			if (argumentosExtras.length > Constantes.ZERO) {
-				// Caso tenha orgao associado, sera o primeiro indice
-				argumentosConstrutor = new Object[] { data.toString(), nomeMedico, argumentosExtras[Constantes.ZERO] };
-			} else {
-				argumentosConstrutor = new Object[] { data.toString(), nomeMedico };
-			}
-			Procedimento procedimentoRealizado = (Procedimento) Reflection.godFactory(Util.getNomeClasse(Procedimento.class, procedimento), argumentosConstrutor);
+		Object[] argumentosConstrutor = null;
+		if (argumentosExtras.length > Constantes.ZERO) {
+			// Caso tenha orgao associado, sera o primeiro indice
+			argumentosConstrutor = new Object[] { data.toString(), nomeMedico, argumentosExtras[Constantes.ZERO] };
+		} else {
+			argumentosConstrutor = new Object[] { data.toString(), nomeMedico };
+		}
+		Procedimento procedimentoRealizado = (Procedimento) Reflection.godFactory(
+				Util.getNomeClasse(Procedimento.class, procedimento), MensagensDeErro.PROCEDIMENTO_INVALIDO,
+				argumentosConstrutor);
 
-			// Realiza o procedimento
-			procedimentoRealizado.realizaProcedimento(prontuario, valorMedicamentos);
+		// Realiza o procedimento
+		procedimentoRealizado.realizaProcedimento(prontuario, valorMedicamentos);
 	}
 }

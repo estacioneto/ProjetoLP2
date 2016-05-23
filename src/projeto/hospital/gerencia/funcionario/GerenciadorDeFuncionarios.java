@@ -8,12 +8,12 @@ import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.dados.ObjetoNuloException;
 import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.gerencia.ValidadorDeLogica;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
+import projeto.util.ValidadorDeLogica;
 import projeto.util.reflexao.Reflection;
 
 /**

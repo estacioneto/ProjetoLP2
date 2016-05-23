@@ -40,6 +40,7 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_ATRIBUTO_MEDICAMENTO_NAO_ATUALIZAVEL = "%s do medicamento nao pode ser alterado.";
 	public static final String ERRO_CONSULTA_MEDICAMENTO = "Erro na consulta de medicamentos. ";
 	public static final String ERRO_ORDENCAO_MEDICAMENTO = "Tipo de ordenacao invalida.";
+	public static final String ERRO_TIPO_MEDICAMENTO = Constantes.TIPO + Constantes.DO_MEDICAMENTO + " invalido.";
 	// MEDICAMENTO
 	// ORGAO
 	public static final String ERRO_CADASTRO_ORGAO = "Erro ao cadastrar orgao. ";
@@ -75,6 +76,7 @@ public abstract class MensagensDeErro {
 	public static final String ERRO_REALIZAR_PROCEDIMENTO = "Erro na realizacao de procedimentos. ";
 	public static final String ERRO_SEM_PERMISSAO_PROCEDIMENTO = " nao tem permissao para realizar procedimentos.";
 	public static final String FUNCIONARIO_PROIBIDO_REALIZAR_PROCEDIMENTO = "O funcionario %s" + ERRO_SEM_PERMISSAO_PROCEDIMENTO;
+	public static final String PROCEDIMENTO_INVALIDO = "Procedimento invalido.";
 	
 	// ERROS DE DADOS
 }

@@ -5,11 +5,9 @@ import java.io.Serializable;
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
-import projeto.hospital.gerencia.funcionario.cargo.DiretorGeral;
-import projeto.hospital.gerencia.funcionario.cargo.Medico;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
-import projeto.hospital.gerencia.funcionario.cargo.TecnicoAdministrativo;
 import projeto.util.Constantes;
+import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 import projeto.util.reflexao.ConstantesReflection;
 import projeto.util.reflexao.Conversao;
@@ -160,7 +158,7 @@ public class Funcionario implements Serializable {
 //			} else if (Constantes.MEDICO.equals(cargo)) {
 //				this.cargo = (Cargo) Reflection.godFactory(Medico.class);
 //			}
-			this.cargo = (Cargo) Reflection.godFactory(Util.getNomeClasse(Cargo.class, cargo), cargo);
+			this.cargo = (Cargo) Reflection.godFactory(Util.getNomeClasse(Cargo.class, cargo), MensagensDeErro.CARGO_INVALIDO_FUNCIONARIO, cargo);
 		} catch (DadoInvalidoException excecao) {
 			throw new OperacaoInvalidaException(excecao.getMessage());
 		}

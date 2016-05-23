@@ -1,11 +1,10 @@
-package projeto.hospital.gerencia;
+package projeto.util;
 
 import java.io.Serializable;
 
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.funcionario.Funcionario;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
-import projeto.util.MensagensDeErro;
 
 /**
  * Valida varios aspectos da logica do sistema.

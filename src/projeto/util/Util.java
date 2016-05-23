@@ -38,7 +38,7 @@ public abstract class Util {
 			return Constantes.CODIGO_MEDICO;
 		return Constantes.CODIGO_TECNICO;
 	}
-	
+
 	/**
 	 * Dado um numero em String, retorna os quatro primeiros digitos em String.
 	 * 
@@ -72,7 +72,7 @@ public abstract class Util {
 	public static String getCodigoPorMatricula(String matricula) {
 		return Character.toString(matricula.charAt(Constantes.ZERO));
 	}
-	
+
 	/**
 	 * Retorna a String com a primeira letra maiuscula e as demais minusculas.
 	 * 
@@ -81,21 +81,21 @@ public abstract class Util {
 	 * @return String capitalizada.
 	 */
 	public static String capitalizaString(String string) {
-		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase()
-				+ string.substring(Constantes.UM);
+		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase() + string.substring(Constantes.UM);
 	}
 
 	/**
-	 * Formata a String para retornar o nome do atributo. 
-	 * @param string Nome do atributo sem formatacao.
+	 * Formata a String para retornar o nome do atributo.
+	 * 
+	 * @param string
+	 *            Nome do atributo sem formatacao.
 	 * @return Nome do atributo.
 	 */
 	public static String getNomeCampo(String string) {
-		return string.substring(Constantes.ZERO, Constantes.UM).toLowerCase()
-				+ string.substring(Constantes.UM).trim();
+		return string.substring(Constantes.ZERO, Constantes.UM).toLowerCase() + string.substring(Constantes.UM).trim();
 	}
 	// CODIGOS/SUBSTRINGS
-	
+
 	// DATA
 	/**
 	 * Dada uma determinada data, o metodo retorna o ano da mesma.
@@ -108,7 +108,7 @@ public abstract class Util {
 		// Validacao da data ja deve ter sido feita antes de chamar esse metodo
 		return data.split(Constantes.BARRA)[Constantes.INDICE_ANO];
 	}
-	
+
 	/**
 	 * Vai pegar a data do formato recebido e guardado no sistema e transformar
 	 * para o formato de apresentacao
@@ -119,33 +119,44 @@ public abstract class Util {
 	 */
 	public static String transformaFormatoData(String dataSistema) {
 		String[] dataQuebrada = dataSistema.split("/");
-		String formatoSaida = String.join("-", dataQuebrada[2],
-				dataQuebrada[1], dataQuebrada[0]);
+		String formatoSaida = String.join("-", dataQuebrada[2], dataQuebrada[1], dataQuebrada[0]);
 		return formatoSaida;
 	}
-	
+
 	/**
-	 * Recebe um nome separado de classe e o transforma para um tipo valido de nome de classe
+	 * Recebe um nome separado de classe e o transforma para um tipo valido de
+	 * nome de classe
 	 * 
-	 * @param nomeEntrada Entrada
+	 * @param nomeEntrada
+	 *            Entrada
 	 * @return Nome valido de classe
 	 */
 	public static String getNomeClasse(String nomeEntrada) {
 		String saida = new String();
 		String[] nomes = nomeEntrada.split(" ");
-		
-		for(int i=0; i<nomes.length; i++){
+
+		for (int i = 0; i < nomes.length; i++) {
 			saida += capitalizaString(nomes[i]);
 		}
-		
+
 		return saida;
 	}
-	
+
+	/**
+	 * Dadas uma classe e uma String representando o nome da classe, retorna o
+	 * nome <b>completo</b> da classe.
+	 * 
+	 * @param klazz
+	 *            Classe no mesmo pacote.
+	 * @param nomeEntrada
+	 *            Nome da classe.
+	 * @return Nome <b>completo</b> da classe.
+	 */
 	public static String getNomeClasse(Class<?> klazz, String nomeEntrada) {
 		String pack = klazz.getPackage().toString().split(" ")[Constantes.UM];
 		return pack + "." + getNomeClasse(nomeEntrada);
 	}
-	
+
 	/**
 	 * Retorna o ano atual.
 	 * 
@@ -155,6 +166,7 @@ public abstract class Util {
 		LocalDate dataAtual = LocalDate.now();
 		return Integer.toString(dataAtual.getYear());
 	}
+
 	// DATA
 	// ARQUIVOS
 	/**
@@ -169,7 +181,7 @@ public abstract class Util {
 		if (arquivo.getParentFile() != null)
 			arquivo.getParentFile().mkdirs();
 	}
-	
+
 	/**
 	 * Pega o objeto de um arquivo.
 	 * 
@@ -183,16 +195,14 @@ public abstract class Util {
 	 */
 	public static Object getObjeto(String caminho) throws DadoInvalidoException {
 		Object objeto = null;
-		try (ObjectInputStream leitorDeObjetos = new ObjectInputStream(
-				new FileInputStream(caminho));){
+		try (ObjectInputStream leitorDeObjetos = new ObjectInputStream(new FileInputStream(caminho));) {
 			objeto = leitorDeObjetos.readObject();
 			return objeto;
 		} catch (Exception excecao) {
-			throw new DadoInvalidoException("Arquivo " + caminho
-					+ "nao existe!");
+			throw new DadoInvalidoException("Arquivo " + caminho + "nao existe!");
 		}
 	}
-	
+
 	/**
 	 * Escreve o objeto em um arquivo
 	 * 
@@ -246,6 +256,6 @@ public abstract class Util {
 			throw new OperacaoInvalidaException(e.getMessage());
 		}
 	}
-	
+
 	// ARQUIVOS
 }

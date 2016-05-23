@@ -25,6 +25,8 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 * Serial gerado automaticamente.
 	 */
 	private static final long serialVersionUID = 1697453654897L;
+	private final Integer PONTUACAO_MINIMA_MASTER = 150;
+	private final Integer PONTUACAO_MAXIMA_MASTER = 350;
 
 	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.NOME
 			+ Constantes.DO_PACIENTE)
@@ -218,16 +220,24 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	// Metodo responsavel por mudar dinamicamente a fidelidade do usuario.
 	private void verificaMudancaStatus() {
 		if (this.fidelidade instanceof FidelidadePadrao) {
-			if ((this.pontuacao >= Constantes.PONTUACAO_MINIMA_MASTER)
-					&& (this.pontuacao <= Constantes.PONTUACAO_MAXIMA_MASTER)) {
+			if ((this.pontuacao >= PONTUACAO_MINIMA_MASTER)
+					&& (this.pontuacao <= PONTUACAO_MAXIMA_MASTER)) {
 				this.fidelidade = new FidelidadeMaster();
-			} else if (this.pontuacao > Constantes.PONTUACAO_MAXIMA_MASTER) {
+			} else if (this.pontuacao > PONTUACAO_MAXIMA_MASTER) {
 				this.fidelidade = new FidelidadeVIP();
 			}
 		} else if ((this.fidelidade instanceof FidelidadeMaster)
-				&& (this.pontuacao > Constantes.PONTUACAO_MAXIMA_MASTER)) {
+				&& (this.pontuacao > PONTUACAO_MAXIMA_MASTER)) {
 			this.fidelidade = new FidelidadeVIP();
 		}
+		
+//		if ((this.pontuacao >= PONTUACAO_MINIMA_MASTER)
+//				&& (this.pontuacao <= PONTUACAO_MAXIMA_MASTER) && !(this.fidelidade instanceof FidelidadeMaster)) {
+//			this.fidelidade = new FidelidadeMaster();
+//		}
+//		if((this.pontuacao > PONTUACAO_MAXIMA_MASTER) && !(this.fidelidade instanceof FidelidadeVIP)) {
+//			this.fidelidade = new FidelidadeVIP();
+//		}
 	}
 
 	/**

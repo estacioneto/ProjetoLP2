@@ -258,17 +258,19 @@ public abstract class Reflection {
 	 * 
 	 * @param klazz
 	 *            Nome completo da classe (package + nome da classe).
+	 * @param mensagemErro
+	 *            Mensagem de erro a ser lancada.
 	 * @param params
 	 *            Parametros do construtor.
 	 * @return Objeto requisitado.
 	 * @throws DadoInvalidoException
 	 *             Caso a classe nao exista.
 	 */
-	public static Object godFactory(String klazz, Object... params) throws DadoInvalidoException {
+	public static Object godFactory(String klazz, String mensagemErro, Object... params) throws DadoInvalidoException {
 		try {
 			return godFactory(Class.forName(klazz), params);
 		} catch (ClassNotFoundException classeNaoEncontrada) {
-			throw new DadoInvalidoException("Classe nao encontrada! " + klazz);
+			throw new DadoInvalidoException(mensagemErro);
 		}
 	}
 

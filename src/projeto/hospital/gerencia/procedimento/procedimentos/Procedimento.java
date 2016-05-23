@@ -39,6 +39,8 @@ public abstract class Procedimento implements Serializable {
 	 * 
 	 * @param prontuario
 	 *            Prontuario do paciente a ser submetido ao procedimento
+	 * @param valorMedicamentos
+	 *            Valor dos medicamentos necessarios
 	 */
 	public abstract void realizaProcedimento(Prontuario prontuario, Double valorMedicamentos);
 

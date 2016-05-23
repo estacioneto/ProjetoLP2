@@ -91,8 +91,7 @@ public class Facade {
 	 *            Data de nascimento do funcionario.
 	 * @return Matricula do funcionario cadastrado.
 	 */
-	public String cadastraFuncionario(String nome, String cargo,
-			String dataNascimento) {
+	public String cadastraFuncionario(String nome, String cargo, String dataNascimento) {
 		return this.controller.cadastraFuncionario(nome, cargo, dataNascimento);
 	}
 
@@ -118,8 +117,7 @@ public class Facade {
 	 * @param novoValor
 	 *            Valor do novo atributo.
 	 */
-	public void atualizaInfoFuncionario(String matricula, String atributo,
-			String novoValor) {
+	public void atualizaInfoFuncionario(String matricula, String atributo, String novoValor) {
 		this.controller.atualizaInfoFuncionario(matricula, atributo, novoValor);
 	}
 
@@ -182,10 +180,9 @@ public class Facade {
 	 *            Tipo sanguineo do paciente
 	 * @return Id do paciente cadastrado
 	 */
-	public String cadastraPaciente(String nome, String data, double peso,
-			String sexo, String genero, String tipoSanguineo) {
-		return this.controller.cadastraPaciente(nome, data, peso, sexo, genero,
-				tipoSanguineo);
+	public String cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
+			String tipoSanguineo) {
+		return this.controller.cadastraPaciente(nome, data, peso, sexo, genero, tipoSanguineo);
 	}
 
 	// CONSULTA DE PACIENTE/PRONTUARIO
@@ -232,10 +229,8 @@ public class Facade {
 	 *            do medicamento.
 	 * @return Nome do medicamento.
 	 */
-	public String cadastraMedicamento(String nome, String tipo, Double preco,
-			int quantidade, String categorias) {
-		return this.controller.cadastraMedicamento(nome, tipo, preco,
-				quantidade, categorias);
+	public String cadastraMedicamento(String nome, String tipo, Double preco, int quantidade, String categorias) {
+		return this.controller.cadastraMedicamento(nome, tipo, preco, quantidade, categorias);
 	}
 
 	/**
@@ -248,8 +243,7 @@ public class Facade {
 	 * @param novoValor
 	 *            Novo valor do atributo
 	 */
-	public void atualizaMedicamento(String nome, String atributo,
-			String novoValor) {
+	public void atualizaMedicamento(String nome, String atributo, String novoValor) {
 		this.controller.atualizaMedicamento(nome, atributo, novoValor);
 	}
 
@@ -324,10 +318,8 @@ public class Facade {
 	 * @param medicamentos
 	 *            Medicamentos necessarios
 	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente,
-			String medicamentos) {
-		this.controller.realizaProcedimento(nomeProcedimento, idPaciente,
-				medicamentos);
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String medicamentos) {
+		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, medicamentos);
 	}
 
 	/**
@@ -342,10 +334,8 @@ public class Facade {
 	 * @param medicamentos
 	 *            Medicamentos necessarios
 	 */
-	public void realizaProcedimento(String nomeProcedimento, String idPaciente,
-			String orgao, String medicamentos) {
-		this.controller.realizaProcedimento(nomeProcedimento, idPaciente,
-				medicamentos, orgao);
+	public void realizaProcedimento(String nomeProcedimento, String idPaciente, String orgao, String medicamentos) {
+		this.controller.realizaProcedimento(nomeProcedimento, idPaciente, medicamentos, orgao);
 	}
 
 	/**
@@ -454,13 +444,14 @@ public class Facade {
 	public int totalOrgaosDisponiveis() {
 		return this.controller.totalOrgaosDisponiveis();
 	}
-	
+
 	/**
 	 * Gera uma ficha de um paciente e guarda
 	 * 
 	 * @param idPaciente
+	 *            id do paciente
 	 */
-	public void exportaFichaPaciente(String idPaciente){
+	public void exportaFichaPaciente(String idPaciente) {
 		this.controller.exportaFichaPaciente(idPaciente);
 	}
 

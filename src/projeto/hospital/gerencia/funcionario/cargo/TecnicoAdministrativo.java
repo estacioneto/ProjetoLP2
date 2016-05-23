@@ -1,5 +1,11 @@
 package projeto.hospital.gerencia.funcionario.cargo;
 
+/**
+ * Classe que representa o cargo de Tecnico Administrativo.
+ * 
+ * @author Estacio Pereira
+ *
+ */
 public class TecnicoAdministrativo extends Cargo {
 
 	/**
@@ -9,6 +15,9 @@ public class TecnicoAdministrativo extends Cargo {
 
 	/**
 	 * Construtor de tecnico administrativo.
+	 * 
+	 * @param nome
+	 *            Nome do cargo
 	 */
 	public TecnicoAdministrativo(String nome) {
 		super(nome);

@@ -6,13 +6,13 @@ import java.util.List;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.gerencia.ValidadorDeLogica;
 import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
 import projeto.hospital.gerencia.funcionario.Funcionario;
 import projeto.hospital.gerencia.funcionario.cargo.Permissao;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.ValidadorDeDados;
+import projeto.util.ValidadorDeLogica;
 import projeto.util.reflexao.Reflection;
 
 /**

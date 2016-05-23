@@ -1,5 +1,9 @@
 package projeto.hospital.gerencia.funcionario.cargo;
 
+/**
+ * Classe que representa o cargo de Diretor Geral.
+ * @author Estacio Pereira
+ */
 public class DiretorGeral extends Cargo {
 
 	/**
@@ -9,10 +13,13 @@ public class DiretorGeral extends Cargo {
 
 	/**
 	 * Construtor de diretor.
+	 * 
+	 * @param nome
+	 *            Nome do cargo.
 	 */
 	public DiretorGeral(String nome) {
 		super(nome);
-		
+
 		this.permissoes.add(Permissao.CADASTRAR_FUNCIONARIOS);
 		this.permissoes.add(Permissao.EXCLUIR_FUNCIONARIOS);
 		this.permissoes.add(Permissao.ATUALIZAR_INFORMACOES_FUNCIONARIOS);

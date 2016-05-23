@@ -1,5 +1,11 @@
 package projeto.hospital.gerencia.funcionario.cargo;
 
+/**
+ * Classe que representa o cargo de Medico.
+ * 
+ * @author Estacio Pereira
+ *
+ */
 public class Medico extends Cargo {
 	/**
 	 * Serial gerado automaticamente.
@@ -8,6 +14,9 @@ public class Medico extends Cargo {
 
 	/**
 	 * Construtor de tecnico administrativo.
+	 * 
+	 * @param nome
+	 *            Nome do cargo.
 	 */
 	public Medico(String nome) {
 		super(nome);

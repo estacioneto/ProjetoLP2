@@ -5,7 +5,6 @@ import java.io.Serializable;
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.exceptions.logica.AcessoBloqueadoException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
-import projeto.hospital.gerencia.ValidadorDeLogica;
 import projeto.hospital.gerencia.bancodeorgaos.BancoDeOrgaos;
 import projeto.hospital.gerencia.bancodeorgaos.Orgao;
 import projeto.hospital.gerencia.farmacia.GerenciadorDeFarmacia;
@@ -20,6 +19,7 @@ import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
+import projeto.util.ValidadorDeLogica;
 
 /**
  * Classe controladora. Gerencia a logica de negocio do sistema delegando
@@ -42,7 +42,7 @@ public class Controller implements Serializable {
 	private GerenciadorDeFarmacia gerenciadorDeMedicamento;
 	private BancoDeOrgaos bancoDeOrgaos;
 	private GerenciadorProcedimento gerenciadorProcedimento;
-	
+
 	private final String CHAVE_DESBLOQUEIO = "c041ebf8";
 	private boolean sistemaJaLiberado;
 
@@ -441,6 +441,8 @@ public class Controller implements Serializable {
 	 *            Nome do procedimento
 	 * @param idPaciente
 	 *            Id do paciente
+	 * @param argumentosExtras
+	 *            Argumentos opcionais, como valor de medicamentos e orgaos
 	 */
 	public void realizaProcedimento(String procedimento, String idPaciente, String... argumentosExtras) {
 		try {
@@ -539,6 +541,7 @@ public class Controller implements Serializable {
 	 * Gera uma ficha de um paciente e guarda
 	 * 
 	 * @param idPaciente
+	 *            id do paciente
 	 */
 	public void exportaFichaPaciente(String idPaciente) {
 		this.gerenciadorDePaciente.exportaFichaPaciente(idPaciente);
@@ -550,7 +553,7 @@ public class Controller implements Serializable {
 	public void iniciaSistema() {
 		try {
 			Controller controllerSalvo = (Controller) Util.getObjeto(Constantes.ARQUIVO_CONTROLLER);
-			
+
 			this.bancoDeOrgaos = controllerSalvo.bancoDeOrgaos;
 			this.gerenciadorDeMedicamento = controllerSalvo.gerenciadorDeMedicamento;
 			this.gerenciadorDePaciente = controllerSalvo.gerenciadorDePaciente;
@@ -561,18 +564,26 @@ public class Controller implements Serializable {
 		}
 	}
 
+	/**
+	 * Libera o sistema pela primeira vez.
+	 * 
+	 * @param chave
+	 *            Chave do sistema.
+	 * @param nome
+	 *            Nome do usuario.
+	 * @param dataNascimento
+	 *            Data de nascimento do usuario.
+	 * @return Matricula gerada.
+	 */
 	public String liberaSistema(String chave, String nome, String dataNascimento) {
 		if (sistemaJaLiberado) {
-			throw new AcessoBloqueadoException(
-					"Erro ao liberar o sistema. Sistema liberado anteriormente.");
+			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Sistema liberado anteriormente.");
 		} else if (CHAVE_DESBLOQUEIO.equals(chave)) {
-			String matricula = this.cadastraFuncionario(nome,
-					Constantes.DIRETOR_GERAL, dataNascimento);
+			String matricula = this.cadastraFuncionario(nome, Constantes.DIRETOR_GERAL, dataNascimento);
 			sistemaJaLiberado = true;
 			return matricula;
 		} else {
-			throw new AcessoBloqueadoException(
-					"Erro ao liberar o sistema. Chave invalida.");
+			throw new AcessoBloqueadoException("Erro ao liberar o sistema. Chave invalida.");
 		}
 	}
 }
