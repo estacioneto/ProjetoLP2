@@ -31,7 +31,7 @@ O uso de expressões lambda no projeto da disciplina permitiu-nos eliminar duas 
 
 Reflexividade (Reflection)
 
-Reflexividade é um recurso altamente poderoso de programação e nos proporcionou retirar muitas condições do código e linhas de validação antes da criação de objetos. Sobre as condições temos o exemplo do getInfo() e o atualizaInfo() que, em outra abordagem, conferiria qual campo seria retornado ou atualizado. A reflexividade nos auxilia também na criação de objetos, onde tendo o package, o nome da classe e os parâmetros do construtor, pode-se criar o objeto sem condicionais, enquanto que em factories padrões, é realizada a criação com estruturas condicionais.
+Reflexividade é um recurso altamente poderoso de programação e nos proporcionou retirar muitas condições do código e linhas de validação antes da criação de objetos. Sobre as condições temos o exemplo do getInfo() e o atualizaInfo() que, em outra abordagem, conferiria qual campo seria retornado ou atualizado. A reflexividade nos auxilia também na criação de objetos, onde tendo o package e o nome da classe, pode-se criar o objeto sem condicionais, como é feito nas factories padrões.
 
 Caso 1
 
