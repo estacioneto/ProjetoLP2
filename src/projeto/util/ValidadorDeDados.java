@@ -8,6 +8,7 @@ import projeto.exceptions.dados.DataInvalidaException;
 import projeto.exceptions.dados.ObjetoNuloException;
 import projeto.exceptions.dados.StringVaziaException;
 import projeto.exceptions.logica.OperacaoInvalidaException;
+import projeto.hospital.gerencia.farmacia.medicamento.tipos.TipoMedicamentoValido;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 
 /**
@@ -286,8 +287,11 @@ public abstract class ValidadorDeDados {
 	 *             Caso o tipo seja invalido.
 	 */
 	public static void validaTipoMedicamento(String atributo, String tipo) throws DadoInvalidoException {
-		if (!Constantes.TIPOS_MEDICAMENTO_VALIDOS.contains(tipo))
+		try{
+			TipoMedicamentoValido.valueOf(tipo.toUpperCase());
+		}catch(IllegalArgumentException excecao){
 			throw new DadoInvalidoException(atributo + " invalido.");
+		}
 	}
 
 	// ATRIBUTOS
