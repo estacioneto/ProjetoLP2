@@ -11,6 +11,9 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.farmacia.medicamento.CategoriasValidasMedicamentos;
 import projeto.hospital.gerencia.farmacia.medicamento.tipos.TipoMedicamentoValido;
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
+import projeto.hospital.gerencia.funcionario.cargo.CargoValido;
+import projeto.hospital.gerencia.procedimento.procedimentos.ProcedimentosValidos;
+import projeto.hospital.gerencia.prontuario.paciente.TipoSanguineoValido;
 
 /**
  * Classe com validadores de dados
@@ -76,8 +79,28 @@ public abstract class ValidadorDeDados {
 	 */
 	public static void validaCargo(String erro, String cargo) throws DadoInvalidoException {
 		validaString(erro, cargo);
-		if (!Constantes.CARGOS_VALIDOS.contains(cargo.toLowerCase()))
+		try {
+			// Uso dessa funcao por String.trim() nao funcionar
+			CargoValido.valueOf(trim(cargo).toUpperCase());
+		} catch (IllegalArgumentException excecao) {
 			throw new DadoInvalidoException(MensagensDeErro.CARGO_INVALIDO_FUNCIONARIO);
+		}
+	}
+
+	/**
+	 * Retorna a String sem espacos.
+	 * 
+	 * @param string
+	 *            String inicial.
+	 * @return String sem espacos.
+	 */
+	private static String trim(String string) {
+		String separada[] = string.split(" ");
+		String retorno = "";
+		for (String s : separada) {
+			retorno += s;
+		}
+		return retorno;
 	}
 
 	/**
@@ -253,10 +276,10 @@ public abstract class ValidadorDeDados {
 			throws DadoInvalidoException {
 		String[] arrayCategorias = categoria.split(",");
 		for (int i = 0; i < arrayCategorias.length; i++) {
-			try{
+			try {
 				String categoriaAtual = arrayCategorias[i];
 				CategoriasValidasMedicamentos.valueOf(categoriaAtual.toUpperCase());
-			}catch(IllegalArgumentException excecao){
+			} catch (IllegalArgumentException excecao) {
 				throw new DadoInvalidoException(mensagemDeErro);
 			}
 		}
@@ -273,8 +296,15 @@ public abstract class ValidadorDeDados {
 	 *             Caso o tipo sanguineo seja invalido.
 	 */
 	public static void validaTipoSanguineo(String erro, String tipo) throws DadoInvalidoException {
-		if (!Constantes.TIPOS_SANGUINEOS_VALIDOS.contains(tipo))
+		try {
+			TipoSanguineoValido.valueOf(tipo.substring(Constantes.ZERO, tipo.length() - Constantes.UM));
+			if (tipo.charAt(tipo.length() - Constantes.UM) != '+'
+					&& tipo.charAt(tipo.length() - Constantes.UM) != '-') {
+				throw new DadoInvalidoException(erro);
+			}
+		} catch (IllegalArgumentException excecao) {
 			throw new DadoInvalidoException(erro);
+		}
 	}
 
 	/**
@@ -288,9 +318,9 @@ public abstract class ValidadorDeDados {
 	 *             Caso o tipo seja invalido.
 	 */
 	public static void validaTipoMedicamento(String atributo, String tipo) throws DadoInvalidoException {
-		try{
+		try {
 			TipoMedicamentoValido.valueOf(tipo.toUpperCase());
-		}catch(IllegalArgumentException excecao){
+		} catch (IllegalArgumentException excecao) {
 			throw new DadoInvalidoException(atributo + " invalido.");
 		}
 	}
@@ -345,8 +375,11 @@ public abstract class ValidadorDeDados {
 
 	// PROCEDIMENTOS
 	public static void validaProcedimento(String procedimento) throws DadoInvalidoException {
-		if (!Constantes.PROCEDIMENTOS.contains(procedimento))
+		try{
+			ProcedimentosValidos.valueOf(trim(procedimento).toUpperCase());
+		}catch(IllegalArgumentException excecao){
 			throw new DadoInvalidoException(MensagensDeErro.PROCEDIMENTO_INVALIDO);
+		}
 	}
 	// PROCEDIMENTOS
 }
