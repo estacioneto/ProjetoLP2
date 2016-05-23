@@ -40,7 +40,7 @@ public abstract class Constantes {
 					"antiemetico" }));
 	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(
 			Arrays.asList(new String[] { DIRETOR_GERAL.toLowerCase(),
-					MEDICO.toLowerCase(), TECNICO.toLowerCase(),
+					MEDICO.toLowerCase(),
 					TECNICO_ADMINISTATIVO.toLowerCase() }));
 	
 	public static final HashSet<String> PROCEDIMENTOS = new HashSet<String>(
@@ -48,9 +48,6 @@ public abstract class Constantes {
 
 	public static final String TIPO_GENERICO = "Generico";
 	public static final String TIPO_REFERENCIA = "Referencia";
-	public static final ArrayList<String> TIPOS_MEDICAMENTO_VALIDOS = new ArrayList<String>(
-			Arrays.asList(new String[] { TIPO_REFERENCIA.toLowerCase(),
-					TIPO_GENERICO.toLowerCase()}));
 	// CONSTANTES DE VALIDACAO
 
 	// CONSTANTES DE ATRIBUTOS
