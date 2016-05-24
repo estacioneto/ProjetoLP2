@@ -140,17 +140,20 @@ public abstract class Reflection {
 						Class<Conversao> anotacaoConversao = Conversao.class;
 						if (campo.isAnnotationPresent(anotacaoConversao)) {
 							Conversao anotacaoConversaoCampo = campo.getAnnotation(anotacaoConversao);
-							Method converte = Conversor.class.getMethod(anotacaoConversaoCampo.conversor(), novoValor.getClass());
+							Class<Conversor> conversor = Conversor.class;
+							Method converte = conversor.getMethod(anotacaoConversaoCampo.conversor(), novoValor.getClass());
 							
 							// Converte o dado
 							novoValor = converte.invoke(null, novoValor);
 						}
 						// Metodo que vai ser usado para validacao
-						Method valida = ValidadorDeDados.class.getMethod(anotacaoValidacaoCampo.metodo(),
-								anotacaoValidacaoCampo.erro().getClass(), novoValor.getClass());
+						Class<ValidadorDeDados> validador = ValidadorDeDados.class; 
+						String erro = anotacaoValidacaoCampo.erro(); 
+						Method metodoValida = validador.getMethod(anotacaoValidacaoCampo.metodo(),
+								erro.getClass(), novoValor.getClass());
 						
 						// Valida o dado
-						valida.invoke(null, anotacaoValidacaoCampo.erro(), novoValor);
+						metodoValida.invoke(null, erro, novoValor);
 					}
 				}
 				// Pega o metodo.
@@ -214,13 +217,17 @@ public abstract class Reflection {
 				
 				// Pega a anotacao de validacao do campo
 				Validacao validacao = campo.getAnnotation(Validacao.class);
-				ValidadorDeDados.validaNaoNulo(validacao.erro(), params[i]);
+				String erro = validacao.erro();
+				String metodo = validacao.metodo();
+				ValidadorDeDados.validaNaoNulo(erro, params[i]);
 				
 				// Pega o metodo usado pra validar o campo
-				Method valida = ValidadorDeDados.class.getMethod(validacao.metodo(), validacao.erro().getClass(),
+				Class<ValidadorDeDados> validador = ValidadorDeDados.class; 
+				Method valida = validador.getMethod(metodo, erro.getClass(),
 						params[i].getClass());
+				
 				// Valida o dado.
-				valida.invoke(null, validacao.erro(), params[i]);
+				valida.invoke(null, erro, params[i]);
 			}
 			// Retorna o objeto construido.
 			return clazz.getConstructors()[0].newInstance(params);
@@ -245,9 +252,13 @@ public abstract class Reflection {
 	private static void camposValidacao(Class<?> klazz, ArrayList<Field> campos) {
 		Field[] camposTemp = klazz.getDeclaredFields();
 		for (int i = camposTemp.length - 1; i > -1; i--) {
-			if (camposTemp[i].isAnnotationPresent(Validacao.class))
-				if (camposTemp[i].getAnnotation(Validacao.class).cadastro())
+			if (camposTemp[i].isAnnotationPresent(Validacao.class)) {
+				boolean validaCadastro = camposTemp[i].getAnnotation(Validacao.class).cadastro();
+				
+				if (validaCadastro) {
 					campos.add(Constantes.ZERO, camposTemp[i]);
+				}
+			}
 		}
 	}
 
