@@ -47,10 +47,10 @@ public class TransplanteDeOrgaos extends Procedimento {
 
 	@Override
 	public String toString() {
-		String saida = new String();
-		saida += "--> " + NOME_PROCEDIMENTO + ":" + Constantes.QUEBRA_LINHA;
-		saida += super.toString() + Constantes.QUEBRA_LINHA;
-		saida += "....... Orgao transplantado: " + this.orgao.getNome(); 
-		return saida;
+		StringBuilder saida = new StringBuilder();
+		saida.append("--> " + NOME_PROCEDIMENTO + ":" + Constantes.QUEBRA_LINHA);
+		saida.append(super.toString() + Constantes.QUEBRA_LINHA);
+		saida.append("....... Orgao transplantado: " + this.orgao.getNome()); 
+		return saida.toString();
 	}
 }

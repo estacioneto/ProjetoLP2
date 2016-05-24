@@ -42,9 +42,9 @@ public class ConsultaClinica extends Procedimento {
 
 	@Override
 	public String toString() {
-		String saida = new String();
-		saida += "--> " + NOME_PROCEDIMENTO + ":" + Constantes.QUEBRA_LINHA;
-		saida += super.toString();
-		return saida;
+		StringBuilder saida = new StringBuilder();
+		saida.append("--> " + NOME_PROCEDIMENTO + ":" + Constantes.QUEBRA_LINHA);
+		saida.append(super.toString());
+		return saida.toString();
 	}
 }

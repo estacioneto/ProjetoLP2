@@ -1,16 +1,12 @@
 package projeto.hospital.gerencia.farmacia.medicamento.tipos;
 
-import java.io.Serializable;
-
 /**
  * Classe que representa o tipo medicamento generico, seus comportaemntos e
  * estados.
  * 
  * @author Thaynan
- *
  */
-public class Generico implements Serializable, TipoMedicamento {
-
+public class Generico implements TipoMedicamento {
 	/**
 	 * Serial gerado automaticamente.
 	 */
@@ -41,7 +37,8 @@ public class Generico implements Serializable, TipoMedicamento {
 	 */
 	@Override
 	public String toString() {
-		String formatacao = "Medicamento " + TIPO + ":";
-		return formatacao;
+		StringBuilder saida = new StringBuilder();
+		saida.append("Medicamento " + TIPO + ":");
+		return saida.toString();
 	}
 }

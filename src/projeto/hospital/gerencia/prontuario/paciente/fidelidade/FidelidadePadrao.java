@@ -1,7 +1,5 @@
 package projeto.hospital.gerencia.prontuario.paciente.fidelidade;
 
-import java.io.Serializable;
-
 import projeto.util.Constantes;
 
 /**
@@ -10,10 +8,9 @@ import projeto.util.Constantes;
  * @author Estacio Pereira
  * @author Thaynan Andrey
  */
-public class FidelidadePadrao implements Fidelidade, Serializable {
-
+public class FidelidadePadrao implements Fidelidade {
 	/**
-	 * 
+	 * Id gerado automaticamente 
 	 */
 	private static final long serialVersionUID = 2425017466808695066L;
 
@@ -27,5 +24,4 @@ public class FidelidadePadrao implements Fidelidade, Serializable {
 	public double getCreditoBonus() {
 		return Constantes.ZERO;
 	}
-
 }

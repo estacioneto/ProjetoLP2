@@ -9,7 +9,6 @@ import java.util.Set;
  * 
  * @author Estacio Pereira
  * @author Eric
- * 
  */
 public abstract class Cargo implements Serializable {
 	/**
@@ -40,17 +39,17 @@ public abstract class Cargo implements Serializable {
 	 * @return true se o cargo permite determinada operacao.
 	 */
 	public boolean temPermissao(Permissao permissao) {
-		return this.permissoes.contains(permissao);
+		return permissoes.contains(permissao);
 	}
 	// VERIFICACAO DE PERMISSAO
 	//GETTERS
 	/**
-	 * Metodo que retorna as permissoes de um cargo.
+	 * Metodo que retorna uma copia do conjunto das permissoes de um cargo.
 	 * 
 	 * @return Conjunto de permissoes do cargo.
 	 */
 	public Set<Permissao> getPermissoes() {
-		return this.permissoes;
+		return new HashSet<>(this.permissoes);
 	}
 
 	/**

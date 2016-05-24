@@ -1,17 +1,12 @@
 package projeto.hospital.gerencia.farmacia.medicamento.tipos;
 
-import java.io.Serializable;
-
 /**
  * Classe que representa o tipo medicamento de referencia, seus comportaemntos e
  * estados.
  * 
  * @author Thaynan
- *
  */
-public class Referencia implements Serializable, TipoMedicamento {
-
-	
+public class Referencia implements TipoMedicamento {
 	/**
 	 * Serial gerado automaticamente.
 	 */
@@ -39,7 +34,8 @@ public class Referencia implements Serializable, TipoMedicamento {
 	 */
 	@Override
 	public String toString() {
-		String formatacao = "Medicamento " + this.getTipo() + ":";
-		return formatacao;
+		StringBuilder saida = new StringBuilder();
+		saida.append("Medicamento " + this.getTipo() + ":");
+		return saida.toString();
 	}
 }

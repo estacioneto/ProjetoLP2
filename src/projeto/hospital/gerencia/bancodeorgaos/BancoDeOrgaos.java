@@ -15,7 +15,6 @@ import projeto.util.reflexao.Reflection;
  * Banco de ogaos. Gerencia os orgaos do hospital.
  * 
  * @author Estacio Pereira
- *
  */
 public class BancoDeOrgaos implements Serializable {
 	/**
@@ -42,11 +41,9 @@ public class BancoDeOrgaos implements Serializable {
 	 */
 	public void cadastraOrgao(String nome, String tipoSanguineo) {
 		try {
-			this.orgaos.add((Orgao) Reflection.godFactory(Orgao.class, nome,
-					tipoSanguineo));
+			this.orgaos.add((Orgao) Reflection.godFactory(Orgao.class, nome, tipoSanguineo));
 		} catch (DadoInvalidoException excecao) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
 		}
 	}
 
@@ -60,19 +57,16 @@ public class BancoDeOrgaos implements Serializable {
 	 */
 	public void retiraOrgao(String nome, String tipoSanguineo) {
 		try {
-			Orgao orgao = (Orgao) Reflection.godFactory(Orgao.class, nome,
-					tipoSanguineo);
+			Orgao orgao = (Orgao) Reflection.godFactory(Orgao.class, nome, tipoSanguineo);
 
 			if (this.orgaos.contains(orgao)) {
 				int indice = this.orgaos.indexOf(orgao);
 				this.orgaos.remove(indice);
 			} else {
-				throw new DadoInvalidoException(
-						MensagensDeErro.ERRO_ORGAO_INEXISTENTE);
+				throw new DadoInvalidoException(MensagensDeErro.ERRO_ORGAO_INEXISTENTE);
 			}
 		} catch (DadoInvalidoException excecao) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_RETIRADA_ORGAO + excecao.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_RETIRADA_ORGAO + excecao.getMessage());
 		}
 	}
 
@@ -88,17 +82,14 @@ public class BancoDeOrgaos implements Serializable {
 	public Orgao getOrgao(String nome, String sanguePaciente) {
 		try {
 			for (Orgao orgao : this.orgaos) {
-				if (orgao.getNome().equalsIgnoreCase(nome)
-						&& sanguePaciente.equals((orgao.getTipoSanguineo()))) {
+				if (orgao.getNome().equalsIgnoreCase(nome) && sanguePaciente.equals((orgao.getTipoSanguineo()))) {
 					this.orgaos.remove(orgao);
 					return orgao;
 				}
 			}
-			throw new DadoInvalidoException(
-					MensagensDeErro.ERRO_ORGAO_INEXISTENTE);
+			throw new DadoInvalidoException(MensagensDeErro.ERRO_ORGAO_INEXISTENTE);
 		} catch (DadoInvalidoException excecao) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
 		}
 	}
 
@@ -113,12 +104,10 @@ public class BancoDeOrgaos implements Serializable {
 	 */
 	public boolean buscaOrgao(String nome, String tipoSanguineo) {
 		try {
-			Orgao orgao = (Orgao) Reflection.godFactory(Orgao.class, nome,
-					tipoSanguineo);
+			Orgao orgao = (Orgao) Reflection.godFactory(Orgao.class, nome, tipoSanguineo);
 			return this.orgaos.contains(orgao);
 		} catch (DadoInvalidoException excecao) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
 		}
 	}
 
@@ -132,30 +121,27 @@ public class BancoDeOrgaos implements Serializable {
 	 */
 	public String buscaOrgPorNome(String nome) {
 		try {
-			ValidadorDeDados.validaString(
-					Constantes.NOME + Constantes.DO_ORGAO, nome);
-			ArrayList<String> orgaos = new ArrayList<>();
+			ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_ORGAO, nome);
+			ArrayList<String> sangueOrgaos = new ArrayList<>();
 			for (Orgao orgao : this.orgaos) {
 				if (orgao.getNome().equals(nome)) {
-					orgaos.add(orgao.getTipoSanguineo());
+					sangueOrgaos.add(orgao.getTipoSanguineo());
 				}
 			}
 			StringBuilder retorno = new StringBuilder();
-			if (orgaos.size() == Constantes.ZERO) {
-				throw new DadoInvalidoException(
-						MensagensDeErro.ORGAO_NAO_CADASTRADO);
+			if (sangueOrgaos.size() == Constantes.ZERO) {
+				throw new DadoInvalidoException(MensagensDeErro.ORGAO_NAO_CADASTRADO);
 			}
-			for (int i = 0; i < orgaos.size(); i++) {
-				retorno.append(orgaos.get(i));
-				if (i != orgaos.size() - 1) {
+			for (int i = 0; i < sangueOrgaos.size(); i++) {
+				retorno.append(sangueOrgaos.get(i));
+				if (i != sangueOrgaos.size() - 1) {
 					retorno.append(Constantes.VIRGULA);
 				}
 			}
 			return retorno.toString();
 
 		} catch (DadoInvalidoException excecao) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
 		}
 	}
 
@@ -169,8 +155,7 @@ public class BancoDeOrgaos implements Serializable {
 	 */
 	public String buscaOrgPorSangue(String tipoSanguineo) {
 		try {
-			ValidadorDeDados.validaTipoSanguineo(
-					MensagensDeErro.TIPO_SANGUINEO_INVALIDO, tipoSanguineo);
+			ValidadorDeDados.validaTipoSanguineo(MensagensDeErro.TIPO_SANGUINEO_INVALIDO, tipoSanguineo);
 			ArrayList<String> orgaos = new ArrayList<>();
 			for (Orgao orgao : this.orgaos) {
 				if (orgao.getTipoSanguineo().equals(tipoSanguineo)) {
@@ -180,8 +165,7 @@ public class BancoDeOrgaos implements Serializable {
 				}
 			}
 			if (orgaos.size() == Constantes.ZERO) {
-				throw new DadoInvalidoException(
-						MensagensDeErro.ORGAO_TIPO_NAO_CADASTRADO);
+				throw new DadoInvalidoException(MensagensDeErro.ORGAO_TIPO_NAO_CADASTRADO);
 			}
 			StringBuilder retorno = new StringBuilder();
 
@@ -193,8 +177,7 @@ public class BancoDeOrgaos implements Serializable {
 			}
 			return retorno.toString();
 		} catch (DadoInvalidoException excecao) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
 		}
 	}
 
@@ -205,10 +188,10 @@ public class BancoDeOrgaos implements Serializable {
 	 *            Nome do orgao.
 	 * @return Quantidade de orgaos com o nome requisitado.
 	 */
-	public int qtdOrgaos(String nome) {
+	public Integer qtdOrgaos(String nome) {
 		try {
 			ValidadorDeDados.validaString(Constantes.NOME, nome);
-			int quantidade = Constantes.ZERO;
+			Integer quantidade = Constantes.ZERO;
 
 			for (Orgao orgao : this.orgaos) {
 				if (orgao.getNome().equals(nome))
@@ -216,13 +199,11 @@ public class BancoDeOrgaos implements Serializable {
 			}
 
 			if (quantidade == Constantes.ZERO) {
-				throw new DadoInvalidoException(
-						MensagensDeErro.ORGAO_NAO_CADASTRADO);
+				throw new DadoInvalidoException(MensagensDeErro.ORGAO_NAO_CADASTRADO);
 			}
 			return quantidade;
 		} catch (DadoInvalidoException excecao) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_BANCO_ORGAO + excecao.getMessage());
 		}
 	}
 
@@ -231,7 +212,7 @@ public class BancoDeOrgaos implements Serializable {
 	 * 
 	 * @return Total de orgaos no banco.
 	 */
-	public int totalOrgaosDisponiveis() {
+	public Integer totalOrgaosDisponiveis() {
 		return this.orgaos.size();
 	}
 }

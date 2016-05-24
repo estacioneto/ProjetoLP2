@@ -4,7 +4,6 @@ package projeto.hospital.gerencia.funcionario.cargo;
  * Classe que representa o cargo de Medico.
  * 
  * @author Estacio Pereira
- *
  */
 public class Medico extends Cargo {
 	/**

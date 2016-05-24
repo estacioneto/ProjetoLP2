@@ -378,7 +378,7 @@ public class Facade {
 	 * @return Caracteristicas do medicamento.
 	 */
 	public String consultaMedNome(String nome) {
-		return this.controller.consultaMedNome(nome);
+		return this.controller.consultaMedicamentoNome(nome);
 	}
 
 	/**

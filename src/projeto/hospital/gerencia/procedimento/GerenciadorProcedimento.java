@@ -12,6 +12,12 @@ import projeto.util.MensagensDeErro;
 import projeto.util.Util;
 import projeto.util.reflexao.Reflection;
 
+/**
+ * Gerenciador de procedimentos
+ * 
+ * @author Eric
+ * @author Estacio
+ */
 public class GerenciadorProcedimento implements Serializable {
 	/**
 	 * Id gerado automaticamente
@@ -34,6 +40,7 @@ public class GerenciadorProcedimento implements Serializable {
 	 */
 	public void realizaProcedimento(String procedimento, Prontuario prontuario, String nomeMedico,
 			Double valorMedicamentos) throws DadoInvalidoException {
+		// Cria o objeto referente ao procedimento a ser realizado
 		Procedimento procedimentoRealizado = getProcedimento(procedimento, nomeMedico);
 
 		// Realiza o procedimento
@@ -58,7 +65,7 @@ public class GerenciadorProcedimento implements Serializable {
 	 */
 	public void realizaProcedimento(String procedimento, Prontuario prontuario, String nomeMedico,
 			Double valorMedicamentos, Orgao orgaoRecuperado) throws DadoInvalidoException {
-		// Necessidade da data de procedimento
+		// Cria o objeto referente ao procedimento a ser realizado
 		Procedimento procedimentoRealizado = getProcedimento(procedimento, nomeMedico, orgaoRecuperado);
 
 		// Realiza o procedimento
@@ -78,12 +85,11 @@ public class GerenciadorProcedimento implements Serializable {
 	 */
 	private Procedimento getProcedimento(String procedimento, Object... argumentos) throws DadoInvalidoException {
 		LocalDate data = LocalDate.now();
-
 		// Lista de argumentos precisa adicionar data ao inicio.
 		Object[] argumentosConstrutor = montaArgumentos(data.toString(), argumentos);
+		String classeProcedimento = Util.getNomeClasse(Procedimento.class, procedimento); 
 		Procedimento procedimentoRealizado = (Procedimento) Reflection.godFactory(
-				Util.getNomeClasse(Procedimento.class, procedimento), MensagensDeErro.PROCEDIMENTO_INVALIDO,
-				argumentosConstrutor);
+				classeProcedimento, MensagensDeErro.PROCEDIMENTO_INVALIDO, argumentosConstrutor);
 		return procedimentoRealizado;
 	}
 

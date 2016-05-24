@@ -19,7 +19,7 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 	 */
 	private static final long serialVersionUID = -787866569388135898L;
 
-	private int cadastros;
+	private Integer cadastros;
 	private DecimalFormat formatadorDecimal;
 	private static GeradorDeDadosDeSeguranca instancia;
 
@@ -31,7 +31,10 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 		this.formatadorDecimal = new DecimalFormat(Constantes.FORMATO_TRES_NUMEROS);
 	}
 	
-	public static GeradorDeDadosDeSeguranca getIncancia(){
+	/**
+	 * @return Instancia do gerador
+	 */
+	public static GeradorDeDadosDeSeguranca getInstancia(){
 		if(instancia == null){
 			instancia = new GeradorDeDadosDeSeguranca();
 		}
@@ -89,5 +92,4 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 	public String geraSenha(String matricula, String ano) {
 		return ano + Util.quatroDigitosIniciais(matricula);
 	}
-
 }

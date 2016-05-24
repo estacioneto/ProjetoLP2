@@ -1,13 +1,14 @@
 package projeto.hospital.gerencia.farmacia.medicamento.tipos;
 
+import java.io.Serializable;
+
 /**
  * Tipo do medicamento. Inteface que define o calculo do preco e a impressao do
  * tipo.
  * 
  * @author Estacio
  */
-public interface TipoMedicamento {
-
+public interface TipoMedicamento extends Serializable {
 	/**
 	 * @return Tipo do medicamento.
 	 */

@@ -20,7 +20,6 @@ import projeto.util.reflexao.Validacao;
  * os dados de um funcionario do SOOS.
  * 
  * @author Estacio Pereira
- *
  */
 public class Funcionario implements Serializable {
 	/**
@@ -64,7 +63,7 @@ public class Funcionario implements Serializable {
 	 */
 	public Funcionario(String nome, String cargo, String dataNascimento) {
 		this(nome, cargo, dataNascimento, GeradorDeDadosDeSeguranca
-				.getIncancia().geraMatricula(cargo, Util.getAnoAtual()));
+				.getInstancia().geraMatricula(cargo, Util.getAnoAtual()));
 	}
 
 	/**
@@ -81,12 +80,12 @@ public class Funcionario implements Serializable {
 	 */
 	public Funcionario(String nome, String cargo, String dataNascimento,
 			String matricula) {
-		// Nao eh necessario validar porque no Gerenciador ja eh feito isso
+		// Nao eh necessario validar porque ja eh feito isso
 		// la no gerenciador de funcionarios
 		this.nome = nome;
 		this.setCargo(cargo);
 		this.matricula = matricula;
-		this.senha = GeradorDeDadosDeSeguranca.getIncancia().geraSenha(
+		this.senha = GeradorDeDadosDeSeguranca.getInstancia().geraSenha(
 				matricula, Util.getAnoPorData(dataNascimento));
 		this.data = dataNascimento;
 	}
@@ -150,14 +149,6 @@ public class Funcionario implements Serializable {
 	 */
 	public void setCargo(String cargo) {
 		try {
-//			if (Constantes.DIRETOR_GERAL.equals(cargo)) {
-//				this.cargo = (Cargo) Reflection.godFactory(Diretor.class);
-//			} else if (Constantes.TECNICO_ADMINISTATIVO.equals(cargo)) {
-//				this.cargo = (Cargo) Reflection
-//						.godFactory(TecnicoAdministrativo.class);
-//			} else if (Constantes.MEDICO.equals(cargo)) {
-//				this.cargo = (Cargo) Reflection.godFactory(Medico.class);
-//			}
 			this.cargo = (Cargo) Reflection.godFactory(Util.getNomeClasse(Cargo.class, cargo), MensagensDeErro.CARGO_INVALIDO_FUNCIONARIO, cargo);
 		} catch (DadoInvalidoException excecao) {
 			throw new OperacaoInvalidaException(excecao.getMessage());
@@ -184,12 +175,9 @@ public class Funcionario implements Serializable {
 
 	/**
 	 * Metodo utilizado para consulta de senha.
-	 * 
-	 * @return {@code OperacaoInvalidaException}
 	 */
-	public String getSenhaProtegida() {
-		throw new OperacaoInvalidaException(
-				"A senha do funcionario eh protegida.");
+	public void getSenhaProtegida() {
+		throw new OperacaoInvalidaException("A senha do funcionario eh protegida.");
 	}
 
 	/**
@@ -222,8 +210,15 @@ public class Funcionario implements Serializable {
 	public void setData(String dataNascimento) throws DadoInvalidoException {
 		this.data = dataNascimento;
 	}
-
 	// GETTERS E SETTERS
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
+		return result;
+	}
 
 	/**
 	 * Equals de funcionario, tendo em vista que a matricula identifica cada um.
@@ -234,9 +229,6 @@ public class Funcionario implements Serializable {
 			return false;
 		Funcionario outro = (Funcionario) obj;
 
-		if (this.matricula.equals(outro.matricula))
-			return true;
-		return false;
+		return this.matricula.equals(outro.matricula);
 	}
-
 }

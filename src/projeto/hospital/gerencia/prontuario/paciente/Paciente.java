@@ -209,15 +209,18 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 				.parseInt(nascimento[Constantes.INDICE_MES]), dia = Integer
 				.parseInt(nascimento[Constantes.INDICE_DIA]);
 
+		// Diferenca de anos -1
 		int idade = hoje.getYear() - ano - 1;
-		if (mes < hoje.getMonthValue() || mes == hoje.getMonthValue()
-				&& dia <= hoje.getDayOfMonth())
+		// Se o dia do aniversario for hoje ou ja tiver passado, adiciona 1 ano
+		if (mes < hoje.getMonthValue() || mes == hoje.getMonthValue() && dia <= hoje.getDayOfMonth())
 			idade++;
 
 		return idade;
 	}
 
-	// Metodo responsavel por mudar dinamicamente a fidelidade do usuario.
+	/**
+	 * Metodo responsavel por mudar dinamicamente a fidelidade do usuario.
+	 */
 	private void verificaMudancaStatus() {
 		if (this.fidelidade instanceof FidelidadePadrao) {
 			if ((this.pontuacao >= PONTUACAO_MINIMA_MASTER)
@@ -230,14 +233,6 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 				&& (this.pontuacao > PONTUACAO_MAXIMA_MASTER)) {
 			this.fidelidade = new FidelidadeVIP();
 		}
-		
-//		if ((this.pontuacao >= PONTUACAO_MINIMA_MASTER)
-//				&& (this.pontuacao <= PONTUACAO_MAXIMA_MASTER) && !(this.fidelidade instanceof FidelidadeMaster)) {
-//			this.fidelidade = new FidelidadeMaster();
-//		}
-//		if((this.pontuacao > PONTUACAO_MAXIMA_MASTER) && !(this.fidelidade instanceof FidelidadeVIP)) {
-//			this.fidelidade = new FidelidadeVIP();
-//		}
 	}
 
 	/**
@@ -277,12 +272,13 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	 *            Pontuacao ganha pelo paciente no procedimento.
 	 */
 	public void registradorDePontos(Integer pontuacaoProcedimento) {
-		pontuacao += pontuacaoProcedimento /*
-											 * + this.calculaBonus(
-											 * pontuacaoProcedimento)
-											 */;
+		pontuacao += pontuacaoProcedimento;
 		this.verificaMudancaStatus();
+	}
 
+	public double calculaDesconto(double d) {
+		double valor = d * fidelidade.getDescontoServico();
+		return valor;
 	}
 
 	/**
@@ -295,9 +291,9 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 
 	@Override
 	public String toString() {
-		String saida = "Nome: " + nome + ". ID: " + id + ". Data Nascimento: "
-				+ data;
-		return saida;
+		StringBuilder saida = new StringBuilder();
+		saida.append("Nome: " + nome + ". ID: " + id + ". Data Nascimento: " + data);
+		return saida.toString();
 	}
 
 	@Override
@@ -309,7 +305,7 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 	}
 
 	/**
-	 * Compara a partir do nome do paciente
+	 * Compara se dois paciente sao iguais a partir do nome
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -318,10 +314,5 @@ public class Paciente implements Serializable, Comparable<Paciente> {
 
 		Paciente paciente = (Paciente) obj;
 		return paciente.nome.equals(this.nome);
-	}
-
-	public double calculaDesconto(double d) {
-		double valor = d * fidelidade.getDescontoServico();
-		return valor;
 	}
 }

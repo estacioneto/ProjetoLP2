@@ -5,7 +5,6 @@ package projeto.hospital.gerencia.funcionario.cargo;
  * @author Estacio Pereira
  */
 public class DiretorGeral extends Cargo {
-
 	/**
 	 * Serial gerado automaticamente.
 	 */
@@ -27,5 +26,4 @@ public class DiretorGeral extends Cargo {
 		this.permissoes.add(Permissao.CADASTRAR_PACIENTES);
 		this.permissoes.add(Permissao.REALIZA_PROCEDIMENTO);
 	}
-
 }

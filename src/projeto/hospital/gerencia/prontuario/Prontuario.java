@@ -80,16 +80,16 @@ public class Prontuario implements Serializable {
 	
 	@Override
 	public String toString() {
-		String saida = new String();
-		saida += "Paciente: " + paciente.getNome() + Constantes.QUEBRA_LINHA;
-		saida += String.format("Peso: %.2f", paciente.getPeso()) + " kg Tipo Sanguineo: " + paciente.getTipoSanguineo() + Constantes.QUEBRA_LINHA;
-		saida += "Sexo: " + paciente.getSexo() + " Genero: " + paciente.getGenero() + Constantes.QUEBRA_LINHA;
-		saida += String.format("Gasto total: R$ %.2f", paciente.getGastosPaciente()) + " Pontos acumulados: " + paciente.getPontuacao() + Constantes.QUEBRA_LINHA;
-		saida += "Resumo dos procedimentos: " + this.procedimentosRealizados.size() + " procedimento(s)" + Constantes.QUEBRA_LINHA;
+		StringBuilder saida = new StringBuilder();
+		saida.append("Paciente: " + paciente.getNome() + Constantes.QUEBRA_LINHA);
+		saida.append(String.format("Peso: %.2f", paciente.getPeso()) + " kg Tipo Sanguineo: " + paciente.getTipoSanguineo() + Constantes.QUEBRA_LINHA);
+		saida.append("Sexo: " + paciente.getSexo() + " Genero: " + paciente.getGenero() + Constantes.QUEBRA_LINHA);
+		saida.append(String.format("Gasto total: R$ %.2f", paciente.getGastosPaciente()) + " Pontos acumulados: " + paciente.getPontuacao() + Constantes.QUEBRA_LINHA);
+		saida.append("Resumo dos procedimentos: " + this.procedimentosRealizados.size() + " procedimento(s)" + Constantes.QUEBRA_LINHA);
 		
 		for(Procedimento procedimento : this.procedimentosRealizados)
-			saida += procedimento.toString() + Constantes.QUEBRA_LINHA;
+			saida.append(procedimento.toString() + Constantes.QUEBRA_LINHA);
 		
-		return saida;
+		return saida.toString();
 	}
 }

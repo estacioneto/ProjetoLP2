@@ -1,7 +1,7 @@
 package projeto.hospital.gerencia.funcionario.cargo;
 
 /**
- * Enumeration com as permissoes dos funcionarios.
+ * Enumeracao com as permissoes dos funcionarios.
  * 
  * @author Estacio Pereira
  */

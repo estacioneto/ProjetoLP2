@@ -1,5 +1,10 @@
 package projeto.hospital.gerencia.farmacia.medicamento;
 
+/**
+ * Enumeracao com as categorias de medicamento
+ * 
+ * @author Thaynan
+ */
 public enum CategoriasValidasMedicamentos {
 
 	ANALGESICO("Analgesico"), ANTIBIOTICO("Antibiotico"), ANTITERMICO("Antitermico"), ANTIINFLAMATORIO("Antiinflamatorio"), HORMONAL("Hormonal"), ANTIEMETICO("Antiemetico");
@@ -10,6 +15,9 @@ public enum CategoriasValidasMedicamentos {
 		this.nome = nome;
 	}
 	
+	/**
+	 * @return Nome da categoria
+	 */
 	public String getNome() {
 		return this.nome;
 	}

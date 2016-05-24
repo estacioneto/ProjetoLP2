@@ -17,7 +17,7 @@ import projeto.util.ValidadorDeLogica;
 import projeto.util.reflexao.Reflection;
 
 /**
- * Gerencia os pacientes e prontuarios
+ * Gerenciador de pacientes e prontuarios
  * 
  * @author Eric
  */
@@ -60,22 +60,14 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	public String cadastraPaciente(String nome, String data, double peso, String sexo, String genero,
 			String tipoSanguineo, Funcionario funcionarioLogado) {
 		try {
-			// ValidadorDeDados.validaNome(Constantes.NOME +
-			// Constantes.DO_PACIENTE, nome);
-			// ValidadorDeDados.validaData(Constantes.DATA, data);
-			// ValidadorDeDados.validaPositivo(Constantes.PESO +
-			// Constantes.DO_PACIENTE, peso);
-			// ValidadorDeDados.validaSexoBiologico(MensagensDeErro.SEXO_INVALIDO,
-			// sexo);
-			// ValidadorDeDados.validaString(Constantes.GENERO, genero);
-
 			ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_PACIENTE,
 					Permissao.CADASTRAR_PACIENTES, funcionarioLogado);
 			Paciente paciente = (Paciente) Reflection.godFactory(Paciente.class, nome, data, peso, tipoSanguineo, sexo,
 					genero);
-			if (pacientes.containsKey(paciente))
+			if (pacientes.containsKey(paciente)) {
 				throw new DadoInvalidoException(MensagensDeErro.PACIENTE_JA_CADASTRADO);
-
+			}
+			
 			String novoId = geradorIdPaciente.getProximoId();
 			paciente.setId(novoId);
 			pacientes.put(paciente, new Prontuario(paciente));
@@ -126,7 +118,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Posicao do prontuario
 	 * @return Id do paciente
 	 */
-	public String getIdProntuarioPosicao(int posicao) {
+	public String getIdProntuarioPosicao(Integer posicao) {
 		try {
 			ValidadorDeDados.validaPositivo(MensagensDeErro.INDICE_PRONTUARIO, posicao);
 
@@ -143,7 +135,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 *            Posicao do prontuario a ser recuperado
 	 * @return Prontuario recuperado
 	 */
-	public Prontuario getProntuarioPosicao(int posicao) {
+	public Prontuario getProntuarioPosicao(Integer posicao) {
 		try {
 			Paciente paciente = getPacientePosicao(posicao);
 
@@ -220,7 +212,7 @@ public class GerenciadorDePacienteProntuario implements Serializable {
 	 * @throws OperacaoInvalidaException
 	 *             Paciente nao existe
 	 */
-	public int getTotalProcedimento(String idPaciente) {
+	public int getTotalProcedimentos(String idPaciente) {
 		try {
 			Prontuario prontuario = getProntuarioPaciente(idPaciente);
 			return prontuario.qtdProcedimentos();

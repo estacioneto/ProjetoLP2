@@ -1,13 +1,14 @@
 package projeto.hospital.gerencia.prontuario.paciente.fidelidade;
 
+import java.io.Serializable;
+
 /**
  * Interface que define a relacao de fidelidade com o SOOS
  * 
  * @author Estacio Pereira
  * @author Thaynan
  */
-public interface Fidelidade{
-
+public interface Fidelidade extends Serializable {
 	/**
 	 * Retorna o desconto dos pacientes nos servicos.
 	 * 

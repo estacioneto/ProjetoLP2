@@ -21,10 +21,8 @@ import projeto.util.reflexao.Validacao;
  * Classe que possui o tipo basico que caracteriza todos os medicamentos.
  * 
  * @author Thaynan
- *
  */
 public class Medicamento implements Serializable {
-
 	/**
 	 * Serial gerado automaticamente.
 	 */
@@ -47,10 +45,9 @@ public class Medicamento implements Serializable {
 	@Validacao(metodo = ConstantesReflection.VALIDA_STRING, erro = Constantes.CATEGORIAS + Constantes.DO_MEDICAMENTO)
 	@MetodoAssociado(get = ConstantesReflection.GET_CATEGORIAS)
 	private String categorias;
-	
-	 @Validacao(metodo = ConstantesReflection.VALIDA_TIPO_MEDICAMENTO, erro =
-	 Constantes.TIPO
-	 + Constantes.DO_MEDICAMENTO, get = true)
+
+	@Validacao(metodo = ConstantesReflection.VALIDA_TIPO_MEDICAMENTO, erro = Constantes.TIPO
+			+ Constantes.DO_MEDICAMENTO, get = true)
 	@MetodoAssociado(get = ConstantesReflection.GET_TIPO)
 	private TipoMedicamento tipo;
 
@@ -68,7 +65,7 @@ public class Medicamento implements Serializable {
 	 * @param tipo
 	 *            Tipo do medicamento.
 	 */
-	public Medicamento(String nome, Double preco, int quantidade, String categoria, String tipo) {
+	public Medicamento(String nome, Double preco, Integer quantidade, String categoria, String tipo) {
 		this.nome = nome;
 		this.preco = preco;
 		this.quantidade = quantidade;
@@ -91,16 +88,8 @@ public class Medicamento implements Serializable {
 	 */
 	public void setTipo(String tipo) {
 		try {
-			// if (tipo.equalsIgnoreCase(Constantes.TIPO_GENERICO)) {
-			// this.tipo = (TipoMedicamento) Reflection
-			// .godFactory(MedicamentoGenerico.class);
-			// } else if (tipo.equalsIgnoreCase(Constantes.TIPO_REFERENCIA)) {
-			// this.tipo = (TipoMedicamento) Reflection
-			// .godFactory(MedicamentoReferencia.class);
-			// }
-
-			this.tipo = (TipoMedicamento) Reflection
-					.godFactory(Util.getNomeClasse(TipoMedicamento.class, tipo), MensagensDeErro.ERRO_TIPO_MEDICAMENTO);
+			this.tipo = (TipoMedicamento) Reflection.godFactory(Util.getNomeClasse(TipoMedicamento.class, tipo),
+					MensagensDeErro.ERRO_TIPO_MEDICAMENTO);
 		} catch (DadoInvalidoException excecao) {
 			throw new OperacaoInvalidaException(excecao.getMessage());
 		}
@@ -114,6 +103,7 @@ public class Medicamento implements Serializable {
 	}
 
 	/**
+	 * Seta a quantidade do medicamento
 	 * 
 	 * @param quantidade
 	 *            Quantidade nova do medicamento.
@@ -123,15 +113,17 @@ public class Medicamento implements Serializable {
 	}
 
 	/**
+	 * Seta a quantidade do medicamento, recebendo ela como {@code String}
 	 * 
 	 * @param quantidade
 	 *            Quantidade nova do medicamento.
 	 */
 	public void setQuantidade(String quantidade) {
-		this.quantidade = Integer.parseInt(quantidade);
+		this.setQuantidade(Integer.parseInt(quantidade));
 	}
 
 	/**
+	 * Seta o preco do medicamento
 	 * 
 	 * @param preco
 	 *            Preco novo do medicamento.
@@ -141,6 +133,7 @@ public class Medicamento implements Serializable {
 	}
 
 	/**
+	 * Seta o preco do medicamento recebendo como {@code String}
 	 * 
 	 * @param preco
 	 *            Preco novo do medicamento.
@@ -150,7 +143,6 @@ public class Medicamento implements Serializable {
 	}
 
 	/**
-	 * 
 	 * @return Nome do medicamento.
 	 */
 	public String getNome() {
@@ -158,15 +150,13 @@ public class Medicamento implements Serializable {
 	}
 
 	/**
-	 * 
 	 * @return Quantidade do medicamento.
 	 */
-	public int getQuantidade() {
+	public Integer getQuantidade() {
 		return quantidade;
 	}
 
 	/**
-	 * 
 	 * @return Categorias do medicamento.
 	 */
 	public String getCategorias() {
@@ -180,16 +170,10 @@ public class Medicamento implements Serializable {
 	 * 
 	 * @param categoria
 	 *            Categoria do medicamento.
-	 * @return Boolean que indica se contem.
+	 * @return Boolean que indica se contem a categoria.
 	 */
 	public boolean contemCategoria(String categoria) {
-		String[] arrayCategorias = this.categorias.split(",");
-		for (int i = 0; i < arrayCategorias.length; i++) {
-			if (arrayCategorias[i].equalsIgnoreCase(categoria)) {
-				return true;
-			}
-		}
-		return false;
+		return this.categorias.contains(categoria);
 	}
 
 	/**
@@ -197,9 +181,10 @@ public class Medicamento implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		String formatacao = String.format("%s %s - Preco: R$ %.2f - Disponivel: %d - Categorias: %s",
-				this.tipo.toString(), this.getNome(), this.getPreco(), this.getQuantidade(), this.getCategorias());
-		return formatacao;
+		StringBuilder saida = new StringBuilder();
+		saida.append(String.format("%s %s - Preco: R$ %.2f - Disponivel: %d - Categorias: %s", this.tipo.toString(),
+				this.getNome(), this.getPreco(), this.getQuantidade(), this.getCategorias()));
+		return saida.toString();
 	}
 
 	@Override

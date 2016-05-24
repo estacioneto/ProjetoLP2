@@ -22,31 +22,37 @@ import projeto.util.reflexao.Reflection;
  *
  */
 public class Farmacia implements Serializable {
-
 	/**
 	 * Serial gerado automaticamente.
 	 */
 	private static final long serialVersionUID = 4325301404289139683L;
 	private List<Medicamento> listaMedicamentos;
-	private Comparator<Medicamento> nomeComparator;
-	private Comparator<Medicamento> precoComparator;
 
 	/**
 	 * Cosntrutor da Farmacia.
 	 */
 	public Farmacia() {
 		this.listaMedicamentos = new ArrayList<>();
-		this.inicializaComparators();
 	}
-
-	private void inicializaComparators() {
-		this.nomeComparator = (Comparator<Medicamento> & Serializable) (Medicamento medicamentoA,
-				Medicamento medicamentoB) -> {
+	
+	/**
+	 * Constroi e retorna o comparador de medicamento por nome
+	 * 
+	 * @return Comparador
+	 */
+	private Comparator<Medicamento> nomeComparator() {
+		return (Medicamento medicamentoA, Medicamento medicamentoB) -> {
 			return medicamentoA.getNome().compareTo(medicamentoB.getNome());
 		};
-
-		this.precoComparator = (Comparator<Medicamento> & Serializable) (Medicamento medicamentoA,
-				Medicamento medicamentoB) -> {
+	}
+	
+	/**
+	 * Constroi e retorna o comparador de medicamento por preco
+	 * 
+	 * @return Comparador
+	 */
+	private Comparator<Medicamento> precoComparator() {
+		return (Medicamento medicamentoA, Medicamento medicamentoB) -> {
 			if (medicamentoA.getPreco() > medicamentoB.getPreco()) {
 				return 1;
 			} else if (medicamentoA.getPreco() < medicamentoB.getPreco()) {
@@ -57,8 +63,7 @@ public class Farmacia implements Serializable {
 	}
 
 	/**
-	 * 
-	 * @return copia da lista de medicamentos.
+	 * @return Copia da lista de medicamentos.
 	 */
 	public List<Medicamento> getListaMedicamentos() {
 		List<Medicamento> copiaDaLista = new ArrayList<>(this.listaMedicamentos);
@@ -81,13 +86,11 @@ public class Farmacia implements Serializable {
 	 *            Categorias do medicamento.
 	 * @return Nome do medicamento.
 	 */
-	public String addMedicamento(String nome, Double preco, int quantidade, String tipoMedicamento, String categorias) {
+	public String addMedicamento(String nome, Double preco, Integer quantidade, String tipoMedicamento, String categorias) {
 		try {
 			Medicamento medicamento;
 			medicamento = (Medicamento) Reflection.godFactory(Medicamento.class, nome, preco, quantidade, categorias,
 					tipoMedicamento);
-			// Validacao poderia ser mais simples
-			// Reflection.validaObjeto(medicamento);
 			this.listaMedicamentos.add(medicamento);
 			return nome;
 		} catch (DadoInvalidoException e) {
@@ -175,12 +178,17 @@ public class Farmacia implements Serializable {
 				medicamentosCategoria.add(medicamentoAtual);
 			}
 		}
-		Collections.sort(medicamentosCategoria, this.precoComparator);
+		Collections.sort(medicamentosCategoria, this.precoComparator());
 		return medicamentosCategoria;
 	}
 
-	// Metodo que recebe uma lista e retorna os nomes dos medicamentos dessa
-	// lista em uma nova lista.
+	/**
+	 * Metodo que recebe uma lista e retorna os nomes dos medicamentos dessa
+	 * lista em uma nova lista
+	 * 
+	 * @param lista Lista
+	 * @return List do nome dos medicamentos
+	 */
 	private List<String> nomesNaLista(List<Medicamento> lista) {
 		List<String> listaNomeMedicamentos = new ArrayList<>();
 		for (Medicamento medicamentoAtual : lista) {
@@ -196,15 +204,18 @@ public class Farmacia implements Serializable {
 	 * @param ordenacao
 	 *            Ordenacao desejada.
 	 * @return lista ordenada em String dos medicamentos.
-	 * @throws DadoInvalidoException
 	 */
-	public String getEstoqueFarmacia(String ordenacao) throws DadoInvalidoException {
-		if (ordenacao.equalsIgnoreCase("preco")) {
-			return this.consultaMedicamentosOrdemPreco();
-		} else if (ordenacao.equalsIgnoreCase("alfabetica")) {
-			return this.consultaMedicamentosOrdemAlfabetica();
-		} else {
-			throw new DadoInvalidoException(MensagensDeErro.ERRO_ORDENCAO_MEDICAMENTO);
+	public String getEstoqueFarmacia(String ordenacao) {
+		try {
+			if (ordenacao.equalsIgnoreCase("preco")) {
+				return this.consultaMedicamentosOrdemPreco();
+			} else if (ordenacao.equalsIgnoreCase("alfabetica")) {
+				return this.consultaMedicamentosOrdemAlfabetica();
+			} else {
+				throw new DadoInvalidoException(MensagensDeErro.ERRO_ORDENCAO_MEDICAMENTO);
+			}
+		} catch (DadoInvalidoException e) {
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_MEDICAMENTO + e.getMessage());
 		}
 	}
 
@@ -215,8 +226,6 @@ public class Farmacia implements Serializable {
 	 * @param categoria
 	 *            Categoria referente ao medicamento.
 	 * @return todos os medicamentos que possuem determinada categoria.
-	 * @throws DadoInvalidoException
-	 *             Caso a categoria nao existir.
 	 */
 	public String consultaMedicamentoPorCategoria(String categoria) {
 		try {
@@ -238,9 +247,7 @@ public class Farmacia implements Serializable {
 	 */
 	public String consultaMedicamentosOrdemAlfabetica() {
 		List<Medicamento> copiaLista = new ArrayList<>(this.listaMedicamentos);
-		// MedicamentoNomeComparator comparator = new
-		// MedicamentoNomeComparator();
-		Collections.sort(copiaLista, this.nomeComparator);
+		Collections.sort(copiaLista, this.nomeComparator());
 		return String.join(",", this.nomesNaLista(copiaLista));
 	}
 
@@ -251,9 +258,7 @@ public class Farmacia implements Serializable {
 	 */
 	public String consultaMedicamentosOrdemPreco() {
 		List<Medicamento> copiaLista = new ArrayList<>(this.listaMedicamentos);
-		// MedicamentoPrecoComparator comparator = new
-		// MedicamentoPrecoComparator();
-		Collections.sort(copiaLista, this.precoComparator);
+		Collections.sort(copiaLista, this.precoComparator());
 		return String.join(",", this.nomesNaLista(copiaLista));
 	}
 

@@ -58,8 +58,17 @@ public abstract class Procedimento implements Serializable {
 		return this.nomeMedico;
 	}
 
-	// Metodo responsavel por calcular o gasto do paciente e repassar para ser
-	// registrado no Paciente.
+	/**
+	 * Metodo responsavel por calcular o gasto do paciente e repassar para ser
+	 * registrado no Paciente.
+	 * 
+	 * @param paciente
+	 *            Paciente
+	 * @param valorProcedimento
+	 *            Valor do procedimento
+	 * @param valorMedicamentos
+	 *            Valor dos medicamentos
+	 */
 	protected void registradorDeGastos(Paciente paciente, Double valorProcedimento, Double valorMedicamentos) {
 		Double gastoComDesconto = (valorProcedimento + valorMedicamentos)
 				- (paciente.calculaDesconto(valorProcedimento + valorMedicamentos));
@@ -68,8 +77,8 @@ public abstract class Procedimento implements Serializable {
 
 	@Override
 	public String toString() {
-		String saida = new String();
-		saida += "....... Data: " + getData() + " Medico: " + getMedico();
-		return saida;
+		StringBuilder saida = new StringBuilder();
+		saida.append("....... Data: " + getData() + " Medico: " + getMedico());
+		return saida.toString();
 	}
 }

@@ -1,9 +1,6 @@
 package projeto.util;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 
 public abstract class Constantes {
 	// CONTANTES DE IMPRESSAO E STRINGS
@@ -31,23 +28,10 @@ public abstract class Constantes {
 	public final static String PRIMEIRO_CADASTRO = "001";
 
 	public static final String DATA_REGEX = "(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/((19|20)\\d{2})";
-	public static final ArrayList<String> TIPOS_SANGUINEOS_VALIDOS = new ArrayList<String>(
-			Arrays.asList(new String[] { "O-", "O+", "B-", "B+", "A-", "A+",
-					"AB-", "AB+" }));
 	//public static final HashSet<String> CATEGORIAS_MEDICAMENTOS = new HashSet<String>(Arrays.asList(new String[] { "analgesico", "antibiotico","antitermico", "antiinflamatorio", "hormonal","antiemetico" }));
-	public static final HashSet<String> CARGOS_VALIDOS = new HashSet<String>(
-			Arrays.asList(new String[] { DIRETOR_GERAL.toLowerCase(),
-					MEDICO.toLowerCase(), TECNICO.toLowerCase(),
-					TECNICO_ADMINISTATIVO.toLowerCase() }));
-	
-	public static final HashSet<String> PROCEDIMENTOS = new HashSet<String>(
-			Arrays.asList(new String[] {"Consulta clinica", "Cirurgia bariatrica", "Redesignacao sexual", "Transplante de orgaos" }));
 
 	public static final String TIPO_GENERICO = "Generico";
 	public static final String TIPO_REFERENCIA = "Referencia";
-	public static final ArrayList<String> TIPOS_MEDICAMENTO_VALIDOS = new ArrayList<String>(
-			Arrays.asList(new String[] { TIPO_REFERENCIA.toLowerCase(),
-					TIPO_GENERICO.toLowerCase()}));
 	// CONSTANTES DE VALIDACAO
 
 	// CONSTANTES DE ATRIBUTOS

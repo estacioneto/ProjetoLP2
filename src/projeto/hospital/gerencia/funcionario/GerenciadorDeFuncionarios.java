@@ -49,21 +49,18 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 */
 	public Funcionario acessaSistema(String matricula, String senha) {
 		try {
-			ValidadorDeDados.validaPadraoMatricula(Constantes.MATRICULA
-					+ Constantes.DO_FUNCIONARIO, matricula);
+			ValidadorDeDados.validaPadraoMatricula(Constantes.MATRICULA + Constantes.DO_FUNCIONARIO, matricula);
 			ValidadorDeDados.validaString(Constantes.SENHA, senha);
 			if (this.contemFuncionario(matricula))
 				if (this.funcionarios.get(matricula).getSenha().equals(senha))
 					return this.funcionarios.get(matricula);
 				else
-					throw new AcessoBloqueadoException(
-							MensagensDeErro.ERRO_LOGIN + "Senha incorreta.");
+					throw new AcessoBloqueadoException(MensagensDeErro.ERRO_LOGIN + "Senha incorreta.");
 			else
-				throw new AcessoBloqueadoException(MensagensDeErro.ERRO_LOGIN
-						+ MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
+				throw new AcessoBloqueadoException(
+						MensagensDeErro.ERRO_LOGIN + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_LOGIN
-					+ e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_LOGIN + e.getMessage());
 		}
 	}
 
@@ -82,33 +79,28 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 *            Funcionario atualmente logado.
 	 * @return Matricula do funcionario cadastrado.
 	 */
-	public String cadastraFuncionario(String nome, String cargo,
-			String dataNascimento, Funcionario funcionarioLogado) {
+	public String cadastraFuncionario(String nome, String cargo, String dataNascimento, Funcionario funcionarioLogado) {
 		try {
 			// Validacao NAO necessaria antes de realizar o cadastro
 			// A ordem importa e a geracao de uma matricula depende de um cargo
 			// valido e uma data valida.
 
-			if (Constantes.DIRETOR_GERAL.equals(cargo) && !this.isEmpty())
+			if (Constantes.DIRETOR_GERAL.equals(cargo) && this.temFuncionariosCadastrados())
 				throw new OperacaoInvalidaException(
-						MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO
-								+ MensagensDeErro.ERRO_CADASTRO_DIRETOR_FUNCIONARIO);
+						MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.ERRO_CADASTRO_DIRETOR_FUNCIONARIO);
 
-			if (!this.isEmpty())
-				ValidadorDeLogica.validaOperacao(
-						MensagensDeErro.ERRO_PERMISSAO_CADASTRO_FUNCIONARIO,
+			if (this.temFuncionariosCadastrados())
+				ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_FUNCIONARIO,
 						Permissao.CADASTRAR_FUNCIONARIOS, funcionarioLogado);
 
-			Funcionario funcionario = (Funcionario) Reflection.godFactory(
-					Funcionario.class, nome, cargo, dataNascimento);
+			Funcionario funcionario = (Funcionario) Reflection.godFactory(Funcionario.class, nome, cargo,
+					dataNascimento);
 			if (this.adicionaFuncionario(funcionario))
 				return funcionario.getMatricula();
 			else
-				throw new OperacaoInvalidaException(
-						"Funcionario ja cadastrado!");
+				throw new OperacaoInvalidaException("Funcionario ja cadastrado!");
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + e.getMessage());
 		}
 	}
 
@@ -118,11 +110,10 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 * @param funcionario
 	 *            Funcionario a ser adicionado.
 	 * @return true se o funcionario foi adicionado com sucesso.
-	 * @throws DadoInvalidoException
+	 * @throws ObjetoNuloException
 	 *             Caso o funcionario seja nulo.
 	 */
-	private boolean adicionaFuncionario(Funcionario funcionario)
-			throws ObjetoNuloException {
+	private boolean adicionaFuncionario(Funcionario funcionario) throws ObjetoNuloException {
 		ValidadorDeDados.validaNaoNulo(Constantes.FUNCIONARIO, funcionario);
 		if (this.contemFuncionario(funcionario.getMatricula()))
 			return false;
@@ -140,31 +131,24 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 * @param matriculaFuncionario
 	 *            Matricula do funcionario a ser excluido.
 	 */
-	public void excluiFuncionario(String matriculaUsuario, String senhaUsuario,
-			String matriculaFuncionario) {
+	public void excluiFuncionario(String matriculaUsuario, String senhaUsuario, String matriculaFuncionario) {
 		try {
-			ValidadorDeDados.validaPadraoMatricula(Constantes.MATRICULA
-					+ Constantes.DO_FUNCIONARIO, matriculaUsuario);
-			ValidadorDeDados.validaPadraoMatricula(Constantes.MATRICULA
-					+ Constantes.DO_FUNCIONARIO, matriculaFuncionario);
+			ValidadorDeDados.validaPadraoMatricula(Constantes.MATRICULA + Constantes.DO_FUNCIONARIO, matriculaUsuario);
+			ValidadorDeDados.validaPadraoMatricula(Constantes.MATRICULA + Constantes.DO_FUNCIONARIO,
+					matriculaFuncionario);
 
-			if (this.contemFuncionario(matriculaUsuario)
-					&& this.contemFuncionario(matriculaFuncionario)) {
-				Funcionario funcionario = this.funcionarios
-						.get(matriculaUsuario);
+			if (this.contemFuncionario(matriculaUsuario) && this.contemFuncionario(matriculaFuncionario)) {
+				Funcionario funcionario = this.funcionarios.get(matriculaUsuario);
 
 				ValidadorDeLogica.validaExclusao(funcionario);
 				if (funcionario.getSenha().equals(senhaUsuario)) {
 					this.funcionarios.remove(matriculaFuncionario);
 				} else
-					throw new DadoInvalidoException(
-							MensagensDeErro.SENHA_INVALIDA);
+					throw new DadoInvalidoException(MensagensDeErro.SENHA_INVALIDA);
 			} else
-				throw new DadoInvalidoException(
-						MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
+				throw new DadoInvalidoException(MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_EXCLUSAO_FUNCIONARIO + e.getMessage());
 		}
 	}
 
@@ -180,32 +164,23 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 * @param novoValor
 	 *            Novo valor do atributo.
 	 */
-	public void atualizaInfoFuncionario(Funcionario funcionarioLogado,
-			String matricula, String atributo, String novoValor) {
+	public void atualizaInfoFuncionario(Funcionario funcionarioLogado, String matricula, String atributo,
+			String novoValor) {
 		try {
-			ValidadorDeDados.validaPadraoMatricula(Constantes.MATRICULA
-					+ Constantes.DO_FUNCIONARIO, matricula);
-			ValidadorDeDados.validaString(Util.capitalizaString(atributo)
-					+ Constantes.DO_FUNCIONARIO, novoValor);
-			// ValidadorDeDados.validaAtualizarAtributoFuncionario(atributo,
-			// novoValor);
+			ValidadorDeDados.validaPadraoMatricula(Constantes.MATRICULA + Constantes.DO_FUNCIONARIO, matricula);
+			ValidadorDeDados.validaString(Util.capitalizaString(atributo) + Constantes.DO_FUNCIONARIO, novoValor);
 			if (!contemFuncionario(matricula)) {
 				throw new OperacaoInvalidaException(
-						MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO
-								+ MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
+						MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 			}
 			// Se o usuario nao for ele mesmo ou nao tiver a permissao para
 			// atualizar outro (o diretor)
-			if (!(funcionarioLogado.getMatricula().equals(matricula) || funcionarioLogado
-					.temPermissao(Permissao.ATUALIZAR_INFORMACOES_FUNCIONARIOS)))
-				throw new OperacaoInvalidaException(
-						MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO
-								+ MensagensDeErro.PERMISSAO_NEGADA_ATUALIZACAO);
-			Reflection.atualizaInfo(this.funcionarios.get(matricula), atributo,
-					novoValor, MensagensDeErro.ATRIBUTO_NAO_ATUALIZAVEL);
+			if (!(funcionarioLogado.getMatricula().equals(matricula) || funcionarioLogado.temPermissao(Permissao.ATUALIZAR_INFORMACOES_FUNCIONARIOS))) {
+				throw new OperacaoInvalidaException( MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + MensagensDeErro.PERMISSAO_NEGADA_ATUALIZACAO);
+			}			
+			Reflection.atualizaInfo(this.funcionarios.get(matricula), atributo, novoValor, MensagensDeErro.ATRIBUTO_NAO_ATUALIZAVEL);
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + e.getMessage());
 		}
 	}
 
@@ -219,21 +194,15 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 * @param novaSenha
 	 *            Nova senha do usuario.
 	 */
-	public void atualizaSenha(Funcionario funcionarioLogado,
-			String senhaAntiga, String novaSenha) {
+	public void atualizaSenha(Funcionario funcionarioLogado, String senhaAntiga, String novaSenha) {
 		try {
-			if (!funcionarioLogado.getSenha().equals(senhaAntiga))
-				throw new OperacaoInvalidaException(
-						MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO
-								+ MensagensDeErro.SENHA_INVALIDA);
-			Reflection.atualizaInfo(
-					this.funcionarios.get(funcionarioLogado.getMatricula()),
-					Constantes.SENHA, novaSenha,
-					MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO
-							+ Constantes.SENHA);
+			if (!funcionarioLogado.getSenha().equals(senhaAntiga)) {
+				throw new OperacaoInvalidaException( MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + MensagensDeErro.SENHA_INVALIDA);
+			}
+			Reflection.atualizaInfo(this.funcionarios.get(funcionarioLogado.getMatricula()), Constantes.SENHA,
+					novaSenha, MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + Constantes.SENHA);
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_ATUALIZA_FUNCIONARIO + e.getMessage());
 		}
 	}
 
@@ -250,19 +219,14 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 */
 	public Object getInfoFuncionario(String matricula, String atributo) {
 		try {
-			ValidadorDeDados.validaPadraoMatricula(Constantes.MATRICULA
-					+ Constantes.DO_FUNCIONARIO, matricula);
+			ValidadorDeDados.validaPadraoMatricula(Constantes.MATRICULA + Constantes.DO_FUNCIONARIO, matricula);
 			ValidadorDeDados.validaString(Constantes.ATRIBUTO, atributo);
 			if (this.contemFuncionario(matricula)) {
-				return Reflection.getInfo(this.funcionarios.get(matricula),
-						atributo);
+				return Reflection.getInfo(this.funcionarios.get(matricula), atributo);
 			}
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO
-							+ MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + MensagensDeErro.ERRO_FUNCIONARIO_NAO_CADASTRADO);
 		} catch (DadoInvalidoException e) {
-			throw new OperacaoInvalidaException(
-					MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + e.getMessage());
+			throw new OperacaoInvalidaException(MensagensDeErro.ERRO_CONSULTA_FUNCIONARIO + e.getMessage());
 		}
 	}
 
@@ -282,8 +246,8 @@ public class GerenciadorDeFuncionarios implements Serializable {
 	 * 
 	 * @return true se nao ha funcionarios cadastrados.
 	 */
-	public boolean isEmpty() {
-		return this.funcionarios.isEmpty();
+	public boolean temFuncionariosCadastrados() {
+		return !this.funcionarios.isEmpty();
 	}
 	// CONSULTA DE FUNCIONARIO
 }

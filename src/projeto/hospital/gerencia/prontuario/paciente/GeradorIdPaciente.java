@@ -15,6 +15,9 @@ public class GeradorIdPaciente implements Serializable {
 
 	private Long id;
 
+	/**
+	 * Construtor
+	 */
 	public GeradorIdPaciente() {
 		id = new Long(1);
 	}
