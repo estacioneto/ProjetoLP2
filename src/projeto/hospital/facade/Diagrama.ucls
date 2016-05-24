@@ -3,551 +3,847 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <package id="1" language="java" name="projeto.hospital.facade" project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/facade" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="821" width="356" x="12" y="-115"/>    
+    <position height="781" width="356" x="12" y="-115"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="2" language="java" name="projeto.hospital.facade.Facade" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/facade/Facade.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="189" y="307"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="3" language="java" name="projeto.hospital.controller" project="ProjetoLP2" 
+  <package id="2" language="java" name="projeto.hospital.controller" project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/controller" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="819" width="379" x="9" y="754"/>    
+    <position height="945" width="379" x="9" y="754"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="4" language="java" name="projeto.hospital.controller.Controller" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="193" y="1197"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="5" language="java" name="projeto.hospital.gerencia" project="ProjetoLP2" 
+  <package id="3" language="java" name="projeto.hospital.gerencia" project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/gerencia" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="3272" width="1108" x="604" y="-107"/>    
+    <position height="3760" width="1356" x="604" y="-114"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <package id="6" language="java" name="projeto.hospital.gerencia.farmacia" project="ProjetoLP2" 
+  <package id="4" language="java" name="projeto.hospital.gerencia.farmacia" project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="785" width="1067" x="631" y="-50"/>    
+    <position height="798" width="1317" x="631" y="-50"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="7" language="java" name="projeto.hospital.gerencia.farmacia.Farmacia" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/Farmacia.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="796" y="127"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="projeto.hospital.gerencia.farmacia.GerenciadorDeFarmacia" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/GerenciadorDeFarmacia.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="838" y="547"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="9" language="java" name="projeto.hospital.gerencia.farmacia.medicamento" project="ProjetoLP2" 
+  <package id="5" language="java" name="projeto.hospital.gerencia.farmacia.medicamento" project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="720" width="651" x="1041" y="7"/>    
+    <position height="736" width="951" x="991" y="5"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="10" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.Medicamento" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/Medicamento.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1170" y="297"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="11" language="java" name="projeto.hospital.gerencia.funcionario" project="ProjetoLP2" 
+  <package id="6" language="java" name="projeto.hospital.gerencia.funcionario" project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="839" width="1066" x="631" y="742"/>    
+    <position height="839" width="1315" x="633" y="765"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="12" language="java" name="projeto.hospital.gerencia.funcionario.Funcionario" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/Funcionario.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="779" y="1285"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="13" language="java" name="projeto.hospital.gerencia.funcionario.GerenciadorDeFuncionarios" 
-    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/GerenciadorDeFuncionarios.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="813" y="900"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="14" language="java" name="projeto.hospital.gerencia.funcionario.GeradorDeDadosDeSeguranca" 
-    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/GeradorDeDadosDeSeguranca.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1545" y="892"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="15" language="java" name="projeto.hospital.gerencia.prontuario" project="ProjetoLP2" 
+  <package id="7" language="java" name="projeto.hospital.gerencia.prontuario" project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="1098" width="1078" x="621" y="1609"/>    
+    <position height="1028" width="1312" x="630" y="1620"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="16" language="java" name="projeto.hospital.gerencia.prontuario.GerenciadorDePacienteProntuario" 
-    project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/GerenciadorDePacienteProntuario.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="849" y="1798"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="17" language="java" name="projeto.hospital.gerencia.funcionario.cargo" project="ProjetoLP2" 
+  <package id="8" language="java" name="projeto.hospital.gerencia.funcionario.cargo" project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="501" width="706" x="982" y="1018"/>    
+    <position height="748" width="704" x="1236" y="827"/>    
     <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
   </package>  
-  <class id="18" language="java" name="projeto.hospital.gerencia.funcionario.cargo.Cargo" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/Cargo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1109" y="1167"/>    
+  <package id="9" language="java" name="projeto.hospital.gerencia.prontuario.paciente" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="957" width="892" x="1039" y="1677"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="10" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/tipos" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="503" width="604" x="1331" y="59"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="11" language="java" name="projeto.hospital.gerencia.prontuario.paciente.fidelidade" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/fidelidade" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="694" width="547" x="1372" y="1740"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="12" language="java" name="projeto.hospital.gerencia.procedimento" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="608" width="1322" x="619" y="2654"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="13" language="java" name="projeto.hospital.facade.Facade" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/facade/Facade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="189" y="296"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="projeto.hospital.gerencia.funcionario.cargo.DiretorGeral" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/DiretorGeral.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1578" y="1128"/>    
+  <class id="14" language="java" name="projeto.hospital.controller.Controller" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/controller/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="198" y="1248"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="projeto.hospital.gerencia.funcionario.cargo.Medico" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/Medico.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1369" y="1214"/>    
+  <class id="15" language="java" name="projeto.hospital.gerencia.farmacia.Farmacia" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/Farmacia.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="811" y="497"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="projeto.hospital.gerencia.funcionario.cargo.TecnicoAdministrativo" 
-    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/TecnicoAdministrativo.java" 
+  <enumeration id="16" language="java" 
+    name="projeto.hospital.gerencia.farmacia.medicamento.CategoriasValidasMedicamentos" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/CategoriasValidasMedicamentos.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1579" y="1278"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <enumeration id="22" language="java" name="projeto.hospital.gerencia.funcionario.cargo.Permissao" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/Permissao.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1297" y="1406"/>    
+    <position height="-1" width="-1" x="1148" y="621"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <package id="23" language="java" name="projeto.hospital.gerencia.prontuario.paciente" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="749" width="1036" x="652" y="1946"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <class id="24" language="java" name="projeto.hospital.gerencia.prontuario.paciente.GeradorIdPaciente" 
-    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/GeradorIdPaciente.java" 
-    binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1459" y="2041"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="25" language="java" name="projeto.hospital.gerencia.prontuario.paciente.Paciente" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/Paciente.java" binary="false" 
+  <class id="17" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.Medicamento" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/Medicamento.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="797" y="2326"/>    
+    <position height="-1" width="-1" x="1146" y="276"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="26" language="java" name="projeto.hospital.gerencia.prontuario.Prontuario" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/Prontuario.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1187" y="1802"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <package id="27" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/tipos" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="649" width="361" x="1318" y="67"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <class id="28" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.Generico" 
+  <class id="18" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.Generico" 
     project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/tipos/Generico.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1536" y="245"/>    
+    <position height="-1" width="-1" x="1787" y="218"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="29" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.Referencia" 
+  <class id="19" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.Referencia" 
     project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/tipos/Referencia.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1539" y="613"/>    
+    <position height="-1" width="-1" x="1785" y="447"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="30" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.TipoMedicamento" 
+  <interface id="20" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.TipoMedicamento" 
     project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/tipos/TipoMedicamento.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1493" y="438"/>    
+    <position height="-1" width="-1" x="1457" y="199"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <package id="31" language="java" name="projeto.hospital.gerencia.prontuario.paciente.fidelidade" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/fidelidade" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="507" width="716" x="942" y="2131"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <interface id="32" language="java" name="projeto.hospital.gerencia.prontuario.paciente.fidelidade.Fidelidade" 
+  <enumeration id="21" language="java" name="projeto.hospital.gerencia.farmacia.medicamento.tipos.TipoMedicamentoValido" 
+    project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/farmacia/medicamento/tipos/TipoMedicamentoValido.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1470" y="431"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="22" language="java" name="projeto.hospital.gerencia.funcionario.Funcionario" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/Funcionario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="775" y="1030"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="projeto.hospital.gerencia.funcionario.GerenciadorDeFuncionarios" 
+    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/GerenciadorDeFuncionarios.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="817" y="1448"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="projeto.hospital.gerencia.funcionario.GeradorDeDadosDeSeguranca" 
+    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/GeradorDeDadosDeSeguranca.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1040" y="1150"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="projeto.hospital.gerencia.funcionario.cargo.Cargo" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/Cargo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1357" y="955"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="26" language="java" name="projeto.hospital.gerencia.funcionario.cargo.CargoValido" 
+    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/CargoValido.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1823" y="955"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="27" language="java" name="projeto.hospital.gerencia.funcionario.cargo.DiretorGeral" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/DiretorGeral.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1589" y="950"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="projeto.hospital.gerencia.funcionario.cargo.Medico" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/Medico.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1651" y="1094"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="29" language="java" name="projeto.hospital.gerencia.funcionario.cargo.Permissao" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/Permissao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1419" y="1445"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="30" language="java" name="projeto.hospital.gerencia.funcionario.cargo.TecnicoAdministrativo" 
+    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/funcionario/cargo/TecnicoAdministrativo.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1523" y="1201"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="projeto.hospital.gerencia.prontuario.Prontuario" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/Prontuario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="791" y="2196"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="projeto.hospital.gerencia.prontuario.GerenciadorDePacienteProntuario" 
+    project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/GerenciadorDePacienteProntuario.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="836" y="1831"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="projeto.hospital.gerencia.prontuario.paciente.Paciente" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/Paciente.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1203" y="2257"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="projeto.hospital.gerencia.prontuario.paciente.GeradorIdPaciente" 
+    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/GeradorIdPaciente.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1231" y="1793"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="35" language="java" name="projeto.hospital.gerencia.prontuario.paciente.TipoSanguineoValido" 
+    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/TipoSanguineoValido.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1487" y="2549"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <interface id="36" language="java" name="projeto.hospital.gerencia.prontuario.paciente.fidelidade.Fidelidade" 
     project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/fidelidade/Fidelidade.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1081" y="2252"/>    
+    <position height="-1" width="-1" x="1513" y="1881"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="33" language="java" name="projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadeMaster" 
+  <class id="37" language="java" name="projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadeMaster" 
     project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/fidelidade/FidelidadeMaster.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1503" y="2302"/>    
+    <position height="-1" width="-1" x="1795" y="1925"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="34" language="java" name="projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadePadrao" 
+  <class id="38" language="java" name="projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadePadrao" 
     project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/fidelidade/FidelidadePadrao.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1439" y="2524"/>    
+    <position height="-1" width="-1" x="1736" y="2164"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="35" language="java" name="projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadeVIP" 
+  <class id="39" language="java" name="projeto.hospital.gerencia.prontuario.paciente.fidelidade.FidelidadeVIP" 
     project="ProjetoLP2" 
     file="/ProjetoLP2/src/projeto/hospital/gerencia/prontuario/paciente/fidelidade/FidelidadeVIP.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1096" y="2507"/>    
+    <position height="-1" width="-1" x="1532" y="2337"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <package id="36" language="java" name="projeto.hospital.gerencia.procedimento" project="ProjetoLP2" 
-    file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="433" width="1082" x="619" y="2720"/>    
-    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
-  </package>  
-  <class id="37" language="java" name="projeto.hospital.gerencia.procedimento.GerenciadorProcedimento" 
+  <class id="40" language="java" name="projeto.hospital.gerencia.procedimento.GerenciadorProcedimento" 
     project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento/GerenciadorProcedimento.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="814" y="2874"/>    
+    <position height="-1" width="-1" x="816" y="2847"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <generalization id="38">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <association id="39">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="40" name="funcionarioLogado">        
-        <position height="0" width="0" x="-57" y="-32"/>      
-      </attribute>      
-      <multiplicity id="41" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-57" y="-32"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="42">    
-    <bendpoint x="1137" y="1309"/>    
-    <bendpoint x="1136" y="1426"/>    
-    <end type="SOURCE" refId="18" navigable="false">      
-      <attribute id="43" name="permissoes">        
-        <position height="0" width="0" x="-29" y="-5"/>      
-      </attribute>      
-      <multiplicity id="44" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-29" y="-5"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="45">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="46" name="farmacia">        
-        <position height="0" width="0" x="4" y="-97"/>      
-      </attribute>      
-      <multiplicity id="47" minimum="0" maximum="1">        
-        <position height="0" width="0" x="4" y="-97"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="48">    
-    <bendpoint x="585" y="1564"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="49" name="gerenciadorDePaciente">        
-        <position height="0" width="0" x="-98" y="142"/>      
-      </attribute>      
-      <multiplicity id="50" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-98" y="142"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="51">    
-    <bendpoint x="583" y="1599"/>    
-    <bendpoint x="588" y="2764"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="52" name="gerenciadorProcedimento">        
+  <package id="41" language="java" name="projeto.hospital.gerencia.procedimento.procedimentos" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento/procedimentos" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="547" width="897" x="1024" y="2706"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="42" language="java" name="projeto.hospital.gerencia.procedimento.procedimentos.Procedimento" 
+    project="ProjetoLP2" file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento/procedimentos/Procedimento.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1189" y="2872"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="43" language="java" name="projeto.hospital.gerencia.procedimento.procedimentos.ProcedimentosValidos" 
+    project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento/procedimentos/ProcedimentosValidos.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1451" y="3148"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="44" language="java" name="projeto.hospital.gerencia.procedimento.procedimentos.CirurgiaBariatrica" 
+    project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento/procedimentos/CirurgiaBariatrica.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1779" y="2864"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="projeto.hospital.gerencia.procedimento.procedimentos.ConsultaClinica" 
+    project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento/procedimentos/ConsultaClinica.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1503" y="2887"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="projeto.hospital.gerencia.procedimento.procedimentos.RedesignacaoSexual" 
+    project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento/procedimentos/RedesignacaoSexual.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1755" y="3101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="projeto.hospital.gerencia.procedimento.procedimentos.TransplanteDeOrgaos" 
+    project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/procedimento/procedimentos/TransplanteDeOrgaos.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1181" y="3136"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="48" language="java" name="projeto.hospital.gerencia.bancodeorgaos" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/bancodeorgaos" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="363" width="585" x="622" y="3270"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="49" language="java" name="projeto.hospital.gerencia.bancodeorgaos.BancoDeOrgaos" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/bancodeorgaos/BancoDeOrgaos.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="776" y="3457"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="projeto.hospital.gerencia.bancodeorgaos.Orgao" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/hospital/gerencia/bancodeorgaos/Orgao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1063" y="3469"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="51" language="java" name="projeto.util" project="ProjetoLP2" file="/ProjetoLP2/src/projeto/util" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1475" width="1132" x="1987" y="-97"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="52" language="java" name="projeto.util.Constantes" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/Constantes.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2458" y="481"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="projeto.util.MensagensDeErro" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/MensagensDeErro.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2163" y="509"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="projeto.util.Util" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/Util.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2709" y="1123"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="projeto.util.ValidadorDeDados" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/ValidadorDeDados.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2974" y="1143"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="projeto.util.ValidadorDeLogica" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/ValidadorDeLogica.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2147" y="1127"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="57" language="java" name="projeto.util.reflexao" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/reflexao" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="931" width="522" x="2584" y="-33"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="58" language="java" name="projeto.util.reflexao.ConstantesReflection" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/reflexao/ConstantesReflection.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2989" y="352"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <annotation id="59" language="java" name="projeto.util.reflexao.Conversao" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/reflexao/Conversao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2671" y="87"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </annotation>  
+  <annotation id="60" language="java" name="projeto.util.reflexao.MetodoAssociado" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/reflexao/MetodoAssociado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2674" y="199"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </annotation>  
+  <class id="61" language="java" name="projeto.util.reflexao.Reflection" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/reflexao/Reflection.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2959" y="788"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <annotation id="62" language="java" name="projeto.util.reflexao.Validacao" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/reflexao/Validacao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2809" y="115"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </annotation>  
+  <class id="63" language="java" name="projeto.util.reflexao.Conversor" project="ProjetoLP2" 
+    file="/ProjetoLP2/src/projeto/util/reflexao/Conversor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2710" y="788"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="64">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="65" name="farmacia">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="53" minimum="0" maximum="1">        
+      <multiplicity id="66" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="37" navigable="true"/>    
+    <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="54">    
-    <bendpoint x="879" y="318"/>    
-    <bendpoint x="947" y="323"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="55" name="listaMedicamentos">        
-        <position height="0" width="0" x="5" y="-243"/>      
-      </attribute>      
-      <multiplicity id="56" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="5" y="-243"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="57">    
-    <bendpoint x="1290" y="1285"/>    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <realization id="58">    
-    <end type="SOURCE" refId="33"/>    
-    <end type="TARGET" refId="32"/>  
-  </realization>  
-  <association id="59">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="60" name="cargo">        
-        <position height="0" width="0" x="-58" y="-53"/>      
-      </attribute>      
-      <multiplicity id="61" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-58" y="-53"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="62">    
-    <end type="SOURCE" refId="34"/>    
-    <end type="TARGET" refId="32"/>  
-  </realization>  
-  <association id="63">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="64" name="tipo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="65" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="30" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="66">    
-    <end type="SOURCE" refId="28"/>    
-    <end type="TARGET" refId="30"/>  
-  </realization>  
   <association id="67">    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="68" name="pacientes">        
-        <position height="0" width="0" x="-74" y="37"/>      
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="68" name="geradorIdPaciente">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="69" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-74" y="37"/>      
+      <multiplicity id="69" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="26" navigable="true"/>    
+    <end type="TARGET" refId="34" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="70">    
-    <end type="SOURCE" refId="25" navigable="false">      
-      <attribute id="71" name="fidelidade">        
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="71" name="gerenciadorFuncionarios">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="72" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="32" navigable="true"/>    
+    <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="73">    
-    <bendpoint x="587" y="860"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="74" name="gerenciadorFuncionarios">        
-        <position height="0" width="0" x="-66" y="-37"/>      
-      </attribute>      
-      <multiplicity id="75" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-66" y="-37"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <generalization id="73">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="25"/>  
+  </generalization>  
+  <realization id="74">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <generalization id="75">    
+    <bendpoint x="1580" y="3015"/>    
+    <bendpoint x="1344" y="3002"/>    
+    <end type="SOURCE" refId="46"/>    
+    <end type="TARGET" refId="42"/>  
+  </generalization>  
   <association id="76">    
-    <bendpoint x="526" y="612"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="77" name="gerenciadorDeMedicamento">        
-        <position height="0" width="0" x="36" y="-68"/>      
+    <bendpoint x="73" y="824"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="77" name="controller">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="78" minimum="0" maximum="1">        
-        <position height="0" width="0" x="36" y="-68"/>      
+        <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="79">    
-    <bendpoint x="1004" y="1930"/>    
-    <bendpoint x="1009" y="2024"/>    
-    <end type="SOURCE" refId="16" navigable="false">      
-      <attribute id="80" name="geradorIdPaciente">        
-        <position height="0" width="0" x="204" y="102"/>      
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="80" name="funcionarioLogado">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="81" minimum="0" maximum="1">        
-        <position height="0" width="0" x="204" y="102"/>      
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="83" name="fidelidade">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="84" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="85">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <association id="86">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="87" name="gerenciadorDePaciente">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="88" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="89">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="90" name="instancia">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="91" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="24" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="82">    
-    <end type="SOURCE" refId="29"/>    
-    <end type="TARGET" refId="30"/>  
-  </realization>  
-  <association id="83">    
-    <bendpoint x="1010" y="1970"/>    
-    <bendpoint x="924" y="1998"/>    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="84" name="paciente">        
-        <position height="0" width="0" x="-747" y="412"/>      
+  <generalization id="92">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="25"/>  
+  </generalization>  
+  <generalization id="93">    
+    <end type="SOURCE" refId="47"/>    
+    <end type="TARGET" refId="42"/>  
+  </generalization>  
+  <association id="94">    
+    <end type="SOURCE" refId="49" navigable="false">      
+      <attribute id="95" name="orgaos">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="85" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-747" y="412"/>      
+      <multiplicity id="96" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="97">    
+    <bendpoint x="1651" y="2773"/>    
+    <bendpoint x="1345" y="2772"/>    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="42"/>  
+  </generalization>  
+  <association id="98">    
+    <bendpoint x="546" y="1706"/>    
+    <bendpoint x="544" y="2718"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="99" name="gerenciadorProcedimento">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="100" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="102" name="tipo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="103" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="104">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="105" name="funcionarios">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="106" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="107">    
+    <end type="SOURCE" refId="45"/>    
+    <end type="TARGET" refId="42"/>  
+  </generalization>  
+  <association id="108">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="109" name="pacientes">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="110" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="111">    
+    <end type="SOURCE" refId="39"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <association id="112">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="113" name="orgao">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="114" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="50" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="116" name="cargo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="117" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="25" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="86">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="87" name="controller">        
-        <position height="0" width="0" x="-13" y="341"/>      
+  <association id="118">    
+    <bendpoint x="1360" y="1316"/>    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="119" name="permissoes">        
+        <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="88" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-13" y="341"/>      
+      <multiplicity id="120" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="29" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="89">    
-    <bendpoint x="1282" y="1141"/>    
-    <end type="SOURCE" refId="19"/>    
-    <end type="TARGET" refId="18"/>  
-  </generalization>  
-  <association id="90">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="91" name="funcionarios">        
-        <position height="0" width="0" x="-57" y="-32"/>      
-      </attribute>      
-      <multiplicity id="92" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="-57" y="-32"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="93">    
-    <end type="SOURCE" refId="35"/>    
-    <end type="TARGET" refId="32"/>  
+  <realization id="121">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="36"/>  
   </realization>  
+  <association id="122">    
+    <bendpoint x="515" y="1715"/>    
+    <bendpoint x="521" y="3059"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="123" name="bancoDeOrgaos">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="124" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="49" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="125">    
+    <bendpoint x="1004" y="2659"/>    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="126" name="procedimentosRealizados">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="127" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="128">    
+    <bendpoint x="818" y="273"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="129" name="listaMedicamentos">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="130" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="131">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <generalization id="132">    
+    <end type="SOURCE" refId="28"/>    
+    <end type="TARGET" refId="25"/>  
+  </generalization>  
+  <association id="133">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="134" name="paciente">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="135" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
