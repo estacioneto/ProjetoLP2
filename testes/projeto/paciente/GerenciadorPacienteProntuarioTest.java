@@ -17,11 +17,12 @@ public class GerenciadorPacienteProntuarioTest {
 	Funcionario tecnico;
 
 	/**
-	 * Reseta os pacientes para os testes
+	 * Inicia o gerenciador de pacientes e prontuario e cadastra pacientes
+	 * validos, os quais serao utilizados em todos os testes da classe.
 	 * 
 	 */
 	@Before
-	public void iniciaTudo() {
+	public void iniciaGerenciadorDePacienteProntuario() {
 		this.gerenciador = new GerenciadorDePacienteProntuario();
 		geradorIdPaciente = new GeradorIdPaciente();
 		tecnico = new Funcionario("Ze cadastro", "Tecnico Administrativo",
@@ -34,6 +35,9 @@ public class GerenciadorPacienteProntuarioTest {
 				"masculino", "Masculino", "A+", tecnico);
 	}
 
+	/**
+	 * Metodo responsavel por testar o cadastro de pacientes validos.
+	 */
 	@Test
 	public void testCadastraPaciente() {
 		try {
@@ -51,6 +55,9 @@ public class GerenciadorPacienteProntuarioTest {
 
 	}
 
+	/**
+	 * Metodo responsavel por testar o cadastro de pacientes invalidos.
+	 */
 	@Test
 	public void testCadastraPacienteInvalido() {
 		try {
@@ -99,6 +106,10 @@ public class GerenciadorPacienteProntuarioTest {
 		}
 	}
 
+	/**
+	 * Metodo responsavel por testar se as informacoes pegas de um usuario estao
+	 * corretas.
+	 */
 	@Test
 	public void testGetInfoPaciente() {
 		try {
@@ -115,6 +126,9 @@ public class GerenciadorPacienteProntuarioTest {
 
 	}
 
+	/**
+	 * Metodo responsavel por testar se o id retornado eh correto.
+	 */
 	@Test
 	public void testGetIdProntuarioPosicao() {
 		try {
@@ -126,6 +140,9 @@ public class GerenciadorPacienteProntuarioTest {
 		}
 	}
 
+	/**
+	 * Metodo responsavel por testar se o ID do paciente esta correto.
+	 */
 	@Test
 	public void testGetIdPaciente() {
 		try {
