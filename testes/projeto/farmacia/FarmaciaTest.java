@@ -85,21 +85,21 @@ public class FarmaciaTest {
 					"analgesico,antiemetico,antitermico");
 			fail();
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Tipo do medicamento invalido.");
+			assertEquals(e.getMessage(), "Erro no cadastro de medicamento. Tipo do medicamento invalido.");
 		}
 		try {
 			farmacia.addMedicamento("Aciclovir", 10.50, 600, "",
 					"analgesico,antitermico");
 			fail();
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Tipo do medicamento invalido.");
+			assertEquals(e.getMessage(), "Erro no cadastro de medicamento. Tipo do medicamento invalido.");
 		}
 		try {
 			farmacia.addMedicamento("Aciclovir", 10.50, 600, "genericoo",
 					"analgesico,antitermico");
 			fail();
 		} catch (Exception e) {
-			assertEquals(e.getMessage(), "Tipo do medicamento invalido.");
+			assertEquals(e.getMessage(), "Erro no cadastro de medicamento. Tipo do medicamento invalido.");
 		}
 	}
 	
@@ -112,43 +112,43 @@ public class FarmaciaTest {
 			farmacia.addMedicamento("", 9.98, 550, "Referencia", "analgesico,antiemetico,antitermico");
 			fail();
 		} catch (Exception e) {
-			assertEquals("Nome do medicamento nao pode ser vazio.", e.getMessage());
+			assertEquals("Erro no cadastro de medicamento. Nome do medicamento nao pode ser vazio.", e.getMessage());
 		}
 		try {
 			farmacia.addMedicamento("       ", 9.98, 550, "Referencia", "analgesico,antiemetico,antitermico");
 			fail();
 		} catch (Exception e) {
-			assertEquals("Nome do medicamento nao pode ser vazio.", e.getMessage());
+			assertEquals("Erro no cadastro de medicamento. Nome do medicamento nao pode ser vazio.", e.getMessage());
 		}
 		try {
 			farmacia.addMedicamento(null, 79.90, 200, "Generico", "analgesico");
 			fail();
 		} catch (Exception e) {
-			assertEquals("Nome do medicamento nao pode ser nulo(a)!", e.getMessage());
+			assertEquals("Erro no cadastro de medicamento. Nome do medicamento nao pode ser nulo(a)!", e.getMessage());
 		}
 		try {
 			farmacia.addMedicamento("Dipirona", -9.8, 550, "Referencia", "analgesico");
 			fail();
 		} catch (Exception e) {
-			assertEquals("Preco do medicamento nao pode ser negativo.", e.getMessage());
+			assertEquals("Erro no cadastro de medicamento. Preco do medicamento nao pode ser negativo.", e.getMessage());
 		}
 		try {
 			farmacia.addMedicamento("Dipirona", 9.8, -10, "Referencia", "analgesico");
 			fail();
 		} catch (Exception e) {
-			assertEquals("Quantidade do medicamento nao pode ser negativo.", e.getMessage());
+			assertEquals("Erro no cadastro de medicamento. Quantidade do medicamento nao pode ser negativo.", e.getMessage());
 		}
 		try {
 			farmacia.addMedicamento("Dipirona", 9.98, 550, "Generico", "");
 			fail();
 		} catch (Exception e) {
-			assertEquals("Categorias do medicamento nao pode ser vazio.", e.getMessage());
+			assertEquals("Erro no cadastro de medicamento. Categorias do medicamento nao pode ser vazio.", e.getMessage());
 		}
 		try {
 			farmacia.addMedicamento("Dipirona", 9.98, 550, "Generico", null);
 			fail();
 		} catch (Exception e) {
-			assertEquals("Categorias do medicamento nao pode ser nulo(a)!", e.getMessage());
+			assertEquals("Erro no cadastro de medicamento. Categorias do medicamento nao pode ser nulo(a)!", e.getMessage());
 		}
 	}
 
@@ -326,6 +326,7 @@ public class FarmaciaTest {
 			assertFalse(dimeticona.contemCategoria(null));
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail();
 		}
 	}
