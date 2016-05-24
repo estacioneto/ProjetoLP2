@@ -120,12 +120,12 @@ public class FarmaciaTest {
 		} catch (Exception e) {
 			assertEquals("Nome do medicamento nao pode ser vazio.", e.getMessage());
 		}
-//		try {
-//			farmacia.addMedicamento(null, 79.90, 200, "Generico", "analgesico");
-//			fail();
-//		} catch (Exception e) {
-//			assertEquals("Nome do medicamento nao pode ser nulo(a)!", e.getMessage());
-//		}
+		try {
+			farmacia.addMedicamento(null, 79.90, 200, "Generico", "analgesico");
+			fail();
+		} catch (Exception e) {
+			assertEquals("Nome do medicamento nao pode ser nulo(a)!", e.getMessage());
+		}
 		try {
 			farmacia.addMedicamento("Dipirona", -9.8, 550, "Referencia", "analgesico");
 			fail();
@@ -144,12 +144,12 @@ public class FarmaciaTest {
 		} catch (Exception e) {
 			assertEquals("Categorias do medicamento nao pode ser vazio.", e.getMessage());
 		}
-//		try {
-//			farmacia.addMedicamento("Dipirona", 9.98, 550, "Generico", null);
-//			fail();
-//		} catch (Exception e) {
-//			assertEquals("Categorias do medicamento nao pode ser nula ou vazia.", e.getMessage());
-//		}
+		try {
+			farmacia.addMedicamento("Dipirona", 9.98, 550, "Generico", null);
+			fail();
+		} catch (Exception e) {
+			assertEquals("Categorias do medicamento nao pode ser nulo(a)!", e.getMessage());
+		}
 	}
 
 	/**

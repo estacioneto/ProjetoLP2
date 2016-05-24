@@ -189,6 +189,7 @@ public abstract class Reflection {
 				Field campo = campos.get(i);
 				campo.setAccessible(true);
 				Validacao validacao = campo.getAnnotation(Validacao.class);
+				ValidadorDeDados.validaNaoNulo(validacao.erro(), params[i]);
 				Method valida = ValidadorDeDados.class.getMethod(validacao.metodo(), validacao.erro().getClass(),
 						params[i].getClass());
 				// Valida o dado.
