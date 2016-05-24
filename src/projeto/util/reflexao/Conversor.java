@@ -1,4 +1,4 @@
-package projeto.util;
+package projeto.util.reflexao;
 
 import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 
@@ -50,7 +50,7 @@ public abstract class Conversor {
 	 *            Numero.
 	 * @return Numero em String.
 	 */
-	public static String inteiroParaString(int numero) {
+	public static String inteiroParaString(Integer numero) {
 		return Integer.toString(numero);
 	}
 

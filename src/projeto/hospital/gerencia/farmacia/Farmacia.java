@@ -11,6 +11,7 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.gerencia.farmacia.medicamento.Medicamento;
 import projeto.util.Constantes;
 import projeto.util.MensagensDeErro;
+import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
 import projeto.util.reflexao.Reflection;
 
@@ -113,7 +114,7 @@ public class Farmacia implements Serializable {
 			ValidadorDeDados.validaString(atributo, novoValor);
 			ValidadorDeDados.validaString(Constantes.NOME + Constantes.DO_MEDICAMENTO, nomeMedicamento);
 			Medicamento medicamento = this.pegaMedicamento("", nomeMedicamento);
-			atributo = ValidadorDeDados.capitalizaString(atributo);
+			atributo = Util.capitalizaString(atributo);
 			Reflection.atualizaInfo(medicamento, atributo, novoValor,
 					String.format(MensagensDeErro.ERRO_ATRIBUTO_MEDICAMENTO_NAO_ATUALIZAVEL, atributo));
 		} catch (DadoInvalidoException | OperacaoInvalidaException e) {

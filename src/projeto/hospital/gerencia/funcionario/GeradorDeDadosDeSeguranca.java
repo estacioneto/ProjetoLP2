@@ -90,6 +90,6 @@ public class GeradorDeDadosDeSeguranca implements Serializable {
 	 * @return Senha gerada.
 	 */
 	public String geraSenha(String matricula, String ano) {
-		return ano + Util.quatroDigitosIniciais(matricula);
+		return ano + Util.quatroCaracteresIniciais(matricula);
 	}
 }

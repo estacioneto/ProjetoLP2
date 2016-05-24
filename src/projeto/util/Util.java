@@ -17,7 +17,6 @@ import projeto.exceptions.logica.OperacaoInvalidaException;
  * 
  * @author Estacio Pereira
  * @author Eric
- *
  */
 public abstract class Util {
 	// CODIGOS/SUBSTRINGS
@@ -31,7 +30,6 @@ public abstract class Util {
 	public static String getCodigoPorCargo(String cargo) {
 		// Validacao da string ser valida ja deve ter sido feita antes de chamar
 		// esse metodo
-
 		if (cargo.equals(Constantes.DIRETOR_GERAL))
 			return Constantes.CODIGO_DIRETOR;
 		if (cargo.equals(Constantes.MEDICO))
@@ -42,12 +40,12 @@ public abstract class Util {
 	/**
 	 * Dado um numero em String, retorna os quatro primeiros digitos em String.
 	 * 
-	 * @param numero
+	 * @param string
 	 *            Numero base.
-	 * @return Quatro digitos iniciais do numero.
+	 * @return Quatro caracteres iniciais da string.
 	 */
-	public static String quatroDigitosIniciais(String numero) {
-		return numero.substring(Constantes.ZERO, Constantes.QUATRO);
+	public static String quatroCaracteresIniciais(String string) {
+		return string.substring(Constantes.ZERO, Constantes.QUATRO);
 	}
 
 	/**
@@ -57,8 +55,8 @@ public abstract class Util {
 	 *            Numero base.
 	 * @return Quatro digitos iniciais do numero.
 	 */
-	public static String quatroDigitosIniciais(int numero) {
-		return quatroDigitosIniciais(Integer.toString(numero));
+	public static String quatroDigitosIniciais(Integer numero) {
+		return quatroCaracteresIniciais(Integer.toString(numero));
 	}
 
 	/**
@@ -85,7 +83,7 @@ public abstract class Util {
 	}
 
 	/**
-	 * Formata a String para retornar o nome do atributo.
+	 * Formata a String para retornar no formato de nome de variavel.
 	 * 
 	 * @param string
 	 *            Nome do atributo sem formatacao.
@@ -138,7 +136,6 @@ public abstract class Util {
 		for (int i = 0; i < nomes.length; i++) {
 			saida += capitalizaString(nomes[i]);
 		}
-
 		return saida;
 	}
 
@@ -193,7 +190,7 @@ public abstract class Util {
 	 * @throws DadoInvalidoException
 	 *             Caso o caminho nao exista.
 	 */
-	public static Object getObjeto(String caminho) throws DadoInvalidoException {
+	public static Object getObjetoArquivo(String caminho) throws DadoInvalidoException {
 		Object objeto = null;
 		try (ObjectInputStream leitorDeObjetos = new ObjectInputStream(new FileInputStream(caminho));) {
 			objeto = leitorDeObjetos.readObject();
@@ -211,12 +208,12 @@ public abstract class Util {
 	 * @param objeto
 	 *            Objeto a ser escrito
 	 */
-	public static void setObjeto(String caminho, Object objeto) {
+	public static void guardaObjetoArquivo(String caminho, Object objeto) {
 		try (ObjectOutputStream escritorObjeto = new ObjectOutputStream(new FileOutputStream(caminho))) {
 			escritorObjeto.writeObject(objeto);
 		} catch (Exception excecao) {
 			criaArquivo(caminho);
-			setObjeto(caminho, objeto);
+			guardaObjetoArquivo(caminho, objeto);
 		}
 	}
 
@@ -256,6 +253,5 @@ public abstract class Util {
 			throw new OperacaoInvalidaException(e.getMessage());
 		}
 	}
-
 	// ARQUIVOS
 }

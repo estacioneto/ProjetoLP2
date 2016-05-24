@@ -7,12 +7,16 @@ import java.util.ArrayList;
 
 import projeto.exceptions.dados.DadoInvalidoException;
 import projeto.util.Constantes;
-import projeto.util.Conversor;
 import projeto.util.Util;
 import projeto.util.ValidadorDeDados;
 
+/**
+ * Classe que encapsula os metodos que utilizam reflection
+ * 
+ * @author Estacio
+ * @author Eric
+ */
 public abstract class Reflection {
-
 	// REFLECTION
 
 	/**
@@ -32,7 +36,7 @@ public abstract class Reflection {
 		// Campo a ser requisitado.
 		Field campo = null;
 		// Metodo possivel de ser invocado.
-		Method metodo;
+		Method metodo = null;
 
 		/*
 		 * Caso o campo nao seja da classe, pega o da superclasse.
@@ -46,19 +50,26 @@ public abstract class Reflection {
 				clazz = clazz.getSuperclass();
 			}
 		} while (campo == null);
-
+		
+		// Depois de recuperar o campo
 		try {
 			// Faz com que seja possivel acessar o campo.
 			campo.setAccessible(true);
-			// Caso precise executar um metodo, executa.
-			if (campo.isAnnotationPresent(MetodoAssociado.class)) {
+			
+			// Caso precise executar um metodo em vez de recuperar o valor diretamente, executa.
+			Class<MetodoAssociado> anotacaoMetodoAssociado = MetodoAssociado.class;
+			if (campo.isAnnotationPresent(anotacaoMetodoAssociado)) {
 				// Pega a anotacao do metodo.
-				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class);
+				MetodoAssociado anotacao = campo.getAnnotation(anotacaoMetodoAssociado);
+				
 				// Pega o metodo.
-				metodo = clazz.getMethod(anotacao.get());
+				String nomeMetodo = anotacao.get();
+				metodo = clazz.getMethod(nomeMetodo);
+				
 				// Invoca o metodo pelo objeto.
 				return metodo.invoke(objeto);
 			}
+			
 			// Caso nao precise executar nenhum metodo, retorna o proprio campo.
 			return campo.get(objeto);
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException e) {
@@ -91,7 +102,7 @@ public abstract class Reflection {
 		// Campo a ser requisitado.
 		Field campo = null;
 		// Metodo possivel de ser invocado.
-		Method metodo;
+		Method metodo = null;
 
 		/*
 		 * Caso o campo nao seja da classe, pega o da superclasse.
@@ -105,31 +116,41 @@ public abstract class Reflection {
 				clazz = clazz.getSuperclass();
 			}
 		} while (campo == null);
-
+		
+		// Depois de recuperar o campo
 		try {
 			// Faz com que seja possivel acessar o campo.
 			campo.setAccessible(true);
 			// Caso precise executar um metodo, executa.
-			if (campo.isAnnotationPresent(MetodoAssociado.class)) {
+			Class<MetodoAssociado> anotacaoMetodoAssociado = MetodoAssociado.class;
+			if (campo.isAnnotationPresent(anotacaoMetodoAssociado)) {
 				// Pega a anotacao do metodo.
-				MetodoAssociado anotacao = campo.getAnnotation(MetodoAssociado.class);
+				MetodoAssociado anotacao = campo.getAnnotation(anotacaoMetodoAssociado);
+				
 				// Se tiver validacao
-				if (campo.isAnnotationPresent(Validacao.class)) {
+				Class<Validacao> anotacaoValidacao = Validacao.class;
+				if (campo.isAnnotationPresent(anotacaoValidacao)) {
+					
 					// Se a validacao deve ser feita na atualizacao
-					if (campo.getAnnotation(Validacao.class).atualizacao()) {
+					if (campo.getAnnotation(anotacaoValidacao).atualizacao()) {
 						// Pega a anotacao de validacao do campo.
-						Validacao anotacaoValidacao = campo.getAnnotation(Validacao.class);
+						Validacao anotacaoValidacaoCampo = campo.getAnnotation(anotacaoValidacao);
+						
 						// Caso precise realizar conversao
-						if (campo.isAnnotationPresent(Conversao.class)) {
-							Conversao conversao = campo.getAnnotation(Conversao.class);
-							Method converte = Conversor.class.getMethod(conversao.conversor(), novoValor.getClass());
+						Class<Conversao> anotacaoConversao = Conversao.class;
+						if (campo.isAnnotationPresent(anotacaoConversao)) {
+							Conversao anotacaoConversaoCampo = campo.getAnnotation(anotacaoConversao);
+							Method converte = Conversor.class.getMethod(anotacaoConversaoCampo.conversor(), novoValor.getClass());
+							
 							// Converte o dado
 							novoValor = converte.invoke(null, novoValor);
 						}
-						Method valida = ValidadorDeDados.class.getMethod(anotacaoValidacao.metodo(),
-								anotacaoValidacao.erro().getClass(), novoValor.getClass());
+						// Metodo que vai ser usado para validacao
+						Method valida = ValidadorDeDados.class.getMethod(anotacaoValidacaoCampo.metodo(),
+								anotacaoValidacaoCampo.erro().getClass(), novoValor.getClass());
+						
 						// Valida o dado
-						valida.invoke(null, anotacaoValidacao.erro(), novoValor);
+						valida.invoke(null, anotacaoValidacaoCampo.erro(), novoValor);
 					}
 				}
 				// Pega o metodo.
@@ -142,7 +163,6 @@ public abstract class Reflection {
 			}
 		} catch (IllegalArgumentException | IllegalAccessException | NoSuchMethodException | SecurityException e) {
 			// Caso o atributo passado nao seja compativel.
-			// e.printStackTrace();
 			throw new DadoInvalidoException(erroAtualizacao);
 		} catch (InvocationTargetException excecao) {
 			// Caso o metodo lance uma excecao.
@@ -167,6 +187,7 @@ public abstract class Reflection {
 		 * - Construir objeto
 		 */
 		Class<?> klazz = clazz;
+		
 		// Campos do objeto.
 		ArrayList<Field> campos = new ArrayList<>();
 		/*
@@ -181,25 +202,31 @@ public abstract class Reflection {
 			klazz = klazz.getSuperclass();
 		} while (klazz != Object.class);
 
+		// Quantidade de parametros que precisam ser passados pra o construtor
 		int parametros = clazz.getConstructors()[0].getParameterCount();
+		
 		try {
 			// Itera pelos parametros do construtor para validar cada campo
+			// Com isso vai validar os dados de entrada
 			for (int i = 0; i < parametros && i < campos.size(); i++) {
 				Field campo = campos.get(i);
 				campo.setAccessible(true);
+				
+				// Pega a anotacao de validacao do campo
 				Validacao validacao = campo.getAnnotation(Validacao.class);
 				ValidadorDeDados.validaNaoNulo(validacao.erro(), params[i]);
+				
+				// Pega o metodo usado pra validar o campo
 				Method valida = ValidadorDeDados.class.getMethod(validacao.metodo(), validacao.erro().getClass(),
 						params[i].getClass());
 				// Valida o dado.
 				valida.invoke(null, validacao.erro(), params[i]);
 			}
-			// Retorna o objeto.
-			// System.out.println(Arrays.asList(params));
+			// Retorna o objeto construido.
 			return clazz.getConstructors()[0].newInstance(params);
+			
 		} catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | SecurityException
 				| InstantiationException excecao) {
-			excecao.printStackTrace();
 			throw new DadoInvalidoException(excecao.getCause().getMessage());
 		} catch (InvocationTargetException excecao) {
 			// Caso algum dado foi invalido
@@ -225,36 +252,8 @@ public abstract class Reflection {
 	}
 
 	/**
-	 * Pega um metodo de uma determinada classe
-	 * 
-	 * @param nomeMetodo
-	 *            Nome do metodo a ser executado
-	 * @param objeto
-	 *            Objeto de que vai executar o metodo
-	 * @param paramsClasses
-	 *            Classes dos parametros do metodo
-	 * @param params
-	 *            Parametros a serem passados na execucao
-	 * @throws DadoInvalidoException
-	 *             Caso o metodo nao exista
-	 */
-	public static void executaMetodo(String nomeMetodo, Object objeto, Class<?>[] paramsClasses, Object[] params)
-			throws DadoInvalidoException {
-		try {
-			Class<?> clazz = objeto.getClass();
-			Method metodo = clazz.getMethod(nomeMetodo, paramsClasses);
-			metodo.setAccessible(true);
-
-			metodo.invoke(objeto, params);
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			throw new DadoInvalidoException("Este erro nao deveria ter acontecido! Contate o suporte.");
-		}
-	}
-
-	/**
 	 * Factory generica que permite criar qualquer objeto dado o nome
-	 * <b>completo</b> de sua classe.
+	 * <b>completo</b> (posicao absoluta na hierarquia de pacotes) de sua classe.
 	 * 
 	 * @param klazz
 	 *            Nome completo da classe (package + nome da classe).
@@ -273,6 +272,5 @@ public abstract class Reflection {
 			throw new DadoInvalidoException(mensagemErro);
 		}
 	}
-
 	// REFLECTION
 }

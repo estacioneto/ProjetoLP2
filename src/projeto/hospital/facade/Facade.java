@@ -55,7 +55,7 @@ public class Facade {
 	 */
 	public void fechaSistema() {
 		this.controller.fechaSistema();
-		Util.setObjeto(Constantes.ARQUIVO_CONTROLLER, this.controller);
+		Util.guardaObjetoArquivo(Constantes.ARQUIVO_CONTROLLER, this.controller);
 		this.controller = null;
 	}
 

@@ -90,7 +90,7 @@ public class GerenciadorDeFuncionarios implements Serializable {
 						MensagensDeErro.ERRO_CADASTRO_FUNCIONARIO + MensagensDeErro.ERRO_CADASTRO_DIRETOR_FUNCIONARIO);
 
 			if (this.temFuncionariosCadastrados())
-				ValidadorDeLogica.validaOperacao(MensagensDeErro.ERRO_PERMISSAO_CADASTRO_FUNCIONARIO,
+				ValidadorDeLogica.validaOperacao("Erro no cadastro de funcionario. O funcionario %s nao tem permissao para cadastrar funcionarios.",
 						Permissao.CADASTRAR_FUNCIONARIOS, funcionarioLogado);
 
 			Funcionario funcionario = (Funcionario) Reflection.godFactory(Funcionario.class, nome, cargo,

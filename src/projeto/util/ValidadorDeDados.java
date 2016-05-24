@@ -137,19 +137,19 @@ public abstract class ValidadorDeDados {
 		validaString(erro, data);
 
 		Pattern padrao = Pattern.compile(Constantes.DATA_REGEX);
-		Matcher validadorDePadrao = padrao.matcher(data);
+		Matcher padraoData = padrao.matcher(data);
 
 		// Verificacao da regex
-		if (!validadorDePadrao.matches())
+		if (!padraoData.matches())
 			throw new DataInvalidaException(Constantes.DATA + " invalida.");
 
-		validadorDePadrao.reset();
+		padraoData.reset();
 		// Verificacao no calendario
-		if (validadorDePadrao.find()) {
+		if (padraoData.find()) {
 
-			String dia = validadorDePadrao.group(1);
-			String mes = validadorDePadrao.group(2);
-			int ano = Integer.parseInt(validadorDePadrao.group(3));
+			String dia = padraoData.group(1);
+			String mes = padraoData.group(2);
+			int ano = Integer.parseInt(padraoData.group(3));
 
 			if (dia.equals("31"))
 				if (mes.equals("11") || mes.equals("04") || mes.equals("06") || mes.equals("09"))
@@ -180,8 +180,6 @@ public abstract class ValidadorDeDados {
 	public static void validaSexoBiologico(String erro, String sexoBiologico) throws DadoInvalidoException {
 		if (sexoBiologico == null || !sexoBiologico.toLowerCase().equals(Constantes.MASCULINO)
 				&& !sexoBiologico.toLowerCase().equals(Constantes.FEMININO))
-			// Nao coloquei mensagem constante por que os testes ainda nao
-			// tratam isso
 			throw new DadoInvalidoException(erro);
 	}
 
@@ -251,19 +249,7 @@ public abstract class ValidadorDeDados {
 	}
 
 	/**
-	 * Valida uma categoria de medicamentos.
-	 * 
-	 * @param string
-	 *            Categoria a ser validada.
-	 * @return String capitalizada.
-	 */
-	public static String capitalizaString(String string) {
-		return string.substring(Constantes.ZERO, Constantes.UM).toUpperCase()
-				+ string.substring(Constantes.UM).toLowerCase();
-	}
-
-	/**
-	 * Valida uma categoria.
+	 * Valida uma categoria de medicamento.
 	 * 
 	 * @param mensagemDeErro
 	 *            Mensagem de Erro, caso aconteca uma excessao.

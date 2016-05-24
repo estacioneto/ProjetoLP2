@@ -65,7 +65,7 @@ public class Controller implements Serializable {
 	 */
 	public void iniciaSistema() {
 		try {
-			Controller controllerSalvo = (Controller) Util.getObjeto(Constantes.ARQUIVO_CONTROLLER);
+			Controller controllerSalvo = (Controller) Util.getObjetoArquivo(Constantes.ARQUIVO_CONTROLLER);
 
 			this.bancoDeOrgaos = controllerSalvo.bancoDeOrgaos;
 			this.farmacia = controllerSalvo.farmacia;
