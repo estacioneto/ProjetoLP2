@@ -173,6 +173,8 @@ public class Medicamento implements Serializable {
 	 * @return Boolean que indica se contem a categoria.
 	 */
 	public boolean contemCategoria(String categoria) {
+		if(categoria == null)
+			return false;
 		return this.categorias.contains(categoria);
 	}
 
