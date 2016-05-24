@@ -72,10 +72,10 @@ expect 1 getTotalProcedimento nomePaciente=${id4}
 
 # aqui ele vai exportar 4 pacientes, apenas para ver o metodo funcionar
 
-#exportaFichaPaciente idPaciente=${id1}
-#exportaFichaPaciente idPaciente=${id2}
-#exportaFichaPaciente idPaciente=${id3}
-#exportaFichaPaciente idPaciente=${id4}
+exportaFichaPaciente idPaciente=${id1}
+exportaFichaPaciente idPaciente=${id2}
+exportaFichaPaciente idPaciente=${id3}
+exportaFichaPaciente idPaciente=${id4}
 
 logout
 
