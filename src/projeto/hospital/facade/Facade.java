@@ -2,8 +2,6 @@ package projeto.hospital.facade;
 
 import projeto.exceptions.logica.OperacaoInvalidaException;
 import projeto.hospital.controller.Controller;
-import projeto.util.Constantes;
-import projeto.util.Util;
 
 /**
  * Classe de fachada. A fachada do sistema cuida da interacao do usuario com o
@@ -55,7 +53,6 @@ public class Facade {
 	 */
 	public void fechaSistema() {
 		this.controller.fechaSistema();
-		Util.guardaObjetoArquivo(Constantes.ARQUIVO_CONTROLLER, this.controller);
 		this.controller = null;
 	}
 

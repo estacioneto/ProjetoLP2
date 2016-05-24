@@ -107,6 +107,7 @@ public class Controller implements Serializable {
 		if (estaLogado())
 			throw new OperacaoInvalidaException("Nao foi possivel fechar o sistema. Um funcionario ainda esta logado: "
 					+ funcionarioLogado.getNome() + ".");
+		Util.guardaObjetoArquivo(Constantes.ARQUIVO_CONTROLLER, this);
 	}
 
 	/**
