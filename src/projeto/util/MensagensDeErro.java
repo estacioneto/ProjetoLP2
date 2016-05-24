@@ -2,7 +2,7 @@ package projeto.util;
 
 public abstract class MensagensDeErro {
 	// ERROS DE PERMISSAO
-	public static final String ERRO_PERMISSAO_CADASTRO_FUNCIONARIO = "Erro no cadastro de funcionario. O funcionario %s nao tem permissao para cadastrar funcionarios.";
+	//public static final String ERRO_PERMISSAO_CADASTRO_FUNCIONARIO = "Erro no cadastro de funcionario. O funcionario %s nao tem permissao para cadastrar funcionarios.";
 	public static final String ERRO_PERMISSAO_CADASTRO_PACIENTE = "Nao foi possivel cadastrar o paciente. O funcionario %s nao tem permissao para cadastrar pacientes.";
 	public static final String ERRO_PERMISSAO_CADASTRO_MEDICAMENTO = "Erro no cadastro de medicamento. O funcionario %s nao tem permissao para cadastrar medicamentos.";
 	public static final String LOGIN_NECESSARIO = "Voce deve estar logado para acessar o sistema.";

@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import projeto.exceptions.dados.DadoInvalidoException;
-import projeto.hospital.gerencia.funcionario.cargo.Cargo;
 import projeto.util.Constantes;
 import projeto.util.Conversor;
 import projeto.util.Util;
