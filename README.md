@@ -42,17 +42,17 @@ A reflexividade nos auxilia também na criação de objetos, onde tendo o “pac
 
 Uso das Java Collections no projeto:
 
-	ArrayList em Banco de Órgãos - É usado um ArrayList, pois podem haver órgãos iguais na coleção, e vão haver mais operações de busca do que de remoção, neste contexto há vantagem de usar ArrayList ao invés de LinkedList.
+ArrayList em Banco de Órgãos - É usado um ArrayList, pois podem haver órgãos iguais na coleção, e vão haver mais operações de busca do que de remoção, neste contexto há vantagem de usar ArrayList ao invés de LinkedList.
 	
-	ArrayList em Farmacia -  É usado um ArrayList, pois podem haver medicamentos iguais na coleção, pode ser necessária ordenação da coleção de formas distintas, o que não permitiria o uso de um HashSet. Além disso, vão haver mais operações de busca do que de remoção, e aí se tem vantagem de usar ArrayList em vez de LinkedList.
+ArrayList em Farmacia -  É usado um ArrayList, pois podem haver medicamentos iguais na coleção, pode ser necessária ordenação da coleção de formas distintas, o que não permitiria o uso de um HashSet. Além disso, vão haver mais operações de busca do que de remoção, e aí se tem vantagem de usar ArrayList em vez de LinkedList.
 
-	HashMap em Gerenciador de Funcionário - É usado um mapa de Matricula - Funcionário pois não haverão dois funcionários com uma mesma matricula no sistema, e muitas operações envolvem recuperar um funcionário por sua matricula ou usar a matrícula do funcionário.
+HashMap em Gerenciador de Funcionário - É usado um mapa de Matricula - Funcionário pois não haverão dois funcionários com uma mesma matricula no sistema, e muitas operações envolvem recuperar um funcionário por sua matricula ou usar a matrícula do funcionário.
 
-	HashSet em Cargo - É usado um HashSet, pois não haverão duas permissões iguais, e não é necessário ordenação nem posições relativas das permissões contidas para determinado cargo.
+HashSet em Cargo - É usado um HashSet, pois não haverão duas permissões iguais, e não é necessário ordenação nem posições relativas das permissões contidas para determinado cargo.
 
-	TreeMap em Gerenciador de Prontuario e Paciente - É usado um mapa ordenado de Paciente - Prontuário,  pois não haverão dois pacientes iguais no sistema, e é necessário ter a ordenação dos pacientes de acordo com seu nome, por ordem lexicográfica crescente, e o TreeMap já oferece esta ordenação na inserção dos elementos.
-	
-	ArrayList em Prontuario - É usado um ArrayList pois os procedimentos a serem guardados podem ser iguais, além de que a ordem que foram inseridos importa, e não vão ocorrer operações de deleção, apenas de busca para resumir os procedimentos, o que dá a vantagem do ArrayList em relação ao LinkedList.
+TreeMap em Gerenciador de Prontuario e Paciente - É usado um mapa ordenado de Paciente - Prontuário,  pois não haverão dois pacientes iguais no sistema, e é necessário ter a ordenação dos pacientes de acordo com seu nome, por ordem lexicográfica crescente, e o TreeMap já oferece esta ordenação na inserção dos elementos.
+
+ArrayList em Prontuario - É usado um ArrayList pois os procedimentos a serem guardados podem ser iguais, além de que a ordem que foram inseridos importa, e não vão ocorrer operações de deleção, apenas de busca para resumir os procedimentos, o que dá a vantagem do ArrayList em relação ao LinkedList.
 
 2. Casos de Usos
 
