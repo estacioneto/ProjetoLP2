@@ -1,0 +1,11 @@
+Paciente: Hedwig
+Peso: 60,00 kg Tipo Sanguineo: B-
+Sexo: masculino Genero: masculino
+Gasto total: R$ 10483,90 Pontos acumulados: 230
+Resumo dos procedimentos: 3 procedimento(s)
+--> Redesignacao Sexual:
+....... Data: 2016-05-24 Medico: Ada Lovelace
+--> Consulta clinica:
+....... Data: 2016-05-24 Medico: Ada Lovelace
+--> Consulta clinica:
+....... Data: 2016-05-24 Medico: Ada Lovelace
